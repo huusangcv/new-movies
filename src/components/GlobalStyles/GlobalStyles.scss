@@ -1,1 +1,32 @@
-@import 'normalize.css'
+.logo-text {
+    font-size: 3.6rem;
+    -webkit-text-fill-color: #0000;
+    -webkit-background-clip: text;
+    -webkit-animation: layout_animatedBackground_a__uXw48 20s linear infinite alternate;
+    background-image: -webkit-gradient(linear, right top, left top, color-stop(0, #adfbda), color-stop(30%, #35c3ff), color-stop(50%, #fda399), color-stop(70%, #76d880), color-stop(90%, #ebf38b), to(#adfbda));
+    font-family: "Dancing Script", Arial, Gadget, sans-serif;
+}
+
+.layout_name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 150px;
+
+    &::after {
+        display: inline-block;
+        content: '';
+        width: 10px;
+        height: 10px;
+        border: 3px solid;
+        border-color: #428bca;
+        border-top: none;
+        border-right: none;
+        border-radius: 2px;
+        rotate: -45deg;
+    }
+}
+
+a {
+    text-decoration: none;
+}

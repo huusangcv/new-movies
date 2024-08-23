@@ -7,11 +7,12 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          {publicLayout.map((route) => {
+          {publicLayout.map((route, index) => {
             const Page = route.component;
             const Layout = DefaultLayout;
             return (
               <Route
+                key={index}
                 path={route.path}
                 element={
                   <Layout>
