@@ -42,7 +42,7 @@
         padding: 8px 12px;
         cursor: pointer;
 
-        &:hover {
+        &:hover:not(.brand) {
             background-color: #102c48;
         }
 
@@ -52,8 +52,18 @@
     }
 
     &-link {
+        color: #fff;
+
         &:hover {
             color: #428bca;
+        }
+
+
+
+        svg {
+            margin-right: 5px;
+            width: 1em;
+            fill: #fff;
         }
     }
 }

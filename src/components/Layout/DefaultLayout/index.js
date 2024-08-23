@@ -2,6 +2,7 @@ import Filter from '../Filter';
 import Header from '../Header';
 import classNames from 'classnames/bind';
 import styles from './DefaultLayout.module.scss';
+import Footer from '../Footer';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +18,7 @@ const DefaultLayout = ({ children }) => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };
