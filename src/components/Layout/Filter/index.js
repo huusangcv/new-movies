@@ -1,5 +1,6 @@
-import styles from './Filter.module.scss';
 import classNames from 'classnames/bind';
+import styles from './Filter.module.scss';
+import filter from '~/components/Options';
 const cx = classNames.bind(styles);
 const Filter = () => {
   return (
@@ -14,10 +15,14 @@ const Filter = () => {
               <div className={cx('control')}>
                 <div className={cx('select')}>
                   <select name="" id="">
-                    <option value="">Option 1</option>
-                    <option value="">Option 2</option>
-                    <option value="">Option 3</option>
-                    <option value="">Option 4</option>
+                    <option value="" defaultValue="">
+                      - Tất cả -
+                    </option>
+                    {filter?.movies.map((movie) => (
+                      <option value={movie.slug} key={movie.id}>
+                        {movie.text}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -31,10 +36,12 @@ const Filter = () => {
               <div className={cx('control')}>
                 <div className={cx('select')}>
                   <select name="" id="">
-                    <option value="">Option 1</option>
-                    <option value="">Option 2</option>
-                    <option value="">Option 3</option>
-                    <option value="">Option 4</option>
+                    <option value="">- Tất cả -</option>
+                    {filter?.types.map((type) => (
+                      <option value={type.slug} key={type.id}>
+                        {type.text}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -48,10 +55,12 @@ const Filter = () => {
               <div className={cx('control')}>
                 <div className={cx('select')}>
                   <select name="" id="">
-                    <option value="">Option 1</option>
-                    <option value="">Option 2</option>
-                    <option value="">Option 3</option>
-                    <option value="">Option 4</option>
+                    <option value="">- Tất cả -</option>
+                    {filter?.nations.map((nation) => (
+                      <option value={nation.slug} key={nation.id}>
+                        {nation.text}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -65,10 +74,13 @@ const Filter = () => {
               <div className={cx('control')}>
                 <div className={cx('select')}>
                   <select name="" id="">
-                    <option value="">Option 1</option>
-                    <option value="">Option 2</option>
-                    <option value="">Option 3</option>
-                    <option value="">Option 4</option>
+                    <option value="">- Tất cả -</option>
+                    {filter?.years.map((year) => (
+                      <option value={year.slug} key={year.id}>
+                        {year.text}
+                      </option>
+                    ))}
+                    <option value="">Trước 2000</option>
                   </select>
                 </div>
               </div>
@@ -77,15 +89,16 @@ const Filter = () => {
           <div className={cx('column')}>
             <div className={cx('field')}>
               <label htmlFor="" className={cx('label')}>
-                Năm:
+                Sắp xếp:
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
                   <select name="" id="">
-                    <option value="">Option 1</option>
-                    <option value="">Option 2</option>
-                    <option value="">Option 3</option>
-                    <option value="">Option 4</option>
+                    {filter?.sortBy.map((sort) => (
+                      <option value={sort.slug} key={sort.id}>
+                        {sort.text}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>

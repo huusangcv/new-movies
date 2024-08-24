@@ -1,10 +1,13 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Svg from '~/assets';
 
 const cx = classNames.bind(styles);
-
+console.log(Svg.bars);
 const Header = () => {
   const [background, setBackground] = useState('');
 
@@ -23,6 +26,12 @@ const Header = () => {
   return (
     <header className={cx('wapper')}>
       <nav className={cx('navbar')} style={{ background: background && background }}>
+        <button className={cx('bars-toggle', 'd-none')} tabindex="0" type="button">
+          <span className="MuiIconButton-label">
+            <FontAwesomeIcon icon={faBars} />
+          </span>
+          <span className="MuiTouchRipple-root"></span>
+        </button>
         <div className={cx('navbar-brand')}>
           <div className={cx('navbar-item', 'brand')}>
             <Link className={cx('logo-text')} to="/">

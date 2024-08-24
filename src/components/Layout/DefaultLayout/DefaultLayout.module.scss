@@ -12,8 +12,39 @@
 
 .container {
     min-height: 1000px;
-    width: 1344px;
     margin: 0 40px;
+}
+
+//resposive for container
+
+@media screen and (max-width: 767.98px) {
+    .container:not(.is-max-desktop):not(.is-max-widescreen) {
+        max-width: 100%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .container:not(.is-max-desktop):not(.is-max-widescreen) {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 1023.98px) {
+    .container:not(.is-max-desktop):not(.is-max-widescreen) {
+        max-width: 100%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .container:not(.is-max-desktop):not(.is-max-widescreen) {
+        max-width: 960px;
+    }
+}
+
+@media screen and (min-width: 1216px) {
+    .container:not(.is-max-desktop):not(.is-max-widescreen) {
+        max-width: 1152px;
+    }
 }
 
 @media screen and (min-width: 1408px) {
@@ -21,13 +52,6 @@
         max-width: 1344px;
     }
 }
-
-@media screen and (min-width: 1024px) {
-    .container {
-        max-width: 960px;
-    }
-}
-
 
 .content {
     min-height: 100px;

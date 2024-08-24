@@ -33,6 +33,12 @@ a {
     cursor: pointer
 }
 
+button {
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
 .heading {
     display: flex;
     justify-content: space-between;
@@ -54,10 +60,27 @@ a {
 
 .title-list {
     margin: -12px -8px;
+    height: auto;
 
     .gird {
         display: grid;
-        grid-template-columns: repeat(5, 20%);
+        flex-wrap: wrap;
+
+        @media screen and (max-width: 767.98px) {
+            grid-template-columns: repeat(2, 50%);
+        }
+
+        @media screen and (min-width: 768px) {
+            grid-template-columns: repeat(3, 33.33%);
+        }
+
+        @media screen and (min-width: 1216px) {
+            grid-template-columns: repeat(4, 25%);
+        }
+
+        @media screen and (min-width: 1408px) {
+            grid-template-columns: repeat(5, 20%);
+        }
     }
 
     .column {
@@ -111,6 +134,13 @@ a {
             -ms-transform: scale(1);
             transform: scale(1);
             will-change: transform;
+
+
+            @media screen and (min-width: 1024px) {
+                .container {
+                    max-width: 960px;
+                }
+            }
         }
 
     }
@@ -143,4 +173,8 @@ a {
     100% {
         left: 100%;
     }
+}
+
+.d-none {
+    display: none;
 }
