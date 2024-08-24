@@ -1,11 +1,11 @@
 .wapper {
-    padding-top: 38px;
+    margin-top: 50px;
     width: 100%;
     min-height: 1000px;
 }
 
 .section {
-    padding: 48px;
+    padding: 36px 48px;
     display: flex;
     justify-content: center;
 }
@@ -13,5 +13,11 @@
 .container {
     min-height: 1000px;
     width: 1344px;
-    margin: 0 124px;
+    max-width: 1344px;
+    margin: 0 40px;
+}
+
+
+.content {
+    min-height: 100px;
 }
