@@ -12,9 +12,10 @@
 html {
     font-size: 62.5%;
     background-color: #06121e;
-    text-size-adjust: 100%;
     min-width: 300px;
     color: #fff;
+    text-rendering: optimizeLegibility;
+    text-size-adjust: 100%;
 }
 
 body {

@@ -3,6 +3,127 @@
     padding: 0 10px;
     margin-bottom: 12px;
     background-color: rgba(14, 39, 64, .45);
-    background: #ccc;
     border-radius: 5px;
+    margin: 0 -12px 12px -12px;
+}
+
+.filter {
+    width: 100%;
+    display: block;
+    unicode-bidi: isolate;
+    min-height: 0;
+    min-width: 0;
+}
+
+.columns {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 5px;
+
+    .column {
+        padding: 12px;
+        display: block;
+        flex-basis: 0;
+        flex-grow: 1;
+        flex-shrink: 1;
+    }
+
+    .label {
+        margin-bottom: 8px;
+        color: #fff;
+        display: block;
+        font-size: 1.6rem;
+        font-weight: 700;
+    }
+
+    .control {
+        box-sizing: border-box;
+        clear: both;
+        font-size: 1rem;
+        position: relative;
+        text-align: inherit;
+
+    }
+
+    .select {
+        width: 100%;
+        height: 40px;
+        display: inline-block;
+        max-width: 100%;
+        position: relative;
+        vertical-align: top;
+
+        &:hover::after {
+            border-color: #d0c52e;
+        }
+
+        &::after {
+            display: block;
+            content: '';
+            border: 3px solid transparent;
+            border-radius: 2px;
+            border-right: 0;
+            border-top: 0;
+            display: block;
+            height: 12px;
+            margin-top: -.4375em;
+            pointer-events: none;
+            position: absolute;
+            top: 45%;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            -webkit-transform-origin: center;
+            transform-origin: center;
+            width: 12px;
+            border-color: #428bca;
+            right: 1.125em;
+            z-index: 4;
+        }
+
+        select {
+            padding: 0 10px;
+            border-radius: 4px;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            display: block;
+            font-size: 1.6rem;
+            max-width: 100%;
+            outline: none;
+            -webkit-appearance: none;
+
+            &:invalid {
+                box-shadow: none;
+                border: none;
+                background-color: #f0f0f0;
+            }
+
+        }
+
+        button {
+            width: 50%;
+            height: 50%;
+        }
+    }
+
+    .filter-btn {
+        height: 35px;
+        flex: 1;
+
+        button {
+            border: none;
+            outline: none;
+            border-radius: 8px;
+            color: #fff;
+            background-color: rgb(167 139 250);
+            height: 100%;
+            width: 100px;
+
+            &:hover {
+                cursor: pointer;
+                opacity: 0.8;
+            }
+        }
+    }
 }

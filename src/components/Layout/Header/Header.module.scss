@@ -50,14 +50,12 @@
         }
     }
 
+    &-item:hover:not(.brand) &-link {
+        color: #428bca;
+    }
+
     &-link {
         color: #fff;
-
-        &:hover {
-            color: #428bca;
-        }
-
-
 
         svg {
             margin-right: 5px;

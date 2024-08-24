@@ -40,6 +40,7 @@ a {
     border-bottom: 1px solid #1b3c5d;
     margin-bottom: 8px;
     margin-top: 32px;
+    font-weight: inherit;
 
     span {
         color: #b1a21e;
@@ -50,9 +51,6 @@ a {
     }
 
 }
-
-.heading+.heading {}
-
 
 .title-list {
     margin: -12px -8px;
