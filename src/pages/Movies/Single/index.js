@@ -1,8 +1,15 @@
 import classNames from 'classnames/bind';
 import styles from './Single.module.scss';
 import thumb from '~/assets/images/thumb.jpg';
+import { useEffect } from 'react';
 const cx = classNames.bind(styles);
 const Single = () => {
+  useEffect(() => {
+    document.title = 'Phim lẻ';
+    window.scroll({
+      top: 0,
+    });
+  }, []);
   return (
     <div className={cx('wapper')}>
       <div className="title-list">
