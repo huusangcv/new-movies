@@ -33,11 +33,16 @@
     .container:not(.is-max-desktop):not(.is-max-widescreen) {
         max-width: 100%;
     }
+
+    .section {
+        padding: 36px 12px;
+    }
 }
 
 @media screen and (min-width: 1024px) {
     .container:not(.is-max-desktop):not(.is-max-widescreen) {
         max-width: 960px;
+
     }
 }
 

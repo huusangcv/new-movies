@@ -1,12 +1,13 @@
 import classNames from 'classnames/bind';
+import { useEffect } from 'react';
 import styles from './Home.module.scss';
 import thumb from '~/assets/images/thumb.jpg';
-import { useEffect } from 'react';
 const cx = classNames.bind(styles);
 const HomePage = () => {
   useEffect(() => {
     document.title = 'Từ Hollywood đến Bollywood, chúng tôi mang đến những bộ phim bạn yêu thích';
   }, []);
+
   return (
     <div className={cx('wapper')}>
       <h2 className="heading">

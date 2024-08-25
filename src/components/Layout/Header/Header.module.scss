@@ -6,13 +6,27 @@
     position: fixed;
     right: 0;
     top: 0;
-    z-index: 9999;
+    z-index: 9997;
 }
 
 .navbar {
     height: 100%;
     display: flex;
     transition: 0.5s ease;
+
+    &.mobile {
+        display: none;
+    }
+
+    @media screen and (max-width: 1023.98px) {
+        &.desktop {
+            display: none;
+        }
+
+        &.mobile {
+            display: flex;
+        }
+    }
 
     &-brand {
         align-items: stretch;
@@ -25,6 +39,10 @@
         display: flex;
         justify-content: space-between;
         flex: 1;
+    }
+
+    &-menu.mobile {
+        justify-content: end;
     }
 
     &-start {
@@ -65,12 +83,18 @@
     }
 
     .bars-toggle {
+        padding: 1px 6px;
+
         svg {
             color: #fff;
             fill: #fff;
-            width: 2.6rem;
-            height: 2.6rem;
+            width: 2.1rem;
+            height: 2.1rem;
         }
 
     }
+}
+
+.d-none {
+    display: none;
 }

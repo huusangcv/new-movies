@@ -71,7 +71,7 @@
             border-right: 0;
             border-top: 0;
             display: block;
-            height: 12px;
+            height: 10px;
             margin-top: -.4375em;
             pointer-events: none;
             position: absolute;
@@ -80,14 +80,14 @@
             transform: rotate(-45deg);
             -webkit-transform-origin: center;
             transform-origin: center;
-            width: 12px;
+            width: 10px;
             border-color: #428bca;
             right: 1.125em;
             z-index: 4;
         }
 
         select {
-            padding: 0 10px;
+            padding: 0 30px 0 10px;
             border-radius: 4px;
             width: 100%;
             height: 100%;

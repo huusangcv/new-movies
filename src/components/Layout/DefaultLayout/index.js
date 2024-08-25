@@ -3,6 +3,7 @@ import Header from '../Header';
 import classNames from 'classnames/bind';
 import styles from './DefaultLayout.module.scss';
 import Footer from '../Footer';
+import Bars from '../OverlayBars';
 
 const cx = classNames.bind(styles);
 
@@ -18,6 +19,7 @@ const DefaultLayout = ({ children }) => {
           </div>
         </div>
       </section>
+      <Bars />
       <Footer />
     </div>
   );
