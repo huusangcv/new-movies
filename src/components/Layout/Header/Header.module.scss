@@ -7,6 +7,7 @@
     right: 0;
     top: 0;
     z-index: 9997;
+
 }
 
 .navbar {
@@ -68,6 +69,10 @@
         }
     }
 
+    .brand {
+        padding: 8px 12px 8px 0;
+    }
+
     &-item:hover:not(.brand) &-link {
         color: #428bca;
     }
@@ -83,13 +88,19 @@
     }
 
     .bars-toggle {
-        padding: 1px 6px;
+        padding: 12px;
+
+        &:hover {
+            cursor: pointer;
+            background: rgba($color: #666, $alpha: 0.5);
+            border-radius: 50%;
+        }
 
         svg {
             color: #fff;
             fill: #fff;
-            width: 2.1rem;
-            height: 2.1rem;
+            width: 2.4rem;
+            height: 2.4rem;
         }
 
     }
