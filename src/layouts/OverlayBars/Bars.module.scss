@@ -1,11 +1,6 @@
 .wapper {
     position: relative;
-    height: 100vh;
     z-index: 9999;
-
-    @media screen and (min-width: 1023.98px) {
-        height: 0;
-    }
 
     .overlay {
         position: fixed;

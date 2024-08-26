@@ -2,11 +2,30 @@ import classNames from 'classnames/bind';
 import { useEffect } from 'react';
 import styles from './Home.module.scss';
 import thumb from '~/assets/images/thumb.jpg';
+import getMovies from '~/services/getMovies';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMoviesSeries, getMoviesSingle } from '~/redux/actions/getMovies';
 const cx = classNames.bind(styles);
+
 const HomePage = () => {
+  const dispatch = useDispatch();
+  const movies = useSelector((state) => state.movies);
   useEffect(() => {
     document.title = 'Từ Hollywood đến Bollywood, chúng tôi mang đến những bộ phim bạn yêu thích';
   }, []);
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      const [moviesSingle, moviesSeries] = await Promise.all([getMovies.Single(), getMovies.Series()]);
+      dispatch(getMoviesSingle(moviesSingle.items));
+      dispatch(getMoviesSeries(moviesSeries.items));
+    };
+    let timer = setTimeout(() => {
+      fetchApi();
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [dispatch]);
 
   return (
     <div className={cx('wapper')}>
@@ -94,146 +113,23 @@ const HomePage = () => {
       </h2>
       <div className="title-list">
         <div className="gird columns">
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
+          {movies?.single.map((movie, index) => {
+            return (
+              index <= 9 && (
+                <div className="column" key={movie._id}>
+                  <a href="#!" className="cover">
+                    <img src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`} alt=""></img>
+                  </a>
+                  <h3 className="name vi">
+                    <a href="#!">{movie.name}</a>
+                  </h3>
+                  <h3 className="name en">
+                    <a href="#!">{movie.origin_name}</a>
+                  </h3>
+                </div>
+              )
+            );
+          })}
         </div>
       </div>
       <h2 className="heading">
@@ -241,76 +137,23 @@ const HomePage = () => {
       </h2>
       <div className="title-list">
         <div className="gird columns">
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
+          {movies?.series.map((movie, index) => {
+            return (
+              index <= 9 && (
+                <div className="column" key={movie._id}>
+                  <a href="#!" className="cover">
+                    <img src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`} alt=""></img>
+                  </a>
+                  <h3 className="name vi">
+                    <a href="#!">{movie.name}</a>
+                  </h3>
+                  <h3 className="name en">
+                    <a href="#!">{movie.origin_name}</a>
+                  </h3>
+                </div>
+              )
+            );
+          })}
         </div>
       </div>
     </div>

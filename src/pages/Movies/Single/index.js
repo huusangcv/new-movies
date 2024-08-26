@@ -1,301 +1,43 @@
 import classNames from 'classnames/bind';
 import styles from './Single.module.scss';
-import thumb from '~/assets/images/thumb.jpg';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 const cx = classNames.bind(styles);
+
 const Single = () => {
+  const movies = useSelector((state) => state.movies);
   useEffect(() => {
     document.title = 'Phim lẻ';
     window.scroll({
       top: 0,
     });
   }, []);
+
   return (
     <div className={cx('wapper')}>
       <div className="title-list">
+        <div className="title-movies">PHIM LẺ</div>
         <div className="gird columns">
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-        </div>
-        <div className="gird columns">
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
+          {movies?.single.map((movie) => {
+            return (
+              <div className="column" key={movie._id}>
+                <a href="#!" className="cover">
+                  <LazyLoadImage
+                    src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`}
+                    alt=""
+                    effect="blur"
+                  ></LazyLoadImage>
+                </a>
+                <h3 className="name vi">
+                  <a href="#!">{movie.name}</a>
+                </h3>
+                <h3 className="name en">
+                  <a href="#!">{movie.origin_name}</a>
+                </h3>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ const DefaultLayout = ({ children }) => {
     <div className={cx('wapper')}>
       <Header />
       <section className={cx('section')}>
-        <div className={cx('container')}>
+        <div className={cx('container')} style={{ flex: 1 }}>
           <div className={cx('inner')}>
             <Filter />
             <div className={cx('content')}>{children}</div>

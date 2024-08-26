@@ -88,6 +88,8 @@ button {
     }
 
     .cover {
+        min-height: 384px;
+        padding-top: 66.66%;
         position: relative;
         background-position: center center;
         background-size: cover;
@@ -123,7 +125,10 @@ button {
         }
 
         img {
-            height: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
             max-width: 100%;
             -webkit-transition: -webkit-transform .15s ease-in-out;
             transition: -webkit-transform .15s ease-in-out;
@@ -142,7 +147,6 @@ button {
                 }
             }
         }
-
     }
 
     .name {
@@ -157,6 +161,10 @@ button {
 
         a {
             color: #7a7a7a;
+        }
+
+        &.vi {
+            margin-top: 8px;
         }
 
         &.vi a {

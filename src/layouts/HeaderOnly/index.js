@@ -13,7 +13,7 @@ const HeaderOnly = ({ children }) => {
       <Header />
       <BackDrop />
       <section className={cx('section')}>
-        <div className={cx('container')} style={{ flex: 1 }}>
+        <div className={cx('container')} style={{ flex: 1, width: '100%' }}>
           <div className={cx('inner')}>
             <div className={cx('content')}>{children}</div>
           </div>
