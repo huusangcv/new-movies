@@ -7,7 +7,7 @@ const MovieDetails = () => {
       <div className={cx('details')}>
         <div className={cx('column', 'is-one-quarter-tablet')}>
           <p class={cx('cover', 'has-text-centered')}>
-            <img src="https://image.tmdb.org/t/p/w342/x8QdSeTe02X8f1EcO7yk90lTGNi.jpg" />
+            <img src="https://image.tmdb.org/t/p/w342/x8QdSeTe02X8f1EcO7yk90lTGNi.jpg" alt="" />
           </p>
           <a class={cx('watch', 'button', 'is-danger', 'is-medium', 'is-fullwidth')} href="/watch/46883">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -87,6 +87,26 @@ const MovieDetails = () => {
                 </a>
               </div>
             </div>
+          </div>
+
+          <dl class={cx('horizontal-dl')}>
+            <dt>Đạo diễn</dt>
+            <dd class={cx('csv')}>
+              <a href="/person/nam-dong-hyub~173099">Nam Dong-hyub</a>
+            </dd>
+            <dt>Quốc gia</dt>
+            <dd class={cx('csv')}>
+              <a href="/country/KR">Hàn Quốc</a>
+            </dd>
+            <dt>Khởi chiếu</dt>
+            <dd>6/26/2024</dd>
+          </dl>
+
+          <div class={cx('has-text-grey-light')}>
+            Hai người đàn ông thô lỗ nhưng giản dị, tự xưng là 'Những anh chàng đẹp trai'. Họ có ước mơ được sống ở vùng
+            nông thôn và cuối cùng giấc mơ của họ đã thành hiện thực. Tuy nhiên, vào ngày đầu tiên chuyển đến ngôi nhà
+            mới, một bí mật bị phong ấn dưới tầng hầm của họ đã được đánh thức. Từ đây gây ra một loạt những hài kịch
+            khó đỡ.
           </div>
         </div>
       </div>

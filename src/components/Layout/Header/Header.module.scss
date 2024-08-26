@@ -70,7 +70,10 @@
     }
 
     .brand {
-        padding: 8px 12px 8px 0;
+
+        @media screen and (max-width: 1023.98px) {
+            padding: 8px 12px 8px 0;
+        }
     }
 
     &-item:hover:not(.brand) &-link {

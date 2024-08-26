@@ -1,6 +1,6 @@
 import Header from '../Header';
 import classNames from 'classnames/bind';
-import styles from '../DefaultLayout/DefaultLayout.module.scss';
+import styles from './Header.module.scss';
 import Footer from '../Footer';
 import Bars from '../OverlayBars';
 import BackDrop from '../BackDrop';
