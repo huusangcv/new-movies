@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import styles from '../DefaultLayout/DefaultLayout.module.scss';
 import Footer from '../Footer';
 import Bars from '../OverlayBars';
-import BackDrop from '../Backdrop';
+import BackDrop from '../BackDrop';
 
 const cx = classNames.bind(styles);
 
