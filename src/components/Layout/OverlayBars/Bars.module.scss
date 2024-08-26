@@ -3,6 +3,10 @@
     height: 100vh;
     z-index: 9999;
 
+    @media screen and (max-width: 1023.98px) {
+        height: 0;
+    }
+
     .overlay {
         position: fixed;
         inset: 0;
@@ -21,13 +25,19 @@
         z-index: 9999;
         background: #0b1e30;
         transition: 0.3s ease-in-out;
+
+        @media screen and (min-width: 768px) {
+            width: 40%;
+        }
+
+        @media screen and (max-width: 767.98px) {
+            width: 50%;
+        }
     }
 
     .bars.show {
         left: 0;
     }
-
-
 
     .bar {
         width: 100%;
@@ -35,6 +45,15 @@
         align-items: center;
         gap: 10px;
         padding: 8px 16px;
+
+        span {
+            color: #fff;
+        }
+
+        &:hover {
+            background: #102c48;
+            cursor: pointer;
+        }
     }
 
     .bar.name {

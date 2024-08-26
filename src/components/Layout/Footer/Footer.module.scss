@@ -1,16 +1,22 @@
 .wapper {
     min-height: 418px;
     padding: 48px 24px 96px;
+
+
 }
 
 .container {
     margin: 0 65px;
+
+    @media screen and (max-width: 1023.98px) {
+        margin: 0;
+    }
 }
 
 
 .footer {
     .title {
-        margin-bottom: 24px;
+        margin: 0 0 24px 0;
         font-size: 1.6rem;
         line-height: 1.125;
         font-weight: 600;

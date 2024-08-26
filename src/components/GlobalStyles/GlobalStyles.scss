@@ -183,3 +183,24 @@ button {
     overflow: hidden;
     height: 100%;
 }
+
+.buttons .button:not(:last-child):not(.is-fullwidth) {
+    margin-right: .5rem;
+}
+
+.button.is-link.is-inverted.is-outlined {
+    background-color: transparent;
+    border-color: #fff;
+    color: #fff;
+}
+
+.button.is-rounded {
+    border-radius: 9999px;
+    padding: 5px 15px;
+    border: 1px solid #dbdbdb;
+
+    &:hover {
+        background-color: #fff;
+        color: #485fc7;
+    }
+}
