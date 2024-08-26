@@ -6,10 +6,10 @@ const MovieDetails = () => {
     <div className={cx('wapper')}>
       <div className={cx('details')}>
         <div className={cx('column', 'is-one-quarter-tablet')}>
-          <p class={cx('cover', 'has-text-centered')}>
+          <p className={cx('cover', 'has-text-centered')}>
             <img src="https://image.tmdb.org/t/p/w342/x8QdSeTe02X8f1EcO7yk90lTGNi.jpg" alt="" />
           </p>
-          <a class={cx('watch', 'button', 'is-danger', 'is-medium', 'is-fullwidth')} href="/watch/46883">
+          <a className={cx('watch', 'button', 'is-danger', 'is-medium', 'is-fullwidth')} href="/watch/46883">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
               <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
             </svg>
@@ -17,15 +17,15 @@ const MovieDetails = () => {
           </a>
         </div>
         <div className={cx('column', 'main')}>
-          <h1 class={cx('title')}>Handsome Guys</h1>
-          <h2 class={cx('subtitle')}>
+          <h1 className={cx('title')}>Handsome Guys</h1>
+          <h2 className={cx('subtitle')}>
             Đẹp Trai Thấy Sai Sai (<a href="/year/2024">2024</a>)
           </h2>
-          <div class={cx('meta')}>
+          <div className={cx('meta')}>
             <span>1 giờ 41 phút</span>
           </div>
-          <div class={cx('meta')}>
-            <span class={cx('imdb-icon')}>
+          <div className={cx('meta')}>
+            <span className={cx('imdb-icon')}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
                 <path
                   d="M44 13H4c-2.2 0-4 1.8-4 4v16c0 2.2 1.8 4 4 4h40c2.2 0 4-1.8 4-4V17c0-2.2-1.8-4-4-4z"
@@ -37,15 +37,15 @@ const MovieDetails = () => {
                 ></path>
               </svg>
             </span>
-            <span class={cx('has-text-weight-bold')}>6.9</span>
+            <span className={cx('has-text-weight-bold')}>6.9</span>
           </div>
 
-          <div class={cx('level', 'genres')}>
-            <div class={cx('level-left')}>
-              <div class={cx('level-item')}>
+          <div className={cx('level', 'genres')}>
+            <div className={cx('level-left')}>
+              <div className={cx('level-item')}>
                 <div
                   href="https://www.facebook.com/sharer/sharer.php?u=https://xemphim.in/movie/handsome-guys~46883"
-                  class={cx('fb-share', 'button', 'is-link')}
+                  className={cx('fb-share', 'button', 'is-link')}
                   target="_blank"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -54,22 +54,22 @@ const MovieDetails = () => {
                   Chia sẻ
                 </div>
               </div>
-              {/* <div class={cx('level-item')}>
-                <div class={cx('dropdown', 'is-hoverable')}>
-                  <div class={cx('dropdown-trigger')}>
-                    <button class={cx('collection-btn', 'button')}>
+              {/* <div className={cx('level-item')}>
+                <div className={cx('dropdown', 'is-hoverable')}>
+                  <div className={cx('dropdown-trigger')}>
+                    <button className={cx('collection-btn', 'button')}>
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                         <path d="M368 224H224V80c0-8.84-7.16-16-16-16h-32c-8.84 0-16 7.16-16 16v144H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h144v144c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V288h144c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path>
                       </svg>
                       Bộ sưu tập
                     </button>
                   </div>
-                  <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                    <div class="dropdown-content has-text-left">
-                      <a href="#" class="dropdown-item">
+                  <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                    <div className="dropdown-content has-text-left">
+                      <a href="#" className="dropdown-item">
                         Thêm vào danh sách phim <strong>Đã Xem</strong>
                       </a>
-                      <a href="#" class="dropdown-item">
+                      <a href="#" className="dropdown-item">
                         Thêm vào danh sách phim <strong>Muốn xem</strong>
                       </a>
                     </div>
@@ -77,32 +77,32 @@ const MovieDetails = () => {
                 </div>
               </div> */}
             </div>
-            <div class="level-right">
-              <div class="level-item buttons">
-                <a class="button is-link is-small is-rounded is-inverted is-outlined" href="/genre/kinh-di">
+            <div className="level-right">
+              <div className="level-item buttons">
+                <a className="button is-link is-small is-rounded is-inverted is-outlined" href="/genre/kinh-di">
                   Kinh dị
                 </a>
-                <a class="button is-link is-small is-rounded is-inverted is-outlined" href="/genre/hai">
+                <a className="button is-link is-small is-rounded is-inverted is-outlined" href="/genre/hai">
                   Hài
                 </a>
               </div>
             </div>
           </div>
 
-          <dl class={cx('horizontal-dl')}>
+          <dl className={cx('horizontal-dl')}>
             <dt>Đạo diễn</dt>
-            <dd class={cx('csv')}>
+            <dd className={cx('csv')}>
               <a href="/person/nam-dong-hyub~173099">Nam Dong-hyub</a>
             </dd>
             <dt>Quốc gia</dt>
-            <dd class={cx('csv')}>
+            <dd className={cx('csv')}>
               <a href="/country/KR">Hàn Quốc</a>
             </dd>
             <dt>Khởi chiếu</dt>
             <dd>6/26/2024</dd>
           </dl>
 
-          <div class={cx('has-text-grey-light')}>
+          <div className={cx('has-text-grey-light')}>
             Hai người đàn ông thô lỗ nhưng giản dị, tự xưng là 'Những anh chàng đẹp trai'. Họ có ước mơ được sống ở vùng
             nông thôn và cuối cùng giấc mơ của họ đã thành hiện thực. Tuy nhiên, vào ngày đầu tiên chuyển đến ngôi nhà
             mới, một bí mật bị phong ấn dưới tầng hầm của họ đã được đánh thức. Từ đây gây ra một loạt những hài kịch

@@ -4,7 +4,7 @@ const cx = classNames.bind(styles);
 const BackDrop = () => {
   return (
     <div className={cx('wapper')}>
-      <div class={cx('backdrop')}></div>
+      <div className={cx('backdrop')}></div>
     </div>
   );
 };
