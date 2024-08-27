@@ -1,8 +1,6 @@
 .wapper {
     min-height: 418px;
     padding: 48px 24px 96px;
-
-
 }
 
 .container {
@@ -12,7 +10,6 @@
         margin: 0;
     }
 }
-
 
 .footer {
     .title {
@@ -27,7 +24,7 @@
         list-style: none;
         margin: 32px;
         padding-left: 0;
-        color: #b5b5b5 !important;
+        color: var(--text-color) !important;
         list-style-type: circle;
     }
 }

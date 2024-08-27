@@ -7,7 +7,6 @@
     right: 0;
     top: 0;
     z-index: 9997;
-
 }
 
 .navbar {
@@ -61,7 +60,7 @@
         cursor: pointer;
 
         &:hover:not(.brand) {
-            background-color: #102c48;
+            background-color: var(--background-color);
         }
 
         &__name {
@@ -77,16 +76,16 @@
     }
 
     &-item:hover:not(.brand) &-link {
-        color: #428bca;
+        color: var(--primary-color);
     }
 
     &-link {
-        color: #fff;
+        color: var(--especitally-color);
 
         svg {
             margin-right: 5px;
             width: 1em;
-            fill: #fff;
+            fill: var(--especitally-color);
         }
     }
 
@@ -100,8 +99,8 @@
         }
 
         svg {
-            color: #fff;
-            fill: #fff;
+            color: var(--especitally-color);
+            fill: var(--especitally-color);
             width: 2.4rem;
             height: 2.4rem;
         }

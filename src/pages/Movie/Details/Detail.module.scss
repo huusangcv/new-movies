@@ -43,7 +43,7 @@
         }
 
         .subtitle {
-            color: #b5b5b5;
+            color: var(--text-color);
             font-size: 2.2rem;
             font-weight: 400;
             line-height: 1.25;
@@ -97,10 +97,10 @@
     }
 
     .button:not(.is-danger) {
-        background-color: #485fc7;
+        background-color: var(--button-color);
         border-color: transparent;
         border-radius: 4px;
-        color: #fff;
+        color: var(--especitally-color);
         padding: 7px 16px;
         display: flex;
         justify-content: center;
@@ -109,7 +109,7 @@
 
         svg {
             height: 1.3em;
-            fill: #fff;
+            fill: var(--especitally-color);
             margin-right: .9em;
         }
     }
@@ -138,7 +138,7 @@
     }
 
     .has-text-grey-light {
-        color: #b5b5b5 !important;
+        color: var(--text-color) !important;
     }
 
 }
@@ -151,14 +151,14 @@
     font-size: 2rem;
     border-radius: 4px;
     width: 100%;
-    color: #fff;
+    color: var(--especitally-color);
     cursor: pointer;
     padding: 9px 20px;
     white-space: nowrap;
     -webkit-appearance: none;
 
     svg {
-        fill: #fff;
+        fill: var(--especitally-color);
         width: 1.8rem;
         margin-right: 20px;
     }

@@ -17,7 +17,6 @@ const Reducer = (state = init, action) => {
         isShowBar: action.payload,
       };
     case GET_MOVIES_SINGLE:
-      console.log('Check actions', action.payload);
       return {
         ...state,
         movies: {
@@ -26,7 +25,6 @@ const Reducer = (state = init, action) => {
         },
       };
     case GET_MOVIES_SERIES:
-      console.log('Check actions', action.payload);
       return {
         ...state,
         movies: {

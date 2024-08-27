@@ -1,7 +1,15 @@
 @import 'normalize.css';
 @import '../../fonts/stylesheet.css';
 
-:root {}
+:root {
+    --primary-color: #428bca;
+    --secondary-color: #06121e;
+    --text-color: #b5b5b5;
+    --background-color: #102c48;
+    --especitally-color: #fff;
+    --button-color: #485fc7;
+    --background-color-bars: #0b1e30;
+}
 
 *,
 ::after,
@@ -11,9 +19,9 @@
 
 html {
     font-size: 62.5%;
-    background-color: #06121e;
+    background-color: var(--secondary-color);
     min-width: 300px;
-    color: #fff;
+    color: var(--especitally-color);
     text-rendering: optimizeLegibility;
     text-size-adjust: 100%;
 }

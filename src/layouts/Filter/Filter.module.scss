@@ -36,7 +36,7 @@
 
     .label {
         margin-bottom: 8px;
-        color: #fff;
+        color: var(--especitally-color);
         display: block;
         font-size: 1.6rem;
         font-weight: 700;
@@ -81,7 +81,7 @@
             -webkit-transform-origin: center;
             transform-origin: center;
             width: 10px;
-            border-color: #428bca;
+            border-color: var(--primary-color);
             right: 1.125em;
             z-index: 4;
         }
@@ -120,7 +120,7 @@
             border: none;
             outline: none;
             border-radius: 8px;
-            color: #fff;
+            color: var(--especitally-color);
             background-color: rgb(167 139 250);
             height: 100%;
             width: 100px;
