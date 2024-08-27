@@ -1,4 +1,4 @@
-import { GET_MOVIES_SERIES, GET_MOVIES_SINGLE, TITLE_MOVIES } from '../constans';
+import { GET_MOVIE_DETAILS, GET_MOVIES_SERIES, GET_MOVIES_SINGLE, TITLE_MOVIES } from '../constans';
 
 const getTitle = (payload) => {
   return {
@@ -19,4 +19,11 @@ const getMoviesSeries = (payload) => {
     payload,
   };
 };
-export { getMoviesSingle, getMoviesSeries, getTitle };
+
+const getMovieDetails = (payload) => {
+  return {
+    type: GET_MOVIE_DETAILS,
+    payload,
+  };
+};
+export { getMoviesSingle, getMoviesSeries, getMovieDetails, getTitle };

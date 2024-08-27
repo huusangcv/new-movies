@@ -1,4 +1,4 @@
-import { GET_MOVIES_SERIES, GET_MOVIES_SINGLE, TOGGLE_BARS } from '../constans';
+import { GET_MOVIE_DETAILS, GET_MOVIES_SERIES, GET_MOVIES_SINGLE, TOGGLE_BARS } from '../constans';
 
 const init = {
   movies: {
@@ -6,6 +6,7 @@ const init = {
     single: [],
     series: [],
   },
+  movie: {},
   isShowBar: false,
 };
 
@@ -31,6 +32,11 @@ const Reducer = (state = init, action) => {
           ...state.movies,
           series: [...action.payload],
         },
+      };
+    case GET_MOVIE_DETAILS:
+      return {
+        ...state,
+        movie: { ...action.payload },
       };
     default:
       return state;

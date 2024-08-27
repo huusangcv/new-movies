@@ -3,7 +3,7 @@ const routes = {
   single: '/movies/single',
   series: '/movies/series',
   new: '/movies/new',
-  detail: '/movie/detail',
+  detail: '/movie/:slug',
 };
 
 export default routes;

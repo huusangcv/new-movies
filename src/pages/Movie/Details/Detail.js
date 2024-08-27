@@ -1,15 +1,37 @@
 import classNames from 'classnames/bind';
 import styles from './Detail.module.scss';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import getMovies from '~/services/getMovies';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMovieDetails } from '~/redux/actions';
 
 const cx = classNames.bind(styles);
 
 const MovieDetails = () => {
+  const { slug } = useParams();
+  const movie = useSelector((state) => state.movie.item);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      const movies = await getMovies.Detail(slug);
+      dispatch(getMovieDetails(movies));
+    };
+
+    window.scroll({
+      top: 0,
+    });
+
+    fetchApi();
+  }, [dispatch]);
+
   return (
     <div className={cx('wapper')}>
       <div className={cx('details')}>
         <div className={cx('column', 'is-one-quarter-tablet')}>
           <p className={cx('cover', 'has-text-centered')}>
-            <img src="https://image.tmdb.org/t/p/w342/x8QdSeTe02X8f1EcO7yk90lTGNi.jpg" alt="" />
+            <img src={`https://img.ophim.live/uploads/movies/${movie?.thumb_url}`} alt="" />
           </p>
           <a className={cx('watch', 'button', 'is-danger', 'is-medium', 'is-fullwidth')} href="/watch/46883">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -19,12 +41,12 @@ const MovieDetails = () => {
           </a>
         </div>
         <div className={cx('column', 'main')}>
-          <h1 className={cx('title')}>Handsome Guys</h1>
+          <h1 className={cx('title')}>{movie?.origin_name}</h1>
           <h2 className={cx('subtitle')}>
-            Đẹp Trai Thấy Sai Sai (<a href="/year/2024">2024</a>)
+            {movie?.name} (<a href="#!">{movie?.year}</a>)
           </h2>
           <div className={cx('meta')}>
-            <span>1 giờ 41 phút</span>
+            <span>{movie?.time}</span>
           </div>
           <div className={cx('meta')}>
             <span className={cx('imdb-icon')}>
@@ -39,7 +61,7 @@ const MovieDetails = () => {
                 ></path>
               </svg>
             </span>
-            <span className={cx('has-text-weight-bold')}>6.9</span>
+            <span className={cx('has-text-weight-bold')}>{Math.round(movie?.tmdb?.vote_average * 10) / 10}</span>
           </div>
 
           <div className={cx('level', 'genres')}>
@@ -81,12 +103,17 @@ const MovieDetails = () => {
             </div>
             <div className="level-right">
               <div className="level-item buttons">
-                <a className="button is-link is-small is-rounded is-inverted is-outlined" href="/genre/kinh-di">
-                  Kinh dị
-                </a>
-                <a className="button is-link is-small is-rounded is-inverted is-outlined" href="/genre/hai">
-                  Hài
-                </a>
+                {movie?.category.map((type) => {
+                  return (
+                    <a
+                      key={type.id}
+                      className="button is-link is-small is-rounded is-inverted is-outlined"
+                      href="/genre/kinh-di"
+                    >
+                      {type.name}
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -94,21 +121,42 @@ const MovieDetails = () => {
           <dl className={cx('horizontal-dl')}>
             <dt>Đạo diễn</dt>
             <dd className={cx('csv')}>
-              <a href="/person/nam-dong-hyub~173099">Nam Dong-hyub</a>
+              {(movie?.length &&
+                movie?.country.map((country) => {
+                  return (
+                    <a key={country.id} href="/person/nam-dong-hyub~173099">
+                      {country.name}
+                    </a>
+                  );
+                })) || <i href="#!">Đang cập nhật...</i>}
             </dd>
             <dt>Quốc gia</dt>
             <dd className={cx('csv')}>
-              <a href="/country/KR">Hàn Quốc</a>
+              {movie?.country.map((country) => {
+                return (
+                  <a key={country.id} href="/person/nam-dong-hyub~173099">
+                    {country.name}
+                  </a>
+                );
+              })}
             </dd>
             <dt>Khởi chiếu</dt>
             <dd>6/26/2024</dd>
           </dl>
 
           <div className={cx('has-text-grey-light')}>
-            Hai người đàn ông thô lỗ nhưng giản dị, tự xưng là 'Những anh chàng đẹp trai'. Họ có ước mơ được sống ở vùng
-            nông thôn và cuối cùng giấc mơ của họ đã thành hiện thực. Tuy nhiên, vào ngày đầu tiên chuyển đến ngôi nhà
-            mới, một bí mật bị phong ấn dưới tầng hầm của họ đã được đánh thức. Từ đây gây ra một loạt những hài kịch
-            khó đỡ.
+            {movie?.content}
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi labore architecto sunt, ipsa quidem iusto.
+            Blanditiis id mollitia voluptate dicta eius atque, rerum similique libero voluptatibus maiores, assumenda
+            aut aliquam sapiente repellendus? Rem velit porro molestias unde ipsam omnis tempora ad possimus. Minima
+            quas rerum eaque facere amet, temporibus neque. Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            Quasi labore architecto sunt, ipsa quidem iusto. Blanditiis id mollitia voluptate dicta eius atque, rerum
+            similique libero voluptatibus maiores, assumenda aut aliquam sapiente repellendus? Rem velit porro molestias
+            unde ipsam omnis tempora ad possimus. Minima quas rerum eaque facere amet, temporibus neque. Lorem ipsum
+            dolor sit amet consectetur, adipisicing elit. Quasi labore architecto sunt, ipsa quidem iusto. Blanditiis id
+            mollitia voluptate dicta eius atque, rerum similique libero voluptatibus maiores, assumenda aut aliquam
+            sapiente repellendus? Rem velit porro molestias unde ipsam omnis tempora ad possimus. Minima quas rerum
+            eaque facere amet, temporibus neque.
           </div>
         </div>
       </div>

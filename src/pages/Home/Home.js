@@ -5,6 +5,8 @@ import { getMoviesSeries, getMoviesSingle } from '~/redux/actions/getMovies';
 import thumb from '~/assets/images/thumb.jpg';
 import getMovies from '~/services/getMovies';
 import styles from './Home.module.scss';
+import { Link } from 'react-router-dom';
+import Details from '../Movie/Details';
 
 const cx = classNames.bind(styles);
 
@@ -119,9 +121,13 @@ const HomePage = () => {
             return (
               index <= 9 && (
                 <div className="column" key={movie._id}>
-                  <a href="#!" className="cover">
-                    <img src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`} alt=""></img>
-                  </a>
+                  <Link to={`movie/${movie.slug}`} className="cover">
+                    <img
+                      src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`}
+                      alt={movie.origin_name}
+                      title={movie.origin_name}
+                    ></img>
+                  </Link>
                   <h3 className="name vi">
                     <a href="#!">{movie.name}</a>
                   </h3>
