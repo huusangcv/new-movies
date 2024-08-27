@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import classNames from 'classnames/bind';
 import styles from './Series.module.scss';
+import Filter from '~/layouts/Filter';
 
 const cx = classNames.bind(styles);
 
@@ -20,7 +21,8 @@ const Series = () => {
   return (
     <div className={cx('wapper')}>
       <div className="title-list">
-        <div className="title-movies">PHIM BỘ</div>
+        <h1 className="title">Phim Bộ</h1>
+        <Filter title="phim-bo" />
         <div className="gird columns">
           {movies?.series.map((movie) => {
             return (

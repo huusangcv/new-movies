@@ -71,7 +71,7 @@ button {
         }
 
         @media screen and (min-width: 768px) {
-            grid-template-columns: repeat(3, 33.33%);
+            grid-template-columns: repeat(4, 25%);
         }
 
         @media screen and (min-width: 1216px) {
@@ -211,5 +211,54 @@ button {
     &:hover {
         background-color: var(--especitally-color);
         color: var(--button-color);
+    }
+}
+
+
+.title {
+    font-size: 3.2rem;
+    margin: 0 0 12px 0;
+    font-weight: 500;
+    line-height: 1.125;
+    word-break: break-word;
+}
+
+
+///Paginate
+
+.paginate {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+
+    .pagination {
+        --bs-pagination-bg: #06121e;
+        --bs-pagination-active-bg: #06121e;
+        --bs-pagination-active-border-color: #fff;
+        --bs-pagination-hover-bg: #06121e;
+        display: flex;
+        gap: 10px;
+    }
+
+
+    .page-item.active .page-link {
+        background: #428bca;
+    }
+
+
+
+    .page-link {
+        border-radius: 8px;
+        padding: 15px 20px;
+        font-size: 2rem;
+        color: #c7d2db;
+
+        &:hover {
+            color: #b1a21e;
+        }
+
+        span {
+            font-size: 2rem;
+        }
     }
 }

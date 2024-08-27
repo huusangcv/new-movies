@@ -1,35 +1,17 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
-import { getMoviesSeries, getMoviesSingle } from '~/redux/actions/getMovies';
+import { Link } from 'react-router-dom';
 import thumb from '~/assets/images/thumb.jpg';
 import getMovies from '~/services/getMovies';
 import styles from './Home.module.scss';
-import { Link } from 'react-router-dom';
-import Details from '../Movie/Details';
 
 const cx = classNames.bind(styles);
 
 const HomePage = () => {
-  const dispatch = useDispatch();
-  const movies = useSelector((state) => state.movies);
   useEffect(() => {
     document.title = 'Từ Hollywood đến Bollywood, chúng tôi mang đến những bộ phim bạn yêu thích';
   }, []);
-
-  useEffect(() => {
-    const fetchApi = async () => {
-      const [moviesSingle, moviesSeries] = await Promise.all([getMovies.Single(), getMovies.Series()]);
-      dispatch(getMoviesSingle(moviesSingle.items));
-      dispatch(getMoviesSeries(moviesSeries.items));
-    };
-
-    let timer = setTimeout(() => {
-      fetchApi();
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [dispatch]);
 
   return (
     <div className={cx('wapper')}>
@@ -114,38 +96,51 @@ const HomePage = () => {
 
       <h2 className="heading">
         <span>PHIM LẺ MỚI CẬP NHẬT</span>
+        <Link to="/movies/single" className={cx('heading', 'watch-all')}>
+          Xem tất cả{' '}
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512">
+            <path d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path>
+          </svg>
+        </Link>
       </h2>
       <div className="title-list">
         <div className="gird columns">
-          {movies?.single.map((movie, index) => {
-            return (
-              index <= 9 && (
-                <div className="column" key={movie._id}>
-                  <Link to={`movie/${movie.slug}`} className="cover">
-                    <img
-                      src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`}
-                      alt={movie.origin_name}
-                      title={movie.origin_name}
-                    ></img>
-                  </Link>
-                  <h3 className="name vi">
-                    <a href="#!">{movie.name}</a>
-                  </h3>
-                  <h3 className="name en">
-                    <a href="#!">{movie.origin_name}</a>
-                  </h3>
-                </div>
-              )
-            );
-          })}
+          {/* {
+            movies?.single.map((movie, index) => {
+              return (
+                index <= 9 && (
+                  <div className="column" key={movie._id}>
+                    <Link to={`movie/${movie.slug}`} className="cover">
+                      <img
+                        src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`}
+                        alt={movie.origin_name}
+                        title={movie.origin_name}
+                      ></img>
+                    </Link>
+                    <h3 className="name vi">
+                      <a href="#!">{movie.name}</a>
+                    </h3>
+                    <h3 className="name en">
+                      <a href="#!">{movie.origin_name}</a>
+                    </h3>
+                  </div>
+                )
+              );
+            })} */}
         </div>
       </div>
       <h2 className="heading">
         <span>PHIM BỘ MỚI CẬP NHẬT</span>
+        <Link to="/movies/series" className={cx('heading', 'watch-all')}>
+          Xem tất cả{' '}
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512">
+            <path d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path>
+          </svg>
+        </Link>
       </h2>
       <div className="title-list">
         <div className="gird columns">
-          {movies?.series.map((movie, index) => {
+          {/* {movies?.series.map((movie, index) => {
             return (
               index <= 9 && (
                 <div className="column" key={movie._id}>
@@ -161,7 +156,7 @@ const HomePage = () => {
                 </div>
               )
             );
-          })}
+          })} */}
         </div>
       </div>
     </div>

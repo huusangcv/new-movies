@@ -1,10 +1,12 @@
-import { GET_MOVIE_DETAILS, GET_MOVIES_SERIES, GET_MOVIES_SINGLE, TOGGLE_BARS } from '../constans';
+import { FILTER_MOVIES, GET_MOVIE_DETAILS, TOGGLE_BARS } from '../constans';
 
 const init = {
-  movies: {
-    title: '',
-    single: [],
-    series: [],
+  filterBy: {
+    moviesType: '',
+    type: '',
+    nation: '',
+    year: '',
+    sortBy: '',
   },
   movie: {},
   isShowBar: false,
@@ -17,21 +19,10 @@ const Reducer = (state = init, action) => {
         ...state,
         isShowBar: action.payload,
       };
-    case GET_MOVIES_SINGLE:
+    case FILTER_MOVIES:
       return {
         ...state,
-        movies: {
-          ...state.movies,
-          single: [...action.payload],
-        },
-      };
-    case GET_MOVIES_SERIES:
-      return {
-        ...state,
-        movies: {
-          ...state.movies,
-          series: [...action.payload],
-        },
+        filterBy: { ...state.filterBy, ...action.payload },
       };
     case GET_MOVIE_DETAILS:
       return {

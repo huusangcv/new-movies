@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-const HeaderOnly = ({ children }) => {
+const HeaderOnlyForDetail = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -37,4 +37,4 @@ const HeaderOnly = ({ children }) => {
   );
 };
 
-export default HeaderOnly;
+export default HeaderOnlyForDetail;

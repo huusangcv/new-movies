@@ -12,7 +12,6 @@ const MovieDetails = () => {
   const { slug } = useParams();
   const movie = useSelector((state) => state.movie.item);
   const dispatch = useDispatch();
-
   useEffect(() => {
     const fetchApi = async () => {
       const movies = await getMovies.Detail(slug);
@@ -145,18 +144,7 @@ const MovieDetails = () => {
           </dl>
 
           <div className={cx('has-text-grey-light')}>
-            {movie?.content}
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi labore architecto sunt, ipsa quidem iusto.
-            Blanditiis id mollitia voluptate dicta eius atque, rerum similique libero voluptatibus maiores, assumenda
-            aut aliquam sapiente repellendus? Rem velit porro molestias unde ipsam omnis tempora ad possimus. Minima
-            quas rerum eaque facere amet, temporibus neque. Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Quasi labore architecto sunt, ipsa quidem iusto. Blanditiis id mollitia voluptate dicta eius atque, rerum
-            similique libero voluptatibus maiores, assumenda aut aliquam sapiente repellendus? Rem velit porro molestias
-            unde ipsam omnis tempora ad possimus. Minima quas rerum eaque facere amet, temporibus neque. Lorem ipsum
-            dolor sit amet consectetur, adipisicing elit. Quasi labore architecto sunt, ipsa quidem iusto. Blanditiis id
-            mollitia voluptate dicta eius atque, rerum similique libero voluptatibus maiores, assumenda aut aliquam
-            sapiente repellendus? Rem velit porro molestias unde ipsam omnis tempora ad possimus. Minima quas rerum
-            eaque facere amet, temporibus neque.
+            {movie?.content.replace(/<\/?p>/g, '').replace(/&nbsp;/g, ' ')}
           </div>
         </div>
       </div>

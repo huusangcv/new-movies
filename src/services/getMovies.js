@@ -1,8 +1,10 @@
 import axios from '~/utils/customizeAxios';
 
 const getMovies = {
-  Single: async (page) => {
-    let result = await axios.get(`danh-sach/phim-le?page=${page}`);
+  Single: async (movieType, page, sort_field, category, country, year) => {
+    let result = await axios.get(
+      `danh-sach/${movieType}?page=${page}&sort_field=${sort_field}&category=${category}&country=${country}&year=${year}`,
+    );
     return result.data;
   },
   Series: async (page) => {

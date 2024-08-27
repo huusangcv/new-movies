@@ -1,6 +1,7 @@
 import { lazy } from 'react';
-import HeaderOnly from '~/layouts/HeaderOnly';
+import HeaderOnlyForDetail from '~/layouts/HeaderOnlyForDetail';
 import config from '~/config';
+import HeaderOnlyForMovies from '~/layouts/HeaderOnlyForMovies';
 
 const HomePage = lazy(() => import('~/pages/Home'));
 const Series = lazy(() => import('~/pages/Movies/Series'));
@@ -10,10 +11,10 @@ const Details = lazy(() => import('~/pages/Movie/Details'));
 
 const publicLayout = [
   { path: config.routes.home, component: HomePage },
-  { path: config.routes.series, component: Series },
-  { path: config.routes.single, component: Single },
+  { path: config.routes.series, component: Series, layout: HeaderOnlyForMovies },
+  { path: config.routes.single, component: Single, layout: HeaderOnlyForMovies },
   { path: config.routes.new, component: New },
-  { path: config.routes.detail, component: Details, layout: HeaderOnly },
+  { path: config.routes.detail, component: Details, layout: HeaderOnlyForDetail },
 ];
 
 const privateLayout = [];
