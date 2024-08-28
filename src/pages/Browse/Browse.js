@@ -1,7 +1,7 @@
 import { memo, useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import classNames from 'classnames/bind';
-import styles from './Single.module.scss';
+import styles from './Browse.module.scss';
 import Filter from '~/layouts/Filter';
 import getMovies from '~/services/getMovies';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { getMoviesSingle } from '~/redux/actions';
 import { moviesSingle } from '~/redux/selector/selector';
 const cx = classNames.bind(styles);
 
-const Single = () => {
+const Browse = () => {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [paginate, setPaginate] = useState();
@@ -20,6 +20,7 @@ const Single = () => {
 
   const totalPage = Math.floor(paginate?.totalItems / paginate?.totalItemsPerPage);
   useEffect(() => {
+    console.log('render');
     setIsLoading(true);
     try {
       const fetchApi = async () => {
@@ -43,6 +44,8 @@ const Single = () => {
   const handlePageClick = (e) => {
     setPage(e.selected + 1);
   };
+
+  console.log({ movies });
 
   return (
     <>
@@ -104,4 +107,4 @@ const Single = () => {
   );
 };
 
-export default memo(Single);
+export default memo(Browse);

@@ -2,9 +2,11 @@ import classNames from 'classnames/bind';
 import filter from '~/components/Options';
 import styles from './Filter.module.scss';
 import { memo, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { filterMovies } from '~/redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
 import Spinner from '~/components/Spinner';
+import { moviesSelector } from '~/redux/selector/selector';
+import { useNavigate } from 'react-router-dom';
+import { filterMovies } from '~/redux/actions';
 
 const cx = classNames.bind(styles);
 
@@ -15,6 +17,8 @@ const Filter = ({ title, isLoading }) => {
   const [year, setYear] = useState('');
   const [sortBy, setSortBy] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const selectValue = useSelector(moviesSelector);
 
   const handleSelectMovies = (e) => {
     setMoviesType(e.target.value);
@@ -33,27 +37,37 @@ const Filter = ({ title, isLoading }) => {
   };
 
   const handleFilterMovies = () => {
-    if (moviesType === '') {
-      dispatch(
-        filterMovies({
-          moviesType: title,
-          type,
-          nation,
-          year,
-          sortBy,
-        }),
-      );
-    } else {
-      dispatch(
-        filterMovies({
-          moviesType,
-          type,
-          nation,
-          year,
-          sortBy,
-        }),
-      );
-    }
+    dispatch(
+      filterMovies({
+        moviesType,
+        type,
+        nation,
+        year,
+        sortBy,
+      }),
+    );
+    // if (moviesType === '') {
+    //   dispatch(
+    //     filterMovies({
+    //       moviesType: title,
+    //       type,
+    //       nation,
+    //       year,
+    //       sortBy,
+    //     }),
+    //   );
+    // } else {
+    //   dispatch(
+    //     filterMovies({
+    //       moviesType,
+    //       type,
+    //       nation,
+    //       year,
+    //       sortBy,
+    //     }),
+    //   );
+    // }
+    navigate('/browse');
   };
   return (
     <div className={cx('wapper')}>
@@ -66,7 +80,7 @@ const Filter = ({ title, isLoading }) => {
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
-                  <select name="" id="" defaultValue={title} onChange={handleSelectMovies}>
+                  <select name="" id="" defaultValue={selectValue.moviesType} onChange={handleSelectMovies}>
                     <option value="" defaultValue="">
                       - Tất cả -
                     </option>
@@ -88,7 +102,7 @@ const Filter = ({ title, isLoading }) => {
                 Thể loại:
               </label>
               <div className={cx('control')}>
-                <div className={cx('select')}>
+                <div className={cx('select')} defaultValue={selectValue.type}>
                   <select name="" id="" onChange={handleSelectType}>
                     <option value="">- Tất cả -</option>
                     {filter?.types.map((type) => (
@@ -108,7 +122,7 @@ const Filter = ({ title, isLoading }) => {
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
-                  <select name="" id="" onChange={handleSelectNations}>
+                  <select name="" id="" onChange={handleSelectNations} defaultValue={selectValue.nation}>
                     <option value="">- Tất cả -</option>
                     {filter?.nations.map((nation) => (
                       <option value={nation.slug} key={nation.id}>
@@ -127,7 +141,7 @@ const Filter = ({ title, isLoading }) => {
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
-                  <select name="" id="" onChange={handleSelectYears}>
+                  <select name="" id="" onChange={handleSelectYears} defaultValue={selectValue.year}>
                     <option value="">- Tất cả -</option>
                     {filter?.years.map((year) => (
                       <option value={year.slug} key={year.id}>
@@ -147,7 +161,7 @@ const Filter = ({ title, isLoading }) => {
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
-                  <select name="" id="" onChange={handleSelectSortBy}>
+                  <select name="" id="" onChange={handleSelectSortBy} defaultValue={selectValue.sortBy}>
                     {filter?.sortBy.map((sort) => (
                       <option value={sort.slug} key={sort.id}>
                         {sort.text}

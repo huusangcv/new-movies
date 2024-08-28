@@ -87,7 +87,7 @@ const Header = () => {
                 <span>Phim Hot</span>
               </div>
             </Link>
-            <Link className={cx('navbar-item')} to="/movies/single">
+            <Link className={cx('navbar-item')} to="movies/single">
               <div className={cx('navbar-link')}>Phim lẻ</div>
             </Link>
           </div>

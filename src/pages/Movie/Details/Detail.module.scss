@@ -1,12 +1,20 @@
 .wapper {
-    position: relative;
     z-index: 9989;
-    margin-top: -408px;
+    margin-top: 210px;
+}
+
+.details__poster {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
 }
 
 .details {
     display: flex;
     margin: -12px -32px;
+
 
     .column.is-one-quarter-tablet {
         position: relative;

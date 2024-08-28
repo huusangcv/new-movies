@@ -1,11 +1,8 @@
 import axios from '~/utils/customizeAxios';
 
 const getMovies = {
-  Single: async (moviesType = 'phim-le', page, sort_field, category, country, year = 2024) => {
-    console.log({ moviesType, year });
-    let result = await axios.get(
-      `danh-sach/${moviesType}?page=${page}&sort_field=${sort_field}&category=${category}&country=${country}&year=${year}`,
-    );
+  Single: async (page) => {
+    let result = await axios.get(`danh-sach/phim-le?page=${page}`);
     return result.data;
   },
   Series: async (page) => {

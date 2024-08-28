@@ -1,15 +1,19 @@
-import { FILTER_MOVIES, GET_MOVIE_DETAILS, TOGGLE_BARS } from '../constans';
+import { FILTER_MOVIES, GET_MOVIE_DETAILS, GET_MOVIE_SINGLE, TOGGLE_BARS } from '../constans';
 
 const init = {
   filterBy: {
+    titlePage: '',
     filterState: false,
     moviesType: '',
     type: '',
     nation: '',
-    year: '2024',
+    year: '',
     sortBy: '',
   },
   movie: {},
+  movies: {
+    single: [],
+  },
   isShowBar: false,
 };
 
@@ -29,6 +33,11 @@ const Reducer = (state = init, action) => {
       return {
         ...state,
         movie: { ...action.payload },
+      };
+    case GET_MOVIE_SINGLE:
+      return {
+        ...state,
+        movies: { single: [...action.payload] },
       };
     default:
       return state;
