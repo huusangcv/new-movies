@@ -11,14 +11,14 @@ import { filterMovies } from '~/redux/actions';
 const cx = classNames.bind(styles);
 
 const Filter = ({ title, isLoading }) => {
-  const [moviesType, setMoviesType] = useState('');
-  const [type, setType] = useState('');
-  const [nation, setNation] = useState('');
-  const [year, setYear] = useState('');
-  const [sortBy, setSortBy] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const selectValue = useSelector(moviesSelector);
+  const [moviesType, setMoviesType] = useState(selectValue.moviesType);
+  const [type, setType] = useState(selectValue.type);
+  const [nation, setNation] = useState(selectValue.nation);
+  const [year, setYear] = useState(selectValue.year);
+  const [sortBy, setSortBy] = useState(selectValue.sortBy);
 
   const handleSelectMovies = (e) => {
     setMoviesType(e.target.value);
@@ -37,36 +37,27 @@ const Filter = ({ title, isLoading }) => {
   };
 
   const handleFilterMovies = () => {
-    dispatch(
-      filterMovies({
-        moviesType,
-        type,
-        nation,
-        year,
-        sortBy,
-      }),
-    );
-    // if (moviesType === '') {
-    //   dispatch(
-    //     filterMovies({
-    //       moviesType: title,
-    //       type,
-    //       nation,
-    //       year,
-    //       sortBy,
-    //     }),
-    //   );
-    // } else {
-    //   dispatch(
-    //     filterMovies({
-    //       moviesType,
-    //       type,
-    //       nation,
-    //       year,
-    //       sortBy,
-    //     }),
-    //   );
-    // }
+    if (moviesType === '') {
+      dispatch(
+        filterMovies({
+          moviesType: title,
+          type,
+          nation,
+          year,
+          sortBy,
+        }),
+      );
+    } else {
+      dispatch(
+        filterMovies({
+          moviesType,
+          type,
+          nation,
+          year,
+          sortBy,
+        }),
+      );
+    }
     navigate('/browse');
   };
   return (
@@ -80,7 +71,7 @@ const Filter = ({ title, isLoading }) => {
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
-                  <select name="" id="" defaultValue={selectValue.moviesType} onChange={handleSelectMovies}>
+                  <select name="" id="" defaultValue={selectValue.moviesType || title} onChange={handleSelectMovies}>
                     <option value="" defaultValue="">
                       - Tất cả -
                     </option>
@@ -102,8 +93,8 @@ const Filter = ({ title, isLoading }) => {
                 Thể loại:
               </label>
               <div className={cx('control')}>
-                <div className={cx('select')} defaultValue={selectValue.type}>
-                  <select name="" id="" onChange={handleSelectType}>
+                <div className={cx('select')}>
+                  <select name="" id="" onChange={handleSelectType} defaultValue={selectValue.type}>
                     <option value="">- Tất cả -</option>
                     {filter?.types.map((type) => (
                       <option value={type.slug} key={type.id}>

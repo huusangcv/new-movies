@@ -5,54 +5,55 @@ import styles from './Browse.module.scss';
 import Filter from '~/layouts/Filter';
 import getMovies from '~/services/getMovies';
 import { Link } from 'react-router-dom';
-import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMoviesSingle } from '~/redux/actions';
-import { moviesSingle } from '~/redux/selector/selector';
+import { moviesSelector } from '~/redux/selector/selector';
+import ReactPaginate from 'react-paginate';
 const cx = classNames.bind(styles);
 
 const Browse = () => {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [paginate, setPaginate] = useState();
+  const [movies, setMovies] = useState([]);
   const dispatch = useDispatch();
-  const movies = useSelector(moviesSingle);
-
+  const { titlePage, moviesType, type, nation, year, sortBy } = useSelector(moviesSelector);
+  console.log(titlePage, moviesType, type, nation, year, sortBy);
   const totalPage = Math.floor(paginate?.totalItems / paginate?.totalItemsPerPage);
   useEffect(() => {
     console.log('render');
     setIsLoading(true);
-    try {
-      const fetchApi = async () => {
-        const movies = await getMovies.Single(page);
+
+    const fetchApi = async () => {
+      try {
+        const movies = await getMovies.Browse(moviesType, page, type, nation, year, sortBy);
         if (movies) {
-          document.title = movies.seoOnPage.titleHead;
+          // document.title = movies.seoOnPage.titleHead;
           setPaginate(movies.params.pagination);
-          dispatch(getMoviesSingle(movies.items));
+          setMovies(movies.items);
           setIsLoading(false);
         }
-      };
-      fetchApi();
-    } catch (error) {
-      console.log('Erroe', error);
-    }
+      } catch (error) {
+        console.log('Erroe', error);
+      }
+    };
+
+    fetchApi();
+
     window.scroll({
       top: 0,
     });
-  }, [page, dispatch]);
+  }, [moviesType, page, type, nation, year, sortBy, dispatch]);
 
   const handlePageClick = (e) => {
     setPage(e.selected + 1);
   };
 
-  console.log({ movies });
-
   return (
     <>
       <div className={cx('wapper')}>
         <div className="title-list">
-          <h1 className="title">Phim lẻ</h1>
-          <Filter />
+          <h1 className="title">{movies?.titlePage}</h1>
+          <Filter title="phim-bo" isLoading={isLoading} />
           {(isLoading && <p>Loading...</p>) || (
             <>
               <div className="gird columns">

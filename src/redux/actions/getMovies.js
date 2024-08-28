@@ -1,4 +1,12 @@
-import { FILTER_MOVIES, GET_MOVIE_DETAILS, GET_MOVIE_SINGLE, TITLE_MOVIES } from '../constans';
+import {
+  FILTER_MOVIES,
+  GET_MOVIE_DETAILS,
+  GET_MOVIE_SERIES,
+  GET_MOVIE_SINGLE,
+  GET_TOTAL_ITEMS_MOVIES_SERIES,
+  GET_TOTAL_ITEMS_MOVIES_SINGLE,
+  TITLE_MOVIES,
+} from '../constans';
 
 const getTitle = (payload) => {
   return {
@@ -28,4 +36,33 @@ const getMoviesSingle = (payload) => {
   };
 };
 
-export { getMovieDetails, getTitle, filterMovies, getMoviesSingle };
+const getMoviesSeries = (payload) => {
+  return {
+    type: GET_MOVIE_SERIES,
+    payload,
+  };
+};
+
+const getTotalItemsSingle = (payload) => {
+  return {
+    type: GET_TOTAL_ITEMS_MOVIES_SINGLE,
+    payload,
+  };
+};
+
+const getTotalItemsSeries = (payload) => {
+  return {
+    type: GET_TOTAL_ITEMS_MOVIES_SERIES,
+    payload,
+  };
+};
+
+export {
+  getMovieDetails,
+  getTitle,
+  filterMovies,
+  getMoviesSingle,
+  getMoviesSeries,
+  getTotalItemsSingle,
+  getTotalItemsSeries,
+};

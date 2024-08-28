@@ -1,4 +1,12 @@
-import { FILTER_MOVIES, GET_MOVIE_DETAILS, GET_MOVIE_SINGLE, TOGGLE_BARS } from '../constans';
+import {
+  FILTER_MOVIES,
+  GET_MOVIE_DETAILS,
+  GET_MOVIE_SERIES,
+  GET_MOVIE_SINGLE,
+  GET_TOTAL_ITEMS_MOVIES_SERIES,
+  GET_TOTAL_ITEMS_MOVIES_SINGLE,
+  TOGGLE_BARS,
+} from '../constans';
 
 const init = {
   filterBy: {
@@ -13,6 +21,11 @@ const init = {
   movie: {},
   movies: {
     single: [],
+    series: [],
+  },
+  totalPage: {
+    moviesSingle: 0,
+    moviesSeries: 0,
   },
   isShowBar: false,
 };
@@ -37,7 +50,22 @@ const Reducer = (state = init, action) => {
     case GET_MOVIE_SINGLE:
       return {
         ...state,
-        movies: { single: [...action.payload] },
+        movies: { ...state.movies, single: [...action.payload] },
+      };
+    case GET_MOVIE_SERIES:
+      return {
+        ...state,
+        movies: { ...state.movies, series: [...action.payload] },
+      };
+    case GET_TOTAL_ITEMS_MOVIES_SINGLE:
+      return {
+        ...state,
+        totalPage: { ...state.totalPage, moviesSingle: action.payload },
+      };
+    case GET_TOTAL_ITEMS_MOVIES_SERIES:
+      return {
+        ...state,
+        totalPage: { ...state.totalPage, moviesSeries: action.payload },
       };
     default:
       return state;

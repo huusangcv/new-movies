@@ -7,34 +7,43 @@ import getMovies from '~/services/getMovies';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMoviesSingle } from '~/redux/actions';
-import { moviesSingle } from '~/redux/selector/selector';
+import { getMoviesSingle, getTotalItemsSingle } from '~/redux/actions';
+import { getTotalItems, moviesSingle } from '~/redux/selector/selector';
 const cx = classNames.bind(styles);
 
 const Single = () => {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  const [paginate, setPaginate] = useState();
   const dispatch = useDispatch();
   const movies = useSelector(moviesSingle);
+  const totalItems = useSelector(getTotalItems);
 
-  const totalPage = Math.floor(paginate?.totalItems / paginate?.totalItemsPerPage);
+  const totalPage = Math.floor(totalItems.moviesSingle / 24);
   useEffect(() => {
     setIsLoading(true);
-    try {
+    if (!movies || movies.length === 0 || page !== 1) {
       const fetchApi = async () => {
-        const movies = await getMovies.Single(page);
-        if (movies) {
-          document.title = movies.seoOnPage.titleHead;
-          setPaginate(movies.params.pagination);
-          dispatch(getMoviesSingle(movies.items));
-          setIsLoading(false);
+        try {
+          const movies = await getMovies.Single(page);
+          if (movies) {
+            document.title = movies.seoOnPage.titleHead;
+            dispatch(getMoviesSingle(movies.items));
+            if (page === 1) {
+              dispatch(getTotalItemsSingle(movies.params.pagination.totalItems));
+            }
+            setIsLoading(false);
+          }
+        } catch (error) {
+          console.log('Erroe', error);
         }
       };
       fetchApi();
-    } catch (error) {
-      console.log('Erroe', error);
     }
+
+    if (movies) {
+      setIsLoading(false);
+    }
+    console.log({ movies });
     window.scroll({
       top: 0,
     });
@@ -49,7 +58,7 @@ const Single = () => {
       <div className={cx('wapper')}>
         <div className="title-list">
           <h1 className="title">Phim lẻ</h1>
-          <Filter />
+          <Filter title="phim-le" />
           {(isLoading && <p>Loading...</p>) || (
             <>
               <div className="gird columns">
