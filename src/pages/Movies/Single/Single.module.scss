@@ -1,3 +1,17 @@
 .wapper {
     width: 100%;
 }
+
+.heading {
+    &.watch-all {
+        color: #ccc;
+        font-size: 1.6rem;
+
+        svg {
+            fill: #ccc;
+            width: 6px;
+            height: 16px;
+            vertical-align: middle;
+        }
+    }
+}
