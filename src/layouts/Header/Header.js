@@ -84,11 +84,18 @@ const Header = () => {
             </div>
             <Link className={cx('navbar-item')} to="/movies/series">
               <div className={cx('navbar-link')}>
-                <span>Phim Hot</span>
+                <span>Phim bộ</span>
               </div>
             </Link>
             <Link className={cx('navbar-item')} to="movies/single">
-              <div className={cx('navbar-link')}>Phim lẻ</div>
+              <div className={cx('navbar-link')}>
+                <span>Phim lẻ</span>
+              </div>
+            </Link>
+            <Link className={cx('navbar-item')} to="/movies/new">
+              <div className={cx('navbar-link')}>
+                <span>Phim mới</span>
+              </div>
             </Link>
           </div>
           <div className={cx('navbar-end')}>

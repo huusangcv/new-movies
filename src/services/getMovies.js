@@ -9,6 +9,10 @@ const getMovies = {
     const result = await axios.get(`danh-sach/phim-bo?page=${page}`);
     return result.data;
   },
+  New: async (page) => {
+    const result = await axios.get(`danh-sach/phim-moi?page=${page}`);
+    return result.data;
+  },
   Browse: async (moviesType, page, type, nation, year, sortBy) => {
     let result;
     if (moviesType === '' && page === '' && type === '' && nation === '' && year === '' && sortBy) {

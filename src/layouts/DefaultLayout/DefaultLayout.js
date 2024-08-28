@@ -5,7 +5,6 @@ import Footer from '../Footer';
 import Bars from '../OverlayBars';
 import { Outlet } from 'react-router-dom';
 import { memo } from 'react';
-import Filter from '../Filter';
 
 const cx = classNames.bind(styles);
 

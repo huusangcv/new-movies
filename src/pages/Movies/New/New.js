@@ -1,35 +1,36 @@
 import { memo, useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import classNames from 'classnames/bind';
-import styles from './Single.module.scss';
+import styles from './New.module.scss';
 import Filter from '~/layouts/Filter';
 import getMovies from '~/services/getMovies';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMoviesSingle, getTotalItemsSingle } from '~/redux/actions';
-import { getTotalItems, moviesSingle } from '~/redux/selector/selector';
+import { getMoviesNew, getTotalItemsNew } from '~/redux/actions';
+import { getTotalItems, moviesSeries } from '~/redux/selector/selector';
 const cx = classNames.bind(styles);
 
-const Single = () => {
+const New = () => {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
-  const movies = useSelector(moviesSingle);
+  const movies = useSelector(moviesSeries);
   const totalItems = useSelector(getTotalItems);
 
-  const totalPage = Math.floor(totalItems.moviesSingle / 24);
+  const totalPage = Math.floor(+totalItems.moviesSeries / 24);
+  console.log({ totalItems });
   useEffect(() => {
     if (!movies || movies.length === 0 || page !== 1) {
       const fetchApi = async () => {
         setIsLoading(true);
         try {
-          const movies = await getMovies.Single(page);
+          const movies = await getMovies.New(page);
           if (movies) {
             document.title = movies.seoOnPage.titleHead;
-            dispatch(getMoviesSingle(movies.items));
+            dispatch(getMoviesNew(movies.items));
             if (page === 1) {
-              dispatch(getTotalItemsSingle(movies.params.pagination.totalItems));
+              dispatch(getTotalItemsNew(movies.params.pagination.totalItems));
             }
             setIsLoading(false);
           }
@@ -38,10 +39,10 @@ const Single = () => {
         }
       };
       fetchApi();
-    } else {
-      if (movies) {
-        setIsLoading(false);
-      }
+    }
+
+    if (movies) {
+      setIsLoading(false);
     }
     console.log({ movies });
     window.scroll({
@@ -57,8 +58,8 @@ const Single = () => {
     <>
       <div className={cx('wapper')}>
         <div className="title-list">
-          <h1 className="title">Phim lẻ</h1>
-          <Filter title="phim-le" />
+          <h1 className="title">Phim mới</h1>
+          <Filter />
           {(isLoading && <p>Loading...</p>) || (
             <>
               <div className="gird columns">
@@ -113,4 +114,4 @@ const Single = () => {
   );
 };
 
-export default memo(Single);
+export default memo(New);

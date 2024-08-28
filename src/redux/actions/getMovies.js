@@ -1,8 +1,10 @@
 import {
   FILTER_MOVIES,
   GET_MOVIE_DETAILS,
+  GET_MOVIE_NEW,
   GET_MOVIE_SERIES,
   GET_MOVIE_SINGLE,
+  GET_TOTAL_ITEMS_MOVIES_NEW,
   GET_TOTAL_ITEMS_MOVIES_SERIES,
   GET_TOTAL_ITEMS_MOVIES_SINGLE,
   TITLE_MOVIES,
@@ -43,6 +45,13 @@ const getMoviesSeries = (payload) => {
   };
 };
 
+const getMoviesNew = (payload) => {
+  return {
+    type: GET_MOVIE_NEW,
+    payload,
+  };
+};
+
 const getTotalItemsSingle = (payload) => {
   return {
     type: GET_TOTAL_ITEMS_MOVIES_SINGLE,
@@ -57,12 +66,21 @@ const getTotalItemsSeries = (payload) => {
   };
 };
 
+const getTotalItemsNew = (payload) => {
+  return {
+    type: GET_TOTAL_ITEMS_MOVIES_NEW,
+    payload,
+  };
+};
+
 export {
   getMovieDetails,
   getTitle,
   filterMovies,
   getMoviesSingle,
   getMoviesSeries,
+  getMoviesNew,
   getTotalItemsSingle,
   getTotalItemsSeries,
+  getTotalItemsNew,
 };

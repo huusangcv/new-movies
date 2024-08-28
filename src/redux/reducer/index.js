@@ -1,8 +1,10 @@
 import {
   FILTER_MOVIES,
   GET_MOVIE_DETAILS,
+  GET_MOVIE_NEW,
   GET_MOVIE_SERIES,
   GET_MOVIE_SINGLE,
+  GET_TOTAL_ITEMS_MOVIES_NEW,
   GET_TOTAL_ITEMS_MOVIES_SERIES,
   GET_TOTAL_ITEMS_MOVIES_SINGLE,
   TOGGLE_BARS,
@@ -22,10 +24,12 @@ const init = {
   movies: {
     single: [],
     series: [],
+    new: [],
   },
   totalPage: {
     moviesSingle: 0,
     moviesSeries: 0,
+    moviesNew: 0,
   },
   isShowBar: false,
 };
@@ -57,6 +61,11 @@ const Reducer = (state = init, action) => {
         ...state,
         movies: { ...state.movies, series: [...action.payload] },
       };
+    case GET_MOVIE_NEW:
+      return {
+        ...state,
+        movies: { ...state.movies, new: [...action.payload] },
+      };
     case GET_TOTAL_ITEMS_MOVIES_SINGLE:
       return {
         ...state,
@@ -66,6 +75,11 @@ const Reducer = (state = init, action) => {
       return {
         ...state,
         totalPage: { ...state.totalPage, moviesSeries: action.payload },
+      };
+    case GET_TOTAL_ITEMS_MOVIES_NEW:
+      return {
+        ...state,
+        totalPage: { ...state.totalPage, moviesNew: action.payload },
       };
     default:
       return state;
