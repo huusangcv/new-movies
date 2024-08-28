@@ -1,19 +1,19 @@
 import classNames from 'classnames/bind';
 import filter from '~/components/Options';
 import styles from './Filter.module.scss';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { filterMovies } from '~/redux/actions';
+import Spinner from '~/components/Spinner';
 
 const cx = classNames.bind(styles);
 
-const Filter = ({ title }) => {
+const Filter = ({ title, isLoading }) => {
   const [moviesType, setMoviesType] = useState('');
   const [type, setType] = useState('');
   const [nation, setNation] = useState('');
   const [year, setYear] = useState('');
   const [sortBy, setSortBy] = useState('');
-
   const dispatch = useDispatch();
 
   const handleSelectMovies = (e) => {
@@ -165,7 +165,7 @@ const Filter = ({ title }) => {
               </label>
               <div className={cx('control')} onClick={handleFilterMovies}>
                 <div className={cx('filter-btn')}>
-                  <button>Duyệt</button>
+                  <button>{(isLoading && <Spinner />) || <span>Duyệt</span>}</button>
                 </div>
               </div>
             </div>
@@ -176,4 +176,4 @@ const Filter = ({ title }) => {
   );
 };
 
-export default Filter;
+export default memo(Filter);

@@ -2,10 +2,11 @@ import { FILTER_MOVIES, GET_MOVIE_DETAILS, TOGGLE_BARS } from '../constans';
 
 const init = {
   filterBy: {
+    filterState: false,
     moviesType: '',
     type: '',
     nation: '',
-    year: '',
+    year: '2024',
     sortBy: '',
   },
   movie: {},

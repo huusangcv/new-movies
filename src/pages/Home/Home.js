@@ -1,9 +1,7 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import thumb from '~/assets/images/thumb.jpg';
-import getMovies from '~/services/getMovies';
 import styles from './Home.module.scss';
 
 const cx = classNames.bind(styles);

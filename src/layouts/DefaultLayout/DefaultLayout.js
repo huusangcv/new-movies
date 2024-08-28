@@ -14,7 +14,7 @@ const DefaultLayout = ({ children }) => {
       <section className={cx('section')}>
         <div className={cx('container')} style={{ flex: 1 }}>
           <div className={cx('inner')}>
-            <Filter />
+            {/* <Filter /> */}
             <div className={cx('content')}>{children}</div>
           </div>
         </div>

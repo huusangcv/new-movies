@@ -232,6 +232,7 @@ button {
     justify-content: center;
 
     .pagination {
+        list-style: none;
         --bs-pagination-bg: #06121e;
         --bs-pagination-active-bg: #06121e;
         --bs-pagination-active-border-color: #fff;
