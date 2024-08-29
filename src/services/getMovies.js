@@ -29,6 +29,10 @@ const getMovies = {
     const result = await axios.get(`phim/${slug}`);
     return result.data;
   },
+  Search: async (keyword, page) => {
+    const result = await axios.get(`tim-kiem?keyword=${keyword}&page=${page}`);
+    return result.data;
+  },
 };
 
 export default getMovies;

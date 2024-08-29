@@ -1,10 +1,10 @@
 import classNames from 'classnames/bind';
 import styles from './Detail.module.scss';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import getMovies from '~/services/getMovies';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMovieDetails } from '~/redux/actions';
+import { filterMoviesByCategory, getMovieDetails } from '~/redux/actions';
 import BackDrop from '~/layouts/BackDrop';
 import Modal from '~/components/ModalRoot/Modal';
 
@@ -14,6 +14,7 @@ const MovieDetails = () => {
   const { slug } = useParams();
   const movie = useSelector((state) => state.movie.item);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isShowModalTrailer, setIsShowModalTrailer] = useState(false);
 
   useEffect(() => {
@@ -31,6 +32,25 @@ const MovieDetails = () => {
 
   const handleCloseModalTrailers = () => {
     setIsShowModalTrailer(!isShowModalTrailer);
+  };
+
+  const handleDispatchFilter = (payload) => {
+    dispatch(
+      filterMoviesByCategory({
+        type: payload,
+        moviesType: '',
+      }),
+    );
+  };
+
+  const metaTag = () => {
+    if (movie?.episode_current === 'Full') {
+      return `${movie?.episode_current} ${movie?.quality}`;
+    } else if (movie?.episode_current.includes('Hoàn Tất')) {
+      return `${movie?.episode_current.replace('Tập ', '')}`;
+    } else {
+      return `${movie?.episode_current.replace('Tập ', '')}/${movie?.episode_total.replace(' Tập', '')}`;
+    }
   };
 
   return (
@@ -56,6 +76,9 @@ const MovieDetails = () => {
             </h2>
             <div className={cx('meta')}>
               <span>{movie?.time}</span>
+              <span className={cx('tag')} title={`${movie?.view} lượt xem`}>
+                {metaTag()}
+              </span>
             </div>
             <div className={cx('meta')}>
               <span className={cx('imdb-icon')}>
@@ -76,16 +99,19 @@ const MovieDetails = () => {
             <div className={cx('level', 'genres')}>
               <div className={cx('level-left')}>
                 <div className={cx('level-item')}>
-                  <div
-                    href="https://www.facebook.com/sharer/sharer.php?u=https://xemphim.in/movie/handsome-guys~46883"
+                  <a
+                    href={`https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                      window.location.href,
+                    )}`}
                     className={cx('fb-share', 'button', 'is-link')}
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                       <path d="M448 80v352c0 26.5-21.5 48-48 48h-85.3V302.8h60.6l8.7-67.6h-69.3V192c0-19.6 5.4-32.9 33.5-32.9H384V98.7c-6.2-.8-27.4-2.7-52.2-2.7-51.6 0-87 31.5-87 89.4v49.9H184v67.6h60.9V480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48z"></path>
                     </svg>
                     Chia sẻ
-                  </div>
+                  </a>
                 </div>
                 {/* <div className={cx('level-item')}>
                   <div className={cx('dropdown', 'is-hoverable')}>
@@ -117,6 +143,7 @@ const MovieDetails = () => {
                       <Link
                         key={type.id}
                         className="button is-link is-small is-rounded is-inverted is-outlined"
+                        onClick={() => handleDispatchFilter(type.slug)}
                         to="/browse"
                       >
                         {type.name}
@@ -130,14 +157,18 @@ const MovieDetails = () => {
             <dl className={cx('horizontal-dl')}>
               <dt>Đạo diễn</dt>
               <dd className={cx('csv')}>
-                {(movie?.length &&
-                  movie?.country.map((country) => {
-                    return (
-                      <a key={country.id} href="/person/nam-dong-hyub~173099">
-                        {country.name}
-                      </a>
-                    );
-                  })) || <i href="#!">Đang cập nhật...</i>}
+                {movie?.director.length &&
+                  movie?.director.map((director, index) => {
+                    if (director) {
+                      return (
+                        <a key={index} href="/person/nam-dong-hyub~173099">
+                          {director}
+                        </a>
+                      );
+                    } else {
+                      return <div>Đang cập nhật....</div>;
+                    }
+                  })}
               </dd>
               <dt>Quốc gia</dt>
               <dd className={cx('csv')}>
@@ -149,12 +180,28 @@ const MovieDetails = () => {
                   );
                 })}
               </dd>
-              <dt>Khởi chiếu</dt>
-              <dd>6/26/2024</dd>
+              <dt>Diễn viên</dt>
+              <dd className={cx('csv')}>
+                {movie?.actor.map((actor, index) => {
+                  if (actor) {
+                    return (
+                      <a key={index} href="/person/nam-dong-hyub~173099">
+                        {actor}
+                      </a>
+                    );
+                  } else {
+                    return <div>Đang cập nhật....</div>;
+                  }
+                })}
+              </dd>
             </dl>
 
             <div className={cx('has-text-grey-light')}>
-              {movie?.content.replace(/<\/?p>/g, '').replace(/&nbsp;/g, ' ')}
+              {movie?.content
+                .replace(/<\/?p>/g, '')
+                .replace(/<\/?strong>/g, '')
+                .replace(/<\/?i>/g, '')
+                .replace(/&nbsp;/g, ' ')}
             </div>
 
             <h3 className="section-header">Trailer</h3>
@@ -163,7 +210,7 @@ const MovieDetails = () => {
               <div
                 data-index="0"
                 className="slick-slide slick-active slick-current"
-                tabindex="-1"
+                tabIndex="-1"
                 aria-hidden="false"
                 style={{
                   outline: 'none',
@@ -174,7 +221,7 @@ const MovieDetails = () => {
                   {movie?.trailer_url && (
                     <div
                       className={cx('item')}
-                      tabindex="-1"
+                      tabIndex="-1"
                       onClick={handleCloseModalTrailers}
                       style={{ width: '100%', display: 'inline-block' }}
                     >

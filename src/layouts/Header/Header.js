@@ -72,7 +72,7 @@ const Header = () => {
         </div>
         <div className={cx('navbar-menu')}>
           <div className={cx('navbar-start')}>
-            <div className={cx('navbar-item')}>
+            <Link className={cx('navbar-item')} to="/search">
               <div className={cx('navbar-link')}>
                 <span>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -81,7 +81,7 @@ const Header = () => {
                   Tim kiếm
                 </span>
               </div>
-            </div>
+            </Link>
             <Link className={cx('navbar-item')} to="/movies/series">
               <div className={cx('navbar-link')}>
                 <span>Phim bộ</span>

@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DefaultLayout from './layouts/DefaultLayout';
 import { lazy, Suspense } from 'react';
 import HomePage from './pages/Home/';
+import Search from './pages/Search';
 // const HomePage = lazy(() => import('~/pages/Home'));
 const Series = lazy(() => import('~/pages/Movies/Series'));
 const Single = lazy(() => import('~/pages/Movies/Single'));
@@ -79,6 +80,7 @@ function App() {
                 </Suspense>
               }
             />
+            <Route path="/search" element={<Search />} />
           </Route>
         </Routes>
       </div>

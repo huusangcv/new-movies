@@ -1,5 +1,6 @@
 import {
   FILTER_MOVIES,
+  FILTER_MOVIES_CATEGORY,
   GET_MOVIE_DETAILS,
   GET_MOVIE_NEW,
   GET_MOVIE_SERIES,
@@ -42,6 +43,11 @@ const Reducer = (state = init, action) => {
         isShowBar: action.payload,
       };
     case FILTER_MOVIES:
+      return {
+        ...state,
+        filterBy: { ...state.filterBy, ...action.payload },
+      };
+    case FILTER_MOVIES_CATEGORY:
       return {
         ...state,
         filterBy: { ...state.filterBy, ...action.payload },

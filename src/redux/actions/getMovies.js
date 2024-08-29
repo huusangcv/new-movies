@@ -1,5 +1,6 @@
 import {
   FILTER_MOVIES,
+  FILTER_MOVIES_CATEGORY,
   GET_MOVIE_DETAILS,
   GET_MOVIE_NEW,
   GET_MOVIE_SERIES,
@@ -20,6 +21,13 @@ const getTitle = (payload) => {
 const filterMovies = (payload) => {
   return {
     type: FILTER_MOVIES,
+    payload,
+  };
+};
+
+const filterMoviesByCategory = (payload) => {
+  return {
+    type: FILTER_MOVIES_CATEGORY,
     payload,
   };
 };
@@ -77,6 +85,7 @@ export {
   getMovieDetails,
   getTitle,
   filterMovies,
+  filterMoviesByCategory,
   getMoviesSingle,
   getMoviesSeries,
   getMoviesNew,

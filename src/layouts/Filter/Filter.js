@@ -71,7 +71,7 @@ const Filter = ({ title, isLoading }) => {
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
-                  <select name="" id="" defaultValue={selectValue.moviesType || title} onChange={handleSelectMovies}>
+                  <select name="" id="" defaultValue={selectValue.moviesType} onChange={handleSelectMovies}>
                     <option value="" defaultValue="">
                       - Tất cả -
                     </option>
