@@ -202,6 +202,12 @@ button {
     color: var(--especitally-color);
 }
 
+
+.button.is-link.is-inverted.is-outlined:hover {
+    background-color: #fff;
+    color: #485fc7;
+}
+
 .button.is-rounded {
     border-radius: 9999px;
     padding: 8px 15px;
@@ -223,44 +229,78 @@ button {
     word-break: break-word;
 }
 
-
 ///Paginate
 
 .paginate {
     width: 100%;
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
 
     .pagination {
+        width: 100%;
         list-style: none;
         --bs-pagination-bg: #06121e;
         --bs-pagination-active-bg: #06121e;
         --bs-pagination-active-border-color: #fff;
         --bs-pagination-hover-bg: #06121e;
         display: flex;
-        gap: 10px;
+        gap: 5px;
+        padding-left: 0;
+
+        flex-grow: 1;
+        flex-shrink: 1;
+        justify-content: flex-start;
+        order: 1;
+
+        .page-item.active .page-link {
+            border-color: #428bca;
+        }
+
+        .page-item:first-of-type {
+            order: 2;
+        }
+
+        .page-item:last-of-type {
+            order: 3;
+        }
+
+        .page-item:first-of-type {
+            margin-left: auto;
+        }
+
+        .page-item:last-of-type:hover,
+        .page-item:first-of-type:hover {
+            border-color: #b5b5b5;
+            color: #dcf836;
+        }
+    }
+}
+
+
+.page-item.active .page-link {
+    background: #428bca;
+}
+
+
+
+.page-link {
+
+    font-size: 1.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 7px 12px;
+    min-width: 40px;
+
+    border: 1px solid transparent;
+    border-color: #dbdbdb;
+    border-radius: 5px;
+    color: #dbdbdb;
+
+    &:hover {
+        color: #b1a21e;
     }
 
-
-    .page-item.active .page-link {
-        background: #428bca;
-    }
-
-
-
-    .page-link {
-        border-radius: 8px;
-        padding: 15px 20px;
+    span {
         font-size: 2rem;
-        color: #c7d2db;
-
-        &:hover {
-            color: #b1a21e;
-        }
-
-        span {
-            font-size: 2rem;
-        }
     }
 }

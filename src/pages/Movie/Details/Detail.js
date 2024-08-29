@@ -1,11 +1,12 @@
 import classNames from 'classnames/bind';
 import styles from './Detail.module.scss';
-import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import getMovies from '~/services/getMovies';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMovieDetails } from '~/redux/actions';
 import BackDrop from '~/layouts/BackDrop';
+import Modal from '~/components/ModalRoot/Modal';
 
 const cx = classNames.bind(styles);
 
@@ -13,6 +14,8 @@ const MovieDetails = () => {
   const { slug } = useParams();
   const movie = useSelector((state) => state.movie.item);
   const dispatch = useDispatch();
+  const [isShowModalTrailer, setIsShowModalTrailer] = useState(false);
+
   useEffect(() => {
     const fetchApi = async () => {
       const movies = await getMovies.Detail(slug);
@@ -25,6 +28,10 @@ const MovieDetails = () => {
 
     fetchApi();
   }, [dispatch, slug]);
+
+  const handleCloseModalTrailers = () => {
+    setIsShowModalTrailer(!isShowModalTrailer);
+  };
 
   return (
     <>
@@ -107,13 +114,13 @@ const MovieDetails = () => {
                 <div className="level-item buttons">
                   {movie?.category.map((type) => {
                     return (
-                      <a
+                      <Link
                         key={type.id}
                         className="button is-link is-small is-rounded is-inverted is-outlined"
-                        href="/genre/kinh-di"
+                        to="/browse"
                       >
                         {type.name}
-                      </a>
+                      </Link>
                     );
                   })}
                 </div>
@@ -149,9 +156,55 @@ const MovieDetails = () => {
             <div className={cx('has-text-grey-light')}>
               {movie?.content.replace(/<\/?p>/g, '').replace(/&nbsp;/g, ' ')}
             </div>
+
+            <h3 className="section-header">Trailer</h3>
+
+            <div className="trailers">
+              <div
+                data-index="0"
+                className="slick-slide slick-active slick-current"
+                tabindex="-1"
+                aria-hidden="false"
+                style={{
+                  outline: 'none',
+                  width: 248,
+                }}
+              >
+                <div>
+                  {movie?.trailer_url && (
+                    <div
+                      className={cx('item')}
+                      tabindex="-1"
+                      onClick={handleCloseModalTrailers}
+                      style={{ width: '100%', display: 'inline-block' }}
+                    >
+                      <div className={cx('clip')}>
+                        <img
+                          src={`https://img.youtube.com/vi/${movie?.trailer_url.replace(
+                            'https://www.youtube.com/watch?v=',
+                            '',
+                          )}/hqdefault.jpg`}
+                          alt=""
+                        />
+                        <div className={cx('icon')}>
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      <Modal
+        isShowModalTrailer={isShowModalTrailer}
+        onClickCloseTrailers={handleCloseModalTrailers}
+        trailer={movie?.trailer_url}
+      />
     </>
   );
 };

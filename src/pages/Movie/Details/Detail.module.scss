@@ -15,146 +15,190 @@
     display: flex;
     margin: -12px -32px;
 
+    .trailers .item {
+        padding: 2px 24px 0 2px;
+        width: 100%;
 
-    .column.is-one-quarter-tablet {
+    }
+
+    .clip {
+        max-width: fit-content;
         position: relative;
-        width: 25%;
-        padding: 12px 32px;
+        cursor: pointer;
+
+        &:hover {
+            -webkit-box-shadow: 0 0 0 2px #cc7b19;
+            box-shadow: 0 0 0 2px #cc7b19;
+        }
+
+        &:hover .icon {
+            display: inline-block;
+        }
+
+
 
         img {
+            display: block;
             height: auto;
             max-width: 100%;
         }
 
-        .has-text-centered {
-            margin: 0;
+        .icon {
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            display: none;
+            fill: #fff;
+
+            svg {
+                width: 32px;
+            }
         }
     }
-
-    .watch {
-        font-size: 1.25rem;
-        margin-top: 3rem;
-        background-color: #dd003f;
-        text-transform: uppercase;
-    }
-
-    .column.main {
-        flex: 1;
-        padding: 24px 32px 12px;
-
-        .title {
-            font-size: 4rem;
-            margin: 0 0 28px 0;
-            font-family: Merriweather, serif;
-            font-weight: 400;
-            line-height: 1.125;
-        }
-
-        .subtitle {
-            color: var(--text-color);
-            font-size: 2.2rem;
-            font-weight: 400;
-            line-height: 1.25;
-            margin: -20px 0 36px;
-            word-break: break-word;
-        }
-
-        .meta {
-            margin-bottom: 16px;
-        }
-
-        .imdb-icon {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            vertical-align: middle;
-            margin: -.3em .6em 0 0;
-        }
-
-        .has-text-weight-bold {
-            font-weight: 700 !important;
-        }
-
-        .level-left {
-            display: flex;
-        }
-    }
-
-    .level {
-        display: flex;
-        justify-content: space-between;
-
-        &-left {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-        }
-
-        &-item {
-            align-items: center;
-            display: flex;
-            flex-basis: auto;
-            flex-grow: 0;
-            flex-shrink: 0;
-            justify-content: center;
-        }
-    }
-
-    .genres {
-        margin-bottom: 56px;
-    }
-
-    .button:not(.is-danger) {
-        background-color: var(--button-color);
-        border-color: transparent;
-        border-radius: 4px;
-        color: var(--especitally-color);
-        padding: 7px 16px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-
-        svg {
-            height: 1.3em;
-            fill: var(--especitally-color);
-            margin-right: .9em;
-        }
-    }
-
-    .horizontal-dl {
-        margin-bottom: 24px;
-
-        dt,
-        dd {
-            margin-bottom: 4px;
-        }
-
-        .csv {
-            display: flex;
-            gap: 8px;
-        }
-
-        dt {
-            width: 120px;
-            text-transform: uppercase;
-            color: #7a7a7a;
-            float: left;
-            clear: left;
-        }
-
-        a {
-            color: #dbdbdb;
-            font-weight: 700;
-            cursor: pointer
-        }
-    }
-
-    .has-text-grey-light {
-        color: var(--text-color) !important;
-    }
-
 }
+
+.column.is-one-quarter-tablet {
+    position: relative;
+    width: 25%;
+    padding: 12px 32px;
+
+    img {
+        height: auto;
+        max-width: 100%;
+    }
+
+    .has-text-centered {
+        margin: 0;
+    }
+}
+
+.watch {
+    font-size: 1.25rem;
+    margin-top: 3rem;
+    background-color: #dd003f;
+    text-transform: uppercase;
+}
+
+.column.main {
+    flex: 1;
+    padding: 24px 32px 12px;
+
+    .title {
+        font-size: 4rem;
+        margin: 0 0 28px 0;
+        font-family: Merriweather, serif;
+        font-weight: 400;
+        line-height: 1.125;
+    }
+
+    .subtitle {
+        color: var(--text-color);
+        font-size: 2.2rem;
+        font-weight: 400;
+        line-height: 1.25;
+        margin: -20px 0 36px;
+        word-break: break-word;
+    }
+
+    .meta {
+        margin-bottom: 16px;
+    }
+
+    .imdb-icon {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        vertical-align: middle;
+        margin: -.3em .6em 0 0;
+    }
+
+    .has-text-weight-bold {
+        font-weight: 700 !important;
+    }
+
+    .level-left {
+        display: flex;
+    }
+}
+
+.level {
+    display: flex;
+    justify-content: space-between;
+
+    &-left {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    &-item {
+        align-items: center;
+        display: flex;
+        flex-basis: auto;
+        flex-grow: 0;
+        flex-shrink: 0;
+        justify-content: center;
+    }
+}
+
+.genres {
+    margin-bottom: 56px;
+}
+
+.button:not(.is-danger) {
+    background-color: var(--button-color);
+    border-color: transparent;
+    border-radius: 4px;
+    color: var(--especitally-color);
+    padding: 7px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    svg {
+        height: 1.3em;
+        fill: var(--especitally-color);
+        margin-right: .9em;
+    }
+}
+
+.horizontal-dl {
+    margin-bottom: 24px;
+
+    dt,
+    dd {
+        margin-bottom: 4px;
+    }
+
+    .csv {
+        display: flex;
+        gap: 8px;
+    }
+
+    dt {
+        width: 120px;
+        text-transform: uppercase;
+        color: #7a7a7a;
+        float: left;
+        clear: left;
+    }
+
+    a {
+        color: #dbdbdb;
+        font-weight: 700;
+        cursor: pointer
+    }
+}
+
+.has-text-grey-light {
+    color: var(--text-color) !important;
+}
+
 
 .button.is-fullwidth {
     display: flex;

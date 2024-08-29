@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DefaultLayout from './layouts/DefaultLayout';
 import { lazy, Suspense } from 'react';
-
-const HomePage = lazy(() => import('~/pages/Home'));
+import HomePage from './pages/Home/';
+// const HomePage = lazy(() => import('~/pages/Home'));
 const Series = lazy(() => import('~/pages/Movies/Series'));
 const Single = lazy(() => import('~/pages/Movies/Single'));
 const New = lazy(() => import('~/pages/Movies/New'));

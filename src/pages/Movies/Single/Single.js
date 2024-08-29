@@ -84,10 +84,10 @@ const Single = () => {
               </div>
               <div className="paginate">
                 <ReactPaginate
-                  nextLabel="Trang kế"
+                  nextLabel="Trang sau"
                   onPageChange={handlePageClick}
-                  pageRangeDisplayed={3}
-                  marginPagesDisplayed={2}
+                  pageRangeDisplayed={5}
+                  marginPagesDisplayed={1}
                   pageCount={totalPage}
                   previousLabel="Trang trước"
                   pageClassName="page-item"
