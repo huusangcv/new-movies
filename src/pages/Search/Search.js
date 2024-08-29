@@ -2,7 +2,6 @@ import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 import { useEffect, useState } from 'react';
 import getMovies from '~/services/getMovies';
-import ReactPaginate from 'react-paginate';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 
@@ -12,6 +11,7 @@ const Search = () => {
   const [searchName, setSearchName] = useState('');
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
+
   useEffect(() => {
     const fetchApi = async () => {
       try {
@@ -28,7 +28,7 @@ const Search = () => {
     }
   }, [page, searchName]);
 
-  console.log({ movies });
+  //Func handle setName to call api
   const handleSearchMovie = (e) => {
     setSearchName(e.target.value);
   };
@@ -72,7 +72,7 @@ const Search = () => {
           })}
         </div>
       </div>
-      <div className="paginate">
+      {/* <div className="paginate">
         <ReactPaginate
           nextLabel="Trang sau"
           onPageChange={handlePageClick}
@@ -94,7 +94,7 @@ const Search = () => {
           renderOnZeroPageCount={null}
           forcePage={page - 1}
         />
-      </div>
+      </div> */}
     </div>
   );
 };

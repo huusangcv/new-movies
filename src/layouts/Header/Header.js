@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleBars } from '~/redux/actions/toggleBars';
 import styles from './Header.module.scss';
+import { filterMoviesByCategory } from '~/redux/actions';
 
 const cx = classNames.bind(styles);
 
@@ -13,6 +14,7 @@ const Header = () => {
   const isShowBar = useSelector((state) => state.isShowBar);
 
   useEffect(() => {
+    //Func handle event set background for header when user scroll down
     const handleScroll = () => {
       if (window.scrollY > 10) {
         setBackground('#401a70');
@@ -23,11 +25,22 @@ const Header = () => {
 
     window.addEventListener('scroll', handleScroll);
 
+    //Func cleanup of useEffect to clear EventListener
     return () => window.removeEventListener('scroll', handleScroll);
   });
 
+  // Func show/close bars for mobile
   const handleShowBar = () => {
     dispatch(toggleBars(!isShowBar));
+  };
+
+  //Func update state of filter
+  const handleDispatchFilter = (payload) => {
+    dispatch(
+      filterMoviesByCategory({
+        moviesType: payload,
+      }),
+    );
   };
 
   return (
@@ -82,17 +95,17 @@ const Header = () => {
                 </span>
               </div>
             </Link>
-            <Link className={cx('navbar-item')} to="/movies/series">
+            <Link className={cx('navbar-item')} to="/movies/series" onClick={() => handleDispatchFilter('phim-bo')}>
               <div className={cx('navbar-link')}>
                 <span>Phim bộ</span>
               </div>
             </Link>
-            <Link className={cx('navbar-item')} to="movies/single">
+            <Link className={cx('navbar-item')} to="movies/single" onClick={() => handleDispatchFilter('phim-le')}>
               <div className={cx('navbar-link')}>
                 <span>Phim lẻ</span>
               </div>
             </Link>
-            <Link className={cx('navbar-item')} to="/movies/new">
+            <Link className={cx('navbar-item')} to="/movies/new" onClick={() => handleDispatchFilter('phim-moi')}>
               <div className={cx('navbar-link')}>
                 <span>Phim mới</span>
               </div>

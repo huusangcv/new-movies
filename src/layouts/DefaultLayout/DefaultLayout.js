@@ -4,7 +4,7 @@ import Header from '../Header';
 import Footer from '../Footer';
 import Bars from '../OverlayBars';
 import { Outlet } from 'react-router-dom';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 
 const cx = classNames.bind(styles);
 

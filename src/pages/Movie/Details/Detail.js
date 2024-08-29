@@ -16,11 +16,20 @@ const MovieDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isShowModalTrailer, setIsShowModalTrailer] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchApi = async () => {
-      const movies = await getMovies.Detail(slug);
-      dispatch(getMovieDetails(movies));
+      try {
+        setIsLoading(true);
+        const movies = await getMovies.Detail(slug);
+        if (movies) {
+          dispatch(getMovieDetails(movies));
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.log('Error ---> ', error);
+      }
     };
 
     window.scroll({
@@ -55,65 +64,81 @@ const MovieDetails = () => {
 
   return (
     <>
-      <div className={cx('details__poster')}>{<BackDrop />}</div>
-      <div className={cx('wapper')}>
-        <div className={cx('details')}>
-          <div className={cx('column', 'is-one-quarter-tablet')}>
-            <p className={cx('cover', 'has-text-centered')}>
-              <img src={`https://img.ophim.live/uploads/movies/${movie?.thumb_url}`} alt="" />
-            </p>
-            <a className={cx('watch', 'button', 'is-danger', 'is-medium', 'is-fullwidth')} href="/watch/46883">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
-              </svg>
-              Xem phim
-            </a>
-          </div>
-          <div className={cx('column', 'main')}>
-            <h1 className={cx('title')}>{movie?.origin_name}</h1>
-            <h2 className={cx('subtitle')}>
-              {movie?.name} (<a href="#!">{movie?.year}</a>)
-            </h2>
-            <div className={cx('meta')}>
-              <span>{movie?.time}</span>
-              <span className={cx('tag')} title={`${movie?.view} lượt xem`}>
-                {metaTag()}
-              </span>
-            </div>
-            <div className={cx('meta')}>
-              <span className={cx('imdb-icon')}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-                  <path
-                    d="M44 13H4c-2.2 0-4 1.8-4 4v16c0 2.2 1.8 4 4 4h40c2.2 0 4-1.8 4-4V17c0-2.2-1.8-4-4-4z"
-                    fill="#ffc107"
-                  ></path>
-                  <path
-                    d="M28.102 18h-3.704v13.102h3.704c2 0 2.796-.403 3.296-.704.602-.398.903-1.097.903-1.796v-7.903c0-.898-.403-1.699-.903-2-.796-.5-1.097-.699-3.296-.699zm.699 10.3c0 .598-.7.598-1.301.598V20c.602 0 1.3 0 1.3.602zM33.8 18v13.3h2.802s.199-.902.398-.698c.398 0 1.5.597 2.2.597.698 0 1.1 0 1.5-.199.6-.398.698-.7.698-1.3v-7.802c0-1.097-1.097-1.796-2-1.796-.898 0-1.796.597-2.199.898v-3zm3.598 4.2c0-.4 0-.598.403-.598.199 0 .398.199.398.597v6.602c0 .398 0 .597-.398.597-.2 0-.403-.199-.403-.597zM22.7 31.3V18h-4.4l-.8 6.3-1.102-6.3h-4v13.3h2.903v-7.402l1.3 7.403h2l1.297-7.403v7.403zM7.602 18h3.097v13.3H7.602z"
-                    fill="#263238"
-                  ></path>
-                </svg>
-              </span>
-              <span className={cx('has-text-weight-bold')}>{Math.round(movie?.tmdb?.vote_average * 10) / 10}</span>
-            </div>
-
-            <div className={cx('level', 'genres')}>
-              <div className={cx('level-left')}>
-                <div className={cx('level-item')}>
+      {(isLoading && <p>Loading...</p>) || (
+        <>
+          <div className={cx('details__poster')}>{<BackDrop poster_url={movie?.poster_url} />}</div>
+          <div className={cx('wapper')}>
+            <div className={cx('details')}>
+              <div className={cx('column', 'is-one-quarter-tablet')}>
+                <p className={cx('cover', 'has-text-centered')}>
+                  <img src={`https://img.ophim.live/uploads/movies/${movie?.thumb_url}`} alt="" />
+                </p>
+                <Link className={cx('watch', 'button', 'is-danger', 'is-medium', 'is-fullwidth')} to={`/watch/${slug}`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
+                  </svg>
+                  Xem phim
+                </Link>
+              </div>
+              <div className={cx('column', 'main')}>
+                <h1 className={cx('title')}>{movie?.origin_name}</h1>
+                <h2 className={cx('subtitle')}>
+                  {movie?.name} (
                   <a
-                    href={`https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                      window.location.href,
-                    )}`}
-                    className={cx('fb-share', 'button', 'is-link')}
-                    target="_blank"
-                    rel="noreferrer"
+                    href="#!"
+                    onClick={() => {
+                      dispatch(
+                        filterMoviesByCategory({
+                          year: movie?.year,
+                        }),
+                      );
+                      navigate('/browse');
+                    }}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                      <path d="M448 80v352c0 26.5-21.5 48-48 48h-85.3V302.8h60.6l8.7-67.6h-69.3V192c0-19.6 5.4-32.9 33.5-32.9H384V98.7c-6.2-.8-27.4-2.7-52.2-2.7-51.6 0-87 31.5-87 89.4v49.9H184v67.6h60.9V480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48z"></path>
-                    </svg>
-                    Chia sẻ
+                    {movie?.year}
                   </a>
+                  )
+                </h2>
+                <div className={cx('meta')}>
+                  <span>{movie?.time}</span>
+                  <span className={cx('tag')} title={`${movie?.view} lượt xem`}>
+                    {metaTag()}
+                  </span>
                 </div>
-                {/* <div className={cx('level-item')}>
+                <div className={cx('meta')}>
+                  <span className={cx('imdb-icon')}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                      <path
+                        d="M44 13H4c-2.2 0-4 1.8-4 4v16c0 2.2 1.8 4 4 4h40c2.2 0 4-1.8 4-4V17c0-2.2-1.8-4-4-4z"
+                        fill="#ffc107"
+                      ></path>
+                      <path
+                        d="M28.102 18h-3.704v13.102h3.704c2 0 2.796-.403 3.296-.704.602-.398.903-1.097.903-1.796v-7.903c0-.898-.403-1.699-.903-2-.796-.5-1.097-.699-3.296-.699zm.699 10.3c0 .598-.7.598-1.301.598V20c.602 0 1.3 0 1.3.602zM33.8 18v13.3h2.802s.199-.902.398-.698c.398 0 1.5.597 2.2.597.698 0 1.1 0 1.5-.199.6-.398.698-.7.698-1.3v-7.802c0-1.097-1.097-1.796-2-1.796-.898 0-1.796.597-2.199.898v-3zm3.598 4.2c0-.4 0-.598.403-.598.199 0 .398.199.398.597v6.602c0 .398 0 .597-.398.597-.2 0-.403-.199-.403-.597zM22.7 31.3V18h-4.4l-.8 6.3-1.102-6.3h-4v13.3h2.903v-7.402l1.3 7.403h2l1.297-7.403v7.403zM7.602 18h3.097v13.3H7.602z"
+                        fill="#263238"
+                      ></path>
+                    </svg>
+                  </span>
+                  <span className={cx('has-text-weight-bold')}>{Math.round(movie?.tmdb?.vote_average * 10) / 10}</span>
+                </div>
+
+                <div className={cx('level', 'genres')}>
+                  <div className={cx('level-left')}>
+                    <div className={cx('level-item')}>
+                      <a
+                        href={`https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                          window.location.href,
+                        )}`}
+                        className={cx('fb-share', 'button', 'is-link')}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                          <path d="M448 80v352c0 26.5-21.5 48-48 48h-85.3V302.8h60.6l8.7-67.6h-69.3V192c0-19.6 5.4-32.9 33.5-32.9H384V98.7c-6.2-.8-27.4-2.7-52.2-2.7-51.6 0-87 31.5-87 89.4v49.9H184v67.6h60.9V480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48z"></path>
+                        </svg>
+                        Chia sẻ
+                      </a>
+                    </div>
+                    {/* <div className={cx('level-item')}>
                   <div className={cx('dropdown', 'is-hoverable')}>
                     <div className={cx('dropdown-trigger')}>
                       <button className={cx('collection-btn', 'button')}>
@@ -135,123 +160,125 @@ const MovieDetails = () => {
                     </div>
                   </div>
                 </div> */}
-              </div>
-              <div className="level-right">
-                <div className="level-item buttons">
-                  {movie?.category.map((type) => {
-                    return (
-                      <Link
-                        key={type.id}
-                        className="button is-link is-small is-rounded is-inverted is-outlined"
-                        onClick={() => handleDispatchFilter(type.slug)}
-                        to="/browse"
-                      >
-                        {type.name}
-                      </Link>
-                    );
-                  })}
+                  </div>
+                  <div className="level-right">
+                    <div className="level-item buttons">
+                      {movie?.category.map((type) => {
+                        return (
+                          <Link
+                            key={type.id}
+                            className="button is-link is-small is-rounded is-inverted is-outlined"
+                            onClick={() => handleDispatchFilter(type.slug)}
+                            to="/browse"
+                          >
+                            {type.name}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            <dl className={cx('horizontal-dl')}>
-              <dt>Đạo diễn</dt>
-              <dd className={cx('csv')}>
-                {movie?.director.length &&
-                  movie?.director.map((director, index) => {
-                    if (director) {
+                <dl className={cx('horizontal-dl')}>
+                  <dt>Đạo diễn</dt>
+                  <dd className={cx('csv')}>
+                    {movie?.director.length &&
+                      movie?.director.map((director, index) => {
+                        if (director) {
+                          return (
+                            <a key={index} href="/person/nam-dong-hyub~173099">
+                              {director}
+                            </a>
+                          );
+                        } else {
+                          return <div>Đang cập nhật....</div>;
+                        }
+                      })}
+                  </dd>
+                  <dt>Quốc gia</dt>
+                  <dd className={cx('csv')}>
+                    {movie?.country.map((country) => {
                       return (
-                        <a key={index} href="/person/nam-dong-hyub~173099">
-                          {director}
+                        <a key={country.id} href="/person/nam-dong-hyub~173099">
+                          {country.name}
                         </a>
                       );
-                    } else {
-                      return <div>Đang cập nhật....</div>;
-                    }
-                  })}
-              </dd>
-              <dt>Quốc gia</dt>
-              <dd className={cx('csv')}>
-                {movie?.country.map((country) => {
-                  return (
-                    <a key={country.id} href="/person/nam-dong-hyub~173099">
-                      {country.name}
-                    </a>
-                  );
-                })}
-              </dd>
-              <dt>Diễn viên</dt>
-              <dd className={cx('csv')}>
-                {movie?.actor.map((actor, index) => {
-                  if (actor) {
-                    return (
-                      <a key={index} href="/person/nam-dong-hyub~173099">
-                        {actor}
-                      </a>
-                    );
-                  } else {
-                    return <div>Đang cập nhật....</div>;
-                  }
-                })}
-              </dd>
-            </dl>
+                    })}
+                  </dd>
+                  <dt>Diễn viên</dt>
+                  <dd className={cx('csv')}>
+                    {movie?.actor.map((actor, index) => {
+                      if (actor) {
+                        return (
+                          <a key={index} href="/person/nam-dong-hyub~173099">
+                            {actor}
+                          </a>
+                        );
+                      } else {
+                        return <div>Đang cập nhật....</div>;
+                      }
+                    })}
+                  </dd>
+                </dl>
 
-            <div className={cx('has-text-grey-light')}>
-              {movie?.content
-                .replace(/<\/?p>/g, '')
-                .replace(/<\/?strong>/g, '')
-                .replace(/<\/?i>/g, '')
-                .replace(/&nbsp;/g, ' ')}
-            </div>
+                <div className={cx('has-text-grey-light')}>
+                  {movie?.content
+                    .replace(/<\/?p>/g, '')
+                    .replace(/<\/?strong>/g, '')
+                    .replace(/<\/?i>/g, '')
+                    .replace(/&nbsp;/g, ' ')}
+                </div>
 
-            <h3 className="section-header">Trailer</h3>
+                <h3 className="section-header">Trailer</h3>
 
-            <div className="trailers">
-              <div
-                data-index="0"
-                className="slick-slide slick-active slick-current"
-                tabIndex="-1"
-                aria-hidden="false"
-                style={{
-                  outline: 'none',
-                  width: 248,
-                }}
-              >
-                <div>
-                  {movie?.trailer_url && (
-                    <div
-                      className={cx('item')}
-                      tabIndex="-1"
-                      onClick={handleCloseModalTrailers}
-                      style={{ width: '100%', display: 'inline-block' }}
-                    >
-                      <div className={cx('clip')}>
-                        <img
-                          src={`https://img.youtube.com/vi/${movie?.trailer_url.replace(
-                            'https://www.youtube.com/watch?v=',
-                            '',
-                          )}/hqdefault.jpg`}
-                          alt=""
-                        />
-                        <div className={cx('icon')}>
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                            <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
-                          </svg>
+                <div className="trailers">
+                  <div
+                    data-index="0"
+                    className="slick-slide slick-active slick-current"
+                    tabIndex="-1"
+                    aria-hidden="false"
+                    style={{
+                      outline: 'none',
+                      width: 248,
+                    }}
+                  >
+                    <div>
+                      {movie?.trailer_url && (
+                        <div
+                          className={cx('item')}
+                          tabIndex="-1"
+                          onClick={handleCloseModalTrailers}
+                          style={{ width: '100%', display: 'inline-block' }}
+                        >
+                          <div className={cx('clip')}>
+                            <img
+                              src={`https://img.youtube.com/vi/${movie?.trailer_url.replace(
+                                'https://www.youtube.com/watch?v=',
+                                '',
+                              )}/hqdefault.jpg`}
+                              alt=""
+                            />
+                            <div className={cx('icon')}>
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
+                              </svg>
+                            </div>
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <Modal
-        isShowModalTrailer={isShowModalTrailer}
-        onClickCloseTrailers={handleCloseModalTrailers}
-        trailer={movie?.trailer_url}
-      />
+          <Modal
+            isShowModalTrailer={isShowModalTrailer}
+            onClickCloseTrailers={handleCloseModalTrailers}
+            trailer={movie?.trailer_url}
+          />
+        </>
+      )}
     </>
   );
 };

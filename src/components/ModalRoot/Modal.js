@@ -19,9 +19,8 @@ const Modal = ({ isShowModalTrailer, onClickCloseTrailers, trailer }) => {
                     '',
                   )}?autoplay=1&muted=1`}
                   frameborder="0"
-                  muted
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
+                  allow="accelerometer; autoplay; muted; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
                 ></iframe>
               </div>
             </div>

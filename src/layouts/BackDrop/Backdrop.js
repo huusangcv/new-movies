@@ -1,16 +1,15 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
 import classNames from 'classnames/bind';
 import styles from './Backdrop.module.scss';
-import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 
-const BackDrop = () => {
-  const movie = useSelector((state) => state.movie.item);
+const BackDrop = ({ poster_url }) => {
   return (
     <div className={cx('wapper')}>
       <div
         className={cx('backdrop')}
-        style={{ backgroundImage: `url(https://img.ophim.live/uploads/movies/${movie?.poster_url})` }}
+        style={{ backgroundImage: `url(https://img.ophim.live/uploads/movies/${poster_url})` }}
       ></div>
     </div>
   );

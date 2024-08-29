@@ -3,6 +3,7 @@ import DefaultLayout from './layouts/DefaultLayout';
 import { lazy, Suspense } from 'react';
 import HomePage from './pages/Home/';
 import Search from './pages/Search';
+import Watch from './pages/Movie/Watch';
 // const HomePage = lazy(() => import('~/pages/Home'));
 const Series = lazy(() => import('~/pages/Movies/Series'));
 const Single = lazy(() => import('~/pages/Movies/Single'));
@@ -81,6 +82,7 @@ function App() {
               }
             />
             <Route path="/search" element={<Search />} />
+            <Route path="/watch/:slug" element={<Watch />} />
           </Route>
         </Routes>
       </div>
