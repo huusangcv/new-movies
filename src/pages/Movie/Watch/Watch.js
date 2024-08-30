@@ -11,11 +11,13 @@ const Watch = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    let timer = setTimeout(() => {
+    if (movie?.episodes[0]?.server_data[0].link_embed) {
       setIsLoading(false);
-    }, 1000);
+    }
 
-    return () => clearTimeout(timer);
+    window.scroll({
+      top: 0,
+    });
   }, []);
 
   const movie = useSelector(movieDetail);

@@ -35,7 +35,7 @@ const init = {
   isShowBar: false,
 };
 
-const Reducer = (state = init, action) => {
+const rootReducer = (state = init, action) => {
   switch (action.type) {
     case TOGGLE_BARS:
       return {
@@ -92,4 +92,4 @@ const Reducer = (state = init, action) => {
   }
 };
 
-export default Reducer;
+export default rootReducer;

@@ -19,16 +19,17 @@ const Series = () => {
   const totalItems = useSelector(getTotalItems);
 
   const totalPage = Math.floor(+totalItems.moviesSeries / 24);
-  console.log({ totalItems });
   useEffect(() => {
     // check if don't have movies or length of movies === 0 or page !==1 when call API
     if (!movies || movies.length === 0 || page !== 1) {
+      console.log('Re render');
       const fetchApi = async () => {
         setIsLoading(true);
         try {
           const movies = await getMovies.Series(page);
           if (movies) {
             document.title = movies.seoOnPage.titleHead;
+
             dispatch(getMoviesSeries(movies.items));
 
             //check page === 1 to get totalItem on each page
@@ -53,9 +54,7 @@ const Series = () => {
           fetchApi();
         }, 400);
       }
-    }
-
-    if (movies) {
+    } else {
       setIsLoading(false);
     }
 

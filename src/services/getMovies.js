@@ -15,13 +15,16 @@ const getMovies = {
   },
   Browse: async (moviesType, page, type, nation, year, sortBy) => {
     let result;
-    if (moviesType === '' && page === '' && type === '' && nation === '' && year === '' && sortBy) {
-      result = await axios.get(`danh-sach/`);
-    } else {
-      result = await axios.get(
-        `danh-sach/${moviesType}?page=${page}&sort_field=${sortBy}&category=${type}&country=${nation}&year=${year}`,
-      );
-    }
+    // if (moviesType === '' && page === '' && type === '' && nation === '' && year === '' && sortBy === '') {
+    //   result = await axios.get(`danh-sach/`);
+    // } else {
+    //   result = await axios.get(
+    //     `danh-sach/${moviesType}?page=${page}&sort_field=${sortBy}&category=${type}&country=${nation}&year=${year}`,
+    //   );
+    // }
+    result = await axios.get(
+      `danh-sach/${moviesType}?page=${page}&sort_field=modified.time&category=${type}&country=${nation}&year=${year}`,
+    );
     console.log({ moviesType, page, type, nation, year, sortBy }, result);
     return result.data;
   },

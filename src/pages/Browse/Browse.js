@@ -17,7 +17,6 @@ const Browse = () => {
   const [movies, setMovies] = useState([]);
   const dispatch = useDispatch();
   const { titlePage, moviesType, type, nation, year, sortBy } = useSelector(moviesSelector);
-  console.log(titlePage, moviesType, type, nation, year, sortBy);
   const totalPage = Math.floor(paginate?.totalItems / paginate?.totalItemsPerPage);
   useEffect(() => {
     console.log('render');
@@ -27,7 +26,7 @@ const Browse = () => {
       try {
         const movies = await getMovies.Browse(moviesType, page, type, nation, year, sortBy);
         if (movies) {
-          // document.title = movies.seoOnPage.titleHead;
+          document.title = movies.seoOnPage.titleHead;
           setPaginate(movies.params.pagination);
           setMovies(movies.items);
           setIsLoading(false);

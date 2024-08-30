@@ -5,8 +5,12 @@ import HomePage from './pages/Home/';
 import Search from './pages/Search';
 import Watch from './pages/Movie/Watch';
 // const HomePage = lazy(() => import('~/pages/Home'));
-const Series = lazy(() => import('~/pages/Movies/Series'));
-const Single = lazy(() => import('~/pages/Movies/Single'));
+// const Series = lazy(() => import('~/pages/Movies/Series'));
+// const Single = lazy(() => import('~/pages/Movies/Single'));
+
+import Single from '~/pages/Movies/Single';
+import Series from '~/pages/Movies/Series';
+
 const New = lazy(() => import('~/pages/Movies/New'));
 const Details = lazy(() => import('~/pages/Movie/Details'));
 const Browse = lazy(() => import('~/pages/Browse'));
@@ -44,17 +48,17 @@ function App() {
             <Route
               path="/movies/single"
               element={
-                <Suspense fallback={<p>Loading....</p>}>
-                  <Single />
-                </Suspense>
+                // <Suspense fallback={<p>Loading....</p>}>
+                <Single />
+                // </Suspense>
               }
             />
             <Route
               path="/movies/series"
               element={
-                <Suspense fallback={<p>Loading....</p>}>
-                  <Series />
-                </Suspense>
+                // <Suspense fallback={<p>Loading....</p>}>
+                <Series />
+                // </Suspense>
               }
             />
             <Route

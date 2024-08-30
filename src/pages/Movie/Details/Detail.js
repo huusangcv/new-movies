@@ -24,6 +24,7 @@ const MovieDetails = () => {
         setIsLoading(true);
         const movies = await getMovies.Detail(slug);
         if (movies) {
+          document.title = movies.seoOnPage.titleHead;
           dispatch(getMovieDetails(movies));
           setIsLoading(false);
         }
@@ -55,8 +56,10 @@ const MovieDetails = () => {
   const metaTag = () => {
     if (movie?.episode_current === 'Full') {
       return `${movie?.episode_current} ${movie?.quality}`;
-    } else if (movie?.episode_current.includes('Hoàn Tất')) {
+    } else if (movie?.episode_current.includes('Hoàn Tất') || movie?.episode_current.includes('Hoàn tất')) {
       return `${movie?.episode_current.replace('Tập ', '')}`;
+    } else if (movie?.episode_current === 'Trailer') {
+      return `0 / ${movie?.episode_total.replace(' Tập', '')}`;
     } else {
       return `${movie?.episode_current.replace('Tập ', '')}/${movie?.episode_total.replace(' Tập', '')}`;
     }
@@ -73,11 +76,15 @@ const MovieDetails = () => {
                 <p className={cx('cover', 'has-text-centered')}>
                   <img src={`https://img.ophim.live/uploads/movies/${movie?.thumb_url}`} alt="" />
                 </p>
-                <Link className={cx('watch', 'button', 'is-danger', 'is-medium', 'is-fullwidth')} to={`/watch/${slug}`}>
+                <Link
+                  onClick={movie?.episode_current === 'Trailer' && handleCloseModalTrailers}
+                  className={cx('watch', 'button', 'is-danger', 'is-medium', 'is-fullwidth')}
+                  to={movie?.episode_current === 'Trailer' || `/watch/${slug}`}
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                     <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
                   </svg>
-                  Xem phim
+                  {(movie?.episode_current === 'Trailer' && 'Trailer') || 'Xem phim'}
                 </Link>
               </div>
               <div className={cx('column', 'main')}>

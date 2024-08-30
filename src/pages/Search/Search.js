@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import getMovies from '~/services/getMovies';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +18,7 @@ const Search = () => {
       try {
         const data = await getMovies.Search(searchName, page);
         if (movies) {
+          document.title = searchName;
           setMovies(data.items);
         }
       } catch (error) {
@@ -72,7 +74,7 @@ const Search = () => {
           })}
         </div>
       </div>
-      {/* <div className="paginate">
+      <div className="paginate">
         <ReactPaginate
           nextLabel="Trang sau"
           onPageChange={handlePageClick}
@@ -94,7 +96,7 @@ const Search = () => {
           renderOnZeroPageCount={null}
           forcePage={page - 1}
         />
-      </div> */}
+      </div>
     </div>
   );
 };
