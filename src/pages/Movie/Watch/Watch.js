@@ -45,6 +45,21 @@ const Watch = () => {
               </div>
             </div>
           </div>
+          <p className={cx('has-text-centered', 'is-size-7')}>
+            <a href="/faq">Phim bị giật hình / mất tiếng nhân vật?</a>
+          </p>
+          <section className={cx('section')}>
+            <div className={cx('container')}>
+              <div className={cx('columns')}>
+                <div className={cx('column')}>
+                  <h1 className="title is-3">Đẹp Trai Thấy Sai Sai</h1>
+                  <h2 className="subtitle is-5">
+                    Handsome Guys (<a href="#!">2024</a>)
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       )}
     </>

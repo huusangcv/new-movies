@@ -229,6 +229,15 @@ button {
     word-break: break-word;
 }
 
+.subtitle {
+    color: var(--text-color);
+    font-size: 2.2rem;
+    font-weight: 400;
+    line-height: 1.25;
+    word-break: break-word;
+}
+
+
 ///Paginate
 
 .paginate {
