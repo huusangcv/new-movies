@@ -9,7 +9,6 @@ import { memo } from 'react';
 const cx = classNames.bind(styles);
 
 const DefaultLayout = () => {
-  console.log('Home render');
   return (
     <div className={cx('wapper')}>
       <Header />

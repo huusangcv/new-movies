@@ -19,7 +19,6 @@ const Watch = () => {
 
   const [currentEpisode, setCurrentEpisode] = useState(0);
 
-  console.log({ movie });
   useEffect(() => {
     setIsLoading(true);
     if (movie) {
