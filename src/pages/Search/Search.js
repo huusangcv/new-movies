@@ -1,22 +1,22 @@
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import getMovies from '~/services/getMovies';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
-import ReactPaginate from 'react-paginate';
 
 const cx = classNames.bind(styles);
 
 const Search = () => {
   const [searchName, setSearchName] = useState('');
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
+
+  const refInput = useRef();
 
   useEffect(() => {
     const fetchApi = async () => {
       try {
-        const data = await getMovies.Search(searchName, page);
+        const data = await getMovies.Search(searchName);
         if (movies) {
           document.title = searchName;
           setMovies(data.items);
@@ -25,20 +25,19 @@ const Search = () => {
         console.log('Error ---> ', error);
       }
     };
+
     if (searchName !== '') {
-      fetchApi();
+      window.addEventListener('keyup', fetchApi());
     }
-  }, [page, searchName]);
+
+    return () => window.removeEventListener('keyup', fetchApi());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchName]);
 
   //Func handle setName to call api
   const handleSearchMovie = (e) => {
     setSearchName(e.target.value);
   };
-
-  const handlePageClick = (e) => {
-    setPage(e.selected + 1);
-  };
-
   return (
     <div className={cx('wapper')}>
       <div className="title-list">
@@ -50,6 +49,7 @@ const Search = () => {
             value={searchName}
             onChange={handleSearchMovie}
             spellCheck={false}
+            ref={refInput}
           />
         </div>
         <div className="gird columns">
@@ -73,29 +73,6 @@ const Search = () => {
             );
           })}
         </div>
-      </div>
-      <div className="paginate">
-        <ReactPaginate
-          nextLabel="Trang sau"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
-          marginPagesDisplayed={1}
-          pageCount={50}
-          previousLabel="Trang trước"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakLabel="..."
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="pagination"
-          activeClassName="active"
-          renderOnZeroPageCount={null}
-          forcePage={page - 1}
-        />
       </div>
     </div>
   );

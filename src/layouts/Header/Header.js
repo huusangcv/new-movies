@@ -54,11 +54,11 @@ const Header = () => {
           </span>
         </button>
         <div className={cx('navbar-brand')}>
-          <div className={cx('navbar-item', 'brand')}>
-            <Link className={cx('logo-text')} to="/">
-              NewMoives
-            </Link>
-          </div>
+          <Link to="/" className={cx('navbar-item', 'brand')}>
+            <div className={cx('logo-text')}>
+              <span onClick={() => handleDispatchFilter('undifine')}>NewMoives</span>
+            </div>
+          </Link>
         </div>
         <div className={cx('navbar-menu', 'mobile')}>
           <div className={cx('navbar-start')}>

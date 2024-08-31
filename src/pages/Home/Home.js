@@ -1,94 +1,66 @@
 import { useEffect } from 'react';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
-import thumb from '~/assets/images/thumb.jpg';
 import styles from './Home.module.scss';
+import moviesRecommend from '~/components/Options/recommend';
+import getMovies from '~/services/getMovies';
+import { useDispatch, useSelector } from 'react-redux';
+import { getNewUpdateMovies } from '~/redux/actions';
+import { movieNewUpdate } from '~/redux/selector/selector';
+import Filter from '~/layouts/Filter';
 
 const cx = classNames.bind(styles);
 
 const HomePage = () => {
+  const dispatch = useDispatch();
+  const moviesNewUpdate = useSelector(movieNewUpdate);
+
   useEffect(() => {
     document.title = 'Từ Hollywood đến Bollywood, chúng tôi mang đến những bộ phim bạn yêu thích';
+
+    const fetchApi = async () => {
+      const [newUpdateSingle, newUpdateSeries] = await Promise.all([
+        getMovies.newUpdateSingle(),
+        getMovies.newUpdateSeries(),
+      ]);
+      dispatch(
+        getNewUpdateMovies({
+          single: newUpdateSingle.items,
+          series: newUpdateSeries.items,
+        }),
+      );
+    };
+    fetchApi();
+
+    window.scroll({
+      top: 0,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className={cx('wapper')}>
+      <Filter />
       <h2 className="heading">
         <span>PHIM ĐỀ CỬ</span>
       </h2>
-
       <div className="title-list">
         <div className="gird columns">
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
-          <div className="column">
-            <a href="#!" className="cover">
-              <img src={thumb} alt="" />
-            </a>
-            <h3 className="name vi">
-              <a href="#!">Việt Nam Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, dolores.</a>
-            </h3>
-            <h3 className="name en">
-              <a href="#!">
-                English Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore illum quibusdam recusandae
-                sit consequatur quaerat facere laudantium doloribus, nihil sunt.
-              </a>
-            </h3>
-          </div>
+          {moviesRecommend.map((movie) => {
+            return (
+              <div className="column" key={movie.id}>
+                <Link to={`/movie/${movie.slug}`} className="cover">
+                  <img src={movie.thumb_url} alt="" />
+                </Link>
+                <h3 className="name vi">
+                  <a href={`movie/${movie.slug}`}>{movie.name}</a>
+                </h3>
+                <h3 className="name en">
+                  <a href={`movie/${movie.slug}`}>{movie.origin_name}</a>
+                </h3>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -103,28 +75,27 @@ const HomePage = () => {
       </h2>
       <div className="title-list">
         <div className="gird columns">
-          {/* {
-            movies?.single.map((movie, index) => {
-              return (
-                index <= 9 && (
-                  <div className="column" key={movie._id}>
-                    <Link to={`movie/${movie.slug}`} className="cover">
-                      <img
-                        src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`}
-                        alt={movie.origin_name}
-                        title={movie.origin_name}
-                      ></img>
-                    </Link>
-                    <h3 className="name vi">
-                      <a href="#!">{movie.name}</a>
-                    </h3>
-                    <h3 className="name en">
-                      <a href="#!">{movie.origin_name}</a>
-                    </h3>
+          {moviesNewUpdate?.single.map((movie, index) => {
+            return (
+              index <= 9 && (
+                <Link to={`movie/${movie.slug}`} className="column" key={movie._id}>
+                  <div className="cover">
+                    <img
+                      src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`}
+                      alt={movie.origin_name}
+                      title={movie.origin_name}
+                    ></img>
                   </div>
-                )
-              );
-            })} */}
+                  <h3 className="name vi">
+                    <a href={`movie/${movie.slug}`}>{movie.name}</a>
+                  </h3>
+                  <h3 className="name en">
+                    <a href={`movie/${movie.slug}`}>{movie.origin_name}</a>
+                  </h3>
+                </Link>
+              )
+            );
+          })}
         </div>
       </div>
       <h2 className="heading">
@@ -138,23 +109,23 @@ const HomePage = () => {
       </h2>
       <div className="title-list">
         <div className="gird columns">
-          {/* {movies?.series.map((movie, index) => {
+          {moviesNewUpdate?.series.map((movie, index) => {
             return (
               index <= 9 && (
-                <div className="column" key={movie._id}>
-                  <a href="#!" className="cover">
+                <Link to={`movie/${movie.slug}`} className="column" key={movie._id}>
+                  <a href={`movie/${movie.slug}`} className="cover">
                     <img src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`} alt=""></img>
                   </a>
                   <h3 className="name vi">
-                    <a href="#!">{movie.name}</a>
+                    <a href={`movie/${movie.slug}`}>{movie.name}</a>
                   </h3>
                   <h3 className="name en">
-                    <a href="#!">{movie.origin_name}</a>
+                    <a href={`movie/${movie.slug}`}>{movie.origin_name}</a>
                   </h3>
-                </div>
+                </Link>
               )
             );
-          })} */}
+          })}
         </div>
       </div>
     </div>

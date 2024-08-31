@@ -61,7 +61,8 @@ const Series = () => {
     window.scroll({
       top: 0,
     });
-  }, [page, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   const handlePageClick = (e) => {
     setPage(e.selected + 1);

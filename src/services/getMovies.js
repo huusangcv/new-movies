@@ -13,7 +13,7 @@ const getMovies = {
     const result = await axios.get(`danh-sach/phim-moi?page=${page}`);
     return result.data;
   },
-  Browse: async (moviesType, page, type, nation, year, sortBy) => {
+  Browse: async (moviesType, page, type, nation, year = '2024', sortBy) => {
     let result;
     // if (moviesType === '' && page === '' && type === '' && nation === '' && year === '' && sortBy === '') {
     //   result = await axios.get(`danh-sach/`);
@@ -25,7 +25,6 @@ const getMovies = {
     result = await axios.get(
       `danh-sach/${moviesType}?page=${page}&sort_field=modified.time&category=${type}&country=${nation}&year=${year}`,
     );
-    console.log({ moviesType, page, type, nation, year, sortBy }, result);
     return result.data;
   },
   Detail: async (slug) => {
@@ -34,6 +33,14 @@ const getMovies = {
   },
   Search: async (keyword, page) => {
     const result = await axios.get(`tim-kiem?keyword=${keyword}&page=${page}`);
+    return result.data;
+  },
+  newUpdateSeries: async () => {
+    const result = await axios.get(`danh-sach/phim-bo-dang-chieu?sort_field=modified.time&category=&country=&year=`);
+    return result.data;
+  },
+  newUpdateSingle: async () => {
+    const result = await axios.get(`danh-sach/phim-le?sort_field=modified.time&category=&country=&year=2024`);
     return result.data;
   },
 };

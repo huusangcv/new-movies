@@ -5,6 +5,7 @@ import {
   GET_MOVIE_NEW,
   GET_MOVIE_SERIES,
   GET_MOVIE_SINGLE,
+  GET_NEW_UPDATE_MOVIES,
   GET_TOTAL_ITEMS_MOVIES_NEW,
   GET_TOTAL_ITEMS_MOVIES_SERIES,
   GET_TOTAL_ITEMS_MOVIES_SINGLE,
@@ -26,6 +27,10 @@ const init = {
     single: [],
     series: [],
     new: [],
+  },
+  newUpdateMovies: {
+    single: [],
+    series: [],
   },
   totalPage: {
     moviesSingle: 0,
@@ -86,6 +91,13 @@ const rootReducer = (state = init, action) => {
       return {
         ...state,
         totalPage: { ...state.totalPage, moviesNew: action.payload },
+      };
+    case GET_NEW_UPDATE_MOVIES:
+      return {
+        ...state,
+        newUpdateMovies: {
+          ...action.payload,
+        },
       };
     default:
       return state;

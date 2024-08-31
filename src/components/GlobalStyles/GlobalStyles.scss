@@ -71,8 +71,9 @@ button {
         }
 
         @media screen and (min-width: 768px) {
-            grid-template-columns: repeat(4, 25%);
+            grid-template-columns: repeat(3, 33.33%);
         }
+
 
         @media screen and (min-width: 1216px) {
             grid-template-columns: repeat(4, 25%);
@@ -89,6 +90,11 @@ button {
 
     .cover {
         min-height: 384px;
+
+        @media screen and (min-width: 768px) {
+            min-height: 384px;
+        }
+
         padding-top: 66.66%;
         position: relative;
         background-position: center center;

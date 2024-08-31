@@ -195,10 +195,10 @@ const MovieDetails = () => {
                   <dt>Đạo diễn</dt>
                   <dd className={cx('csv')}>
                     {movie?.director.length &&
-                      movie?.director.map((director) => {
+                      movie?.director.map((director, index) => {
                         if (director) {
                           return (
-                            <a key={uid(director)} href="/person/nam-dong-hyub~173099">
+                            <a key={index} href="/person/nam-dong-hyub~173099">
                               {director}
                             </a>
                           );
@@ -219,10 +219,10 @@ const MovieDetails = () => {
                   </dd>
                   <dt>Diễn viên</dt>
                   <dd className={cx('csv')}>
-                    {movie?.actor.map((actor) => {
+                    {movie?.actor.map((actor, index) => {
                       if (actor) {
                         return (
-                          <a key={uid(actor)} href="/person/nam-dong-hyub~173099">
+                          <a key={uid(actor, index)} href="/person/nam-dong-hyub~173099">
                             {actor}
                           </a>
                         );

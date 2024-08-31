@@ -5,6 +5,7 @@ import {
   GET_MOVIE_NEW,
   GET_MOVIE_SERIES,
   GET_MOVIE_SINGLE,
+  GET_NEW_UPDATE_MOVIES,
   GET_TOTAL_ITEMS_MOVIES_NEW,
   GET_TOTAL_ITEMS_MOVIES_SERIES,
   GET_TOTAL_ITEMS_MOVIES_SINGLE,
@@ -81,6 +82,13 @@ const getTotalItemsNew = (payload) => {
   };
 };
 
+const getNewUpdateMovies = (payload) => {
+  return {
+    type: GET_NEW_UPDATE_MOVIES,
+    payload: payload,
+  };
+};
+
 export {
   getMovieDetails,
   getTitle,
@@ -92,4 +100,5 @@ export {
   getTotalItemsSingle,
   getTotalItemsSeries,
   getTotalItemsNew,
+  getNewUpdateMovies,
 };

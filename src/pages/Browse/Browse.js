@@ -16,7 +16,7 @@ const Browse = () => {
   const [paginate, setPaginate] = useState();
   const [movies, setMovies] = useState([]);
   const dispatch = useDispatch();
-  const { titlePage, moviesType, type, nation, year, sortBy } = useSelector(moviesSelector);
+  const { moviesType, type, nation, year, sortBy } = useSelector(moviesSelector);
   const totalPage = Math.floor(paginate?.totalItems / paginate?.totalItemsPerPage);
   useEffect(() => {
     console.log('render');
