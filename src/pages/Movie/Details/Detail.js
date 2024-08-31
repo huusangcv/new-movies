@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { filterMoviesByCategory, getMovieDetails } from '~/redux/actions';
 import BackDrop from '~/layouts/BackDrop';
 import Modal from '~/components/ModalRoot/Modal';
+import { uid } from 'react-uid';
 
 const cx = classNames.bind(styles);
 
@@ -125,7 +126,11 @@ const MovieDetails = () => {
                       ></path>
                     </svg>
                   </span>
-                  <span className={cx('has-text-weight-bold')}>{Math.round(movie?.tmdb?.vote_average * 10) / 10}</span>
+                  <span className={cx('has-text-weight-bold')}>
+                    {(Math.round(movie?.tmdb?.vote_average * 10) / 10 &&
+                      Math.round(movie?.tmdb?.vote_average * 10) / 10) ||
+                      ''}
+                  </span>
                 </div>
 
                 <div className={cx('level', 'genres')}>
@@ -190,10 +195,10 @@ const MovieDetails = () => {
                   <dt>Đạo diễn</dt>
                   <dd className={cx('csv')}>
                     {movie?.director.length &&
-                      movie?.director.map((director, index) => {
+                      movie?.director.map((director) => {
                         if (director) {
                           return (
-                            <a key={index} href="/person/nam-dong-hyub~173099">
+                            <a key={uid(director)} href="/person/nam-dong-hyub~173099">
                               {director}
                             </a>
                           );
@@ -214,10 +219,10 @@ const MovieDetails = () => {
                   </dd>
                   <dt>Diễn viên</dt>
                   <dd className={cx('csv')}>
-                    {movie?.actor.map((actor, index) => {
+                    {movie?.actor.map((actor) => {
                       if (actor) {
                         return (
-                          <a key={index} href="/person/nam-dong-hyub~173099">
+                          <a key={uid(actor)} href="/person/nam-dong-hyub~173099">
                             {actor}
                           </a>
                         );

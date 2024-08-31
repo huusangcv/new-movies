@@ -10,7 +10,7 @@ import { filterMovies } from '~/redux/actions';
 
 const cx = classNames.bind(styles);
 
-const Filter = ({ title, isLoading }) => {
+const Filter = ({ isLoading }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const selectValue = useSelector(moviesSelector);
@@ -37,27 +37,15 @@ const Filter = ({ title, isLoading }) => {
   };
 
   const handleFilterMovies = () => {
-    if (moviesType === '') {
-      dispatch(
-        filterMovies({
-          moviesType: title,
-          type,
-          nation,
-          year,
-          sortBy,
-        }),
-      );
-    } else {
-      dispatch(
-        filterMovies({
-          moviesType,
-          type,
-          nation,
-          year,
-          sortBy,
-        }),
-      );
-    }
+    dispatch(
+      filterMovies({
+        moviesType,
+        type,
+        nation,
+        year,
+        sortBy,
+      }),
+    );
     navigate('/browse');
   };
   return (

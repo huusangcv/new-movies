@@ -18,7 +18,7 @@ const Modal = ({ isShowModalTrailer, onClickCloseTrailers, trailer }) => {
                     'https://www.youtube.com/watch?v=',
                     '',
                   )}?autoplay=1&muted=1`}
-                  frameborder="0"
+                  frameBorder="0"
                   allow="accelerometer; autoplay; muted; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
