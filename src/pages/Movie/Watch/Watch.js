@@ -44,7 +44,8 @@ const Watch = () => {
     window.scroll({
       top: 0,
     });
-  }, [currentEpisode, slug, movie, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentEpisode]);
 
   const handleDispatchFilter = (payload) => {
     dispatch(
