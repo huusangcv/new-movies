@@ -174,7 +174,7 @@ const MovieDetails = () => {
                 </div> */}
                   </div>
                   <div className="level-right">
-                    <div className="level-item buttons">
+                    <div className={cx('level-item', 'buttons')}>
                       {movie?.category.map((type) => {
                         return (
                           <Link
@@ -195,11 +195,11 @@ const MovieDetails = () => {
                   <dt>Đạo diễn</dt>
                   <dd className={cx('csv')}>
                     {movie?.director.length &&
-                      movie?.director.map((director, index) => {
+                      movie?.director.map((director) => {
                         if (director) {
                           return (
-                            <a key={index} href="/person/nam-dong-hyub~173099">
-                              {director}
+                            <a key={uid(11)} href="/person/nam-dong-hyub~173099">
+                              <span> {director}</span>
                             </a>
                           );
                         } else {
@@ -212,18 +212,18 @@ const MovieDetails = () => {
                     {movie?.country.map((country) => {
                       return (
                         <a key={country.id} href="/person/nam-dong-hyub~173099">
-                          {country.name}
+                          <span> {country.name}</span>
                         </a>
                       );
                     })}
                   </dd>
                   <dt>Diễn viên</dt>
                   <dd className={cx('csv')}>
-                    {movie?.actor.map((actor, index) => {
+                    {movie?.actor.map((actor) => {
                       if (actor) {
                         return (
-                          <a key={uid(actor, index)} href="/person/nam-dong-hyub~173099">
-                            {actor}
+                          <a key={uid(actor)} href="/person/nam-dong-hyub~173099">
+                            <span> {actor}</span>
                           </a>
                         );
                       } else {

@@ -21,7 +21,6 @@ const DefaultLayout = () => {
           </div>
         </div>
       </section>
-      {/* <Modal /> */}
       <Bars />
       <Footer />
     </div>

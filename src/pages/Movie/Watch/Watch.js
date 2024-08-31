@@ -8,6 +8,7 @@ import { filterMoviesByCategory, getMovieDetails } from '~/redux/actions';
 import getMovies from '~/services/getMovies';
 import { Link, useParams } from 'react-router-dom';
 import { uid } from 'react-uid';
+import VideoPlayer from './Video';
 
 const cx = classNames.bind(styles);
 const Watch = () => {
@@ -27,10 +28,10 @@ const Watch = () => {
       const fetchApi = async () => {
         try {
           setIsLoading(true);
-          const movies = await getMovies.Detail(slug);
-          if (movies) {
-            document.title = movies.seoOnPage.titleHead;
-            dispatch(getMovieDetails(movies));
+          const movie = await getMovies.Detail(slug);
+          if (movie) {
+            document.title = movie.seoOnPage.titleHead;
+            dispatch(getMovieDetails(movie));
             setIsLoading(false);
           }
         } catch (error) {
@@ -65,22 +66,7 @@ const Watch = () => {
         <div className={cx('watch_video')}>
           <div className={cx('columns')}>
             <div className={cx('column')}>
-              <div className={cx('video-js')}>
-                <iframe
-                  className={cx('vjs-tech')}
-                  src={movie?.episodes[0]?.server_data[currentEpisode].link_embed}
-                  frameBorder="0"
-                  muted
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-                {/* <div
-                className={cx('video-poster')}
-                style={{
-                  backgroundImage: `url('https://img.ophim.live/uploads/movies/${movie?.poster_url}')`,
-                }}
-              ></div> */}
-              </div>
+              <VideoPlayer movie={movie} poster_url={movie.poster_url} currentEpisode={currentEpisode} />
             </div>
           </div>
           <p className={cx('has-text-centered', 'is-size-7')}>
@@ -134,7 +120,7 @@ const Watch = () => {
                     <a
                       href="#!"
                       className={cx('button', 'is-success')}
-                      key={uid(episode.slug)}
+                      key={uid(episode)}
                       onClick={() => handleEpisodeChange(index)}
                       disabled={index === currentEpisode && true}
                     >
