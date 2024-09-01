@@ -19,8 +19,10 @@ const Watch = () => {
   const movie = useSelector(movieDetail);
 
   const [currentEpisode, setCurrentEpisode] = useState(0);
+  const videoSrc = movie?.episodes[0]?.server_data[currentEpisode]?.link_m3u8;
 
   useEffect(() => {
+    console.log('re render');
     setIsLoading(true);
     if (movie) {
       setIsLoading(false);
@@ -45,7 +47,7 @@ const Watch = () => {
       top: 0,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentEpisode]);
+  }, []);
 
   const handleDispatchFilter = (payload) => {
     dispatch(
@@ -66,7 +68,12 @@ const Watch = () => {
         <div className={cx('watch_video')}>
           <div className={cx('columns')}>
             <div className={cx('column')}>
-              <VideoPlayer movie={movie} poster_url={movie.poster_url} currentEpisode={currentEpisode} />
+              <VideoPlayer
+                movie={movie}
+                poster_url={movie.poster_url}
+                currentEpisode={currentEpisode}
+                videoSrc={videoSrc}
+              />
             </div>
           </div>
           <p className={cx('has-text-centered', 'is-size-7')}>

@@ -36,11 +36,24 @@ const Header = () => {
 
   //Func update state of filter
   const handleDispatchFilter = (payload) => {
-    dispatch(
-      filterMoviesByCategory({
-        moviesType: payload,
-      }),
-    );
+    if (payload === '') {
+      dispatch(
+        filterMoviesByCategory({
+          titlePage: '',
+          filterState: false,
+          moviesType: '',
+          type: '',
+          nation: '',
+          year: '',
+          sortBy: '',
+        }),
+      );
+    } else
+      dispatch(
+        filterMoviesByCategory({
+          moviesType: payload,
+        }),
+      );
   };
 
   return (
@@ -54,9 +67,9 @@ const Header = () => {
           </span>
         </button>
         <div className={cx('navbar-brand')}>
-          <Link to="/" className={cx('navbar-item', 'brand')}>
+          <Link to="/" className={cx('navbar-item', 'brand')} onClick={() => handleDispatchFilter('')}>
             <div className={cx('logo-text')}>
-              <span onClick={() => handleDispatchFilter('undifine')}>NewMoives</span>
+              <span>NewMoives</span>
             </div>
           </Link>
         </div>
@@ -78,7 +91,7 @@ const Header = () => {
       <nav className={cx('navbar', 'desktop')} style={{ background: background && background, opacity: 0.9 }}>
         <div className={cx('navbar-brand')}>
           <div className={cx('navbar-item', 'brand')}>
-            <Link className={cx('logo-text')} to="/">
+            <Link className={cx('logo-text')} to="/" onClick={() => handleDispatchFilter('')}>
               NewMoives
             </Link>
           </div>

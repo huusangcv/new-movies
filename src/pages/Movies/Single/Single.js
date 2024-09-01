@@ -78,21 +78,21 @@ const Single = () => {
               <div className="gird columns">
                 {movies?.map((movie) => {
                   return (
-                    <div className="column" key={movie._id}>
-                      <Link to={`/movie/${movie.slug}`} className="cover">
+                    <Link to={`/movie/${movie.slug}`} className="column" key={movie._id}>
+                      <div className="cover">
                         <LazyLoadImage
                           src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`}
                           alt=""
                           effect="blur"
                         ></LazyLoadImage>
-                      </Link>
+                      </div>
                       <h3 className="name vi">
-                        <a href="#!">{movie.name}</a>
+                        <span>{movie.name}</span>
                       </h3>
                       <h3 className="name en">
-                        <a href="#!">{movie.origin_name}</a>
+                        <span>{movie.origin_name}</span>
                       </h3>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>

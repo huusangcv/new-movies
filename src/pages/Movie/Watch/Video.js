@@ -2,16 +2,14 @@ import React, { useEffect, useRef } from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
 
-const VideoPlayer = ({ movie, currentEpisode, poster_url }) => {
+const VideoPlayer = ({ movie, currentEpisode, poster_url, videoSrc }) => {
   const videoRef = useRef(null);
-  const videoSrc = movie?.episodes[0]?.server_data[currentEpisode]?.link_m3u8;
-
   useEffect(() => {
     const player = videojs(videoRef.current, {
       userActions: {
         hotkeys: function (event) {
           if (event.key === ' ') {
-            event.preventDefault(); // Ngăn chặn hành vi mặc định (cuộn trang)
+            event.preventDefault();
             if (this.paused()) {
               this.play();
             } else {
@@ -29,15 +27,17 @@ const VideoPlayer = ({ movie, currentEpisode, poster_url }) => {
           forward: 10,
         },
       },
-
       spatialNavigation: {
         enabled: true,
+      },
+      hls: {
+        smoothQualityChange: true,
       },
       autoPlay: false,
       preload: 'auto',
       sources: [
         {
-          src: videoSrc,
+          src: videoSrc, // Đảm bảo videoSrc là URL hợp lệ
           type: 'application/x-mpegURL',
         },
       ],
@@ -48,13 +48,13 @@ const VideoPlayer = ({ movie, currentEpisode, poster_url }) => {
         player.dispose();
       }
     };
-  }, [videoSrc]);
+  }, [currentEpisode, videoSrc]);
 
   return (
     <div
       data-vjs-player="true"
       id="vjs_video_3"
-      playsInline="true"
+      playsInline={true}
       tabIndex="-1"
       role="region"
       lang="vi"
@@ -68,7 +68,8 @@ const VideoPlayer = ({ movie, currentEpisode, poster_url }) => {
         poster={`https://img.ophim.live/uploads/movies/${poster_url}`}
         playsInline="playsinline"
         id="vjs_video_3"
-        tabindex="-1"
+        tabIndex="-1"
+        className="video-js"
         role="application"
       ></video>
     </div>

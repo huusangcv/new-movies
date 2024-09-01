@@ -48,17 +48,21 @@ const HomePage = () => {
         <div className="gird columns">
           {moviesRecommend.map((movie) => {
             return (
-              <div className="column" key={movie.id}>
-                <Link to={`/movie/${movie.slug}`} className="cover">
+              <Link to={`/movie/${movie.slug}`} className="column" key={movie.id}>
+                <div className="cover">
                   <img src={movie.thumb_url} alt="" />
-                </Link>
+                </div>
                 <h3 className="name vi">
-                  <a href={`movie/${movie.slug}`}>{movie.name}</a>
+                  <span>
+                    <span>{movie.name}</span>
+                  </span>
                 </h3>
                 <h3 className="name en">
-                  <a href={`movie/${movie.slug}`}>{movie.origin_name}</a>
+                  <span>
+                    <span>{movie.origin_name}</span>
+                  </span>
                 </h3>
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -87,10 +91,10 @@ const HomePage = () => {
                     ></img>
                   </div>
                   <h3 className="name vi">
-                    <a href={`movie/${movie.slug}`}>{movie.name}</a>
+                    <span>{movie.name}</span>
                   </h3>
                   <h3 className="name en">
-                    <a href={`movie/${movie.slug}`}>{movie.origin_name}</a>
+                    <span>{movie.origin_name}</span>
                   </h3>
                 </Link>
               )
@@ -113,14 +117,18 @@ const HomePage = () => {
             return (
               index <= 9 && (
                 <Link to={`movie/${movie.slug}`} className="column" key={movie._id}>
-                  <a href={`movie/${movie.slug}`} className="cover">
+                  <span className="cover">
                     <img src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`} alt=""></img>
-                  </a>
+                  </span>
                   <h3 className="name vi">
-                    <a href={`movie/${movie.slug}`}>{movie.name}</a>
+                    <span>
+                      <span>{movie.name}</span>
+                    </span>
                   </h3>
                   <h3 className="name en">
-                    <a href={`movie/${movie.slug}`}>{movie.origin_name}</a>
+                    <span>
+                      <span>{movie.origin_name}</span>
+                    </span>
                   </h3>
                 </Link>
               )

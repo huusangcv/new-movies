@@ -22,7 +22,7 @@ const Pagination = ({ handlePageClick, totalPage, page }) => {
         containerClassName="pagination"
         activeClassName="active"
         renderOnZeroPageCount={null}
-        forcePage={page - 1}
+        forcePage={(totalPage <= 1 && page - 3) || page - 1}
       />
     </div>
   );

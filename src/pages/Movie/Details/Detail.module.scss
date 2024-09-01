@@ -276,6 +276,11 @@
     white-space: nowrap;
     -webkit-appearance: none;
 
+
+    &:hover {
+        opacity: 0.8;
+    }
+
     svg {
         fill: var(--especitally-color);
         width: 1.8rem;

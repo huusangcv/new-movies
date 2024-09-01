@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { moviesSelector } from '~/redux/selector/selector';
 import ReactPaginate from 'react-paginate';
+import Pagination from '~/components/Pagination';
 const cx = classNames.bind(styles);
 
 const Browse = () => {
@@ -42,7 +43,7 @@ const Browse = () => {
       top: 0,
     });
   }, [moviesType, page, type, nation, year, sortBy, dispatch]);
-
+  console.log({ page });
   const handlePageClick = (e) => {
     setPage(e.selected + 1);
   };
@@ -58,47 +59,21 @@ const Browse = () => {
               <div className="gird columns">
                 {movies?.map((movie) => {
                   return (
-                    <div className="column" key={movie._id}>
-                      <Link to={`/movie/${movie.slug}`} className="cover">
-                        <LazyLoadImage
-                          src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`}
-                          alt=""
-                          effect="blur"
-                        ></LazyLoadImage>
-                      </Link>
+                    <Link to={`/movie/${movie.slug}`} className="column" key={movie._id}>
+                      <div className="cover">
+                        <img src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`} alt=""></img>
+                      </div>
                       <h3 className="name vi">
-                        <a href="#!">{movie.name}</a>
+                        <span>{movie.name}</span>
                       </h3>
                       <h3 className="name en">
-                        <a href="#!">{movie.origin_name}</a>
+                        <span>{movie.origin_name}</span>
                       </h3>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
-              <div className="paginate">
-                <ReactPaginate
-                  nextLabel="Trang kế"
-                  onPageChange={handlePageClick}
-                  pageRangeDisplayed={3}
-                  marginPagesDisplayed={2}
-                  pageCount={totalPage}
-                  previousLabel="Trang trước"
-                  pageClassName="page-item"
-                  pageLinkClassName="page-link"
-                  previousClassName="page-item"
-                  previousLinkClassName="page-link"
-                  nextClassName="page-item"
-                  nextLinkClassName="page-link"
-                  breakLabel="..."
-                  breakClassName="page-item"
-                  breakLinkClassName="page-link"
-                  containerClassName="pagination"
-                  activeClassName="active"
-                  renderOnZeroPageCount={null}
-                  forcePage={page - 1}
-                />
-              </div>
+              <Pagination handlePageClick={handlePageClick} totalPage={totalPage} page={page} />
             </>
           )}
         </div>
