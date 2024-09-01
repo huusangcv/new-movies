@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DefaultLayout from './layouts/DefaultLayout';
+
 import { lazy, Suspense } from 'react';
 import HomePage from './pages/Home/';
 import Search from './pages/Search';

@@ -27,7 +27,7 @@ const MovieDetails = () => {
         const movies = await getMovies.Detail(slug);
         if (movies) {
           document.title = movies.seoOnPage.titleHead;
-          dispatch(getMovieDetails(movies.item));
+          dispatch(getMovieDetails(movies));
           setIsLoading(false);
         }
       } catch (error) {

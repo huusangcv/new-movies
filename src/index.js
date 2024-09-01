@@ -5,6 +5,11 @@ import reportWebVitals from './reportWebVitals';
 import GlobalStyles from './components/GlobalStyles';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import ReactGA from 'react-ga4';
+
+ReactGA.initialize('G-9G552G5GLK');
+ReactGA.send({ hitType: 'pageview', page: window.location.pathname, title: 'Custom Title' });
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
