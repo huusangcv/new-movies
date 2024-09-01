@@ -28,7 +28,18 @@ const Single = () => {
           const movies = await getMovies.Single(page);
           if (movies) {
             document.title = movies.seoOnPage.titleHead;
-            dispatch(getMoviesSingle(movies.items));
+
+            // Map array to only get [name,slug,origin_name,thumb_url]
+            const result = movies.items.map((movie) => {
+              return {
+                name: movie.name,
+                slug: movie.slug,
+                origin_name: movie.origin_name,
+                thumb_url: movie.thumb_url,
+              };
+            });
+
+            dispatch(getMoviesSingle(result));
 
             //check page === 1 to get totalItem on each page
             if (page === 1) {

@@ -30,7 +30,16 @@ const Series = () => {
           if (movies) {
             document.title = movies.seoOnPage.titleHead;
 
-            dispatch(getMoviesSeries(movies.items));
+            const result = movies.items.map((movie) => {
+              return {
+                name: movie.name,
+                slug: movie.slug,
+                origin_name: movie.origin_name,
+                thumb_url: movie.thumb_url,
+              };
+            });
+
+            dispatch(getMoviesSeries(result));
 
             //check page === 1 to get totalItem on each page
             if (page === 1) {

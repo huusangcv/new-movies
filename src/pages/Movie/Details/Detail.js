@@ -8,12 +8,13 @@ import { filterMoviesByCategory, getMovieDetails } from '~/redux/actions';
 import BackDrop from '~/layouts/BackDrop';
 import Modal from '~/components/ModalRoot/Modal';
 import { uid } from 'react-uid';
+import { movieDetail } from '~/redux/selector/selector';
 
 const cx = classNames.bind(styles);
 
 const MovieDetails = () => {
   const { slug } = useParams();
-  const movie = useSelector((state) => state.movie.item);
+  const movie = useSelector(movieDetail);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isShowModalTrailer, setIsShowModalTrailer] = useState(false);
@@ -26,7 +27,7 @@ const MovieDetails = () => {
         const movies = await getMovies.Detail(slug);
         if (movies) {
           document.title = movies.seoOnPage.titleHead;
-          dispatch(getMovieDetails(movies));
+          dispatch(getMovieDetails(movies.item));
           setIsLoading(false);
         }
       } catch (error) {
@@ -98,6 +99,7 @@ const MovieDetails = () => {
                       dispatch(
                         filterMoviesByCategory({
                           year: movie?.year,
+                          moviesType: '',
                         }),
                       );
                       navigate('/browse');

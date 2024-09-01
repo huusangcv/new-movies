@@ -28,7 +28,18 @@ const New = () => {
           const movies = await getMovies.New(page);
           if (movies) {
             document.title = movies.seoOnPage.titleHead;
-            dispatch(getMoviesNew(movies.items));
+
+            const result = movies.items.map((movie) => {
+              return {
+                name: movie.name,
+                slug: movie.slug,
+                origin_name: movie.origin_name,
+                thumb_url: movie.thumb_url,
+              };
+            });
+
+            dispatch(getMoviesNew(result));
+
             if (page === 1) {
               dispatch(getTotalItemsNew(movies.params.pagination.totalItems));
             }
