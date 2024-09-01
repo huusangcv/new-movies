@@ -5,11 +5,13 @@
     right: 0;
 
     .has-text-centered {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
         font-size: 1.5rem;
-        margin-top: 12px;
+        margin: 12px 0 0 0;
+        text-align: center;
+
+        @media screen and (max-width: 767.98px) {
+            font-size: 1.2rem;
+        }
 
         a:hover {
             color: #dcf836;
@@ -21,8 +23,17 @@
     padding: 48px;
     width: 100%;
 
+
     .container {
         margin: 0 40px;
+    }
+
+    @media screen and (max-width: 767.98px) {
+        padding: 48px 12px;
+
+        .container {
+            margin: 0;
+        }
     }
 
     a:hover {
@@ -33,6 +44,11 @@
 .columns {
     display: flex;
     justify-content: space-between;
+
+    @media screen and (max-width: 767.98px) {
+        flex-direction: column;
+        margin-bottom: 12px;
+    }
 }
 
 .column {
@@ -43,6 +59,7 @@
 
     &.has-text-right {
         text-align: right !important;
+        padding: 12px;
     }
 
     .back {

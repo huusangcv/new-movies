@@ -2,7 +2,6 @@ import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import getMovies from '~/services/getMovies';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
@@ -27,10 +26,9 @@ const Search = () => {
     };
 
     if (searchName !== '') {
-      window.addEventListener('keyup', fetchApi());
+      fetchApi();
     }
 
-    return () => window.removeEventListener('keyup', fetchApi());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchName]);
 
@@ -57,11 +55,7 @@ const Search = () => {
             return (
               <Link to={`/movie/${movie.slug}`} className="column" key={movie._id}>
                 <div className="cover">
-                  <LazyLoadImage
-                    src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`}
-                    alt=""
-                    effect="blur"
-                  ></LazyLoadImage>
+                  <img src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`} alt="" effect="blur"></img>
                 </div>
                 <h3 className="name vi">
                   <span>{movie.name}</span>

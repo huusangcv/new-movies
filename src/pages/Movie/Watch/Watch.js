@@ -22,7 +22,6 @@ const Watch = () => {
   const videoSrc = movie?.episodes[0]?.server_data[currentEpisode]?.link_m3u8;
 
   useEffect(() => {
-    console.log('re render');
     setIsLoading(true);
     if (movie) {
       setIsLoading(false);
@@ -47,7 +46,7 @@ const Watch = () => {
       top: 0,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentEpisode]);
 
   const handleDispatchFilter = (payload) => {
     dispatch(
@@ -124,15 +123,14 @@ const Watch = () => {
                 {/* <button className="button is-success is-outlined is-hidden">Tập 1 ... -1</button> */}
                 {movie?.episodes[0]?.server_data?.map((episode, index) => {
                   return (
-                    <a
-                      href="#!"
+                    <span
                       className={cx('button', 'is-success')}
                       key={uid(episode)}
                       onClick={() => handleEpisodeChange(index)}
                       disabled={index === currentEpisode && true}
                     >
                       Tập {episode.name}
-                    </a>
+                    </span>
                   );
                 })}
                 <button className="button is-success is-outlined is-hidden"></button>

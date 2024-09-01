@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toggleBars } from '~/redux/actions/toggleBars';
 import styles from './Bars.module.scss';
+import { filterMoviesByCategory } from '~/redux/actions';
 
 const cx = classNames.bind(styles);
 
@@ -25,11 +26,33 @@ const Bars = () => {
     dispatch(toggleBars(false));
   };
 
+  //Func update state of filter
+  const handleDispatchFilter = (payload) => {
+    if (payload === '') {
+      dispatch(
+        filterMoviesByCategory({
+          titlePage: '',
+          filterState: false,
+          moviesType: '',
+          type: '',
+          nation: '',
+          year: '',
+          sortBy: '',
+        }),
+      );
+    } else
+      dispatch(
+        filterMoviesByCategory({
+          moviesType: payload,
+        }),
+      );
+  };
+
   return (
     <div className={cx('wapper')}>
       <div className={isShowBar ? cx('overlay') : ''} onClick={handleCloseBar}></div>
       <div className={cx('bars', isShowBar && 'show')}>
-        <Link className={cx('bar', 'name')}>
+        <Link className={cx('bar', 'name')} onClick={handleCloseBar}>
           <div className={cx('layout_icon')}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
               <path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path>
@@ -39,7 +62,7 @@ const Bars = () => {
             <span>Hữu Sang</span>
           </div>
         </Link>
-        <Link to="/movies/single" onClick={handleCloseBar} className={cx('bar')}>
+        <Link to="/movies/single" className={cx('bar')}>
           <div className={cx('layout_icon')}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-36 344h12V232h-12c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12h48c6.627 0 12 5.373 12 12v140h12c6.627 0 12 5.373 12 12v8c0 6.627-5.373 12-12 12h-72c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12zm36-240c-17.673 0-32 14.327-32 32s14.327 32 32 32 32-14.327 32-32-14.327-32-32-32z"></path>
@@ -59,7 +82,7 @@ const Bars = () => {
             <span>Donate</span>
           </div>
         </Link>
-        <Link to="/movies/single" onClick={handleCloseBar} className={cx('bar')}>
+        <Link to="" onClick={handleCloseBar} className={cx('bar')}>
           <div className={cx('layout_icon')}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path d="M488 64h-8v20c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12V64H96v20c0 6.6-5.4 12-12 12H44c-6.6 0-12-5.4-12-12V64h-8C10.7 64 0 74.7 0 88v336c0 13.3 10.7 24 24 24h8v-20c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v20h320v-20c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v20h8c13.3 0 24-10.7 24-24V88c0-13.3-10.7-24-24-24zM96 372c0 6.6-5.4 12-12 12H44c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12H44c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12H44c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm288 224c0 6.6-5.4 12-12 12H140c-6.6 0-12-5.4-12-12V108c0-6.6 5.4-12 12-12h232c6.6 0 12 5.4 12 12v296zm96-32c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40zm0-96c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40z"></path>
@@ -69,7 +92,7 @@ const Bars = () => {
             <span>Bộ sưu tập</span>
           </div>
         </Link>
-        <Link to="/movies/single" onClick={handleCloseBar} className={cx('bar')}>
+        <Link to="" onClick={handleCloseBar} className={cx('bar')}>
           <div className={cx('layout_icon')}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path d="M48 64h132c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H48c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16h132c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48zm279 19.5l-7.1 7.1c-4.7 4.7-4.7 12.3 0 17l132 131.4H172c-6.6 0-12 5.4-12 12v10c0 6.6 5.4 12 12 12h279.9L320 404.4c-4.7 4.7-4.7 12.3 0 17l7.1 7.1c4.7 4.7 12.3 4.7 17 0l164.5-164c4.7-4.7 4.7-12.3 0-17L344 83.5c-4.7-4.7-12.3-4.7-17 0z"></path>
@@ -80,27 +103,48 @@ const Bars = () => {
           </div>
         </Link>
         <hr className="MuiDivider-root"></hr>
-        <Link className={cx('bar')}>
+        {/* <Link className={cx('bar')}>
           <div className="MuiListItemText-root">
             <span>Phim hot</span>
           </div>
-        </Link>
-        <Link to="/movies/single" onClick={handleCloseBar} className={cx('bar')}>
+        </Link> */}
+        <Link
+          to="/movies/single"
+          className={cx('bar')}
+          onClick={() => {
+            handleDispatchFilter('phim-le');
+            handleCloseBar();
+          }}
+        >
           <div className="MuiListItemText-root">
             <span>Phim lẻ</span>
           </div>
         </Link>
-        <Link to="/movies/series" onClick={handleCloseBar} className={cx('bar')}>
+        <Link
+          to="/movies/series"
+          className={cx('bar')}
+          onClick={() => {
+            handleDispatchFilter('phim-bo');
+            handleCloseBar();
+          }}
+        >
           <div className="MuiListItemText-root">
             <span>Phim bộ</span>
           </div>
         </Link>
-        <Link to="/movies/single" onClick={handleCloseBar} className={cx('bar')}>
+        <Link
+          to="/movies/new"
+          className={cx('bar')}
+          onClick={() => {
+            handleDispatchFilter('phim-moi');
+            handleCloseBar();
+          }}
+        >
           <div className="MuiListItemText-root">
             <span>Phim mới</span>
           </div>
         </Link>
-        <Link to="/movies/single" onClick={handleCloseBar} className={cx('bar')}>
+        <Link to="/movies/faqs" onClick={handleCloseBar} className={cx('bar')}>
           <div className="MuiListItemText-root">
             <span>FAQs</span>
           </div>

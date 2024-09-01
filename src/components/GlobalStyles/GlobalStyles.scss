@@ -265,6 +265,11 @@ button {
         justify-content: flex-start;
         order: 1;
 
+        @media screen and (max-width: 1024px) {
+            flex-wrap: wrap-reverse;
+            justify-content: end;
+        }
+
         .page-item.active .page-link {
             border-color: #428bca;
         }
@@ -275,6 +280,17 @@ button {
 
         .page-item:last-of-type {
             order: 3;
+        }
+
+        @media screen and (max-width: 1024px) {
+            .page-item:first-of-type {
+                width: 111px;
+            }
+
+            .page-item:last-of-type {
+                width: 111px;
+            }
+
         }
 
         .page-item:first-of-type {
