@@ -1,10 +1,11 @@
 import { memo, useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import ReactGA from 'react-ga';
 import classNames from 'classnames/bind';
 import styles from './Series.module.scss';
 import Filter from '~/layouts/Filter';
 import getMovies from '~/services/getMovies';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMoviesSeries, getTotalItemsSeries } from '~/redux/actions';
 import { getTotalItems, moviesSeries } from '~/redux/selector/selector';
@@ -12,6 +13,7 @@ import Pagination from '~/components/Pagination';
 const cx = classNames.bind(styles);
 
 const Series = () => {
+  const location = useLocation();
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
@@ -72,6 +74,14 @@ const Series = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
+
+  useEffect(() => {
+    const page = location.pathname; // Đặt tên trang là URL
+    const title = document.title; // Tên trang từ document.title
+
+    ReactGA.set({ page, title });
+    ReactGA.send('pageview');
+  }, [location]);
 
   const handlePageClick = (e) => {
     setPage(e.selected + 1);

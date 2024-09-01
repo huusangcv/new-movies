@@ -1,17 +1,19 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 import classNames from 'classnames/bind';
 import styles from './Watch.module.scss';
+import ReactGA from 'react-ga';
 import { useDispatch, useSelector } from 'react-redux';
 import { movieDetail } from '~/redux/selector/selector';
 import { useEffect, useState } from 'react';
 import { filterMoviesByCategory, getMovieDetails } from '~/redux/actions';
 import getMovies from '~/services/getMovies';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { uid } from 'react-uid';
 import VideoPlayer from './Video';
 
 const cx = classNames.bind(styles);
 const Watch = () => {
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const { slug } = useParams();
 
@@ -47,6 +49,14 @@ const Watch = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentEpisode]);
+
+  useEffect(() => {
+    const page = location.pathname; // Đặt tên trang là URL
+    const title = document.title; // Tên trang từ document.title
+
+    ReactGA.set({ page, title });
+    ReactGA.send('pageview');
+  }, [location]);
 
   const handleDispatchFilter = (payload) => {
     dispatch(

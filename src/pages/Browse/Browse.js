@@ -1,22 +1,22 @@
 import { memo, useEffect, useState } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+// import { LazyLoadImage } from 'react-lazy-load-image-component';
 import classNames from 'classnames/bind';
 import styles from './Browse.module.scss';
 import Filter from '~/layouts/Filter';
 import getMovies from '~/services/getMovies';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import ReactGA from 'react-ga';
+import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { moviesSelector } from '~/redux/selector/selector';
-import ReactPaginate from 'react-paginate';
 import Pagination from '~/components/Pagination';
 const cx = classNames.bind(styles);
 
 const Browse = () => {
+  const location = useLocation();
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [paginate, setPaginate] = useState();
   const [movies, setMovies] = useState([]);
-  const dispatch = useDispatch();
   const { moviesType, type, nation, year, sortBy } = useSelector(moviesSelector);
   const totalPage = Math.floor(paginate?.totalItems / paginate?.totalItemsPerPage);
   useEffect(() => {
@@ -42,8 +42,16 @@ const Browse = () => {
     window.scroll({
       top: 0,
     });
-  }, [moviesType, page, type, nation, year, sortBy, dispatch]);
-  console.log({ page });
+  }, [moviesType, page, type, nation, year, sortBy]);
+
+  useEffect(() => {
+    const page = location.pathname; // Đặt tên trang là URL
+    const title = document.title; // Tên trang từ document.title
+
+    ReactGA.set({ page, title });
+    ReactGA.send('pageview');
+  }, [location]);
+
   const handlePageClick = (e) => {
     setPage(e.selected + 1);
   };

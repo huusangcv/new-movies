@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './Detail.module.scss';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import ReactGA from 'react-ga';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import getMovies from '~/services/getMovies';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +14,7 @@ import { movieDetail } from '~/redux/selector/selector';
 const cx = classNames.bind(styles);
 
 const MovieDetails = () => {
+  const location = useLocation();
   const { slug } = useParams();
   const movie = useSelector(movieDetail);
   const dispatch = useDispatch();
@@ -40,7 +42,16 @@ const MovieDetails = () => {
     });
 
     fetchApi();
-  }, [dispatch, slug]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]);
+
+  useEffect(() => {
+    const page = location.pathname; // Đặt tên trang là URL
+    const title = document.title; // Tên trang từ document.title
+
+    ReactGA.set({ page, title });
+    ReactGA.send('pageview');
+  }, [location]);
 
   const handleCloseModalTrailers = () => {
     setIsShowModalTrailer(!isShowModalTrailer);

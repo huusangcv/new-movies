@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
+import ReactGA from 'react-ga';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './Home.module.scss';
 import moviesRecommend from '~/components/Options/recommend';
 import getMovies from '~/services/getMovies';
@@ -12,6 +13,7 @@ import Filter from '~/layouts/Filter';
 const cx = classNames.bind(styles);
 
 const HomePage = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const moviesNewUpdate = useSelector(movieNewUpdate);
 
@@ -56,6 +58,14 @@ const HomePage = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const page = location.pathname; // Đặt tên trang là URL
+    const title = document.title; // Tên trang từ document.title
+
+    ReactGA.set({ page, title });
+    ReactGA.send('pageview');
+  }, [location]);
 
   return (
     <div className={cx('wapper')}>

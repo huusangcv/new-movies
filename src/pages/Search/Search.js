@@ -2,14 +2,14 @@ import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import getMovies from '~/services/getMovies';
-import { Link } from 'react-router-dom';
-
+import { Link, useLocation } from 'react-router-dom';
+import ReactGA from 'react-ga';
 const cx = classNames.bind(styles);
 
 const Search = () => {
   const [searchName, setSearchName] = useState('');
   const [movies, setMovies] = useState([]);
-
+  const location = useLocation();
   const refInput = useRef();
 
   useEffect(() => {
@@ -31,6 +31,14 @@ const Search = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchName]);
+
+  useEffect(() => {
+    const page = location.pathname; // Đặt tên trang là URL
+    const title = document.title; // Tên trang từ document.title
+
+    ReactGA.set({ page, title });
+    ReactGA.send('pageview');
+  }, [location]);
 
   //Func handle setName to call api
   const handleSearchMovie = (e) => {

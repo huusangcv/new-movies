@@ -8,7 +8,7 @@ import store from './redux/store';
 import ReactGA from 'react-ga4';
 
 ReactGA.initialize('G-9G552G5GLK');
-ReactGA.send({ hitType: 'pageview', page: window.location.pathname, title: 'Custom Title' });
+ReactGA.send({ hitType: 'pageview', page: window.location.pathname, title: document.title });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
