@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from 'react';
-// import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import classNames from 'classnames/bind';
 import styles from './Browse.module.scss';
 import Filter from '~/layouts/Filter';
