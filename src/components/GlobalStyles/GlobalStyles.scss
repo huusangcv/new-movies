@@ -248,6 +248,8 @@ button {
 .paginate {
     width: 100%;
 
+
+
     .pagination {
         width: 100%;
         list-style: none;
@@ -268,6 +270,12 @@ button {
             flex-wrap: wrap-reverse;
             justify-content: end;
         }
+
+        @media screen and (max-width: 414px) {
+            justify-content: center;
+            gap: 20px 10px;
+        }
+
 
         .page-item.active .page-link {
             border-color: #428bca;
@@ -294,6 +302,10 @@ button {
 
         .page-item:first-of-type {
             margin-left: auto;
+
+            @media screen and (max-width: 414px) {
+                margin-left: 0;
+            }
         }
 
         .page-item:last-of-type:hover,
