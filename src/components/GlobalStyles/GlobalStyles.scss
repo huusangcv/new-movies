@@ -357,12 +357,20 @@ button {
     background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, .7)));
     background: linear-gradient(transparent, rgba(0, 0, 0, .7));
     background-color: transparent !important;
+
+    @media screen and (max-width: 767.98px) {
+        font-size: 1rem;
+    }
 }
 
 .video-js .vjs-progress-control {
     position: absolute;
     width: 100%;
     top: -70%;
+
+    @media screen and (max-width: 767.98px) {
+        width: auto;
+    }
 }
 
 .video-js .vjs-time-control {
