@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import filter from '~/components/Options';
 import styles from './Filter.module.scss';
-import { memo, useState } from 'react';
+import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from '~/components/Spinner';
 import { moviesSelector } from '~/redux/selector/selector';
@@ -14,40 +14,60 @@ const Filter = ({ isLoading }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const selectValue = useSelector(moviesSelector);
-  const [moviesType, setMoviesType] = useState(selectValue.moviesType);
-  const [type, setType] = useState(selectValue.type);
-  const [nation, setNation] = useState(selectValue.nation);
-  const [year, setYear] = useState(selectValue.year);
-  const [sortBy, setSortBy] = useState(selectValue.sortBy);
 
   const handleSelectMovies = (e) => {
-    setMoviesType(e.target.value);
-  };
-  const handleSelectType = (e) => {
-    setType(e.target.value);
-  };
-  const handleSelectNations = (e) => {
-    setNation(e.target.value);
-  };
-  const handleSelectYears = (e) => {
-    setYear(e.target.value);
-  };
-  const handleSelectSortBy = (e) => {
-    setSortBy(e.target.value);
-  };
-
-  const handleFilterMovies = () => {
     dispatch(
       filterMovies({
-        moviesType,
-        type,
-        nation,
-        year,
-        sortBy,
+        moviesType: e.target.value,
       }),
     );
     navigate('/browse');
   };
+  const handleSelectType = (e) => {
+    dispatch(
+      filterMovies({
+        type: e.target.value,
+      }),
+    );
+    navigate('/browse');
+  };
+  const handleSelectNations = (e) => {
+    dispatch(
+      filterMovies({
+        nation: e.target.value,
+      }),
+    );
+    navigate('/browse');
+  };
+  const handleSelectYears = (e) => {
+    dispatch(
+      filterMovies({
+        year: e.target.value,
+      }),
+    );
+    navigate('/browse');
+  };
+  const handleSelectSortBy = (e) => {
+    dispatch(
+      filterMovies({
+        sortBy: e.target.value,
+      }),
+    );
+    navigate('/browse');
+  };
+
+  // const handleFilterMovies = () => {
+  //   dispatch(
+  //     filterMovies({
+  //       moviesType,
+  //       type,
+  //       nation,
+  //       year,
+  //       sortBy,
+  //     }),
+  //   );
+  //   navigate('/browse');
+  // };
   return (
     <div className={cx('wapper')}>
       <div className={cx('filter')}>
@@ -151,7 +171,7 @@ const Filter = ({ isLoading }) => {
               </div>
             </div>
           </div>
-          <div className={cx('column')}>
+          {/* <div className={cx('column')}>
             <div className={cx('field')}>
               <label htmlFor="" className={cx('label')}>
                 Lọc phim
@@ -162,7 +182,7 @@ const Filter = ({ isLoading }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

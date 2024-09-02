@@ -24,8 +24,8 @@ const VideoPlayer = memo(({ movie, currentEpisode, poster_url }) => {
         enableSmoothSeeking: true,
         controlBar: {
           skipButtons: {
-            backward: 10,
-            forward: 10,
+            backward: 5,
+            forward: 5,
           },
         },
         spatialNavigation: {
