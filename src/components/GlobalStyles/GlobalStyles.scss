@@ -369,7 +369,7 @@ button {
     top: -70%;
 
     @media screen and (max-width: 767.98px) {
-        width: auto;
+        position: inherit;
     }
 }
 
