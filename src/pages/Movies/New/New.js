@@ -78,7 +78,7 @@ const New = () => {
     const title = document.title; // Tên trang từ document.title
 
     ReactGA.set({ page, title });
-    ReactGA.send('pageview');
+    ReactGA.send('New movies');
   }, [location]);
 
   const handlePageClick = (e) => {

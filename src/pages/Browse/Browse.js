@@ -58,7 +58,7 @@ const Browse = () => {
     const title = document.title; // Tên trang từ document.title
 
     ReactGA.set({ page, title });
-    ReactGA.send('pageview');
+    ReactGA.send('Filter Movies');
   }, [location]);
 
   const handlePageClick = (e) => {

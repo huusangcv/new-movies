@@ -80,7 +80,7 @@ const Series = () => {
     const title = document.title; // Tên trang từ document.title
 
     ReactGA.set({ page, title });
-    ReactGA.send('pageview');
+    ReactGA.send('Series Movies');
   }, [location]);
 
   const handlePageClick = (e) => {

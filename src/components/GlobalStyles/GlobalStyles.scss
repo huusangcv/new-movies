@@ -59,7 +59,6 @@ button {
 }
 
 .title-list {
-    margin: -12px -8px;
     height: auto;
 
     .gird {
@@ -92,7 +91,7 @@ button {
         min-height: 384px;
 
         @media screen and (min-width: 768px) {
-            min-height: 384px;
+            min-height: 340px;
         }
 
         padding-top: 66.66%;
@@ -217,9 +216,9 @@ button {
 
 .button.is-rounded {
     border-radius: 9999px;
-    padding: 8px 15px;
     border: 1px solid #dbdbdb;
     font-size: 1.2rem;
+    padding: 5px 10px;
 
     &:hover {
         background-color: var(--especitally-color);
@@ -342,7 +341,18 @@ button {
 }
 
 .video-js .vjs-control-bar {
+    font-size: 1.4rem;
     background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, .7)));
     background: linear-gradient(transparent, rgba(0, 0, 0, .7));
-    background-color: rgba(0, 0, 0, .3) !important;
+    background-color: transparent !important;
+}
+
+.video-js .vjs-progress-control {
+    position: absolute;
+    width: 100%;
+    top: -70%;
+}
+
+.video-js .vjs-time-control {
+    margin-left: auto;
 }

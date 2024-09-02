@@ -17,11 +17,7 @@ const VideoPlayer = memo(({ movie, currentEpisode, poster_url }) => {
           hotkeys: function (event) {
             if (event.key === ' ') {
               event.preventDefault();
-              if (this.paused()) {
-                this.play();
-              } else {
-                this.pause();
-              }
+              this.paused() ? this.play() : this.pause();
             }
           },
         },
