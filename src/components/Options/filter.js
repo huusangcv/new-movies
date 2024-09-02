@@ -35,7 +35,7 @@ const filter = {
     { id: 19, slug: 'bi-an', text: 'Bí ẩn' },
     { id: 20, slug: 'hoc-duong', text: 'Học Đường' },
     { id: 21, slug: 'kinh-dien', text: 'Kinh Điển' },
-    // { id: 22, slug: 'phim-18', text: 'Phim 18+' },
+    { id: 22, slug: 'phim-18', text: 'Phim 18+' },
   ],
 
   nations: [
