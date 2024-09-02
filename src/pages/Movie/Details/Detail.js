@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './Detail.module.scss';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import getMovies from '~/services/getMovies';

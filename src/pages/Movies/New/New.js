@@ -6,7 +6,7 @@ import Filter from '~/layouts/Filter';
 import getMovies from '~/services/getMovies';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import { getMoviesNew, getTotalItemsNew } from '~/redux/actions';
 import { getTotalItems, moviesNew } from '~/redux/selector/selector';
 import Pagination from '~/components/Pagination';

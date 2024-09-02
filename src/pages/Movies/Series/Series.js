@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import classNames from 'classnames/bind';
 import styles from './Series.module.scss';
 import Filter from '~/layouts/Filter';

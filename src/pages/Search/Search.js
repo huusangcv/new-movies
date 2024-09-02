@@ -3,7 +3,8 @@ import styles from './Search.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import getMovies from '~/services/getMovies';
 import { Link, useLocation } from 'react-router-dom';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 const cx = classNames.bind(styles);
 
 const Search = () => {
@@ -15,10 +16,20 @@ const Search = () => {
   useEffect(() => {
     const fetchApi = async () => {
       try {
-        const data = await getMovies.Search(searchName);
+        const data = await getMovies.Search(searchName.trim());
         if (movies) {
           document.title = searchName;
-          setMovies(data.items);
+
+          const result = data.items.map((movie) => {
+            return {
+              name: movie.name,
+              slug: movie.slug,
+              origin_name: movie.origin_name,
+              thumb_url: movie.thumb_url,
+            };
+          });
+
+          setMovies(result);
         }
       } catch (error) {
         console.log('Error ---> ', error);
@@ -28,6 +39,10 @@ const Search = () => {
     if (searchName !== '') {
       fetchApi();
     }
+
+    window.scroll({
+      top: 0,
+    });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchName]);
@@ -63,7 +78,11 @@ const Search = () => {
             return (
               <Link to={`/movie/${movie.slug}`} className="column" key={movie._id}>
                 <div className="cover">
-                  <img src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`} alt="" effect="blur"></img>
+                  <LazyLoadImage
+                    src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`}
+                    alt=""
+                    effect="blur"
+                  ></LazyLoadImage>
                 </div>
                 <h3 className="name vi">
                   <span>{movie.name}</span>

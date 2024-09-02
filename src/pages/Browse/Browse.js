@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import styles from './Browse.module.scss';
 import Filter from '~/layouts/Filter';
 import getMovies from '~/services/getMovies';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { moviesSelector } from '~/redux/selector/selector';
@@ -20,7 +20,6 @@ const Browse = () => {
   const { moviesType, type, nation, year, sortBy } = useSelector(moviesSelector);
   const totalPage = Math.floor(paginate?.totalItems / paginate?.totalItemsPerPage);
   useEffect(() => {
-    console.log('render');
     setIsLoading(true);
 
     const fetchApi = async () => {
@@ -29,7 +28,17 @@ const Browse = () => {
         if (movies) {
           document.title = movies.seoOnPage.titleHead;
           setPaginate(movies.params.pagination);
-          setMovies(movies.items);
+
+          const result = movies.items.map((movie) => {
+            return {
+              name: movie.name,
+              slug: movie.slug,
+              origin_name: movie.origin_name,
+              thumb_url: movie.thumb_url,
+            };
+          });
+
+          setMovies(result);
           setIsLoading(false);
         }
       } catch (error) {
@@ -69,7 +78,11 @@ const Browse = () => {
                   return (
                     <Link to={`/movie/${movie.slug}`} className="column" key={movie._id}>
                       <div className="cover">
-                        <img src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`} alt=""></img>
+                        <LazyLoadImage
+                          src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`}
+                          alt=""
+                          effect="blur"
+                        ></LazyLoadImage>
                       </div>
                       <h3 className="name vi">
                         <span>{movie.name}</span>

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 import classNames from 'classnames/bind';
 import styles from './Watch.module.scss';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import { useDispatch, useSelector } from 'react-redux';
 import { movieDetail } from '~/redux/selector/selector';
 import { useEffect, useState } from 'react';
