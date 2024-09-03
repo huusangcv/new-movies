@@ -20,42 +20,45 @@ const HomePage = () => {
 
   useEffect(() => {
     document.title = 'Từ Hollywood đến Bollywood, chúng tôi mang đến những bộ phim bạn yêu thích';
+    if (!moviesNewUpdate.single || moviesNewUpdate.single.length === 0) {
+      const fetchApi = async () => {
+        setIsLoading(true);
+        const [newUpdateSingle, newUpdateSeries] = await Promise.all([
+          getMovies.newUpdateSingle(),
+          getMovies.newUpdateSeries(),
+        ]);
+        if (newUpdateSingle && newUpdateSeries) {
+          const result1 = newUpdateSingle.items.map((movie) => {
+            return {
+              name: movie.name,
+              slug: movie.slug,
+              origin_name: movie.origin_name,
+              thumb_url: movie.thumb_url,
+            };
+          });
 
-    const fetchApi = async () => {
-      setIsLoading(true);
-      const [newUpdateSingle, newUpdateSeries] = await Promise.all([
-        getMovies.newUpdateSingle(),
-        getMovies.newUpdateSeries(),
-      ]);
-      if (newUpdateSingle && newUpdateSeries) {
-        const result1 = newUpdateSingle.items.map((movie) => {
-          return {
-            name: movie.name,
-            slug: movie.slug,
-            origin_name: movie.origin_name,
-            thumb_url: movie.thumb_url,
-          };
-        });
+          const result2 = newUpdateSeries.items.map((movie) => {
+            return {
+              name: movie.name,
+              slug: movie.slug,
+              origin_name: movie.origin_name,
+              thumb_url: movie.thumb_url,
+            };
+          });
 
-        const result2 = newUpdateSeries.items.map((movie) => {
-          return {
-            name: movie.name,
-            slug: movie.slug,
-            origin_name: movie.origin_name,
-            thumb_url: movie.thumb_url,
-          };
-        });
-
-        dispatch(
-          getNewUpdateMovies({
-            single: result1,
-            series: result2,
-          }),
-        );
-        setIsLoading(false);
-      }
-    };
-    fetchApi();
+          dispatch(
+            getNewUpdateMovies({
+              single: result1,
+              series: result2,
+            }),
+          );
+          setIsLoading(false);
+        }
+      };
+      fetchApi();
+    } else if (moviesNewUpdate) {
+      setIsLoading(false);
+    }
 
     window.scroll({
       top: 0,
@@ -104,7 +107,7 @@ const HomePage = () => {
       <h2 className="heading">
         <span>PHIM LẺ MỚI CẬP NHẬT</span>
         <Link to="/movies/single" className={cx('heading', 'watch-all')}>
-          Xem tất cả
+          Xem tất cả{' '}
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512">
             <path d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path>
           </svg>
