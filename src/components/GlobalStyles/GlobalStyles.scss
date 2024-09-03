@@ -97,7 +97,6 @@ button {
   }
 
   .cover {
-    min-width: 256px;
     min-height: 384px;
 
     @media screen and (max-width: 768px) {
@@ -155,6 +154,7 @@ button {
       left: 0;
       height: 100%;
       max-width: 100%;
+      min-width: 100%;
       -webkit-transition: -webkit-transform 0.15s ease-in-out;
       transition: -webkit-transform 0.15s ease-in-out;
       -o-transition: transform 0.15s ease-in-out;
