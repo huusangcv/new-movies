@@ -94,6 +94,10 @@ button {
             min-height: 340px;
         }
 
+        @media screen and (max-width: 414px) {
+            min-height: 300px;
+        }
+
         padding-top: 66.66%;
         position: relative;
         background-position: center center;
