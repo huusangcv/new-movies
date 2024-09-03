@@ -3,7 +3,6 @@ import filter from '~/components/Options';
 import styles from './Filter.module.scss';
 import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Spinner from '~/components/Spinner';
 import { moviesSelector } from '~/redux/selector/selector';
 import { useNavigate } from 'react-router-dom';
 import { filterMovies } from '~/redux/actions';
@@ -56,18 +55,6 @@ const Filter = ({ isLoading }) => {
     navigate('/browse');
   };
 
-  // const handleFilterMovies = () => {
-  //   dispatch(
-  //     filterMovies({
-  //       moviesType,
-  //       type,
-  //       nation,
-  //       year,
-  //       sortBy,
-  //     }),
-  //   );
-  //   navigate('/browse');
-  // };
   return (
     <div className={cx('wapper')}>
       <div className={cx('filter')}>
@@ -171,18 +158,6 @@ const Filter = ({ isLoading }) => {
               </div>
             </div>
           </div>
-          {/* <div className={cx('column')}>
-            <div className={cx('field')}>
-              <label htmlFor="" className={cx('label')}>
-                Lọc phim
-              </label>
-              <div className={cx('control')} onClick={handleFilterMovies}>
-                <div className={cx('filter-btn')}>
-                  <button>{(isLoading && <Spinner />) || <span>Duyệt</span>}</button>
-                </div>
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>

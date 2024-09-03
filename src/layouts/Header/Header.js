@@ -69,7 +69,7 @@ const Header = () => {
         <div className={cx('navbar-brand')}>
           <Link to="/" className={cx('navbar-item', 'brand')} onClick={() => handleDispatchFilter('')}>
             <div className={cx('logo-text')}>
-              <span>NewMoives</span>
+              <span>NewMovies</span>
             </div>
           </Link>
         </div>
