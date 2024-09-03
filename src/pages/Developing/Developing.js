@@ -1,5 +1,11 @@
+import { toast, ToastContainer } from 'react-toastify';
+
 const Developing = () => {
-  return <h1>Trang này đang phát triển... ^^, hãy trở lại trang khác</h1>;
+  return (
+    <>
+      <h1 onClick={() => toast('Hello')}>Trang này đang phát triển... ^^, hãy trở lại trang khác</h1>
+    </>
+  );
 };
 
 export default Developing;

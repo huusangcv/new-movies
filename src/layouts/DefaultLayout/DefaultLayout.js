@@ -5,6 +5,7 @@ import Footer from '../Footer';
 import Bars from '../OverlayBars';
 import { Outlet } from 'react-router-dom';
 import { memo } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 const cx = classNames.bind(styles);
 

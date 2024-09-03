@@ -1,68 +1,69 @@
 .wapper {
-    margin-top: 50px;
-    width: 100%;
-    min-height: 1000px;
+  position: relative;
+  margin-top: 50px;
+  width: 100%;
+  min-height: 1000px;
 }
 
 .section {
-    position: relative;
-    padding: 36px 48px;
-    display: flex;
-    justify-content: center;
+  position: relative;
+  padding: 36px 48px;
+  display: flex;
+  justify-content: center;
 }
 
 .container {
-    min-height: 1000px;
-    margin: 0 40px;
+  min-height: 1000px;
+  margin: 0 40px;
 
-    @media screen and (max-width: 767.98px) {
-        min-height: 800px;
-        margin: 0;
-    }
+  @media screen and (max-width: 767.98px) {
+    min-height: 800px;
+    margin: 0;
+  }
 }
 
 //resposive for container
 
 @media screen and (max-width: 767.98px) {
-    .container:not(.is-max-desktop):not(.is-max-widescreen) {
-        max-width: 100%;
-    }
+  .container:not(.is-max-desktop):not(.is-max-widescreen) {
+    max-width: 100%;
+  }
 }
 
 @media screen and (min-width: 768px) {
-    .container:not(.is-max-desktop):not(.is-max-widescreen) {
-        max-width: 100%;
-    }
+  .container:not(.is-max-desktop):not(.is-max-widescreen) {
+    max-width: 100%;
+  }
 }
 
 @media screen and (max-width: 1023.98px) {
-    .container:not(.is-max-desktop):not(.is-max-widescreen) {
-        max-width: 100%;
-    }
+  .container:not(.is-max-desktop):not(.is-max-widescreen) {
+    max-width: 100%;
+  }
 
-    .section {
-        padding: 36px 12px;
-    }
+  .section {
+    padding: 36px 12px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
-    .container:not(.is-max-desktop):not(.is-max-widescreen) {
-        max-width: 960px;
-    }
+  .container:not(.is-max-desktop):not(.is-max-widescreen) {
+    max-width: 960px;
+  }
 }
 
 @media screen and (min-width: 1216px) {
-    .container:not(.is-max-desktop):not(.is-max-widescreen) {
-        max-width: 1152px;
-    }
+  .container:not(.is-max-desktop):not(.is-max-widescreen) {
+    max-width: 1152px;
+  }
 }
 
 @media screen and (min-width: 1408px) {
-    .container:not(.is-max-desktop):not(.is-max-widescreen) {
-        max-width: 1344px;
-    }
+  .container:not(.is-max-desktop):not(.is-max-widescreen) {
+    max-width: 1344px;
+  }
 }
 
 .content {
-    min-height: 100px;
+  min-height: 100px;
 }

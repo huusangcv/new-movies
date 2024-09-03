@@ -139,7 +139,11 @@ const MovieDetails = () => {
                       ></path>
                     </svg>
                   </span>
-                  <span className={cx('has-text-weight-bold')}>
+                  <span
+                    className={cx('has-text-weight-bold')}
+                    style={{ cursor: 'help' }}
+                    title={`${movie?.tmdb?.vote_count} lượt đánh giá`}
+                  >
                     {(Math.round(movie?.tmdb?.vote_average * 10) / 10 &&
                       Math.round(movie?.tmdb?.vote_average * 10) / 10) ||
                       ''}

@@ -10,6 +10,8 @@ import getMovies from '~/services/getMovies';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { uid } from 'react-uid';
 import VideoPlayer from './Video';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const cx = classNames.bind(styles);
 const Watch = () => {
@@ -27,6 +29,7 @@ const Watch = () => {
     setIsLoading(true);
     if (movie) {
       setIsLoading(false);
+      if (movie.quality === 'cam') toast.warning('Phim hiện chưa có bản đẹp');
     } else {
       const fetchApi = async () => {
         try {
@@ -149,6 +152,18 @@ const Watch = () => {
           </section>
         </div>
       )}
+      <ToastContainer
+        position="bottom-center"
+        autoClose={false}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </>
   );
 };
