@@ -86,7 +86,7 @@ const Watch = () => {
             </div>
           </div>
           <p className={cx('has-text-centered', 'is-size-7')}>
-            <a href="/faq">Phim bị giật hình / mất tiếng nhân vật?</a>
+            <a href="/developing">Phim bị giật hình / mất tiếng nhân vật?</a>
           </p>
           <section className={cx('section')}>
             <div className={cx('container')}>
