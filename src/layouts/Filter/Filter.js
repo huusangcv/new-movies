@@ -9,7 +9,7 @@ import { filterMovies } from '~/redux/actions';
 
 const cx = classNames.bind(styles);
 
-const Filter = ({ isLoading }) => {
+const Filter = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const selectValue = useSelector(moviesSelector);
