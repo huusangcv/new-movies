@@ -1,10 +1,10 @@
 import classNames from 'classnames/bind';
-import styles from './Search.module.scss';
 import { useEffect, useRef, useState } from 'react';
-import getMovies from '~/services/getMovies';
-import { Link, useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga4';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Link, useLocation } from 'react-router-dom';
+import getMovies from '~/services/getMovies';
+import styles from './Search.module.scss';
+
 const cx = classNames.bind(styles);
 
 const Search = () => {
@@ -50,6 +50,7 @@ const Search = () => {
   const handleSearchMovie = (e) => {
     setSearchName(e.target.value);
   };
+
   return (
     <div className={cx('wapper')}>
       <div className="title-list">
@@ -73,10 +74,8 @@ const Search = () => {
                     src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
                     alt=""
                     loading="lazy"
-                    decoding="async"
                     srcSet={`
                     https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w,
-                    https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=684&q=75 684w
                 `}
                   ></img>
                 </div>

@@ -1,29 +1,30 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 import classNames from 'classnames/bind';
 import styles from './Watch.module.scss';
-import ReactGA from 'react-ga4';
-import { useDispatch, useSelector } from 'react-redux';
-import { movieDetail } from '~/redux/selector/selector';
-import { useEffect, useState } from 'react';
-import { filterMoviesByCategory, getMovieDetails } from '~/redux/actions';
-import getMovies from '~/services/getMovies';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { uid } from 'react-uid';
-import VideoPlayer from './Video';
-import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ReactGA from 'react-ga4';
+import { uid } from 'react-uid';
+import { useEffect, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterMoviesByCategory, getMovieDetails } from '~/redux/actions';
+import { movieDetail } from '~/redux/selector/selector';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+
+import getMovies from '~/services/getMovies';
+import VideoPlayer from './Video';
 
 const cx = classNames.bind(styles);
 const Watch = () => {
+  const { slug } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
-  const { slug } = useParams();
-
   const dispatch = useDispatch();
-  const movie = useSelector(movieDetail);
 
   const [currentEpisode, setCurrentEpisode] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const movie = useSelector(movieDetail);
+
   const videoSrc = movie?.episodes[0]?.server_data[currentEpisode]?.link_m3u8;
 
   useEffect(() => {
@@ -123,9 +124,6 @@ const Watch = () => {
                   </div>
                 </div>
                 <div className={cx('column', 'has-text-right')}>
-                  {/* <div className={cx('mt-4')}>
-                    <button class="button is-info is-outlined is-rounded">Tab Song ngữ</button>
-                  </div> */}
                   <div className={cx('back')}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                       <path d="M11.093 251.65l175.998 184C211.81 461.494 256 444.239 256 408v-87.84c154.425 1.812 219.063 16.728 181.19 151.091-8.341 29.518 25.447 52.232 49.68 34.51C520.16 481.421 576 426.17 576 331.19c0-171.087-154.548-201.035-320-203.02V40.016c0-36.27-44.216-53.466-68.91-27.65L11.093 196.35c-14.791 15.47-14.791 39.83 0 55.3zm23.127-33.18l176-184C215.149 29.31 224 32.738 224 40v120c157.114 0 320 11.18 320 171.19 0 74.4-40 122.17-76.02 148.51C519.313 297.707 395.396 288 224 288v120c0 7.26-8.847 10.69-13.78 5.53l-176-184a7.978 7.978 0 0 1 0-11.06z"></path>

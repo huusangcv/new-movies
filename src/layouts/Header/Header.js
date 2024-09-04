@@ -1,10 +1,10 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { toggleBars } from '~/redux/actions/toggleBars';
-import styles from './Header.module.scss';
+import { useEffect, useState } from 'react';
 import { filterMoviesByCategory } from '~/redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);
 

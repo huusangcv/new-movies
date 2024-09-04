@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import ReactGA from 'react-ga4';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import styles from './Home.module.scss';
-import moviesRecommend from '~/components/Options/recommend';
-import getMovies from '~/services/getMovies';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNewUpdateMovies } from '~/redux/actions';
 import { movieNewUpdate } from '~/redux/selector/selector';
+import styles from './Home.module.scss';
+import moviesRecommend from '~/components/Options/recommend';
+import getMovies from '~/services/getMovies';
 import Filter from '~/layouts/Filter';
 
 const cx = classNames.bind(styles);

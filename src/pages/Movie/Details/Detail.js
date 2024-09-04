@@ -1,24 +1,27 @@
 import classNames from 'classnames/bind';
-import styles from './Detail.module.scss';
 import ReactGA from 'react-ga4';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import getMovies from '~/services/getMovies';
+import { uid } from 'react-uid';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterMoviesByCategory, getMovieDetails } from '~/redux/actions';
+import { movieDetail } from '~/redux/selector/selector';
+
+import getMovies from '~/services/getMovies';
+import styles from './Detail.module.scss';
 import BackDrop from '~/layouts/BackDrop';
 import Modal from '~/components/ModalRoot/Modal';
-import { uid } from 'react-uid';
-import { movieDetail } from '~/redux/selector/selector';
 
 const cx = classNames.bind(styles);
 
 const MovieDetails = () => {
-  const location = useLocation();
   const { slug } = useParams();
+  const location = useLocation();
   const movie = useSelector(movieDetail);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [isShowModalTrailer, setIsShowModalTrailer] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -257,6 +260,7 @@ const MovieDetails = () => {
                     .replace(/<\/?p>/g, '')
                     .replace(/<\/?strong>/g, '')
                     .replace(/<\/?i>/g, '')
+                    .replace(/<\/?br>/g, '')
                     .replace(/&nbsp;/g, ' ')}
                 </div>
 
