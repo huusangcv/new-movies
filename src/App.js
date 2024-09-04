@@ -12,6 +12,7 @@ import Watch from './pages/Movie/Watch';
 import Single from '~/pages/Movies/Single';
 import Series from '~/pages/Movies/Series';
 import Developing from './pages/Developing/Developing';
+import NotFound from './pages/NotFound';
 
 const New = lazy(() => import('~/pages/Movies/New'));
 const Details = lazy(() => import('~/pages/Movie/Details'));
@@ -42,9 +43,9 @@ function App() {
                     </Suspense>
                   </Layout>
                 }
-              />
-            );
-          })} */}
+                />
+                );
+                })} */}
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<HomePage />} />
             <Route
@@ -90,6 +91,7 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/watch/:slug" element={<Watch />} />
             <Route path="/developing" element={<Developing />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </div>

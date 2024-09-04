@@ -7,7 +7,7 @@ import { movieDetail } from '~/redux/selector/selector';
 import { useEffect, useState } from 'react';
 import { filterMoviesByCategory, getMovieDetails } from '~/redux/actions';
 import getMovies from '~/services/getMovies';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { uid } from 'react-uid';
 import VideoPlayer from './Video';
 import { toast, ToastContainer } from 'react-toastify';
@@ -16,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const cx = classNames.bind(styles);
 const Watch = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const { slug } = useParams();
 
@@ -29,7 +30,7 @@ const Watch = () => {
     setIsLoading(true);
     if (movie) {
       setIsLoading(false);
-      if (movie.quality === 'cam') toast.warning('Phim hiện chưa có bản đẹp');
+      if (movie.quality === 'CAM') toast.warning('Phim hiện chưa có bản đẹp');
     } else {
       const fetchApi = async () => {
         try {
@@ -39,6 +40,8 @@ const Watch = () => {
             document.title = movie.seoOnPage.titleHead;
             dispatch(getMovieDetails(movie));
             setIsLoading(false);
+          } else {
+            navigate('*');
           }
         } catch (error) {
           console.log('Error ---> ', error);
@@ -154,7 +157,7 @@ const Watch = () => {
       )}
       <ToastContainer
         position="bottom-center"
-        autoClose={false}
+        autoClose={10000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

@@ -16,20 +16,11 @@ const Search = () => {
   useEffect(() => {
     const fetchApi = async () => {
       try {
-        const data = await getMovies.Search(searchName.trim());
+        const movies = await getMovies.Search(searchName.trim());
         if (movies) {
           document.title = searchName;
 
-          const result = data.items.map((movie) => {
-            return {
-              name: movie.name,
-              slug: movie.slug,
-              origin_name: movie.origin_name,
-              thumb_url: movie.thumb_url,
-            };
-          });
-
-          setMovies(result);
+          setMovies(movies.items);
         }
       } catch (error) {
         console.log('Error ---> ', error);
@@ -78,11 +69,16 @@ const Search = () => {
             return (
               <Link to={`/movie/${movie.slug}`} className="column" key={movie._id}>
                 <div className="cover">
-                  <LazyLoadImage
-                    src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`}
+                  <img
+                    src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
                     alt=""
-                    effect="blur"
-                  ></LazyLoadImage>
+                    loading="lazy"
+                    decoding="async"
+                    srcSet={`
+                    https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w,
+                    https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=684&q=75 684w
+                `}
+                  ></img>
                 </div>
                 <h3 className="name vi">
                   <span>{movie.name}</span>

@@ -79,7 +79,7 @@ const Browse = () => {
                     <Link to={`/movie/${movie.slug}`} className="column" key={movie._id}>
                       <div className="cover">
                         <LazyLoadImage
-                          src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`}
+                          src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
                           alt=""
                           effect="blur"
                         ></LazyLoadImage>

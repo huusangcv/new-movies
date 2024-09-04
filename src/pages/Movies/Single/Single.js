@@ -18,61 +18,61 @@ const Single = () => {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const movies = useSelector(moviesSingle);
+  // const [movies, setMovies] = useState([]);
   const totalItems = useSelector(getTotalItems);
 
   const totalPage = Math.floor(totalItems.moviesSingle / 24);
   useEffect(() => {
     // check if don't have movies or length of movies === 0 or page !==1 when call API
-    if (!movies || movies.length === 0 || page !== 1) {
-      const fetchApi = async () => {
-        setIsLoading(true);
-        try {
-          const movies = await getMovies.Single(page);
-          if (movies) {
-            document.title = movies.seoOnPage.titleHead;
 
-            // Map array to only get [name,slug,origin_name,thumb_url]
-            const result = movies.items.map((movie) => {
-              return {
-                name: movie.name,
-                slug: movie.slug,
-                origin_name: movie.origin_name,
-                thumb_url: movie.thumb_url,
-              };
-            });
+    const fetchApi = async () => {
+      setIsLoading(true);
+      try {
+        const movies = await getMovies.Single(page);
+        if (movies) {
+          document.title = movies.seoOnPage.titleHead;
 
-            dispatch(getMoviesSingle(result));
+          // Map array to only get [name,slug,origin_name,thumb_url]
+          const result = movies.items.map((movie) => {
+            return {
+              name: movie.name,
+              slug: movie.slug,
+              origin_name: movie.origin_name,
+              thumb_url: movie.thumb_url,
+            };
+          });
 
-            //check page === 1 to get totalItem on each page
-            if (page === 1) {
-              dispatch(getTotalItemsSingle(movies.params.pagination.totalItems));
-            }
-            setIsLoading(false);
+          dispatch(getMoviesSingle(result));
+
+          // setMovies(result);
+
+          //check page === 1 to get totalItem on each page
+          if (page === 1) {
+            dispatch(getTotalItemsSingle(movies.params.pagination.totalItems));
           }
-        } catch (error) {
-          console.log('Erroe', error);
+          setIsLoading(false);
         }
-      };
-
-      //Check page === 1 delay 1,2 call api movies series else page !== 1 delay 400ms
-      if (page === 1) {
-        setTimeout(() => {
-          fetchApi();
-        }, 1200);
-      } else {
-        setTimeout(() => {
-          fetchApi();
-        }, 400);
-      }
-      //-------
-    } else {
-      if (movies) {
+      } catch (error) {
+        console.log('Erroe', error);
+      } finally {
         setIsLoading(false);
       }
+    };
+    if (!movies || movies.length === 0 || page !== 1) {
+      const delay = page === 1 ? 1200 : 400;
+      const timeoutId = setTimeout(fetchApi, delay);
+      window.scroll({
+        top: 0,
+      });
+      // Dọn dẹp timeout khi component unmount hoặc khi page thay đổi
+      return () => clearTimeout(timeoutId);
+    } else {
+      setIsLoading(false);
+      window.scroll({
+        top: 0,
+      });
     }
-    window.scroll({
-      top: 0,
-    });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
@@ -101,11 +101,16 @@ const Single = () => {
                   return (
                     <Link to={`/movie/${movie.slug}`} className="column" key={movie._id}>
                       <div className="cover">
-                        <LazyLoadImage
-                          src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`}
-                          alt=""
-                          effect="blur"
-                        ></LazyLoadImage>
+                        <img
+                          src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
+                          alt={movie.name}
+                          loading="lazy"
+                          decoding="async"
+                          srcSet={`
+                          https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w,
+                          https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=684&q=75 684w
+                      `}
+                        ></img>
                       </div>
                       <h3 className="name vi">
                         <span>{movie.name}</span>

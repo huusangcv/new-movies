@@ -31,6 +31,8 @@ const MovieDetails = () => {
           document.title = movies.seoOnPage.titleHead;
           dispatch(getMovieDetails(movies));
           setIsLoading(false);
+        } else {
+          navigate('*');
         }
       } catch (error) {
         console.log('Error ---> ', error);

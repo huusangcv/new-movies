@@ -122,7 +122,7 @@ const HomePage = () => {
                   <Link to={`movie/${movie.slug}`} className="column" key={movie._id}>
                     <div className="cover">
                       <img
-                        src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`}
+                        src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
                         alt={movie.origin_name}
                         title={movie.origin_name}
                       ></img>
@@ -156,7 +156,10 @@ const HomePage = () => {
                 index <= 9 && (
                   <Link to={`movie/${movie.slug}`} className="column" key={movie._id}>
                     <span className="cover">
-                      <img src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`} alt=""></img>
+                      <img
+                        src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
+                        alt=""
+                      ></img>
                     </span>
                     <h3 className="name vi">
                       <span>
