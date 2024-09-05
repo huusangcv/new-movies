@@ -27,7 +27,7 @@ const HomePage = () => {
           getMovies.newUpdateSingle(),
           getMovies.newUpdateSeries(),
         ]);
-        if (newUpdateSingle && newUpdateSeries) {
+        if ([newUpdateSingle, newUpdateSeries]) {
           const result1 = newUpdateSingle.items.map((movie) => {
             return {
               name: movie.name,

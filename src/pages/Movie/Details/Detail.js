@@ -92,7 +92,15 @@ const MovieDetails = () => {
             <div className={cx('details')}>
               <div className={cx('column', 'is-one-quarter-tablet')}>
                 <p className={cx('cover', 'has-text-centered')}>
-                  <img src={`https://img.ophim.live/uploads/movies/${movie?.thumb_url}`} alt="" />
+                  <img
+                    src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
+                    alt={movie.name}
+                    loading="lazy"
+                    decoding="auto"
+                    srcSet={`
+                          https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w,
+                      `}
+                  ></img>
                 </p>
                 <Link
                   onClick={movie?.episode_current === 'Trailer' && handleCloseModalTrailers}

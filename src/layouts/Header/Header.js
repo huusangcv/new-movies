@@ -113,7 +113,7 @@ const Header = () => {
                 <span>Phim bộ</span>
               </div>
             </Link>
-            <Link className={cx('navbar-item')} to="movies/single" onClick={() => handleDispatchFilter('phim-le')}>
+            <Link className={cx('navbar-item')} to="/movies/single" onClick={() => handleDispatchFilter('phim-le')}>
               <div className={cx('navbar-link')}>
                 <span>Phim lẻ</span>
               </div>

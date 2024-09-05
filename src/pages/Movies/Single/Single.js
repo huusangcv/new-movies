@@ -1,5 +1,4 @@
 import { memo, useEffect, useState } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import ReactGA from 'react-ga4';
 import classNames from 'classnames/bind';
 import styles from './Single.module.scss';
@@ -7,18 +6,21 @@ import Filter from '~/layouts/Filter';
 import getMovies from '~/services/getMovies';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMoviesSingle, getTotalItemsSingle } from '~/redux/actions';
-import { getTotalItems, moviesSingle } from '~/redux/selector/selector';
+import { getCurrentPageMovies, getMoviesSingle, getTotalItemsSingle } from '~/redux/actions';
+import { currentPageMovies, getTotalItems, moviesSingle } from '~/redux/selector/selector';
 import Pagination from '~/components/Pagination';
 const cx = classNames.bind(styles);
 
 const Single = () => {
   const location = useLocation();
-  const [page, setPage] = useState(1);
+  const query = new URLSearchParams(location.search);
+
+  console.log({ query });
+
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const movies = useSelector(moviesSingle);
-  // const [movies, setMovies] = useState([]);
+  const page = useSelector(currentPageMovies);
   const totalItems = useSelector(getTotalItems);
 
   const totalPage = Math.floor(totalItems.moviesSingle / 24);
@@ -85,7 +87,7 @@ const Single = () => {
   }, [location]);
 
   const handlePageClick = (e) => {
-    setPage(e.selected + 1);
+    dispatch(getCurrentPageMovies(e.selected + 1));
   };
 
   return (
@@ -104,8 +106,6 @@ const Single = () => {
                         <img
                           src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
                           alt={movie.name}
-                          loading="lazy"
-                          decoding="auto"
                           srcSet={`
                           https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w,
                       `}

@@ -1,3 +1,4 @@
+import currentPageReducer from './currentPageReducer';
 import filterReducer from './filterReducer';
 import movieListReducer from './movieListReducer';
 import movieReducer from './movieReducer';
@@ -13,6 +14,7 @@ const rootReducer = (state = {}, action) => {
     newUpdateMovies: moviesNewUpdateReducer(state.newUpdateMovies, action),
     totalPage: totalPageReducer(state.totalPage, action),
     isShowBar: toggleBarsReducer(state.isShowBar, action),
+    currentPageMovies: currentPageReducer(state.currentPageMovies, action),
   };
 };
 

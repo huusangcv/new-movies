@@ -10,6 +10,7 @@ const GET_TOTAL_ITEMS_MOVIES_SINGLE = 'get_total_page_single';
 const GET_TOTAL_ITEMS_MOVIES_SERIES = 'get_total_items_series';
 const GET_TOTAL_ITEMS_MOVIES_NEW = 'get_total_items_NEW';
 const GET_NEW_UPDATE_MOVIES = 'get_new_update_movies';
+const GET_CURRENT_PAGE_MOVIES = 'get_current_page_movies';
 export {
   TOGGLE_BARS,
   TITLE_MOVIES,
@@ -23,4 +24,5 @@ export {
   GET_TOTAL_ITEMS_MOVIES_SERIES,
   GET_TOTAL_ITEMS_MOVIES_NEW,
   GET_NEW_UPDATE_MOVIES,
+  GET_CURRENT_PAGE_MOVIES,
 };

@@ -1,6 +1,7 @@
 import {
   FILTER_MOVIES,
   FILTER_MOVIES_CATEGORY,
+  GET_CURRENT_PAGE_MOVIES,
   GET_MOVIE_DETAILS,
   GET_MOVIE_NEW,
   GET_MOVIE_SERIES,
@@ -89,6 +90,13 @@ const getNewUpdateMovies = (payload) => {
   };
 };
 
+const getCurrentPageMovies = (payload) => {
+  return {
+    type: GET_CURRENT_PAGE_MOVIES,
+    payload: payload,
+  };
+};
+
 export {
   getMovieDetails,
   getTitle,
@@ -101,4 +109,5 @@ export {
   getTotalItemsSeries,
   getTotalItemsNew,
   getNewUpdateMovies,
+  getCurrentPageMovies,
 };

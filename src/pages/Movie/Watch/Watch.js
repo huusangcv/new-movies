@@ -12,7 +12,6 @@ import { movieDetail } from '~/redux/selector/selector';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import getMovies from '~/services/getMovies';
-import VideoPlayer from './Video';
 
 const cx = classNames.bind(styles);
 const Watch = () => {
@@ -25,7 +24,7 @@ const Watch = () => {
   const [isLoading, setIsLoading] = useState(true);
   const movie = useSelector(movieDetail);
 
-  const videoSrc = movie?.episodes[0]?.server_data[currentEpisode]?.link_m3u8;
+  const videoSrc = movie?.episodes[0]?.server_data[currentEpisode]?.link_embed;
 
   useEffect(() => {
     setIsLoading(true);
@@ -84,12 +83,13 @@ const Watch = () => {
         <div className={cx('watch_video')}>
           <div className={cx('columns')}>
             <div className={cx('column')}>
-              <VideoPlayer
-                movie={movie}
-                poster_url={movie.poster_url}
-                currentEpisode={currentEpisode}
-                videoSrc={videoSrc}
-              />
+              <iframe
+                src={videoSrc}
+                frameBorder="0"
+                allow="accelerometer; autoplay; muted; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="video-js"
+              ></iframe>
             </div>
           </div>
           <p className={cx('has-text-centered', 'is-size-7')}>
