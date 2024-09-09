@@ -80,7 +80,11 @@ const Browse = () => {
                       <div className="cover">
                         <LazyLoadImage
                           src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
-                          alt=""
+                          alt={movie.name}
+                          srcSet={`
+                          https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w,
+                      `}
+                          style={{ minWidth: 256, minHeight: 384 }}
                           effect="blur"
                         ></LazyLoadImage>
                       </div>

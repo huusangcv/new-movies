@@ -3,6 +3,7 @@ import DefaultLayout from './layouts/DefaultLayout';
 
 import { Fragment, Suspense } from 'react';
 import { publicLayout } from './routes';
+import Login from './pages/Login/Login';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
               />
             );
           })}
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </Router>

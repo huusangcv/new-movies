@@ -12,6 +12,7 @@ import { movieDetail } from '~/redux/selector/selector';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import getMovies from '~/services/getMovies';
+import Spinner from '~/components/Spinner';
 
 const cx = classNames.bind(styles);
 const Watch = () => {
@@ -30,6 +31,7 @@ const Watch = () => {
     setIsLoading(true);
     if (movie) {
       setIsLoading(false);
+      toast.info('Nếu phim không load được vui lòng refresh');
       if (movie.quality === 'CAM') toast.warning('Phim hiện chưa có bản đẹp');
     } else {
       const fetchApi = async () => {

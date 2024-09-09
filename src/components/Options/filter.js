@@ -74,6 +74,7 @@ const filter = {
     { id: 33, slug: 'nam-phi', text: 'Nam Phi' },
     { id: 34, slug: 'ukraina', text: 'Ukraina' },
     { id: 35, slug: 'a-rap-xe-ut', text: 'Ả Rập Xê Út' },
+    { id: 36, slug: 'viet-nam', text: 'Việt Nam' },
   ],
   sortBy: [
     { id: 1, slug: '', text: 'Ngày phát hành' },

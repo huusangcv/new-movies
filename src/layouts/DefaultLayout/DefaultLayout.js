@@ -1,13 +1,22 @@
 import classNames from 'classnames/bind';
 import styles from './DefaultLayout.module.scss';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from '../Header';
 import Footer from '../Footer';
 import Bars from '../OverlayBars';
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 const cx = classNames.bind(styles);
 
 const DefaultLayout = ({ children }) => {
+  const auth = JSON.parse(window.localStorage.getItem('auth'));
+
+  // useEffect(() => {
+  //   if (auth) {
+  //     toast.success('Đăng nhập thành công!');
+  //   }
+  // }, []);
   return (
     <div className={cx('wapper')}>
       <Header />
@@ -19,6 +28,18 @@ const DefaultLayout = ({ children }) => {
         </div>
       </section>
       <Bars />
+      <ToastContainer
+        position="top-right"
+        autoClose={10000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <Footer />
     </div>
   );

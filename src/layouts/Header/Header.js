@@ -123,6 +123,17 @@ const Header = () => {
                 <span>Phim mới</span>
               </div>
             </Link>
+            <Link
+              className={cx('navbar-item')}
+              onClick={() => {
+                handleDispatchFilter('phim-moi');
+                window.location.href = 'https://music.newmoviesz.online';
+              }}
+            >
+              <div className={cx('navbar-link')}>
+                <span>FAQs</span>
+              </div>
+            </Link>
           </div>
           <div className={cx('navbar-end')}>
             <div className={cx('navbar-item', 'navbar-item__name')}>
