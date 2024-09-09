@@ -49,7 +49,6 @@ const Login = () => {
       // Xử lý phản hồi
       if (result.success) {
         console.log('Đăng nhập thành công:', result.data);
-        navigate('/');
         if (email !== 'admin@gmail.com') {
           navigate('/');
           window.localStorage.setItem('auth', JSON.stringify(email));
