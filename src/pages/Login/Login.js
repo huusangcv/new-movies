@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
 import classNames from 'classnames/bind';
 import Spinner from '~/components/Spinner';
+import axios from 'axios';
 
 const cx = classNames.bind(styles);
 
@@ -26,13 +27,16 @@ const Login = () => {
 
     try {
       // Gửi yêu cầu POST đến API
-      const response = await fetch('http://localhost:8080/login', {
+
+      const response = await fetch('https://api.newmoviesz.online/login.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
+
+      console.log({ response });
 
       // Kiểm tra mã phản hồi
       if (!response.ok) {
@@ -45,7 +49,7 @@ const Login = () => {
       // Xử lý phản hồi
       if (result.success) {
         console.log('Đăng nhập thành công:', result.data);
-
+        navigate('/');
         if (email !== 'admin@gmail.com') {
           navigate('/');
           window.localStorage.setItem('auth', JSON.stringify(email));
