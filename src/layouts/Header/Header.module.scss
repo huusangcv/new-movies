@@ -1,117 +1,178 @@
 header {
-    width: 100vw;
+  width: 100vw;
+
+  svg {
+    fill: #fff;
+    width: 21px;
+    margin-right: 1em;
+  }
 }
 
 .wapper {
-    min-height: 70px;
-    width: 100%;
-    background: transparent;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 9999;
+  min-height: 70px;
+  width: 100%;
+  background: transparent;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 9999;
 }
 
 .navbar {
-    height: 100%;
-    display: flex;
-    transition: 0.5s ease;
+  height: 100%;
+  display: flex;
+  transition: 0.5s ease;
+
+  &.mobile {
+    display: none;
+  }
+
+  @media screen and (max-width: 1023.98px) {
+    &.desktop {
+      display: none;
+    }
 
     &.mobile {
-        display: none;
+      display: flex;
+    }
+  }
+
+  &-brand {
+    align-items: stretch;
+    display: flex;
+    flex-shrink: 0;
+    min-height: 3.25rem;
+  }
+
+  &-menu {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+  }
+
+  &-menu.mobile {
+    justify-content: end;
+  }
+
+  &-start {
+    display: flex;
+  }
+
+  &-end {
+    display: flex;
+  }
+
+  &-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+
+    &:hover:not(.brand) {
+      background-color: var(--background-color);
     }
 
+    &__name {
+      padding-right: 20px;
+    }
+  }
+
+  .brand {
     @media screen and (max-width: 1023.98px) {
-        &.desktop {
-            display: none;
-        }
+      padding: 8px 12px 8px 0;
+    }
+  }
 
-        &.mobile {
-            display: flex;
-        }
+  &-item:hover:not(.brand) &-link {
+    color: var(--primary-color);
+  }
+
+  &-link {
+    color: var(--especitally-color);
+
+    svg {
+      margin-right: 5px;
+      width: 1em;
+      fill: var(--especitally-color);
+    }
+  }
+
+  .bars-toggle {
+    padding: 12px;
+
+    &:hover {
+      cursor: pointer;
+      background: rgba($color: #666, $alpha: 0.5);
+      border-radius: 50%;
     }
 
-    &-brand {
-        align-items: stretch;
-        display: flex;
-        flex-shrink: 0;
-        min-height: 3.25rem;
+    svg {
+      color: var(--especitally-color);
+      fill: var(--especitally-color);
+      width: 2.4rem;
+      height: 2.4rem;
+    }
+  }
+
+  //Dropdown and username
+  &-item.has-dropdown {
+    position: relative;
+  }
+
+  &-dropdown {
+    display: none;
+    background-color: #242424;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-top: 2px solid #dbdbdb;
+    -webkit-box-shadow: 0 8px 8px rgba(10, 10, 10, 0.1);
+    box-shadow: 0 8px 8px rgba(10, 10, 10, 0.1);
+    font-size: 0.875rem;
+    left: -70%;
+    min-width: 100%;
+    padding: 8px 0;
+    position: absolute;
+    top: 100%;
+    z-index: 20;
+    width: 300px;
+
+    a.navbar-item:hover {
+      background-color: #f5f5f5;
+      color: #0a0a0a;
     }
 
-    &-menu {
-        display: flex;
-        justify-content: space-between;
-        flex: 1;
+    .navbar-item {
+      font-size: 1.4rem;
+      color: #fff;
+    }
+  }
+
+  &-item.is-hoverable:hover &-dropdown {
+    display: block;
+
+    .navbar-item:hover svg {
+      fill: #0a0a0a;
     }
 
-    &-menu.mobile {
-        justify-content: end;
+    .navbar-item:hover svg {
+      fill: #0a0a0a;
     }
 
-    &-start {
-        display: flex;
+    .navbar-item svg {
+      fill: #fff;
     }
 
-    &-end {
-        display: flex;
-    }
+    // .navbar-item:hover svg {
+    //   fill: #0a0a0a;
+    // }
 
-    &-item {
-        display: flex;
-        align-items: center;
-        padding: 8px 12px;
-        cursor: pointer;
-
-        &:hover:not(.brand) {
-            background-color: var(--background-color);
-        }
-
-        &__name {
-            padding-right: 20px;
-        }
-    }
-
-    .brand {
-
-        @media screen and (max-width: 1023.98px) {
-            padding: 8px 12px 8px 0;
-        }
-    }
-
-    &-item:hover:not(.brand) &-link {
-        color: var(--primary-color);
-    }
-
-    &-link {
-        color: var(--especitally-color);
-
-        svg {
-            margin-right: 5px;
-            width: 1em;
-            fill: var(--especitally-color);
-        }
-    }
-
-    .bars-toggle {
-        padding: 12px;
-
-        &:hover {
-            cursor: pointer;
-            background: rgba($color: #666, $alpha: 0.5);
-            border-radius: 50%;
-        }
-
-        svg {
-            color: var(--especitally-color);
-            fill: var(--especitally-color);
-            width: 2.4rem;
-            height: 2.4rem;
-        }
-
-    }
+    // .navbar-item:hover + svg {
+    //   fill: #fff;
+    // }
+  }
 }
 
 .d-none {
-    display: none;
+  display: none;
 }
