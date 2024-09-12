@@ -7,14 +7,13 @@
 
 .section {
   position: relative;
-  padding: 36px 48px;
+  padding: 48px;
   display: flex;
   justify-content: center;
 }
 
 .container {
   min-height: 1000px;
-  margin: 0 40px;
 
   @media screen and (max-width: 767.98px) {
     min-height: 800px;
@@ -62,8 +61,4 @@
   .container:not(.is-max-desktop):not(.is-max-widescreen) {
     max-width: 1344px;
   }
-}
-
-.content {
-  min-height: 100px;
 }

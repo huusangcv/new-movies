@@ -3,6 +3,7 @@ import thumb2 from '~/assets/images/thumb-2.jpg';
 import thumb3 from '~/assets/images/thumb-3.jpg';
 import thumb4 from '~/assets/images/thumb-4.jpg';
 import thumb5 from '~/assets/images/thumb-5.jpg';
+import thumb6 from '~/assets/images/thumb-6.jpg';
 
 const moviesRecommend = [
   {
@@ -40,6 +41,13 @@ const moviesRecommend = [
     origin_name: 'Handsome Guys',
     thumb_url: thumb5,
   },
+  // {
+  //   id: 6,
+  //   name: 'Deadpool và Wolverine',
+  //   slug: 'deadpool-va-wolverine',
+  //   origin_name: 'Deadpool & Wolverine',
+  //   thumb_url: thumb6,
+  // },
 ];
 
 export default moviesRecommend;

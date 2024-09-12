@@ -9,6 +9,8 @@ const routes = {
   watch: '/watch/:slug',
   browse: '/browse',
   notfound: '*',
+  login: '/login',
+  signup: '/signup',
 };
 
 export default routes;

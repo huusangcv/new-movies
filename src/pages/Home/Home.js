@@ -125,6 +125,8 @@ const HomePage = () => {
                         src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
                         alt={movie.origin_name}
                         title={movie.origin_name}
+                        decoding="async"
+                        data-nimg="responsive"
                       ></img>
                     </div>
                     <h3 className="name vi">

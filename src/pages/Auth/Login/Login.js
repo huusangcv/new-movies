@@ -51,7 +51,8 @@ const Login = () => {
         console.log('Đăng nhập thành công:', result.data);
         if (email !== 'admin@gmail.com') {
           navigate('/');
-          window.localStorage.setItem('auth', JSON.stringify(email));
+          document.cookie = `auth=${email} expirse=10 Secure`;
+          // window.localStorage.setItem('auth', JSON.stringify(email));
         } else {
           window.location.href = 'https://admin.newmoviesz.online';
         }
@@ -104,8 +105,9 @@ const Login = () => {
                   </form>
                 </div>
                 <p className="has-text-grey has-text-right">
-                  <a href="/signup">Đăng ký</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="/forgot">Quên mật khẩu</a>
-                  &nbsp;&nbsp;·&nbsp;&nbsp;<a href="/resendVerification">Gửi lại email xác nhận</a>
+                  <a href="/signup">Đăng ký</a>
+                  {/* &nbsp;&nbsp;·&nbsp;&nbsp;<a href="/forgot">Quên mật khẩu</a>
+                  &nbsp;&nbsp;·&nbsp;&nbsp;<a href="/resendVerification">Gửi lại email xác nhận</a> */}
                 </p>
               </div>
             </div>

@@ -72,33 +72,36 @@ button {
   margin: -12px -8px;
 
   .gird {
-    display: grid;
+    max-width: 100%;
+    display: flex;
     flex-wrap: wrap;
-
-    @media screen and (max-width: 767.98px) {
-      grid-template-columns: repeat(2, 50%);
-    }
-
-    @media screen and (min-width: 768px) {
-      grid-template-columns: repeat(3, 33.33%);
-    }
-
-    @media screen and (min-width: 1216px) {
-      grid-template-columns: repeat(4, 25%);
-    }
-
-    @media screen and (min-width: 1408px) {
-      grid-template-columns: repeat(5, 20%);
-    }
   }
 
   .column {
     padding: 12px 8px;
+    flex: none;
+
+    @media screen and (max-width: 767.98px) {
+      width: 50%;
+    }
+
+    @media screen and (min-width: 768px) {
+      width: 33.33%;
+    }
+
+    @media screen and (min-width: 1216px) {
+      width: 25%;
+    }
+
+    @media screen and (min-width: 1408px) {
+      width: 20%;
+    }
   }
 
   .cover {
+    flex: none;
     min-height: 384px;
-
+    min-width: 100%;
     @media screen and (max-width: 768px) {
       min-height: 340px;
     }

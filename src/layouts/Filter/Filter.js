@@ -134,7 +134,7 @@ const Filter = () => {
                         {year.text}
                       </option>
                     ))}
-                    <option value="">Trước 2000</option>
+                    <option value={Math.floor(Math.random() * 10) + 1990}>Trước 2000</option>
                   </select>
                 </div>
               </div>

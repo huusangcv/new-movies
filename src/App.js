@@ -3,7 +3,8 @@ import DefaultLayout from './layouts/DefaultLayout';
 
 import { Fragment, Suspense } from 'react';
 import { publicLayout } from './routes';
-import Login from './pages/Login/Login';
+import { authLayout } from './routes/routes';
+import AuthLayout from './layouts/AuthLayout';
 
 function App() {
   return (
@@ -34,7 +35,21 @@ function App() {
               />
             );
           })}
-          <Route path="/login" element={<Login />} />
+
+          {authLayout.map((route, index) => {
+            const Page = route.component;
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <AuthLayout>
+                    <Page />
+                  </AuthLayout>
+                }
+              />
+            );
+          })}
         </Routes>
       </div>
     </Router>

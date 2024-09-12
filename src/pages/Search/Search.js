@@ -4,6 +4,7 @@ import ReactGA from 'react-ga4';
 import { Link, useLocation } from 'react-router-dom';
 import getMovies from '~/services/getMovies';
 import styles from './Search.module.scss';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const cx = classNames.bind(styles);
 
@@ -50,6 +51,7 @@ const Search = () => {
   const handleSearchMovie = (e) => {
     setSearchName(e.target.value);
   };
+  console.log(refInput.current);
 
   return (
     <div className={cx('wapper')}>
@@ -70,14 +72,13 @@ const Search = () => {
             return (
               <Link to={`/movie/${movie.slug}`} className="column" key={movie._id}>
                 <div className="cover">
-                  <img
+                  <LazyLoadImage
                     src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
-                    alt=""
-                    loading="lazy"
+                    alt={movie.name}
+                    effect="blur"
                     srcSet={`
-                    https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w,
-                `}
-                  ></img>
+                          https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
+                  ></LazyLoadImage>
                 </div>
                 <h3 className="name vi">
                   <span>{movie.name}</span>

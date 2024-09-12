@@ -1,5 +1,7 @@
 import { lazy } from 'react';
 import config from '~/config';
+import Login from '~/pages/Auth/Login/Login';
+import SignUp from '~/pages/Auth/SignUp';
 
 const HomePage = lazy(() => import('~/pages/Home'));
 const Series = lazy(() => import('~/pages/Movies/Series'));
@@ -25,6 +27,11 @@ const publicLayout = [
   { path: config.routes.notfound, component: NotFound },
 ];
 
+const authLayout = [
+  { path: config.routes.login, component: Login },
+  { path: config.routes.signup, component: SignUp },
+];
+
 const privateLayout = [];
 
-export { publicLayout, privateLayout };
+export { publicLayout, privateLayout, authLayout };

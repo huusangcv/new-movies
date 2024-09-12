@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentPageMovies, getMoviesSeries, getTotalItemsSeries } from '~/redux/actions';
 import { currentPageMovies, getTotalItems, moviesSeries } from '~/redux/selector/selector';
 import Pagination from '~/components/Pagination';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 const cx = classNames.bind(styles);
 
 const Series = () => {
@@ -89,9 +90,9 @@ const Series = () => {
   return (
     <>
       <div className={cx('wapper')}>
+        <h1 className="title">Phim bộ</h1>
+        <Filter />
         <div className="title-list">
-          <h1 className="title">Phim bộ</h1>
-          <Filter />
           {(isLoading && <p>Loading...</p>) || (
             <>
               <div className="gird columns">
@@ -99,12 +100,13 @@ const Series = () => {
                   return (
                     <Link to={`/movie/${movie.slug}`} className="column" key={movie._id}>
                       <div className="cover">
-                        <img
+                        <LazyLoadImage
                           src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
                           alt={movie.name}
+                          effect="blur"
                           srcSet={`
                           https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
-                        ></img>
+                        ></LazyLoadImage>
                       </div>
                       <h3 className="name vi">
                         <span>{movie.name}</span>
