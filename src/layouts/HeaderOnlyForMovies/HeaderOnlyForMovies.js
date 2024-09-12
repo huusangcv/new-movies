@@ -18,7 +18,6 @@ const HeaderOnlyForMovies = ({ children }) => {
         </div>
       </section>
       <Bars />
-      <Footer />
     </div>
   );
 };

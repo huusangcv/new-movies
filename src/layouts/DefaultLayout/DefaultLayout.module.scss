@@ -2,7 +2,6 @@
   position: relative;
   margin-top: 50px;
   width: 100%;
-  min-height: 1000px;
 }
 
 .section {
@@ -13,10 +12,7 @@
 }
 
 .container {
-  min-height: 1000px;
-
   @media screen and (max-width: 767.98px) {
-    min-height: 800px;
     margin: 0;
   }
 }

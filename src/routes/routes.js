@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import config from '~/config';
+import HeaderOnlyForMovies from '~/layouts/HeaderOnlyForMovies';
 import Login from '~/pages/Auth/Login/Login';
 import SignUp from '~/pages/Auth/SignUp';
 
@@ -20,7 +21,7 @@ const publicLayout = [
   { path: config.routes.single, component: Single },
   { path: config.routes.new, component: New },
   { path: config.routes.detail, component: Details },
-  { path: config.routes.watch, component: Watch },
+  { path: config.routes.watch, component: Watch, layout: HeaderOnlyForMovies },
   { path: config.routes.browse, component: Browse },
   { path: config.routes.search, component: Search },
   { path: config.routes.developing, component: Developing },

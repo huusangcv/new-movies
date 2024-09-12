@@ -12,7 +12,7 @@ import { movieDetail } from '~/redux/selector/selector';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import getMovies from '~/services/getMovies';
-import Spinner from '~/components/Spinner';
+import Footer from '~/layouts/Footer';
 
 const cx = classNames.bind(styles);
 const Watch = () => {
@@ -153,11 +153,12 @@ const Watch = () => {
               </div>
             </div>
           </section>
+          <Footer />
         </div>
       )}
       <ToastContainer
         position="bottom-center"
-        autoClose={10000}
+        autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
