@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { toggleBars } from '~/redux/actions/toggleBars';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { filterMoviesByCategory } from '~/redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Header.module.scss';
@@ -12,8 +12,6 @@ const Header = () => {
   const [background, setBackground] = useState('');
   const dispatch = useDispatch();
   const isShowBar = useSelector((state) => state.isShowBar);
-
-  const refUserName = useRef();
 
   useEffect(() => {
     //Func handle event set background for header when user scroll down

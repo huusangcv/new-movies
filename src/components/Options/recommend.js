@@ -4,6 +4,8 @@ import thumb3 from '~/assets/images/thumb-3.jpg';
 import thumb4 from '~/assets/images/thumb-4.jpg';
 import thumb5 from '~/assets/images/thumb-5.jpg';
 import thumb6 from '~/assets/images/thumb-6.jpg';
+import thumb7 from '~/assets/images/thumb-7.jpg';
+import thumb8 from '~/assets/images/thumb-8.jpg';
 
 const moviesRecommend = [
   {
@@ -41,13 +43,27 @@ const moviesRecommend = [
     origin_name: 'Handsome Guys',
     thumb_url: thumb5,
   },
-  // {
-  //   id: 6,
-  //   name: 'Deadpool và Wolverine',
-  //   slug: 'deadpool-va-wolverine',
-  //   origin_name: 'Deadpool & Wolverine',
-  //   thumb_url: thumb6,
-  // },
+  {
+    id: 6,
+    name: 'Deadpool và Wolverine',
+    slug: 'deadpool-va-wolverine',
+    origin_name: 'Deadpool & Wolverine',
+    thumb_url: thumb6,
+  },
+  {
+    id: 7,
+    name: 'Bad Boys: Ride or Die',
+    slug: 'nhung-ga-trai-hu-choi-hay-bi-xoi',
+    origin_name: 'Bad Boys: Ride or Die',
+    thumb_url: thumb7,
+  },
+  {
+    id: 8,
+    name: 'Vùng đất câm lặng: Ngày một',
+    slug: 'deadpool-va-wolverine',
+    origin_name: 'A Quiet Place: Day One',
+    thumb_url: thumb8,
+  },
 ];
 
 export default moviesRecommend;

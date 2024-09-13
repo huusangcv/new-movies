@@ -11,6 +11,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUserName] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,6 +21,7 @@ const SignUp = () => {
 
     // Tạo đối tượng dữ liệu để gửi
     const data = {
+      name: username,
       email: email,
       password: password,
     };
@@ -27,7 +29,7 @@ const SignUp = () => {
     try {
       // Gửi yêu cầu POST đến API
 
-      const response = await fetch('https://api.newmoviesz.online/login.php', {
+      const response = await fetch('https://api.newmoviesz.online/add.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,18 +49,13 @@ const SignUp = () => {
 
       // Xử lý phản hồi
       if (result.success) {
-        console.log('Đăng nhập thành công:', result.data);
-        if (email !== 'admin@gmail.com') {
-          navigate('/');
-          window.localStorage.setItem('auth', JSON.stringify(email));
-        } else {
-          window.location.href = 'https://admin.newmoviesz.online';
-        }
+        alert('Đăng ký thành công');
         setIsLoading(false);
+        navigate('/login');
         // Có thể lưu thông tin người dùng hoặc token ở đây
       } else {
         setError(result.message); // Hiển thị thông báo lỗi
-        console.error('Lỗi đăng nhập:', result.message);
+        console.error('Lỗi đăng ký:', result.message);
       }
     } catch (error) {
       setError('Có lỗi xảy ra, vui lòng thử lại sau.');
@@ -82,7 +79,7 @@ const SignUp = () => {
                           className="input is-large"
                           name="name"
                           placeholder="Tên của bạn"
-                          onChange={(e) => setEmail(e.target.value)}
+                          onChange={(e) => setUserName(e.target.value)}
                         />
                       </div>
                     </div>

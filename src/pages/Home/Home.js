@@ -16,6 +16,11 @@ const HomePage = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
+  const [index, setIndex] = useState(() => {
+    if (window.innerWidth > 1280) return 9;
+    return 7;
+  });
+
   const moviesNewUpdate = useSelector(movieNewUpdate);
 
   useEffect(() => {
@@ -74,6 +79,24 @@ const HomePage = () => {
     ReactGA.send('pageview');
   }, [location]);
 
+  useEffect(() => {
+    const handleResize = (e) => {
+      if (e.target.innerWidth <= 1280) {
+        setIndex(7);
+
+        if (e.target.innerWidth <= 1163) {
+          setIndex(5);
+        }
+      } else {
+        setIndex(9);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  });
+
   return (
     <div className={cx('wapper')}>
       <Filter />
@@ -82,23 +105,27 @@ const HomePage = () => {
       </h2>
       <div className="title-list">
         <div className="gird columns">
-          {moviesRecommend.map((movie) => {
+          {moviesRecommend.map((movie, currentItem) => {
+            let newIndex = index;
+            if (window.innerWidth > 1280) newIndex = 4;
             return (
-              <Link to={`/movie/${movie.slug}`} className="column" key={movie.id}>
-                <div className="cover">
-                  <img src={movie.thumb_url} alt="" />
-                </div>
-                <h3 className="name vi">
-                  <span>
-                    <span>{movie.name}</span>
-                  </span>
-                </h3>
-                <h3 className="name en">
-                  <span>
-                    <span>{movie.origin_name}</span>
-                  </span>
-                </h3>
-              </Link>
+              currentItem <= newIndex && (
+                <Link to={`/movie/${movie.slug}`} className="column" key={movie.id}>
+                  <div className="cover">
+                    <img src={movie.thumb_url} alt="" />
+                  </div>
+                  <h3 className="name vi">
+                    <span>
+                      <span>{movie.name}</span>
+                    </span>
+                  </h3>
+                  <h3 className="name en">
+                    <span>
+                      <span>{movie.origin_name}</span>
+                    </span>
+                  </h3>
+                </Link>
+              )
             );
           })}
         </div>
@@ -116,9 +143,9 @@ const HomePage = () => {
       <div className="title-list">
         <div className="gird columns">
           {(isLoading && <p>Loading...</p>) ||
-            moviesNewUpdate?.single.map((movie, index) => {
+            moviesNewUpdate?.single.map((movie, currentItem) => {
               return (
-                index <= 9 && (
+                currentItem <= index && (
                   <Link to={`movie/${movie.slug}`} className="column" key={movie._id}>
                     <div className="cover">
                       <img
@@ -153,9 +180,9 @@ const HomePage = () => {
       <div className="title-list">
         <div className="gird columns">
           {(isLoading && <p>Loading...</p>) ||
-            moviesNewUpdate?.series.map((movie, index) => {
+            moviesNewUpdate?.series.map((movie, currentItem) => {
               return (
-                index <= 9 && (
+                currentItem <= index && (
                   <Link to={`movie/${movie.slug}`} className="column" key={movie._id}>
                     <span className="cover">
                       <img

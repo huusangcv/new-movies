@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 import Header from '../Header';
-import Footer from '../Footer';
 import Bars from '../OverlayBars';
 import styles from './HeaderOnlyForMovies.module.scss';
 

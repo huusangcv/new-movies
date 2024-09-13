@@ -31,7 +31,9 @@ const Watch = () => {
     setIsLoading(true);
     if (movie) {
       setIsLoading(false);
-      toast.info('Nếu phim không load được vui lòng refresh');
+      if (+movie?.episodes[0].server_data[0].name === 1) {
+        toast.info('Nếu phim không load được vui lòng refresh');
+      }
       if (movie.quality === 'CAM') toast.warning('Phim hiện chưa có bản đẹp');
     } else {
       const fetchApi = async () => {
