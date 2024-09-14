@@ -70,6 +70,7 @@ button {
 .title-list {
   height: auto;
   margin: -12px -8px;
+  min-height: 100px;
 
   .gird {
     max-width: 100%;
@@ -86,7 +87,7 @@ button {
     }
 
     @media screen and (min-width: 768px) {
-      width: 33.33%;
+      width: 33.3333%;
     }
 
     @media screen and (min-width: 1216px) {

@@ -83,6 +83,14 @@ const MovieDetails = () => {
     }
   };
 
+  const handleShare = async () => {
+    await navigator?.share({
+      title: 'Hữu Sang',
+      text: 'Phim này hay lắm',
+      url: window.location.href,
+    });
+  };
+
   return (
     <>
       {(isLoading && <p>Loading...</p>) || (
@@ -165,7 +173,7 @@ const MovieDetails = () => {
 
                 <div className={cx('level', 'genres')}>
                   <div className={cx('level-left')}>
-                    <div className={cx('level-item')}>
+                    <div className={cx('level-item')} onClick={handleShare}>
                       <a
                         href={`https://www.facebook.com/sharer/sharer.php?u=https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
                           window.location.href,
