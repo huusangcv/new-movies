@@ -69,11 +69,10 @@ button {
 
 .title-list {
   height: auto;
-  margin: -12px -8px;
   min-height: 100px;
 
   .gird {
-    max-width: 100%;
+    margin: -12px -8px 12px;
     display: flex;
     flex-wrap: wrap;
   }

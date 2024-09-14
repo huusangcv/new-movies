@@ -8,6 +8,7 @@ const routes = {
   detail: '/movie/:slug',
   watch: '/watch/:slug',
   browse: '/browse',
+  collection: '/collection',
   notfound: '*',
   login: '/login',
   signup: '/signup',

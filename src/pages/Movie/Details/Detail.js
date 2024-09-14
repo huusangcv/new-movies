@@ -128,7 +128,6 @@ const MovieDetails = () => {
                 <h2 className={cx('subtitle')}>
                   {movie?.name} (
                   <a
-                    href="#!"
                     onClick={() => {
                       dispatch(
                         filterMoviesByCategory({
@@ -183,28 +182,28 @@ const MovieDetails = () => {
                         Chia sẻ
                       </div>
                     </div>
-                    {/* <div className={cx('level-item')}>
-                  <div className={cx('dropdown', 'is-hoverable')}>
-                    <div className={cx('dropdown-trigger')}>
-                      <button className={cx('collection-btn', 'button')}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                          <path d="M368 224H224V80c0-8.84-7.16-16-16-16h-32c-8.84 0-16 7.16-16 16v144H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h144v144c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V288h144c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path>
-                        </svg>
-                        Bộ sưu tập
-                      </button>
-                    </div>
-                    <div className="dropdown-menu" id="dropdown-menu" role="menu">
-                      <div className="dropdown-content has-text-left">
-                        <a href="#" className="dropdown-item">
-                          Thêm vào danh sách phim <strong>Đã Xem</strong>
-                        </a>
-                        <a href="#" className="dropdown-item">
-                          Thêm vào danh sách phim <strong>Muốn xem</strong>
-                        </a>
+                    <div className={cx('level-item')}>
+                      <div className={cx('dropdown', 'is-hoverable')}>
+                        <div className={cx('dropdown-trigger')}>
+                          <button className={cx('collection-btn', 'button')}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                              <path d="M368 224H224V80c0-8.84-7.16-16-16-16h-32c-8.84 0-16 7.16-16 16v144H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h144v144c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V288h144c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path>
+                            </svg>
+                            Bộ sưu tập
+                          </button>
+                        </div>
+                        <div className={cx('dropdown-menu')} role="menu">
+                          <div className={cx('dropdown-content', 'has-text-left')}>
+                            <a href="#" className={cx('dropdown-item')}>
+                              Thêm vào danh sách phim <strong>Đã Xem</strong>
+                            </a>
+                            <a href="#" className={cx('dropdown-item')}>
+                              Thêm vào danh sách phim <strong>Muốn xem</strong>
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div> */}
                   </div>
                   <div className="level-right">
                     <div className={cx('level-item', 'buttons')}>
