@@ -4,19 +4,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from '../Header';
 import Footer from '../Footer';
 import Bars from '../OverlayBars';
-import { memo, useEffect } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { memo } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 const cx = classNames.bind(styles);
 
 const DefaultLayout = ({ children }) => {
-  const auth = JSON.parse(window.localStorage.getItem('auth'));
-
-  // useEffect(() => {
-  //   if (auth) {
-  //     toast.success('Đăng nhập thành công!');
-  //   }
-  // }, []);
   return (
     <div className={cx('wapper')}>
       <Header />

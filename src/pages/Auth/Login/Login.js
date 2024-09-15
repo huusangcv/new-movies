@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
 import classNames from 'classnames/bind';
 import Spinner from '~/components/Spinner';
-import axios from 'axios';
 
 const cx = classNames.bind(styles);
 
@@ -12,7 +11,6 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -59,11 +57,9 @@ const Login = () => {
         setIsLoading(false);
         // Có thể lưu thông tin người dùng hoặc token ở đây
       } else {
-        setError(result.message); // Hiển thị thông báo lỗi
         console.error('Lỗi đăng nhập:', result.message);
       }
     } catch (error) {
-      setError('Có lỗi xảy ra, vui lòng thử lại sau.');
       console.error('Có lỗi xảy ra:', error);
     }
   };

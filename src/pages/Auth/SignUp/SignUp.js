@@ -12,7 +12,6 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUserName] = useState('');
-  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -54,11 +53,9 @@ const SignUp = () => {
         navigate('/login');
         // Có thể lưu thông tin người dùng hoặc token ở đây
       } else {
-        setError(result.message); // Hiển thị thông báo lỗi
         console.error('Lỗi đăng ký:', result.message);
       }
     } catch (error) {
-      setError('Có lỗi xảy ra, vui lòng thử lại sau.');
       console.error('Có lỗi xảy ra:', error);
     }
   };

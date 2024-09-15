@@ -99,7 +99,7 @@ const HomePage = () => {
 
   return (
     <div className={cx('wapper')}>
-      <Filter />
+      <Filter noneMultiline={true} />
       <h2 className="heading">
         <span>PHIM ĐỀ CỬ</span>
       </h2>

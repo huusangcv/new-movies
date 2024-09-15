@@ -396,3 +396,154 @@ button {
 .video-js .vjs-time-control {
   margin-left: auto;
 }
+
+//show Items is-multiline
+
+.tlist {
+  min-height: 0;
+  min-width: 0;
+
+  @media print, screen and (min-width: 769px) {
+    .columns:not(.is-desktop) {
+      display: flex;
+    }
+  }
+
+  .columns {
+    margin: -12px;
+  }
+
+  .columns:not(:last-child) {
+    margin-bottom: 0.75rem;
+  }
+
+  .column {
+    display: block;
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: 12px;
+  }
+
+  a {
+    color: #dbdbdb;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .name.vi {
+    margin-top: 0;
+  }
+
+  .name.vi a {
+    font-weight: 700;
+    color: #dbdbdb;
+  }
+
+  .name.en a {
+    color: #7a7a7a;
+    .year {
+      color: #b5b5b5;
+    }
+  }
+
+  img {
+    width: 150px;
+    display: flex;
+  }
+
+  .intro {
+    margin-bottom: 1em;
+    color: #b5b5b5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 2em;
+    max-height: 6.4rem;
+  }
+  .imdb-rating {
+    color: #b5b5b5;
+    font-weight: 700;
+    text-align: right;
+  }
+
+  .imdb-icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    margin: -0.3em 0.6em 0 0;
+  }
+
+  .genres {
+    margin-bottom: 0;
+  }
+
+  .tag:not(body) {
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    color: #4a4a4a;
+    display: inline-flex;
+    font-size: 1.2rem;
+    height: 2em;
+    justify-content: center;
+    line-height: 1.5;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    white-space: nowrap;
+  }
+
+  .tags .tag:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+
+  .tag:not(body).is-dark {
+    background-color: #363636;
+    color: #fff;
+  }
+  .tags .tag {
+    margin-bottom: 0.5rem;
+  }
+
+  .meta {
+    text-align: right;
+    color: #b5b5b5;
+  }
+
+  .media + .media {
+    border-top: 1px solid hsla(0, 0%, 85.9%, 0.5);
+    margin-top: 16px;
+    padding-top: 16px;
+  }
+
+  .media {
+    align-items: flex-start;
+    display: flex;
+    text-align: inherit;
+  }
+
+  .media-content {
+    flex-basis: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+    text-align: inherit;
+    overflow-x: visible;
+    overflow-x: initial;
+  }
+
+  .media-left,
+  .media-right {
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  .media-left {
+    margin-right: 32px;
+  }
+}

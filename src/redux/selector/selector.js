@@ -6,6 +6,7 @@ const getTotalItems = (state) => state.totalPage;
 const movieDetail = (state) => state.movie.item;
 const movieNewUpdate = (state) => state.newUpdateMovies;
 const currentPageMovies = (state) => state.currentPageMovies;
+const moviesOnMultiline = (state) => state.moviesOnMultiline;
 
 export {
   moviesSelector,
@@ -16,4 +17,5 @@ export {
   getTotalItems,
   movieNewUpdate,
   currentPageMovies,
+  moviesOnMultiline,
 };

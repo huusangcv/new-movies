@@ -128,6 +128,7 @@ const MovieDetails = () => {
                 <h2 className={cx('subtitle')}>
                   {movie?.name} (
                   <a
+                    href="#!"
                     onClick={() => {
                       dispatch(
                         filterMoviesByCategory({
@@ -194,10 +195,10 @@ const MovieDetails = () => {
                         </div>
                         <div className={cx('dropdown-menu')} role="menu">
                           <div className={cx('dropdown-content', 'has-text-left')}>
-                            <a href="#" className={cx('dropdown-item')}>
+                            <a href="#!" className={cx('dropdown-item')}>
                               Thêm vào danh sách phim <strong>Đã Xem</strong>
                             </a>
-                            <a href="#" className={cx('dropdown-item')}>
+                            <a href="#!" className={cx('dropdown-item')}>
                               Thêm vào danh sách phim <strong>Muốn xem</strong>
                             </a>
                           </div>

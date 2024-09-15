@@ -2,13 +2,11 @@ import { memo, useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
 import classNames from 'classnames/bind';
 import styles from './Collection.module.scss';
-import Filter from '~/layouts/Filter';
 import getMovies from '~/services/getMovies';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentPageMovies, getMoviesSingle, getTotalItemsSingle } from '~/redux/actions';
-import { currentPageMovies, getTotalItems, moviesSingle } from '~/redux/selector/selector';
-import Pagination from '~/components/Pagination';
+import { getMoviesSingle, getTotalItemsSingle } from '~/redux/actions';
+import { currentPageMovies, moviesSingle } from '~/redux/selector/selector';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 const cx = classNames.bind(styles);
 
@@ -22,9 +20,7 @@ const Collection = () => {
   const dispatch = useDispatch();
   const movies = useSelector(moviesSingle);
   const page = useSelector(currentPageMovies);
-  const totalItems = useSelector(getTotalItems);
 
-  const totalPage = Math.floor(totalItems.moviesSingle / 24);
   useEffect(() => {
     // check if don't have movies or length of movies === 0 or page !==1 when call API
 
@@ -87,9 +83,9 @@ const Collection = () => {
     ReactGA.send('Single Movies');
   }, [location]);
 
-  const handlePageClick = (e) => {
-    dispatch(getCurrentPageMovies(e.selected + 1));
-  };
+  // const handlePageClick = (e) => {
+  //   dispatch(getCurrentPageMovies(e.selected + 1));
+  // };
 
   return (
     <>

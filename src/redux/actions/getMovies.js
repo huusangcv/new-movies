@@ -10,6 +10,7 @@ import {
   GET_TOTAL_ITEMS_MOVIES_NEW,
   GET_TOTAL_ITEMS_MOVIES_SERIES,
   GET_TOTAL_ITEMS_MOVIES_SINGLE,
+  IS_MULTILINE,
   TITLE_MOVIES,
 } from '../constans';
 
@@ -97,6 +98,13 @@ const getCurrentPageMovies = (payload) => {
   };
 };
 
+const getMoviesOnMultiline = (payload) => {
+  return {
+    type: IS_MULTILINE,
+    payload: payload,
+  };
+};
+
 export {
   getMovieDetails,
   getTitle,
@@ -110,4 +118,5 @@ export {
   getTotalItemsNew,
   getNewUpdateMovies,
   getCurrentPageMovies,
+  getMoviesOnMultiline,
 };
