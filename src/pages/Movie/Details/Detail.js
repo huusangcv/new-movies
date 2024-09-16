@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { uid } from 'react-uid';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterMoviesByCategory, getMovieDetails } from '~/redux/actions';
+import { addMoviesWantToSee, addMoviesWatched, filterMoviesByCategory, getMovieDetails } from '~/redux/actions';
 import { movieDetail } from '~/redux/selector/selector';
 
 import getMovies from '~/services/getMovies';
@@ -195,10 +195,36 @@ const MovieDetails = () => {
                         </div>
                         <div className={cx('dropdown-menu')} role="menu">
                           <div className={cx('dropdown-content', 'has-text-left')}>
-                            <a href="#!" className={cx('dropdown-item')}>
+                            <a
+                              href="#!"
+                              className={cx('dropdown-item')}
+                              onClick={() =>
+                                dispatch(
+                                  addMoviesWatched({
+                                    thumb_url: movie.thumb_url,
+                                    name: movie.name,
+                                    origin_name: movie.origin_name,
+                                    slug: movie.slug,
+                                  }),
+                                )
+                              }
+                            >
                               Thêm vào danh sách phim <strong>Đã Xem</strong>
                             </a>
-                            <a href="#!" className={cx('dropdown-item')}>
+                            <a
+                              href="#!"
+                              className={cx('dropdown-item')}
+                              onClick={() =>
+                                dispatch(
+                                  addMoviesWantToSee({
+                                    thumb_url: movie.thumb_url,
+                                    name: movie.name,
+                                    origin_name: movie.origin_name,
+                                    slug: movie.slug,
+                                  }),
+                                )
+                              }
+                            >
                               Thêm vào danh sách phim <strong>Muốn xem</strong>
                             </a>
                           </div>
@@ -252,13 +278,21 @@ const MovieDetails = () => {
                   </dd>
                   <dt>Diễn viên</dt>
                   <dd className={cx('csv')}>
-                    {movie?.actor.map((actor) => {
+                    {movie?.actor.map((actor, index) => {
                       if (actor) {
-                        return (
-                          <a key={uid(actor)} href="/person/nam-dong-hyub~173099">
-                            <span> {actor}</span>
-                          </a>
-                        );
+                        if (index <= 0) {
+                          return (
+                            <a key={uid(actor)} href="/person/nam-dong-hyub~173099">
+                              {actor}
+                            </a>
+                          );
+                        } else {
+                          return (
+                            <a key={uid(actor)} href="/person/nam-dong-hyub~173099">
+                              <span> {`${actor},`}</span>
+                            </a>
+                          );
+                        }
                       } else {
                         return <div>Đang cập nhật....</div>;
                       }

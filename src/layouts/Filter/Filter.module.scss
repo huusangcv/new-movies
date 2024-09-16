@@ -20,6 +20,10 @@
 
   &.noneMultiline {
     grid-template-columns: repeat(5, 1fr);
+
+    @media screen and (max-width: 767.98px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   align-items: center;

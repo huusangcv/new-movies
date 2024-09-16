@@ -42,7 +42,7 @@ const Series = () => {
                 poster_url: movie.poster_url,
                 category: movie.category,
                 country: movie.country,
-                tmdb: movie.tmdb,
+                tmdb: movie.tmdb,time: movie.time,
               };
             });
 

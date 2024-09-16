@@ -46,6 +46,7 @@ const Single = () => {
               category: movie.category,
               country: movie.country,
               tmdb: movie.tmdb,
+              time: movie.time,
             };
           });
 

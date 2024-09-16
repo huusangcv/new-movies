@@ -1,3 +1,4 @@
+import collectionReducer from './collectionReducer';
 import currentPageReducer from './currentPageReducer';
 import filterReducer from './filterReducer';
 import isMultilineReducer from './isMultilineReducer';
@@ -17,6 +18,7 @@ const rootReducer = (state = {}, action) => {
     isShowBar: toggleBarsReducer(state.isShowBar, action),
     currentPageMovies: currentPageReducer(state.currentPageMovies, action),
     moviesOnMultiline: isMultilineReducer(state.moviesOnMultiline, action),
+    collectionMovies: collectionReducer(state.collectionMovies, action),
   };
 };
 

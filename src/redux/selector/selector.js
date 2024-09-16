@@ -7,6 +7,8 @@ const movieDetail = (state) => state.movie.item;
 const movieNewUpdate = (state) => state.newUpdateMovies;
 const currentPageMovies = (state) => state.currentPageMovies;
 const moviesOnMultiline = (state) => state.moviesOnMultiline;
+const watchedMovies = (state) => state.collectionMovies.watched;
+const wantToSeeMovies = (state) => state.collectionMovies.wantToSee;
 
 export {
   moviesSelector,
@@ -18,4 +20,6 @@ export {
   movieNewUpdate,
   currentPageMovies,
   moviesOnMultiline,
+  watchedMovies,
+  wantToSeeMovies,
 };

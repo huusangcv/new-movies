@@ -12,6 +12,8 @@ import {
   GET_TOTAL_ITEMS_MOVIES_SINGLE,
   IS_MULTILINE,
   TITLE_MOVIES,
+  WANT_TO_SEE,
+  WATCHED,
 } from '../constans';
 
 const getTitle = (payload) => {
@@ -105,6 +107,20 @@ const getMoviesOnMultiline = (payload) => {
   };
 };
 
+const addMoviesWatched = (payload) => {
+  return {
+    type: WATCHED,
+    payload: payload,
+  };
+};
+
+const addMoviesWantToSee = (payload) => {
+  return {
+    type: WANT_TO_SEE,
+    payload: payload,
+  };
+};
+
 export {
   getMovieDetails,
   getTitle,
@@ -119,4 +135,6 @@ export {
   getNewUpdateMovies,
   getCurrentPageMovies,
   getMoviesOnMultiline,
+  addMoviesWatched,
+  addMoviesWantToSee,
 };
