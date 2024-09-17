@@ -60,7 +60,7 @@ const moviesRecommend = [
   {
     id: 8,
     name: 'Vùng đất câm lặng: Ngày một',
-    slug: 'deadpool-va-wolverine',
+    slug: 'vung-dat-cam-lang-ngay-mot',
     origin_name: 'A Quiet Place: Day One',
     thumb_url: thumb8,
   },
