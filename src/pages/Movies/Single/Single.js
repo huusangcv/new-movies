@@ -100,7 +100,7 @@ const Single = () => {
     <>
       <div className={cx('wapper')}>
         <h1 className="title">Phim lẻ</h1>
-        <Filter />
+        <Filter movieType="phim-le" />
         <div className="title-list">
           {(isLoading && <p>Loading...</p>) || (
             <>

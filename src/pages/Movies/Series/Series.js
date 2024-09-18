@@ -42,7 +42,8 @@ const Series = () => {
                 poster_url: movie.poster_url,
                 category: movie.category,
                 country: movie.country,
-                tmdb: movie.tmdb,time: movie.time,
+                tmdb: movie.tmdb,
+                time: movie.time,
               };
             });
 
@@ -96,7 +97,7 @@ const Series = () => {
     <>
       <div className={cx('wapper')}>
         <h1 className="title">Phim bộ</h1>
-        <Filter />
+        <Filter movieType="phim-bo" />
         <div className="title-list">
           {(isLoading && <p>Loading...</p>) || (
             <>
