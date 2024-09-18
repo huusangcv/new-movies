@@ -6,54 +6,86 @@ import { useDispatch, useSelector } from 'react-redux';
 import { moviesOnMultiline, moviesSelector } from '~/redux/selector/selector';
 import { useNavigate } from 'react-router-dom';
 import { filterMovies, getMoviesOnMultiline } from '~/redux/actions';
+import { useQueryParams, StringParam, NumberParam, ArrayParam, withDefault } from 'use-query-params';
+import { type } from '@testing-library/user-event/dist/type';
 
 const cx = classNames.bind(styles);
 
+const MyFiltersParam = withDefault(ArrayParam, []);
 const Filter = ({ noneMultiline }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const selectValue = useSelector(moviesSelector);
   const isMultiline = useSelector(moviesOnMultiline);
 
+  const [query, setQuery] = useQueryParams({
+    type: StringParam,
+    genre: StringParam,
+    country: StringParam,
+    year: NumberParam,
+    sort: StringParam,
+  });
+
+  const { type, genre, country, year, sort } = query;
+  const isOnBrowsePage = window.location.pathname.startsWith('/browse');
   const handleSelectMovies = (e) => {
-    dispatch(
-      filterMovies({
-        moviesType: e.target.value,
-      }),
-    );
-    navigate('/browse');
+    const newType = e.target.value;
+    if (newType === '') {
+      setQuery({ genre, country, year, sort }, 'push');
+    } else {
+      if (!isOnBrowsePage) {
+        const queryString = new URLSearchParams({ type: newType }).toString();
+        navigate(`/browse?${queryString}`);
+      }
+      setQuery({ type: newType, genre, country, year, sort }, 'push');
+    }
   };
   const handleSelectType = (e) => {
-    dispatch(
-      filterMovies({
-        type: e.target.value,
-      }),
-    );
-    navigate('/browse');
+    const newGenre = e.target.value;
+    if (newGenre === '') {
+      setQuery({ type, country, year, sort }, 'push');
+    } else {
+      if (!isOnBrowsePage) {
+        const queryString = new URLSearchParams({ genre: newGenre }).toString();
+        navigate(`/browse?${queryString}`);
+      }
+      setQuery({ type, genre: newGenre, country, year, sort }, 'push');
+    }
   };
   const handleSelectNations = (e) => {
-    dispatch(
-      filterMovies({
-        nation: e.target.value,
-      }),
-    );
-    navigate('/browse');
+    const newCountry = e.target.value;
+    if (newCountry === '') {
+      setQuery({ type, genre, year, sort }, 'push');
+    } else {
+      if (!isOnBrowsePage) {
+        const queryString = new URLSearchParams({ country: newCountry }).toString();
+        navigate(`/browse?${queryString}`);
+      }
+      setQuery({ type, genre, country: newCountry, year, sort }, 'push');
+    }
   };
   const handleSelectYears = (e) => {
-    dispatch(
-      filterMovies({
-        year: e.target.value,
-      }),
-    );
-    navigate('/browse');
+    const newYear = e.target.value;
+    if (newYear === '') {
+      setQuery({ type, genre, country, sort }, 'push');
+    } else {
+      if (!isOnBrowsePage) {
+        const queryString = new URLSearchParams({ year: newYear }).toString();
+        navigate(`/browse?${queryString}`);
+      }
+      setQuery({ type, genre, country, year: newYear, sort }, 'push');
+    }
   };
   const handleSelectSortBy = (e) => {
-    dispatch(
-      filterMovies({
-        sortBy: e.target.value,
-      }),
-    );
-    navigate('/browse');
+    const newSort = e.target.value;
+    if (newSort === '') {
+      setQuery({ type, genre, country, year }, 'push');
+    } else {
+      if (!isOnBrowsePage) {
+        const queryString = new URLSearchParams({ sort: newSort }).toString();
+        navigate(`/browse?${queryString}`);
+      }
+      setQuery({ type, genre, country, year, sort: newSort }, 'push');
+    }
   };
 
   const handleActiveIsMultiline = (e) => {
@@ -79,10 +111,8 @@ const Filter = ({ noneMultiline }) => {
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
-                  <select name="" id="" defaultValue={selectValue.moviesType} onChange={handleSelectMovies}>
-                    <option value="" defaultValue="">
-                      - Tất cả -
-                    </option>
+                  <select name="" id="" value={(type && type) || ''} onChange={handleSelectMovies}>
+                    <option value="">- Tất cả -</option>
                     {filter?.movies.map((movie) => {
                       return (
                         <option value={movie.slug} key={movie.id}>
@@ -102,7 +132,7 @@ const Filter = ({ noneMultiline }) => {
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
-                  <select name="" id="" onChange={handleSelectType} defaultValue={selectValue.type}>
+                  <select name="" id="" onChange={handleSelectType} value={(genre && genre) || ''}>
                     <option value="">- Tất cả -</option>
                     {filter?.types.map((type) => (
                       <option value={type.slug} key={type.id}>
@@ -121,7 +151,7 @@ const Filter = ({ noneMultiline }) => {
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
-                  <select name="" id="" onChange={handleSelectNations} defaultValue={selectValue.nation}>
+                  <select name="" id="" onChange={handleSelectNations} value={(country && country) || ''}>
                     <option value="">- Tất cả -</option>
                     {filter?.nations.map((nation) => (
                       <option value={nation.slug} key={nation.id}>
@@ -140,7 +170,7 @@ const Filter = ({ noneMultiline }) => {
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
-                  <select name="" id="" onChange={handleSelectYears} defaultValue={selectValue.year}>
+                  <select name="" id="" onChange={handleSelectYears} value={(year && year) || ''}>
                     <option value="">- Tất cả -</option>
                     {filter?.years.map((year) => (
                       <option value={year.slug} key={year.id}>
@@ -160,7 +190,7 @@ const Filter = ({ noneMultiline }) => {
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
-                  <select name="" id="" onChange={handleSelectSortBy} defaultValue={selectValue.sortBy}>
+                  <select name="" id="" onChange={handleSelectSortBy} value={(sort && sort) || ''}>
                     {filter?.sortBy.map((sort) => (
                       <option value={sort.slug} key={sort.id}>
                         {sort.text}

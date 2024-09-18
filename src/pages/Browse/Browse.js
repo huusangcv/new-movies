@@ -9,6 +9,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { moviesOnMultiline, moviesSelector } from '~/redux/selector/selector';
 import Pagination from '~/components/Pagination';
+import { useQueryParams, StringParam, NumberParam, ArrayParam, withDefault } from 'use-query-params';
 const cx = classNames.bind(styles);
 
 const Browse = () => {
@@ -17,8 +18,18 @@ const Browse = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [paginate, setPaginate] = useState();
   const [movies, setMovies] = useState([]);
-  const { moviesType, type, nation, year, sortBy } = useSelector(moviesSelector);
+  // const { moviesType, type, nation, year, sortBy } = useSelector(moviesSelector);
   const isMultiline = useSelector(moviesOnMultiline);
+
+  const [query] = useQueryParams({
+    type: StringParam,
+    genre: StringParam,
+    country: StringParam,
+    year: NumberParam,
+    sort: StringParam,
+  });
+
+  const { type, genre, country, year, sort } = query;
 
   const totalPage = Math.floor(paginate?.totalItems / paginate?.totalItemsPerPage);
   useEffect(() => {
@@ -26,7 +37,7 @@ const Browse = () => {
 
     const fetchApi = async () => {
       try {
-        const movies = await getMovies.Browse(moviesType, page, type, nation, year, sortBy);
+        const movies = await getMovies.Browse(type, page, genre, country, year, sort);
         if (movies) {
           document.title = movies.seoOnPage.titleHead;
           setPaginate(movies.params.pagination);
@@ -59,7 +70,7 @@ const Browse = () => {
     window.scroll({
       top: 0,
     });
-  }, [moviesType, page, type, nation, year, sortBy]);
+  }, [type, genre, country, year, sort]);
 
   useEffect(() => {
     const page = location.pathname; // Đặt tên trang là URL

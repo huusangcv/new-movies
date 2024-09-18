@@ -13,7 +13,7 @@ const getMovies = {
     const result = await axios.get(`danh-sach/phim-moi?page=${page}`);
     return result.data;
   },
-  Browse: async (moviesType, page, type, nation, year = '2024', sortBy) => {
+  Browse: async (moviesType, page, type = '', nation = '', year = '', sortBy = '') => {
     let result;
     // if (moviesType === '' && page === '' && type === '' && nation === '' && year === '' && sortBy === '') {
     //   result = await axios.get(`danh-sach/`);
@@ -23,7 +23,7 @@ const getMovies = {
     //   );
     // }
     result = await axios.get(
-      `danh-sach/${moviesType}?page=${page}&sort_field=modified.time&category=${type}&country=${nation}&year=${year}`,
+      `danh-sach/${moviesType}?page=${page}&sort_field=${sortBy}&category=${type}&country=${nation}&year=${year}`,
     );
     return result.data;
   },
