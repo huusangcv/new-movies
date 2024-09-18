@@ -3,16 +3,14 @@ import filter from '~/components/Options';
 import styles from './Filter.module.scss';
 import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { moviesOnMultiline, moviesSelector } from '~/redux/selector/selector';
+import { moviesOnMultiline } from '~/redux/selector/selector';
 import { useNavigate } from 'react-router-dom';
-import { filterMovies, getMoviesOnMultiline } from '~/redux/actions';
-import { useQueryParams, StringParam, NumberParam, ArrayParam, withDefault } from 'use-query-params';
-import { type } from '@testing-library/user-event/dist/type';
+import { getMoviesOnMultiline } from '~/redux/actions';
+import { useQueryParams, StringParam, NumberParam } from 'use-query-params';
 
 const cx = classNames.bind(styles);
 
-const MyFiltersParam = withDefault(ArrayParam, []);
-const Filter = ({ noneMultiline }) => {
+const Filter = ({ noneMultiline, movieType }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isMultiline = useSelector(moviesOnMultiline);
@@ -26,6 +24,7 @@ const Filter = ({ noneMultiline }) => {
   });
 
   const { type, genre, country, year, sort } = query;
+
   const isOnBrowsePage = window.location.pathname.startsWith('/browse');
   const handleSelectMovies = (e) => {
     const newType = e.target.value;
@@ -45,10 +44,20 @@ const Filter = ({ noneMultiline }) => {
       setQuery({ type, country, year, sort }, 'push');
     } else {
       if (!isOnBrowsePage) {
-        const queryString = new URLSearchParams({ genre: newGenre }).toString();
+        let queryString;
+        if (movieType) {
+          queryString = new URLSearchParams({ type: movieType, genre: newGenre }).toString();
+        } else {
+          queryString = new URLSearchParams({ genre: newGenre }).toString();
+        }
         navigate(`/browse?${queryString}`);
       }
-      setQuery({ type, genre: newGenre, country, year, sort }, 'push');
+
+      if (movieType) {
+        setQuery({ type: movieType, genre: newGenre, country, year, sort }, 'push');
+      } else {
+        setQuery({ type, genre: newGenre, country, year, sort }, 'push');
+      }
     }
   };
   const handleSelectNations = (e) => {
@@ -57,10 +66,19 @@ const Filter = ({ noneMultiline }) => {
       setQuery({ type, genre, year, sort }, 'push');
     } else {
       if (!isOnBrowsePage) {
-        const queryString = new URLSearchParams({ country: newCountry }).toString();
+        let queryString;
+        if (movieType) {
+          queryString = new URLSearchParams({ type: movieType, country: newCountry }).toString();
+        } else {
+          queryString = new URLSearchParams({ country: newCountry }).toString();
+        }
         navigate(`/browse?${queryString}`);
       }
-      setQuery({ type, genre, country: newCountry, year, sort }, 'push');
+      if (movieType) {
+        setQuery({ type: movieType, genre, country: newCountry, year, sort }, 'push');
+      } else {
+        setQuery({ type, genre, country: newCountry, year, sort }, 'push');
+      }
     }
   };
   const handleSelectYears = (e) => {
@@ -69,10 +87,20 @@ const Filter = ({ noneMultiline }) => {
       setQuery({ type, genre, country, sort }, 'push');
     } else {
       if (!isOnBrowsePage) {
-        const queryString = new URLSearchParams({ year: newYear }).toString();
+        let queryString;
+        if (movieType) {
+          queryString = new URLSearchParams({ type: movieType, year: newYear }).toString();
+        } else {
+          queryString = new URLSearchParams({ year: newYear }).toString();
+        }
         navigate(`/browse?${queryString}`);
       }
-      setQuery({ type, genre, country, year: newYear, sort }, 'push');
+
+      if (movieType) {
+        setQuery({ type: movieType, genre, country, year: newYear, sort }, 'push');
+      } else {
+        setQuery({ type, genre, country, year: newYear, sort }, 'push');
+      }
     }
   };
   const handleSelectSortBy = (e) => {
@@ -81,10 +109,20 @@ const Filter = ({ noneMultiline }) => {
       setQuery({ type, genre, country, year }, 'push');
     } else {
       if (!isOnBrowsePage) {
-        const queryString = new URLSearchParams({ sort: newSort }).toString();
+        let queryString;
+        if (movieType) {
+          queryString = new URLSearchParams({ type: movieType, sort: newSort }).toString();
+        } else {
+          queryString = new URLSearchParams({ sort: newSort }).toString();
+        }
         navigate(`/browse?${queryString}`);
       }
-      setQuery({ type, genre, country, year, sort: newSort }, 'push');
+
+      if (movieType) {
+        setQuery({ type: movieType, genre, country, year, sort: newSort }, 'push');
+      } else {
+        setQuery({ type, genre, country, year, sort: newSort }, 'push');
+      }
     }
   };
 
@@ -111,7 +149,12 @@ const Filter = ({ noneMultiline }) => {
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
-                  <select name="" id="" value={(type && type) || ''} onChange={handleSelectMovies}>
+                  <select
+                    name=""
+                    id=""
+                    value={(movieType && movieType) || (type && type) || ''}
+                    onChange={handleSelectMovies}
+                  >
                     <option value="">- Tất cả -</option>
                     {filter?.movies.map((movie) => {
                       return (

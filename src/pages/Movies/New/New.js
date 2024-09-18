@@ -95,7 +95,7 @@ const New = () => {
     <>
       <div className={cx('wapper')}>
         <h1 className="title">Phim mới</h1>
-        <Filter />
+        <Filter movieType={'phim-moi'} />
         <div className="title-list">
           {(isLoading && <p>Loading...</p>) || (
             <>
