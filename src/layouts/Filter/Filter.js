@@ -10,7 +10,7 @@ import { useQueryParams, StringParam, NumberParam } from 'use-query-params';
 
 const cx = classNames.bind(styles);
 
-const Filter = ({ noneMultiline, movieType }) => {
+const Filter = ({ noneMultiline, movieType, genreCurrent, index }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isMultiline = useSelector(moviesOnMultiline);
@@ -175,7 +175,12 @@ const Filter = ({ noneMultiline, movieType }) => {
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
-                  <select name="" id="" onChange={handleSelectType} value={(genre && genre) || ''}>
+                  <select
+                    name=""
+                    id=""
+                    onChange={handleSelectType}
+                    value={(genreCurrent === 'genre' && index) || (genre && genre) || ''}
+                  >
                     <option value="">- Tất cả -</option>
                     {filter?.types.map((type) => (
                       <option value={type.slug} key={type.id}>
@@ -194,7 +199,12 @@ const Filter = ({ noneMultiline, movieType }) => {
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
-                  <select name="" id="" onChange={handleSelectNations} value={(country && country) || ''}>
+                  <select
+                    name=""
+                    id=""
+                    onChange={handleSelectNations}
+                    value={(genreCurrent === 'country' && index) || (country && country) || ''}
+                  >
                     <option value="">- Tất cả -</option>
                     {filter?.nations.map((nation) => (
                       <option value={nation.slug} key={nation.id}>
@@ -213,7 +223,12 @@ const Filter = ({ noneMultiline, movieType }) => {
               </label>
               <div className={cx('control')}>
                 <div className={cx('select')}>
-                  <select name="" id="" onChange={handleSelectYears} value={(year && year) || ''}>
+                  <select
+                    name=""
+                    id=""
+                    onChange={handleSelectYears}
+                    value={(genreCurrent === 'year' && index) || (year && year) || ''}
+                  >
                     <option value="">- Tất cả -</option>
                     {filter?.years.map((year) => (
                       <option value={year.slug} key={year.id}>

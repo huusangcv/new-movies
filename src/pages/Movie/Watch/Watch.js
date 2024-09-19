@@ -7,9 +7,9 @@ import { uid } from 'react-uid';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterMoviesByCategory, getMovieDetails } from '~/redux/actions';
+import { getMovieDetails } from '~/redux/actions';
 import { movieDetail } from '~/redux/selector/selector';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import getMovies from '~/services/getMovies';
 import Footer from '~/layouts/Footer';
@@ -68,15 +68,6 @@ const Watch = () => {
     ReactGA.send('Watch movie');
   }, [location]);
 
-  const handleDispatchFilter = (payload) => {
-    dispatch(
-      filterMoviesByCategory({
-        year: payload,
-        moviesType: '',
-      }),
-    );
-  };
-
   const handleEpisodeChange = (index) => {
     setCurrentEpisode(index);
   };
@@ -115,11 +106,7 @@ const Watch = () => {
                 <div className={cx('column')}>
                   <h1 className="title is-3">{movie?.name}</h1>
                   <h2 className="subtitle is-5">
-                    {movie?.origin_name} (
-                    <Link onClick={() => handleDispatchFilter(movie?.year)} to={`/browse`}>
-                      {movie?.year}
-                    </Link>
-                    )
+                    {movie?.origin_name} (<a onClick={() => navigate(`/year/${movie.year}`)}>{movie?.year}</a>)
                   </h2>
                   <div className={cx('buttons', 'are-small')} style={{ cursor: 'pointer' }}>
                     <div

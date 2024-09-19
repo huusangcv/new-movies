@@ -128,15 +128,8 @@ const MovieDetails = () => {
                 <h2 className={cx('subtitle')}>
                   {movie?.name} (
                   <a
-                    href="#!"
                     onClick={() => {
-                      dispatch(
-                        filterMoviesByCategory({
-                          year: movie?.year,
-                          moviesType: '',
-                        }),
-                      );
-                      navigate('/browse');
+                      navigate(`/year/${movie.year}`);
                     }}
                   >
                     {movie?.year}
@@ -236,14 +229,13 @@ const MovieDetails = () => {
                     <div className={cx('level-item', 'buttons')}>
                       {movie?.category.map((type) => {
                         return (
-                          <Link
+                          <a
                             key={type.id}
                             className="button is-link is-small is-rounded is-inverted is-outlined"
-                            onClick={() => handleDispatchFilter(type.slug)}
-                            to="/browse"
+                            onClick={() => navigate(`/genre/${type.slug}`)}
                           >
                             {type.name}
-                          </Link>
+                          </a>
                         );
                       })}
                     </div>
@@ -270,7 +262,7 @@ const MovieDetails = () => {
                   <dd className={cx('csv')}>
                     {movie?.country.map((country) => {
                       return (
-                        <a key={country.id} href="/person/nam-dong-hyub~173099">
+                        <a key={country.id} onClick={() => navigate(`/country/${country.slug}`)}>
                           <span> {country.name}</span>
                         </a>
                       );

@@ -26,7 +26,6 @@ const Single = () => {
   const totalPage = Math.floor(totalItems.moviesSingle / 24);
   useEffect(() => {
     // check if don't have movies or length of movies === 0 or page !==1 when call API
-
     const fetchApi = async () => {
       setIsLoading(true);
       try {

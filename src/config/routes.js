@@ -9,6 +9,7 @@ const routes = {
   watch: '/watch/:slug',
   browse: '/browse',
   collection: '/collection',
+  browseDetails: '/:genreCurrent/:index',
   notfound: '*',
   login: '/login',
   signup: '/signup',

@@ -1,43 +1,42 @@
 import { memo, useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import classNames from 'classnames/bind';
-import styles from './Browse.module.scss';
+import styles from './BrowseDetails.module.scss';
 import Filter from '~/layouts/Filter';
 import getMovies from '~/services/getMovies';
 import ReactGA from 'react-ga4';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { moviesOnMultiline, moviesSelector } from '~/redux/selector/selector';
+import { moviesOnMultiline } from '~/redux/selector/selector';
 import Pagination from '~/components/Pagination';
-import { useQueryParams, StringParam, NumberParam, ArrayParam, withDefault } from 'use-query-params';
+import filter from '~/components/Options/filter';
 const cx = classNames.bind(styles);
 
-const Browse = () => {
+const BrowseDetails = () => {
   const location = useLocation();
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [paginate, setPaginate] = useState();
   const [movies, setMovies] = useState([]);
-  // const { moviesType, type, nation, year, sortBy } = useSelector(moviesSelector);
   const isMultiline = useSelector(moviesOnMultiline);
-
-  const [query] = useQueryParams({
-    type: StringParam,
-    genre: StringParam,
-    country: StringParam,
-    year: NumberParam,
-    sort: StringParam,
-  });
-
-  const { type, genre, country, year, sort } = query;
+  const { genreCurrent, index } = useParams();
+  console.log(genreCurrent, index, '123');
 
   const totalPage = Math.floor(paginate?.totalItems / paginate?.totalItemsPerPage);
   useEffect(() => {
     setIsLoading(true);
 
-    const fetchApi = async () => {
+    const fetchApi = async (type = '', genre = '', country = '', sort = '', year = '') => {
       try {
-        const movies = await getMovies.Browse(type, page, genre, country, year, sort);
+        let movies;
+        if (genreCurrent === 'country') {
+          movies = await getMovies.Browse(type, page, genre, index, year, sort);
+        } else if (genreCurrent === 'year') {
+          movies = await getMovies.Browse(type, page, genre, country, index, sort);
+        } else {
+          movies = await getMovies.Browse(type, page, index, country, year, sort);
+        }
+
         if (movies) {
           document.title = movies.seoOnPage.titleHead;
           setPaginate(movies.params.pagination);
@@ -70,7 +69,7 @@ const Browse = () => {
     window.scroll({
       top: 0,
     });
-  }, [page, type, genre, country, year, sort]);
+  }, [page]);
 
   useEffect(() => {
     const page = location.pathname; // Đặt tên trang là URL
@@ -88,8 +87,20 @@ const Browse = () => {
     <>
       <div className={cx('wapper')}>
         <div className="title-list">
-          <h1 className="title">{movies?.titlePage}</h1>
-          <Filter />
+          {(genreCurrent === 'year' && <h1 className="title">Phim {index}</h1>) ||
+            (genreCurrent === 'country' &&
+              filter.nations.map((country) => {
+                if (index === country.slug) {
+                  return <h1 key={country.id} className="title">{`Phim ${country.text}`}</h1>;
+                }
+              })) ||
+            filter.types.map((type) => {
+              if (index === type.slug) {
+                return <h1 key={type.id} className="title">{`Phim ${type.text}`}</h1>;
+              }
+            })}
+
+          <Filter genreCurrent={genreCurrent} index={index} />
           {(isLoading && <p>Loading...</p>) || (
             <>
               {(isMultiline && (
@@ -205,4 +216,4 @@ const Browse = () => {
   );
 };
 
-export default memo(Browse);
+export default memo(BrowseDetails);

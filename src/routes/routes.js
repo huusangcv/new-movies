@@ -9,6 +9,7 @@ const Series = lazy(() => import('~/pages/Movies/Series'));
 const Single = lazy(() => import('~/pages/Movies/Single'));
 const New = lazy(() => import('~/pages/Movies/New'));
 const Collection = lazy(() => import('~/pages/Movies/Collection'));
+const BrowseDetails = lazy(() => import('~/pages/BrowseDetails'));
 const Details = lazy(() => import('~/pages/Movie/Details'));
 const Watch = lazy(() => import('~/pages/Movie/Watch'));
 const Browse = lazy(() => import('~/pages/Browse'));
@@ -22,6 +23,7 @@ const publicLayout = [
   { path: config.routes.single, component: Single },
   { path: config.routes.new, component: New },
   { path: config.routes.collection, component: Collection },
+  { path: config.routes.browseDetails, component: BrowseDetails },
   { path: config.routes.detail, component: Details },
   { path: config.routes.watch, component: Watch, layout: HeaderOnlyForMovies },
   { path: config.routes.browse, component: Browse },
