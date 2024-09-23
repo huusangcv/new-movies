@@ -69,7 +69,7 @@ const BrowseDetails = () => {
     window.scroll({
       top: 0,
     });
-  }, [page]);
+  }, [page, genreCurrent, index]);
 
   useEffect(() => {
     const page = location.pathname; // Đặt tên trang là URL
@@ -89,16 +89,16 @@ const BrowseDetails = () => {
         <div className="title-list">
           {(genreCurrent === 'year' && <h1 className="title">Phim {index}</h1>) ||
             (genreCurrent === 'country' &&
-              filter.nations.map((country) => {
-                if (index === country.slug) {
+              filter.nations
+                .filter((country) => index === country.slug)
+                .map((country) => {
                   return <h1 key={country.id} className="title">{`Phim ${country.text}`}</h1>;
-                }
-              })) ||
-            filter.types.map((type) => {
-              if (index === type.slug) {
+                })) ||
+            filter.types
+              .filter((type) => index === type.slug)
+              .map((type) => {
                 return <h1 key={type.id} className="title">{`Phim ${type.text}`}</h1>;
-              }
-            })}
+              })}
 
           <Filter genreCurrent={genreCurrent} index={index} />
           {(isLoading && <p>Loading...</p>) || (
@@ -107,8 +107,8 @@ const BrowseDetails = () => {
                 <div className="tlist">
                   {movies?.map((movie) => {
                     return (
-                      <div class="media">
-                        <Link class="media-left" to={`/movie/${movie.slug}`}>
+                      <div className="media">
+                        <Link className="media-left" to={`/movie/${movie.slug}`}>
                           <LazyLoadImage
                             src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
                             alt={movie.name}
@@ -117,45 +117,45 @@ const BrowseDetails = () => {
                             https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
                           ></LazyLoadImage>
                         </Link>
-                        <div class="media-content">
-                          <div class="columns">
-                            <div class="column">
-                              <h3 class="name vi">
+                        <div className="media-content">
+                          <div className="columns">
+                            <div className="column">
+                              <h3 className="name vi">
                                 <Link to={`/movie/${movie.slug}`}>{movie.name}</Link>
                               </h3>
-                              <h3 class="name en">
+                              <h3 className="name en">
                                 <Link to={`/movie/${movie.slug}`}>{movie.origin_name}</Link> (
-                                <a class="year" href="/year/2024">
+                                <a className="year" href="/year/2024">
                                   {movie.year}
                                 </a>
                                 )
                               </h3>
                             </div>
-                            <div class="column meta">
+                            <div className="column meta">
                               <p>{movie?.time}</p>
-                              <p class="csv">
+                              <p className="csv">
                                 {movie?.country.map((country, index) => {
                                   return (
-                                    <a key={country.id} href="/person/nam-dong-hyub~173099">
-                                      {(index <= 1 && country.name) || `${country.name} , `}
-                                    </a>
+                                    <Link key={country.id} to={`/country/${country.slug}`}>
+                                      {(index === 0 && country.name) || `, ${country.name}`}
+                                    </Link>
                                   );
                                 })}
                               </p>
                             </div>
                           </div>
-                          <div class="columns">
-                            <div class="column tags genres">
+                          <div className="columns">
+                            <div className="column tags genres">
                               {movie?.category.map((item, index) => {
                                 return (
-                                  <a class="tag is-dark" key={item.id} href="/person/nam-dong-hyub~173099">
+                                  <a className="tag is-dark" key={item.id} href="/person/nam-dong-hyub~173099">
                                     {(index <= 1 && item.name) || `${item.name} `}
                                   </a>
                                 );
                               })}
                             </div>
-                            <div class="column imdb-rating">
-                              <span class="imdb-icon">
+                            <div className="column imdb-rating">
+                              <span className="imdb-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
                                   <path
                                     d="M44 13H4c-2.2 0-4 1.8-4 4v16c0 2.2 1.8 4 4 4h40c2.2 0 4-1.8 4-4V17c0-2.2-1.8-4-4-4z"
@@ -172,7 +172,7 @@ const BrowseDetails = () => {
                                 ''}
                             </div>
                           </div>
-                          <div class="intro">
+                          <div className="intro">
                             <Link to={`/movie/${movie.slug}`} style={{ color: '#428bca', cursor: 'pointer' }}>
                               Xem chi tiết
                             </Link>

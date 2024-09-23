@@ -5,39 +5,62 @@ import { Link, useLocation } from 'react-router-dom';
 import getMovies from '~/services/getMovies';
 import styles from './Search.module.scss';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { StringParam, useQueryParams } from 'use-query-params';
 
 const cx = classNames.bind(styles);
 
 const Search = () => {
-  const [searchName, setSearchName] = useState('');
   const [movies, setMovies] = useState([]);
   const location = useLocation();
   const refInput = useRef();
 
+  const [query, setQuery] = useQueryParams({
+    q: StringParam,
+  });
+
+  const { q } = query;
+
   useEffect(() => {
     const fetchApi = async () => {
       try {
-        const movies = await getMovies.Search(searchName.trim());
+        const movies = await getMovies.Search(q);
         if (movies) {
-          document.title = searchName;
+          if (q) {
+            document.title = q;
+          } else {
+            document.title = 'Tìm kiếm phim';
+          }
 
-          setMovies(movies.items);
+          const result = movies.items.map((movie) => {
+            return {
+              name: movie.name,
+              slug: movie.slug,
+              origin_name: movie.origin_name,
+              year: movie.year,
+              thumb_url: movie.thumb_url,
+              poster_url: movie.poster_url,
+              category: movie.category,
+              country: movie.country,
+              tmdb: movie.tmdb,
+              time: movie.time,
+            };
+          });
+
+          setMovies(result);
         }
       } catch (error) {
         console.log('Error ---> ', error);
       }
     };
 
-    if (searchName !== '') {
-      fetchApi();
-    }
+    fetchApi();
 
     window.scroll({
       top: 0,
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchName]);
+  }, [q]);
 
   useEffect(() => {
     const page = location.pathname; // Đặt tên trang là URL
@@ -49,9 +72,14 @@ const Search = () => {
 
   //Func handle setName to call api
   const handleSearchMovie = (e) => {
-    setSearchName(e.target.value);
+    const searchName = e.target.value;
+
+    if (searchName === '') {
+      setQuery({}, 'push');
+    } else {
+      setQuery({ q: searchName }, 'push');
+    }
   };
-  console.log(refInput.current);
 
   return (
     <div className={cx('wapper')}>
@@ -61,7 +89,7 @@ const Search = () => {
             type="text"
             className={cx('input', 'is-medium')}
             placeholder="Nhập tên phim..."
-            value={searchName}
+            value={q}
             onChange={handleSearchMovie}
             spellCheck={false}
             ref={refInput}

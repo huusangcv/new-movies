@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { uid } from 'react-uid';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMoviesWantToSee, addMoviesWatched, filterMoviesByCategory, getMovieDetails } from '~/redux/actions';
+import { addMoviesWantToSee, addMoviesWatched, getMovieDetails } from '~/redux/actions';
 import { movieDetail } from '~/redux/selector/selector';
 
 import getMovies from '~/services/getMovies';
@@ -46,7 +46,12 @@ const MovieDetails = () => {
       top: 0,
     });
 
-    fetchApi();
+    if (!movie || movie.slug !== slug) {
+      fetchApi();
+    } else {
+      setIsLoading(false);
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
@@ -60,15 +65,6 @@ const MovieDetails = () => {
 
   const handleCloseModalTrailers = () => {
     setIsShowModalTrailer(!isShowModalTrailer);
-  };
-
-  const handleDispatchFilter = (payload) => {
-    dispatch(
-      filterMoviesByCategory({
-        type: payload,
-        moviesType: '',
-      }),
-    );
   };
 
   const metaTag = () => {
@@ -126,15 +122,7 @@ const MovieDetails = () => {
               <div className={cx('column', 'main')}>
                 <h1 className={cx('title')}>{movie?.origin_name}</h1>
                 <h2 className={cx('subtitle')}>
-                  {movie?.name} (
-                  <a
-                    onClick={() => {
-                      navigate(`/year/${movie.year}`);
-                    }}
-                  >
-                    {movie?.year}
-                  </a>
-                  )
+                  {movie?.name} (<Link to={`/year/${movie.year}`}>{movie?.year}</Link>)
                 </h2>
                 <div className={cx('meta')}>
                   <span>{movie?.time}</span>
@@ -229,13 +217,13 @@ const MovieDetails = () => {
                     <div className={cx('level-item', 'buttons')}>
                       {movie?.category.map((type) => {
                         return (
-                          <a
+                          <Link
                             key={type.id}
                             className="button is-link is-small is-rounded is-inverted is-outlined"
-                            onClick={() => navigate(`/genre/${type.slug}`)}
+                            to={`/genre/${type.slug}`}
                           >
                             {type.name}
-                          </a>
+                          </Link>
                         );
                       })}
                     </div>
@@ -246,12 +234,12 @@ const MovieDetails = () => {
                   <dt>Đạo diễn</dt>
                   <dd className={cx('csv')}>
                     {movie?.director.length &&
-                      movie?.director.map((director) => {
+                      movie?.director.map((director, index) => {
                         if (director) {
                           return (
-                            <a key={uid(11)} href="/person/nam-dong-hyub~173099">
-                              <span> {director}</span>
-                            </a>
+                            <Link key={director.id} to="/developing">
+                              {(index === 0 && director) || `, ${director}`}
+                            </Link>
                           );
                         } else {
                           return <div>Đang cập nhật....</div>;
@@ -260,11 +248,11 @@ const MovieDetails = () => {
                   </dd>
                   <dt>Quốc gia</dt>
                   <dd className={cx('csv')}>
-                    {movie?.country.map((country) => {
+                    {movie?.country.map((country, index) => {
                       return (
-                        <a key={country.id} onClick={() => navigate(`/country/${country.slug}`)}>
-                          <span> {country.name}</span>
-                        </a>
+                        <Link key={country.id} to={`/country/${country.slug}`}>
+                          {(index === 0 && country.name) || `, ${country.name}`}
+                        </Link>
                       );
                     })}
                   </dd>
@@ -272,19 +260,11 @@ const MovieDetails = () => {
                   <dd className={cx('csv')}>
                     {movie?.actor.map((actor, index) => {
                       if (actor) {
-                        if (index <= 0) {
-                          return (
-                            <a key={uid(actor)} href="/person/nam-dong-hyub~173099">
-                              {actor}
-                            </a>
-                          );
-                        } else {
-                          return (
-                            <a key={uid(actor)} href="/person/nam-dong-hyub~173099">
-                              <span> {`${actor},`}</span>
-                            </a>
-                          );
-                        }
+                        return (
+                          <Link key={uid(actor)} to="/developing">
+                            {(index === 0 && actor) || `, ${actor}`}
+                          </Link>
+                        );
                       } else {
                         return <div>Đang cập nhật....</div>;
                       }

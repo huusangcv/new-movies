@@ -9,10 +9,11 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMovieDetails } from '~/redux/actions';
 import { movieDetail } from '~/redux/selector/selector';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import getMovies from '~/services/getMovies';
 import Footer from '~/layouts/Footer';
+import Spinner from '~/components/Spinner';
 
 const cx = classNames.bind(styles);
 const Watch = () => {
@@ -88,13 +89,15 @@ const Watch = () => {
         <div className={cx('watch_video')}>
           <div className={cx('columns')}>
             <div className={cx('column')}>
-              <iframe
-                src={videoSrc}
-                frameBorder="0"
-                allow="accelerometer; autoplay; muted; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="video-js"
-              ></iframe>
+              {(videoSrc && (
+                <iframe
+                  src={videoSrc}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; muted; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="video-js"
+                ></iframe>
+              )) || <div className="video-js">Vui lòng đợi giây lát</div>}
             </div>
           </div>
           <p className={cx('has-text-centered', 'is-size-7')}>
@@ -106,7 +109,7 @@ const Watch = () => {
                 <div className={cx('column')}>
                   <h1 className="title is-3">{movie?.name}</h1>
                   <h2 className="subtitle is-5">
-                    {movie?.origin_name} (<a onClick={() => navigate(`/year/${movie.year}`)}>{movie?.year}</a>)
+                    {movie?.origin_name} (<Link to={`/year/${movie.year}`}>{movie?.year}</Link>)
                   </h2>
                   <div className={cx('buttons', 'are-small')} style={{ cursor: 'pointer' }}>
                     <div
@@ -127,7 +130,7 @@ const Watch = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                       <path d="M11.093 251.65l175.998 184C211.81 461.494 256 444.239 256 408v-87.84c154.425 1.812 219.063 16.728 181.19 151.091-8.341 29.518 25.447 52.232 49.68 34.51C520.16 481.421 576 426.17 576 331.19c0-171.087-154.548-201.035-320-203.02V40.016c0-36.27-44.216-53.466-68.91-27.65L11.093 196.35c-14.791 15.47-14.791 39.83 0 55.3zm23.127-33.18l176-184C215.149 29.31 224 32.738 224 40v120c157.114 0 320 11.18 320 171.19 0 74.4-40 122.17-76.02 148.51C519.313 297.707 395.396 288 224 288v120c0 7.26-8.847 10.69-13.78 5.53l-176-184a7.978 7.978 0 0 1 0-11.06z"></path>
                     </svg>
-                    <a href={`/movie/${slug}`}>Về trang giới thiệu phim</a>
+                    <Link to={`/movie/${slug}`}>Về trang giới thiệu phim</Link>
                   </div>
                 </div>
               </div>
@@ -154,8 +157,8 @@ const Watch = () => {
         </div>
       )}
       <ToastContainer
-        position="bottom-center"
-        autoClose={5000}
+        position="bottom-right"
+        autoClose={false}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

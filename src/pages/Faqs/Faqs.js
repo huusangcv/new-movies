@@ -2,7 +2,7 @@ const Faqs = () => {
   return (
     <div className="section">
       <div className="container">
-        <h1 class="has-text-centered title is-2">Câu hỏi thường gặp</h1>
+        <h1 className="has-text-centered title is-2">Câu hỏi thường gặp</h1>
       </div>
       <ul>
         <li>Chọn một server khác từ các server bên dưới phim</li>
@@ -20,7 +20,7 @@ const Faqs = () => {
         </a>
         ). Bạn có thể thử xem bằng 4G xem có cải thiện không (4G thường được các nhà mạng ưu tiên băng thông).
       </p>
-      <h3 class="has-text-warning" id="sound">
+      <h3 className="has-text-warning" id="sound">
         2. Phim bị giật hình (hình ảnh nhảy lên nhảy xuống) khi xem full màn hình, nhất là khi hiện phụ đề?
       </h3>
       <p>
@@ -34,7 +34,7 @@ const Faqs = () => {
         để thanh công cụ player và tiến trình phim luôn hiển thị bằng cách rê chuột qua đó và để nguyên chuột ở đó (nếu
         không thanh này sẽ biến mất sau vài giây).
       </p>
-      <h3 class="has-text-warning" id="sound">
+      <h3 className="has-text-warning" id="sound">
         3. Gặp vấn đề về âm thanh: phim không có tiếng, mất tiếng nhân vật, hoặc âm thanh bị rè?
       </h3>
     </div>

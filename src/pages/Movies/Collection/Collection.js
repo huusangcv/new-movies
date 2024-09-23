@@ -21,7 +21,7 @@ const Collection = () => {
           <>
             <div className="title-list">
               <h1 className={cx('title')}>Bộ sưu tập phim của bạn</h1>
-              <h2 class={cx('title', 'is-4')}>Các phim bạn muốn xem:</h2>
+              <h2 className={cx('title', 'is-4')}>Các phim bạn muốn xem:</h2>
 
               {(wantToSee.length === 0 && (
                 <div style={{ color: '#7a7a7a' }}>Bạn chưa thêm phim nào vào danh sách này</div>
@@ -55,7 +55,7 @@ const Collection = () => {
             <hr />
 
             <div className="title-list">
-              <h2 class={cx('title', 'is-4')}>Các phim bạn đã xem:</h2>
+              <h2 className={cx('title', 'is-4')}>Các phim bạn đã xem:</h2>
               {(watched.length === 0 && (
                 <div style={{ color: '#7a7a7a' }}>Bạn chưa thêm phim nào vào danh sách này</div>
               )) || (
