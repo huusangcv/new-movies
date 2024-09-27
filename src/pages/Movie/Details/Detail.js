@@ -23,7 +23,13 @@ const MovieDetails = () => {
   const navigate = useNavigate();
 
   const [isShowModalTrailer, setIsShowModalTrailer] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    if (movie) {
+      return false;
+    } else {
+      return true;
+    }
+  });
 
   useEffect(() => {
     const fetchApi = async () => {
@@ -91,7 +97,11 @@ const MovieDetails = () => {
 
   return (
     <>
-      {(isLoading && <p>Loading...</p>) || (
+      {(isLoading && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 9999999, backgroundColor: '#06121e' }}>
+          <p>Loading...</p>
+        </div>
+      )) || (
         <>
           <div className={cx('details__poster')}>{<BackDrop poster_url={movie?.poster_url} />}</div>
           <div className={cx('wapper')}>

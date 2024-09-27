@@ -23,98 +23,56 @@ const Series = () => {
   const totalPage = Math.floor(totalItems.moviesSingle / 24);
   useEffect(() => {
     // check if don't have movies or length of movies === 0 or page !==1 when call API
-    // if (!movies || movies.length === 0 || page !== 1) {
-    //   const fetchApi = async () => {
-    //     setIsLoading(true);
-    //     try {
-    //       const movies = await getMovies.Series(page);
-    //       if (movies) {
-    //         document.title = movies.seoOnPage.titleHead;
+    if (!movies || movies.length === 0 || page !== 1) {
+      const fetchApi = async () => {
+        setIsLoading(true);
+        try {
+          const movies = await getMovies.Series(page);
+          if (movies) {
+            document.title = movies.seoOnPage.titleHead;
 
-    //         const result = movies.items.map((movie) => {
-    //           return {
-    //             name: movie.name,
-    //             slug: movie.slug,
-    //             origin_name: movie.origin_name,
-    //             year: movie.year,
-    //             thumb_url: movie.thumb_url,
-    //             poster_url: movie.poster_url,
-    //             category: movie.category,
-    //             country: movie.country,
-    //             tmdb: movie.tmdb,
-    //             time: movie.time,
-    //           };
-    //         });
+            const result = movies.items.map((movie) => {
+              return {
+                name: movie.name,
+                slug: movie.slug,
+                origin_name: movie.origin_name,
+                year: movie.year,
+                thumb_url: movie.thumb_url,
+                poster_url: movie.poster_url,
+                category: movie.category,
+                country: movie.country,
+                tmdb: movie.tmdb,
+                time: movie.time,
+              };
+            });
 
-    //         dispatch(getMoviesSeries(result));
+            dispatch(getMoviesSeries(result));
 
-    //         //check page === 1 to get totalItem on each page
-    //         if (page === 1) {
-    //           dispatch(getTotalItemsSeries(movies.params.pagination.totalItems));
-    //         }
-
-    //         setIsLoading(false);
-    //       }
-    //     } catch (error) {
-    //       console.log('Erroe', error);
-    //     }
-    //   };
-
-    //   //Check page === 1 delay 1,2 call api movies series else page !== 1 delay 400ms
-    //   if (page === 1) {
-    //     setTimeout(() => {
-    //       fetchApi();
-    //     }, 1200);
-    //   } else {
-    //     setTimeout(() => {
-    //       fetchApi();
-    //     }, 400);
-    //   }
-    // } else {
-    //   setIsLoading(false);
-    // }
-
-    const fetchApi = async () => {
-      setIsLoading(true);
-      try {
-        const movies = await getMovies.Series(page);
-        if (movies) {
-          document.title = movies.seoOnPage.titleHead;
-
-          const result = movies.items.map((movie) => {
-            return {
-              name: movie.name,
-              slug: movie.slug,
-              origin_name: movie.origin_name,
-              year: movie.year,
-              thumb_url: movie.thumb_url,
-              poster_url: movie.poster_url,
-              category: movie.category,
-              country: movie.country,
-              tmdb: movie.tmdb,
-              time: movie.time,
-            };
-          });
-
-          dispatch(getMoviesSeries(result));
-
-          //check page === 1 to get totalItem on each page
-          if (page === 1) {
-            dispatch(getTotalItemsSeries(movies.params.pagination.totalItems));
+            if (page === 1) {
+              dispatch(getTotalItemsSeries(movies.params.pagination.totalItems));
+            }
+            setIsLoading(false);
           }
-          setIsLoading(false);
+        } catch (error) {
+          console.log('Erroe', error);
         }
-      } catch (error) {
-        console.log('Erroe', error);
+      };
+      //Check page === 1 delay 1,2 call api movies series else page !== 1 delay 400ms
+      if (page === 1) {
+        setTimeout(() => {
+          fetchApi();
+        }, 1200);
+      } else {
+        setTimeout(() => {
+          fetchApi();
+        }, 400);
       }
-    };
-
-    if (!movies || page !== 1) {
-      fetchApi();
+      //--
     } else {
-      setIsLoading(false);
+      if (movies) {
+        setIsLoading(false);
+      }
     }
-
     window.scroll({
       top: 0,
     });

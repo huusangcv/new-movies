@@ -9,14 +9,7 @@ import { useEffect, useState } from 'react';
 const cx = classNames.bind(styles);
 
 const HeaderOnlyForDetail = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1200);
-  }, []);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     (isLoading && <div>Loading...</div>) || (

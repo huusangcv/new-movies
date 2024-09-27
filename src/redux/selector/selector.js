@@ -3,6 +3,7 @@ const moviesSingle = (state) => state.movies.single;
 const moviesSeries = (state) => state.movies.series;
 const moviesNew = (state) => state.movies.new;
 const getTotalItems = (state) => state.totalPage;
+const loading = (state) => state.isLoading;
 const movieDetail = (state) => state.movie.item;
 const movieNewUpdate = (state) => state.newUpdateMovies;
 const currentPageMovies = (state) => state.currentPageMovies;
@@ -22,4 +23,5 @@ export {
   moviesOnMultiline,
   watchedMovies,
   wantToSeeMovies,
+  loading,
 };

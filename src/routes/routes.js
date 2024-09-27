@@ -16,6 +16,7 @@ const Browse = lazy(() => import('~/pages/Browse'));
 const Search = lazy(() => import('~/pages/Search'));
 const Developing = lazy(() => import('~/pages/Developing'));
 const NotFound = lazy(() => import('~/pages/NotFound'));
+const Account = lazy(() => import('~/pages/Account'));
 
 const publicLayout = [
   { path: config.routes.home, component: HomePage },
@@ -29,6 +30,7 @@ const publicLayout = [
   { path: config.routes.browse, component: Browse },
   { path: config.routes.search, component: Search },
   { path: config.routes.developing, component: Developing },
+  { path: config.routes.settings, component: Account },
   { path: config.routes.notfound, component: NotFound },
 ];
 

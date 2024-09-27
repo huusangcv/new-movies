@@ -13,7 +13,6 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import getMovies from '~/services/getMovies';
 import Footer from '~/layouts/Footer';
-import Spinner from '~/components/Spinner';
 
 const cx = classNames.bind(styles);
 const Watch = () => {
@@ -21,10 +20,16 @@ const Watch = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const movie = useSelector(movieDetail);
 
   const [currentEpisode, setCurrentEpisode] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-  const movie = useSelector(movieDetail);
+  const [isLoading, setIsLoading] = useState(() => {
+    if (movie) {
+      return false;
+    } else {
+      return true;
+    }
+  });
 
   const videoSrc = movie?.episodes[0]?.server_data[currentEpisode]?.link_embed;
 

@@ -1,6 +1,7 @@
 import collectionReducer from './collectionReducer';
 import currentPageReducer from './currentPageReducer';
 import filterReducer from './filterReducer';
+import isLoadingReducer from './isLoadingReducer';
 import isMultilineReducer from './isMultilineReducer';
 import movieListReducer from './movieListReducer';
 import movieReducer from './movieReducer';
@@ -16,6 +17,7 @@ const rootReducer = (state = {}, action) => {
     newUpdateMovies: moviesNewUpdateReducer(state.newUpdateMovies, action),
     totalPage: totalPageReducer(state.totalPage, action),
     isShowBar: toggleBarsReducer(state.isShowBar, action),
+    isLoading: isLoadingReducer(state.isLoading, action),
     currentPageMovies: currentPageReducer(state.currentPageMovies, action),
     moviesOnMultiline: isMultilineReducer(state.moviesOnMultiline, action),
     collectionMovies: collectionReducer(state.collectionMovies, action),

@@ -10,6 +10,7 @@ const routes = {
   browse: '/browse',
   collection: '/collection',
   browseDetails: '/:genreCurrent/:index',
+  settings: '/settings',
   notfound: '*',
   login: '/login',
   signup: '/signup',
