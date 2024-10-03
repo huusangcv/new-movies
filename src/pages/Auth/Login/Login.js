@@ -49,7 +49,7 @@ const Login = () => {
         console.log('Đăng nhập thành công:', result.data);
         if (email !== 'admin@gmail.com') {
           navigate('/');
-          document.cookie = `auth=${email} expirse=10 Secure`;
+          // document.cookie = `auth=${email} expirse=10 Secure`;
           // window.localStorage.setItem('auth', JSON.stringify(email));
         } else {
           window.location.href = 'https://admin.newmoviesz.online';

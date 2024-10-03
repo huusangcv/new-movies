@@ -148,9 +148,9 @@ const BrowseDetails = () => {
                             <div className="column tags genres">
                               {movie?.category.map((item, index) => {
                                 return (
-                                  <a className="tag is-dark" key={item.id} href="/person/nam-dong-hyub~173099">
+                                  <Link className="tag is-dark" key={item.id} to={`/genren/${item.slug}`}>
                                     {(index <= 1 && item.name) || `${item.name} `}
-                                  </a>
+                                  </Link>
                                 );
                               })}
                             </div>

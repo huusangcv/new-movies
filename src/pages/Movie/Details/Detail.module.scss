@@ -167,7 +167,14 @@
     .level-item {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px 4px;
+      // gap: 10px 4px;
+      margin-bottom: 12px;
+    }
+
+
+    .level-left {
+      flex-direction: column;
+      justify-content: center;
     }
   }
 
@@ -222,7 +229,7 @@
   svg {
     height: 1.3em;
     fill: var(--especitally-color);
-    margin-right: 0.9em;
+    margin-right: 8px;
   }
 }
 
@@ -291,6 +298,10 @@
 .dropdown {
   margin-left: 14px;
 
+  @media screen and (max-width: 767.98px) {
+    margin-left: 0;
+  }
+
   display: inline-flex;
   position: relative;
   vertical-align: top;
@@ -338,6 +349,10 @@
     line-height: 1.5;
     padding: 6px 48px 6px 16px;
     position: relative;
+
+    @media screen and (max-width: 767.98px) {
+      font-size: 1.4rem;
+    }
 
     &:hover {
       background-color: #f5f5f5;
