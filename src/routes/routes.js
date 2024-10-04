@@ -3,20 +3,23 @@ import config from '~/config';
 import HeaderOnlyForMovies from '~/layouts/HeaderOnlyForMovies';
 import Login from '~/pages/Auth/Login/Login';
 import SignUp from '~/pages/Auth/SignUp';
+import Details from '~/pages/Movie/Details';
+import BrowseDetails from '~/pages/BrowseDetails';
 
 const HomePage = lazy(() => import('~/pages/Home'));
 const Series = lazy(() => import('~/pages/Movies/Series'));
 const Single = lazy(() => import('~/pages/Movies/Single'));
 const New = lazy(() => import('~/pages/Movies/New'));
 const Collection = lazy(() => import('~/pages/Movies/Collection'));
-const BrowseDetails = lazy(() => import('~/pages/BrowseDetails'));
-const Details = lazy(() => import('~/pages/Movie/Details'));
+// const BrowseDetails = lazy(() => import('~/pages/BrowseDetails'));
+// const Details = lazy(() => import('~/pages/Movie/Details'));
 const Watch = lazy(() => import('~/pages/Movie/Watch'));
 const Browse = lazy(() => import('~/pages/Browse'));
 const Search = lazy(() => import('~/pages/Search'));
 const Developing = lazy(() => import('~/pages/Developing'));
 const NotFound = lazy(() => import('~/pages/NotFound'));
 const Account = lazy(() => import('~/pages/Account'));
+const Donate = lazy(() => import('~/pages/Donate'));
 
 const publicLayout = [
   { path: config.routes.home, component: HomePage },
@@ -31,6 +34,7 @@ const publicLayout = [
   { path: config.routes.search, component: Search },
   { path: config.routes.developing, component: Developing },
   { path: config.routes.settings, component: Account },
+  { path: config.routes.donate, component: Donate },
   { path: config.routes.notfound, component: NotFound },
 ];
 

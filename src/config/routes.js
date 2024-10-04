@@ -11,6 +11,7 @@ const routes = {
   collection: '/collection',
   browseDetails: '/:genreCurrent/:index',
   settings: '/settings',
+  donate: '/donate',
   notfound: '*',
   login: '/login',
   signup: '/signup',

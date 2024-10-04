@@ -547,3 +547,230 @@ button {
     margin-right: 32px;
   }
 }
+
+//evaluate
+.is-flex {
+  display: flex !important;
+}
+
+.is-align-items-center {
+  align-items: center !important;
+}
+
+.is-flex-direction-column {
+  flex-direction: column !important;
+}
+
+.has-text-centered {
+  text-align: center !important;
+}
+
+.field:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.mt-4 {
+  margin-top: 16px !important;
+}
+
+.my-4 {
+  margin-top: 16px !important;
+  margin-bottom: 16px !important;
+}
+
+.field.has-addons {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.field.has-addons .control.is-expanded {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.field.has-addons .control:not(:last-child) {
+  margin-right: -1px;
+}
+
+.control {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  clear: both;
+  font-size: 1.6rem;
+  position: relative;
+  text-align: inherit;
+}
+
+.field.has-addons .control:first-child:not(:only-child) .button,
+.field.has-addons .control:first-child:not(:only-child) .input,
+.field.has-addons .control:first-child:not(:only-child) .select select {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.button,
+.file-cta,
+.file-name,
+.input,
+.pagination-ellipsis,
+.pagination-link,
+.pagination-next,
+.pagination-previous,
+.select select,
+.textarea {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: 1.6rem;
+  height: 2.5em;
+  justify-content: flex-start;
+  line-height: 1.5;
+  padding: calc(0.5em - 1px) calc(0.75em - 1px);
+  position: relative;
+  vertical-align: top;
+}
+
+.input,
+.textarea {
+  -webkit-box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
+  box-shadow: inset 0 0.0625em 0.125em rgba(10, 10, 10, 0.05);
+  max-width: 100%;
+  width: 100%;
+}
+
+.input,
+.select select,
+.textarea {
+  background-color: #fff;
+  border-color: #dbdbdb;
+  border-radius: 4px;
+  color: #363636;
+}
+
+.button {
+  background-color: #fff;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  color: #363636;
+  cursor: pointer;
+  justify-content: center;
+  padding: calc(0.5em - 1px) 1em;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 0 4px 4px 0;
+}
+
+.button.is-info {
+  background-color: #3e8ed0;
+  border-color: transparent;
+  color: #fff;
+  border-radius: 0;
+}
+
+.button.is-success {
+  background-color: #48c78e;
+  border-color: transparent;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.button.is-primary {
+  background-color: #cf2122;
+  border-color: transparent;
+  color: #fff;
+}
+
+.button.is-medium {
+  font-size: 2rem;
+  border-radius: 4px;
+}
+
+.mr-4 {
+  margin-right: 16px !important;
+}
+
+.my-5 {
+  margin-top: 24px !important;
+  margin-bottom: 24px !important;
+}
+
+.has-text-centered {
+  text-align: center !important;
+}
+
+.title.is-2 {
+  font-size: 4rem;
+}
+
+.label {
+  color: #fff;
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.label.is-medium {
+  font-size: 2rem;
+}
+
+.label:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.select:not(.is-multiple) {
+  height: 2.5em;
+}
+.select {
+  display: inline-block;
+  max-width: 100%;
+  position: relative;
+  vertical-align: top;
+}
+
+.select select:not([multiple]) {
+  padding-right: 5rem;
+}
+.select select {
+  cursor: pointer;
+  display: block;
+  font-size: 1.6rem;
+  max-width: 100%;
+  outline: none;
+}
+
+.navbar-link:not(.is-arrowless):after,
+.select:not(.is-multiple):not(.is-loading):after {
+  border: 3px solid transparent;
+  border-radius: 2px;
+  border-right: 0;
+  border-top: 0;
+  content: ' ';
+  display: block;
+  height: 0.625em;
+  margin-top: -0.4375em;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  width: 0.625em;
+}
+
+.select:not(.is-multiple):not(.is-loading):after {
+  border-color: #428bca;
+  right: 1.125em;
+  z-index: 4;
+}
+
+//donate
+
+.donate-form .field {
+  margin-bottom: 3.2rem;
+}
