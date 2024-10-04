@@ -1,10 +1,6 @@
-import classNames from 'classnames/bind';
-import styles from './Account.module.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-
-const cx = classNames.bind(styles);
 
 const Account = () => {
   const [isChangeEmail, setIsChangeEmail] = useState(false);
@@ -63,7 +59,7 @@ const Account = () => {
         {(!isChangeEmail && (
           <p>
             Email: <b>huusangcv@gmail.com</b> -&nbsp;
-            <a href="#" onClick={handleIsChangeEmail}>
+            <a href="#!" onClick={handleIsChangeEmail}>
               Đổi email
             </a>
           </p>
@@ -87,7 +83,7 @@ const Account = () => {
                 </button>
               </div>
               <div className="control">
-                <a href="#" className="button" onClick={handleIsChangeEmail}>
+                <a href="#!" className="button" onClick={handleIsChangeEmail}>
                   Hủy
                 </a>
               </div>
@@ -96,23 +92,30 @@ const Account = () => {
         )}
         {(!isChangePassword && (
           <p>
-            <a href="#" onClick={handleIsChangePassword}>
+            <a href="#!" onClick={handleIsChangePassword}>
               Đổi mật khẩu
             </a>
           </p>
         )) || (
-          <form class="my-4" style={{ width: '300px' }}>
-            <div class="field">
-              <div class="control">
-                <input type="password" name="password1" class="input" placeholder="Mật khẩu mới" required="" value="" />
+          <form className="my-4" style={{ width: '300px' }}>
+            <div className="field">
+              <div className="control">
+                <input
+                  type="password"
+                  name="password1"
+                  className="input"
+                  placeholder="Mật khẩu mới"
+                  required=""
+                  value=""
+                />
               </div>
             </div>
-            <div class="field">
-              <div class="control">
+            <div className="field">
+              <div className="control">
                 <input
                   type="password"
                   name="password2"
-                  class="input"
+                  className="input"
                   placeholder="Nhập lại mật khẩu"
                   required=""
                   value=""
@@ -120,10 +123,10 @@ const Account = () => {
               </div>
             </div>
             <div>
-              <button type="submit" class="button is-success mr-4">
+              <button type="submit" className="button is-success mr-4">
                 Cập nhật
               </button>
-              <a class="button" style={{ borderRadius: '4px' }} onClick={handleIsChangePassword}>
+              <a href="#!" className="button" style={{ borderRadius: '4px' }} onClick={handleIsChangePassword}>
                 Hủy
               </a>
             </div>
