@@ -53,7 +53,7 @@ const Donate = () => {
     navigator.clipboard
       .writeText('0358337215')
       .then(() => {
-        setCopySuccess(`Coppy 0358337215`);
+        setCopySuccess('Coppy 0358337215');
         setTimeout(() => {
           setCopySuccess('');
         }, 1000);

@@ -10,12 +10,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMovieDetails } from '~/redux/actions';
 import { movieDetail } from '~/redux/selector/selector';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import videoUrl from '~/assets/video/ex1.mp4';
 import Hls from 'hls.js';
-
+import artplayerPluginHlsControl from 'artplayer-plugin-hls-control';
 import getMovies from '~/services/getMovies';
 import Footer from '~/layouts/Footer';
-import Artplayer from 'artplayer';
 import Player from './Video';
 
 const cx = classNames.bind(styles);
@@ -35,7 +33,7 @@ const Watch = () => {
     }
   });
 
-  const videoSrc = movie?.episodes[0]?.server_data[currentEpisode]?.link_m3u8;
+  const videoSrc = movie?.episodes[0]?.server_data[currentEpisode]?.link_embed;
 
   useEffect(() => {
     setIsLoading(true);
@@ -113,7 +111,7 @@ const Watch = () => {
         <div className={cx('watch_video')}>
           <div className={cx('columns')}>
             <div className={cx('column')}>
-              {/* {(videoSrc && (
+              {(videoSrc && (
                 <iframe
                   src={videoSrc}
                   frameBorder="0"
@@ -121,9 +119,9 @@ const Watch = () => {
                   allowFullScreen
                   className="video-js"
                 ></iframe>
-              )) || <div className="video-js">Vui lòng đợi giây lát</div>} */}
+              )) || <div className="video-js">Vui lòng đợi giây lát</div>}
 
-              <Player
+              {/* <Player
                 option={{
                   url: videoSrc,
                   customType: {
@@ -134,7 +132,6 @@ const Watch = () => {
                   muted: false,
                   autoplay: false,
                   pip: true,
-                  autoSize: true,
                   autoMini: true,
                   setting: true,
                   loop: true,
@@ -142,7 +139,6 @@ const Watch = () => {
                   playbackRate: true,
                   aspectRatio: true,
                   fullscreen: true,
-                  fullscreenWeb: true,
                   subtitleOffset: true,
                   miniProgressBar: true,
                   mutex: true,
@@ -155,28 +151,13 @@ const Watch = () => {
                   moreVideoAttr: {
                     crossOrigin: 'anonymous',
                   },
-                  controls: [
-                    {
-                      position: 'right',
-                      html: 'Control',
-                      index: 1,
-                      tooltip: 'Control Tooltip',
-                      style: {
-                        marginRight: '20px',
-                      },
-                      click: function () {
-                        console.info('You clicked on the custom control');
-                      },
-                    },
-                  ],
                 }}
                 style={{
-                  width: '600px',
-                  height: '400px',
-                  margin: '60px auto 0',
+                  width: '100%',
+                  height: '600px',
                 }}
                 getInstance={(art) => console.info(art)}
-              />
+              /> */}
             </div>
           </div>
           <p className={cx('has-text-centered', 'is-size-7')}>
