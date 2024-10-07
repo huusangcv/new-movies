@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import numeral from 'numeral';
 import user from '~/services/user';
 const Donate = () => {
@@ -6,6 +6,13 @@ const Donate = () => {
   const [qrCode, setQrCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [copySuccess, setCopySuccess] = useState('');
+
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+    });
+  }, []);
+
   const handleSelectAmount = (e) => {
     setAmount(e.target.value);
   };
@@ -46,8 +53,7 @@ const Donate = () => {
     navigator.clipboard
       .writeText('0358337215')
       .then(() => {
-        setCopySuccess('Sao chép thành công!');
-
+        setCopySuccess(`Coppy 0358337215`);
         setTimeout(() => {
           setCopySuccess('');
         }, 1000);

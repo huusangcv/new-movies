@@ -115,14 +115,10 @@ const HomePage = () => {
                     <img src={movie.thumb_url} alt="" />
                   </div>
                   <h3 className="name vi">
-                    <span>
-                      <span>{movie.name}</span>
-                    </span>
+                    <span>{movie.name}</span>
                   </h3>
                   <h3 className="name en">
-                    <span>
-                      <span>{movie.origin_name}</span>
-                    </span>
+                    <span>{movie.origin_name}</span>
                   </h3>
                 </Link>
               )
@@ -191,14 +187,10 @@ const HomePage = () => {
                       ></img>
                     </span>
                     <h3 className="name vi">
-                      <span>
-                        <span>{movie.name}</span>
-                      </span>
+                      <span>{movie.name}</span>
                     </h3>
                     <h3 className="name en">
-                      <span>
-                        <span>{movie.origin_name}</span>
-                      </span>
+                      <span>{movie.origin_name}</span>
                     </h3>
                   </Link>
                 )

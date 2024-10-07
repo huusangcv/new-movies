@@ -1,4 +1,5 @@
 import collectionReducer from './collectionReducer';
+import currentMoviesTopReducer from './currentMoviesTopReducer';
 import currentPageReducer from './currentPageReducer';
 import filterReducer from './filterReducer';
 import isLoadingReducer from './isLoadingReducer';
@@ -21,6 +22,7 @@ const rootReducer = (state = {}, action) => {
     currentPageMovies: currentPageReducer(state.currentPageMovies, action),
     moviesOnMultiline: isMultilineReducer(state.moviesOnMultiline, action),
     collectionMovies: collectionReducer(state.collectionMovies, action),
+    currentMoviesTop: currentMoviesTopReducer(state.currentMoviesTop, action),
   };
 };
 

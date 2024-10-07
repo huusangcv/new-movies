@@ -3,6 +3,7 @@ const routes = {
   single: '/movies/single',
   series: '/movies/series',
   new: '/movies/new',
+  top: '/top',
   search: '/search',
   developing: '/developing',
   detail: '/movie/:slug',

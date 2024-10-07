@@ -2,12 +2,14 @@ const {
   GET_TOTAL_ITEMS_MOVIES_SINGLE,
   GET_TOTAL_ITEMS_MOVIES_SERIES,
   GET_TOTAL_ITEMS_MOVIES_NEW,
+  GET_TOTAL_ITEMS_MOVIES_TOP,
 } = require('../constans');
 
 const initialState = {
   moviesSingle: 0,
   moviesSeries: 0,
   moviesNew: 0,
+  moviesTop: 0,
 };
 
 const totalPageReducer = (state = initialState, action) => {
@@ -26,6 +28,11 @@ const totalPageReducer = (state = initialState, action) => {
       return {
         ...state,
         moviesNew: action.payload,
+      };
+    case GET_TOTAL_ITEMS_MOVIES_TOP:
+      return {
+        ...state,
+        moviesTop: action.payload,
       };
     default:
       return state;

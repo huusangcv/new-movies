@@ -10,9 +10,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMovieDetails } from '~/redux/actions';
 import { movieDetail } from '~/redux/selector/selector';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import videoUrl from '~/assets/video/ex1.mp4';
+import Hls from 'hls.js';
 
 import getMovies from '~/services/getMovies';
 import Footer from '~/layouts/Footer';
+import Artplayer from 'artplayer';
+import Player from './Video';
 
 const cx = classNames.bind(styles);
 const Watch = () => {
@@ -31,7 +35,7 @@ const Watch = () => {
     }
   });
 
-  const videoSrc = movie?.episodes[0]?.server_data[currentEpisode]?.link_embed;
+  const videoSrc = movie?.episodes[0]?.server_data[currentEpisode]?.link_m3u8;
 
   useEffect(() => {
     setIsLoading(true);
@@ -64,7 +68,7 @@ const Watch = () => {
       top: 0,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentEpisode]);
+  }, [currentEpisode, videoSrc]);
 
   useEffect(() => {
     const page = location.pathname; // Đặt tên trang là URL
@@ -88,13 +92,28 @@ const Watch = () => {
     } catch (error) {}
   };
 
+  const playM3u8 = (video, url, art) => {
+    if (Hls.isSupported()) {
+      if (art.hls) art.hls.destroy();
+      const hls = new Hls();
+      hls.loadSource(url);
+      hls.attachMedia(video);
+      art.hls = hls;
+      art.on('destroy', () => hls.destroy());
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = url;
+    } else {
+      art.notice.show = 'Unsupported playback format: m3u8';
+    }
+  };
+
   return (
     <>
       {(isLoading && <p>Loading...</p>) || (
         <div className={cx('watch_video')}>
           <div className={cx('columns')}>
             <div className={cx('column')}>
-              {(videoSrc && (
+              {/* {(videoSrc && (
                 <iframe
                   src={videoSrc}
                   frameBorder="0"
@@ -102,7 +121,62 @@ const Watch = () => {
                   allowFullScreen
                   className="video-js"
                 ></iframe>
-              )) || <div className="video-js">Vui lòng đợi giây lát</div>}
+              )) || <div className="video-js">Vui lòng đợi giây lát</div>} */}
+
+              <Player
+                option={{
+                  url: videoSrc,
+                  customType: {
+                    m3u8: playM3u8,
+                  },
+                  volume: 0.5,
+                  isLive: false,
+                  muted: false,
+                  autoplay: false,
+                  pip: true,
+                  autoSize: true,
+                  autoMini: true,
+                  setting: true,
+                  loop: true,
+                  flip: true,
+                  playbackRate: true,
+                  aspectRatio: true,
+                  fullscreen: true,
+                  fullscreenWeb: true,
+                  subtitleOffset: true,
+                  miniProgressBar: true,
+                  mutex: true,
+                  backdrop: true,
+                  playsInline: true,
+                  autoPlayback: true,
+                  airplay: true,
+                  theme: '#23ade5',
+                  lang: navigator.language.toLowerCase(),
+                  moreVideoAttr: {
+                    crossOrigin: 'anonymous',
+                  },
+                  controls: [
+                    {
+                      position: 'right',
+                      html: 'Control',
+                      index: 1,
+                      tooltip: 'Control Tooltip',
+                      style: {
+                        marginRight: '20px',
+                      },
+                      click: function () {
+                        console.info('You clicked on the custom control');
+                      },
+                    },
+                  ],
+                }}
+                style={{
+                  width: '600px',
+                  height: '400px',
+                  margin: '60px auto 0',
+                }}
+                getInstance={(art) => console.info(art)}
+              />
             </div>
           </div>
           <p className={cx('has-text-centered', 'is-size-7')}>

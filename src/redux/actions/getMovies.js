@@ -1,4 +1,5 @@
 import {
+  CURRENT_MOVIES_TOP,
   FILTER_MOVIES,
   FILTER_MOVIES_CATEGORY,
   GET_CURRENT_PAGE_MOVIES,
@@ -7,10 +8,12 @@ import {
   GET_MOVIE_SEARCH,
   GET_MOVIE_SERIES,
   GET_MOVIE_SINGLE,
+  GET_MOVIE_TOP,
   GET_NEW_UPDATE_MOVIES,
   GET_TOTAL_ITEMS_MOVIES_NEW,
   GET_TOTAL_ITEMS_MOVIES_SERIES,
   GET_TOTAL_ITEMS_MOVIES_SINGLE,
+  GET_TOTAL_ITEMS_MOVIES_TOP,
   IS_MULTILINE,
   TITLE_MOVIES,
   WANT_TO_SEE,
@@ -66,6 +69,13 @@ const getMoviesNew = (payload) => {
   };
 };
 
+const getMoviesTop = (payload) => {
+  return {
+    type: GET_MOVIE_TOP,
+    payload,
+  };
+};
+
 const getTotalItemsSingle = (payload) => {
   return {
     type: GET_TOTAL_ITEMS_MOVIES_SINGLE,
@@ -87,6 +97,13 @@ const getTotalItemsNew = (payload) => {
   };
 };
 
+const getTotalItemsTop = (payload) => {
+  return {
+    type: GET_TOTAL_ITEMS_MOVIES_TOP,
+    payload,
+  };
+};
+
 const getNewUpdateMovies = (payload) => {
   return {
     type: GET_NEW_UPDATE_MOVIES,
@@ -97,6 +114,13 @@ const getNewUpdateMovies = (payload) => {
 const getCurrentPageMovies = (payload) => {
   return {
     type: GET_CURRENT_PAGE_MOVIES,
+    payload: payload,
+  };
+};
+
+const getCurrentMoviesTop = (payload) => {
+  return {
+    type: CURRENT_MOVIES_TOP,
     payload: payload,
   };
 };
@@ -130,11 +154,14 @@ export {
   getMoviesSingle,
   getMoviesSeries,
   getMoviesNew,
+  getMoviesTop,
   getTotalItemsSingle,
   getTotalItemsSeries,
   getTotalItemsNew,
+  getTotalItemsTop,
   getNewUpdateMovies,
   getCurrentPageMovies,
+  getCurrentMoviesTop,
   getMoviesOnMultiline,
   addMoviesWatched,
   addMoviesWantToSee,

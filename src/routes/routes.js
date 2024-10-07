@@ -5,17 +5,16 @@ import Login from '~/pages/Auth/Login/Login';
 import SignUp from '~/pages/Auth/SignUp';
 import Details from '~/pages/Movie/Details';
 import BrowseDetails from '~/pages/BrowseDetails';
+import HomePage from '~/pages/Home';
+import Series from '~/pages/Movies/Series';
+import Single from '~/pages/Movies/Single';
+import New from '~/pages/Movies/New';
+import Top from '~/pages/Movies/Top';
+import Collection from '~/pages/Movies/Collection';
+import Search from '~/pages/Search';
+import Browse from '~/pages/Browse';
 
-const HomePage = lazy(() => import('~/pages/Home'));
-const Series = lazy(() => import('~/pages/Movies/Series'));
-const Single = lazy(() => import('~/pages/Movies/Single'));
-const New = lazy(() => import('~/pages/Movies/New'));
-const Collection = lazy(() => import('~/pages/Movies/Collection'));
-// const BrowseDetails = lazy(() => import('~/pages/BrowseDetails'));
-// const Details = lazy(() => import('~/pages/Movie/Details'));
 const Watch = lazy(() => import('~/pages/Movie/Watch'));
-const Browse = lazy(() => import('~/pages/Browse'));
-const Search = lazy(() => import('~/pages/Search'));
 const Developing = lazy(() => import('~/pages/Developing'));
 const NotFound = lazy(() => import('~/pages/NotFound'));
 const Account = lazy(() => import('~/pages/Account'));
@@ -26,6 +25,7 @@ const publicLayout = [
   { path: config.routes.series, component: Series },
   { path: config.routes.single, component: Single },
   { path: config.routes.new, component: New },
+  { path: config.routes.top, component: Top },
   { path: config.routes.collection, component: Collection },
   { path: config.routes.browseDetails, component: BrowseDetails },
   { path: config.routes.detail, component: Details },

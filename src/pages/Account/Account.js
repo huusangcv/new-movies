@@ -1,11 +1,17 @@
 import 'react-toastify/dist/ReactToastify.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 
 const Account = () => {
   const [isChangeEmail, setIsChangeEmail] = useState(false);
   const [isChangePassword, setIsChangePassword] = useState(false);
   const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+    });
+  }, []);
 
   const handleIsChangeEmail = () => {
     setIsChangeEmail(!isChangeEmail);
