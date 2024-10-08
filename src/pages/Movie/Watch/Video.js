@@ -21,7 +21,7 @@ export default function Player({ option, getInstance, ...rest }) {
 
     return () => {
       if (art && art.destroy) {
-        art.destroy(false);
+        art.destroy(true);
       }
     };
   }, [option, getInstance]);

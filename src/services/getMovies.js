@@ -14,7 +14,7 @@ const getMovies = {
     return result.data;
   },
   Top: async (page, movieType = '') => {
-    const result = await axios.get(`danh-sach/${movieType}?sort_field=view&page=${page}`);
+    const result = await axios.get(`danh-sach/${movieType}?page=${page}&sort_field=view&year=2024`);
     return result.data;
   },
   Browse: async (moviesType, page, type = '', nation = '', year = '', sortBy = '') => {

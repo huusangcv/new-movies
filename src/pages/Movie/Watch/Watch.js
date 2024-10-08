@@ -11,10 +11,8 @@ import { getMovieDetails } from '~/redux/actions';
 import { movieDetail } from '~/redux/selector/selector';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import Hls from 'hls.js';
-import artplayerPluginHlsControl from 'artplayer-plugin-hls-control';
 import getMovies from '~/services/getMovies';
 import Footer from '~/layouts/Footer';
-import Player from './Video';
 
 const cx = classNames.bind(styles);
 const Watch = () => {
@@ -120,8 +118,8 @@ const Watch = () => {
                   className="video-js"
                 ></iframe>
               )) || <div className="video-js">Vui lòng đợi giây lát</div>}
-
-              {/* <Player
+              {/* 
+              <Player
                 option={{
                   url: videoSrc,
                   customType: {
@@ -130,7 +128,7 @@ const Watch = () => {
                   volume: 0.5,
                   isLive: false,
                   muted: false,
-                  autoplay: false,
+                  autoplay: true,
                   pip: true,
                   autoMini: true,
                   setting: true,

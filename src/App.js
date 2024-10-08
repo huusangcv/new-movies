@@ -6,7 +6,6 @@ import { authLayout } from './routes/routes';
 import AuthLayout from './layouts/AuthLayout';
 import { QueryParamProvider } from 'use-query-params';
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
-
 function App() {
   return (
     <Router>

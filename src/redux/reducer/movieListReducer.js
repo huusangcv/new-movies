@@ -1,4 +1,4 @@
-const { GET_MOVIE_SINGLE, GET_MOVIE_SERIES, GET_MOVIE_NEW, GET_MOVIE_SEARCH, GET_MOVIE_TOP } = require('../constans');
+const { GET_MOVIE_SINGLE, GET_MOVIE_SERIES, GET_MOVIE_NEW, GET_MOVIE_TOP } = require('../constans');
 
 const initialState = {
   single: [],

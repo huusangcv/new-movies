@@ -80,6 +80,7 @@ const filter = {
     { id: 1, slug: '', text: 'Ngày phát hành' },
     { id: 2, slug: 'modified.time', text: 'Ngày cập nhật' },
     { id: 3, slug: 'year', text: 'Năm sản xuất' },
+    { id: 4, slug: 'view', text: 'Lượt xem' },
   ],
   years: [
     { id: 2026, slug: '2026', text: '2026' },
