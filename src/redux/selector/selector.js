@@ -7,7 +7,9 @@ const getTotalItems = (state) => state.totalPage;
 const loading = (state) => state.isLoading;
 const movieDetail = (state) => state.movie.item;
 const movieNewUpdate = (state) => state.newUpdateMovies;
-const currentPageMovies = (state) => state.currentPageMovies;
+const currentPageMoviesSingle = (state) => state.currentPageMovies.single;
+const currentPageMoviesSeries = (state) => state.currentPageMovies.series;
+const currentPageMoviesNew = (state) => state.currentPageMovies.new;
 const currentMoviesTop = (state) => state.currentMoviesTop;
 const moviesOnMultiline = (state) => state.moviesOnMultiline;
 const watchedMovies = (state) => state.collectionMovies.watched;
@@ -22,7 +24,9 @@ export {
   moviesTop,
   getTotalItems,
   movieNewUpdate,
-  currentPageMovies,
+  currentPageMoviesSingle,
+  currentPageMoviesSeries,
+  currentPageMoviesNew,
   currentMoviesTop,
   moviesOnMultiline,
   watchedMovies,

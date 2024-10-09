@@ -12,7 +12,9 @@ const GET_TOTAL_ITEMS_MOVIES_SERIES = 'get_total_items_series';
 const GET_TOTAL_ITEMS_MOVIES_NEW = 'get_total_items_new';
 const GET_TOTAL_ITEMS_MOVIES_TOP = 'get_total_items_top';
 const GET_NEW_UPDATE_MOVIES = 'get_new_update_movies';
-const GET_CURRENT_PAGE_MOVIES = 'get_current_page_movies';
+const GET_CURRENT_PAGE_MOVIES_SINGLE = 'get_current_page_movies_single';
+const GET_CURRENT_PAGE_MOVIES_SERIES = 'get_current_page_movies_series';
+const GET_CURRENT_PAGE_MOVIES_NEW = 'get_current_page_movies_new';
 const IS_MULTILINE = 'is_multiline';
 const IS_LOADING = 'is_loading';
 const WATCHED = 'watched';
@@ -33,7 +35,9 @@ export {
   GET_TOTAL_ITEMS_MOVIES_NEW,
   GET_TOTAL_ITEMS_MOVIES_TOP,
   GET_NEW_UPDATE_MOVIES,
-  GET_CURRENT_PAGE_MOVIES,
+  GET_CURRENT_PAGE_MOVIES_SINGLE,
+  GET_CURRENT_PAGE_MOVIES_SERIES,
+  GET_CURRENT_PAGE_MOVIES_NEW,
   IS_MULTILINE,
   IS_LOADING,
   WATCHED,

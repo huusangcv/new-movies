@@ -2,7 +2,9 @@ import {
   CURRENT_MOVIES_TOP,
   FILTER_MOVIES,
   FILTER_MOVIES_CATEGORY,
-  GET_CURRENT_PAGE_MOVIES,
+  GET_CURRENT_PAGE_MOVIES_NEW,
+  GET_CURRENT_PAGE_MOVIES_SERIES,
+  GET_CURRENT_PAGE_MOVIES_SINGLE,
   GET_MOVIE_DETAILS,
   GET_MOVIE_NEW,
   GET_MOVIE_SERIES,
@@ -110,9 +112,23 @@ const getNewUpdateMovies = (payload) => {
   };
 };
 
-const getCurrentPageMovies = (payload) => {
+const getCurrentPageMoviesSingle = (payload) => {
   return {
-    type: GET_CURRENT_PAGE_MOVIES,
+    type: GET_CURRENT_PAGE_MOVIES_SINGLE,
+    payload: payload,
+  };
+};
+
+const getCurrentPageMoviesSeries = (payload) => {
+  return {
+    type: GET_CURRENT_PAGE_MOVIES_SERIES,
+    payload: payload,
+  };
+};
+
+const getCurrentPageMoviesNew = (payload) => {
+  return {
+    type: GET_CURRENT_PAGE_MOVIES_NEW,
     payload: payload,
   };
 };
@@ -159,7 +175,9 @@ export {
   getTotalItemsNew,
   getTotalItemsTop,
   getNewUpdateMovies,
-  getCurrentPageMovies,
+  getCurrentPageMoviesSingle,
+  getCurrentPageMoviesSeries,
+  getCurrentPageMoviesNew,
   getCurrentMoviesTop,
   getMoviesOnMultiline,
   addMoviesWatched,

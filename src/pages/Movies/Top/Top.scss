@@ -1,9 +1,11 @@
 .mb-4 {
   margin-bottom: 1.6rem !important;
 }
-.MuiButtonBase-root {
-  font-size: 1.6rem !important;
-  width: 160px !important;
+.title-list {
+  .MuiButtonBase-root {
+    font-size: 1.6rem !important;
+    width: 160px !important;
+  }
 }
 
 .MuiButtonBase-root:not(.Mui-selected) {

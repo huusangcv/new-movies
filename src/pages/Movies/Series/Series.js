@@ -6,21 +6,28 @@ import Filter from '~/layouts/Filter';
 import getMovies from '~/services/getMovies';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentPageMovies, getMoviesSeries, getTotalItemsSeries } from '~/redux/actions';
-import { currentPageMovies, getTotalItems, moviesOnMultiline, moviesSeries } from '~/redux/selector/selector';
+import { getCurrentPageMoviesSeries, getMoviesSeries, getTotalItemsSeries } from '~/redux/actions';
+import { currentPageMoviesSeries, getTotalItems, moviesOnMultiline, moviesSeries } from '~/redux/selector/selector';
 import Pagination from '~/components/Pagination';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 const cx = classNames.bind(styles);
 
 const Series = () => {
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const movies = useSelector(moviesSeries);
-  const page = useSelector(currentPageMovies);
+  const page = useSelector(currentPageMoviesSeries);
   const totalItems = useSelector(getTotalItems);
   const isMultiline = useSelector(moviesOnMultiline);
-  const totalPage = Math.floor(totalItems.moviesSingle / 24);
+  const totalPage = Math.floor(totalItems.moviesSeries / 24);
+
+  const [isLoading, setIsLoading] = useState(() => {
+    if (movies && movies.length > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  });
   useEffect(() => {
     // check if don't have movies or length of movies === 0 or page !==1 when call API
     if (!movies || movies.length === 0 || page !== 1) {
@@ -88,7 +95,7 @@ const Series = () => {
   }, [location]);
 
   const handlePageClick = (e) => {
-    dispatch(getCurrentPageMovies(e.selected + 1));
+    dispatch(getCurrentPageMoviesSeries(e.selected + 1));
   };
 
   return (
@@ -144,7 +151,7 @@ const Series = () => {
                             <div className="column tags genres">
                               {movie?.category.map((item, index) => {
                                 return (
-                                  <Link className="tag is-dark" key={item.id}  to={`/genre/${item.slug}`}>
+                                  <Link className="tag is-dark" key={item.id} to={`/genre/${item.slug}`}>
                                     {(index <= 1 && item.name) || `${item.name} `}
                                   </Link>
                                 );

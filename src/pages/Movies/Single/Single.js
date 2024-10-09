@@ -6,8 +6,8 @@ import Filter from '~/layouts/Filter';
 import getMovies from '~/services/getMovies';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentPageMovies, getMoviesSingle, getTotalItemsSingle } from '~/redux/actions';
-import { currentPageMovies, getTotalItems, moviesOnMultiline, moviesSingle } from '~/redux/selector/selector';
+import { getCurrentPageMoviesSingle, getMoviesSingle, getTotalItemsSingle } from '~/redux/actions';
+import { currentPageMoviesSingle, getTotalItems, moviesOnMultiline, moviesSingle } from '~/redux/selector/selector';
 import Pagination from '~/components/Pagination';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 const cx = classNames.bind(styles);
@@ -15,11 +15,17 @@ const cx = classNames.bind(styles);
 const Single = () => {
   const location = useLocation();
   // const query = new URLSearchParams(location.search);
-
-  const [isLoading, setIsLoading] = useState(true);
-  const dispatch = useDispatch();
   const movies = useSelector(moviesSingle);
-  const page = useSelector(currentPageMovies);
+
+  const [isLoading, setIsLoading] = useState(() => {
+    if (movies && movies.length > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  });
+  const dispatch = useDispatch();
+  const page = useSelector(currentPageMoviesSingle);
   const totalItems = useSelector(getTotalItems);
   const isMultiline = useSelector(moviesOnMultiline);
 
@@ -92,7 +98,7 @@ const Single = () => {
   }, [location]);
 
   const handlePageClick = (e) => {
-    dispatch(getCurrentPageMovies(e.selected + 1));
+    dispatch(getCurrentPageMoviesSingle(e.selected + 1));
   };
 
   return (

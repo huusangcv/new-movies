@@ -109,6 +109,17 @@ const Bars = () => {
           </div>
         </Link> */}
         <Link
+          to="/top"
+          className={cx('bar')}
+          onClick={() => {
+            handleCloseBar();
+          }}
+        >
+          <div className="MuiListItemText-root">
+            <span>Phim hot</span>
+          </div>
+        </Link>
+        <Link
           to="/movies/single"
           className={cx('bar')}
           onClick={() => {

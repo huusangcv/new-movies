@@ -6,21 +6,28 @@ import getMovies from '~/services/getMovies';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactGA from 'react-ga4';
-import { getCurrentPageMovies, getMoviesNew, getTotalItemsNew } from '~/redux/actions';
-import { currentPageMovies, getTotalItems, moviesNew, moviesOnMultiline } from '~/redux/selector/selector';
+import { getCurrentPageMoviesNew, getMoviesNew, getTotalItemsNew } from '~/redux/actions';
+import { currentPageMoviesNew, getTotalItems, moviesNew, moviesOnMultiline } from '~/redux/selector/selector';
 import Pagination from '~/components/Pagination';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 const cx = classNames.bind(styles);
 
 const New = () => {
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const movies = useSelector(moviesNew);
-  const page = useSelector(currentPageMovies);
+  const page = useSelector(currentPageMoviesNew);
   const totalItems = useSelector(getTotalItems);
   const isMultiline = useSelector(moviesOnMultiline);
-  const totalPage = Math.floor(totalItems.moviesSingle / 24);
+  const totalPage = Math.floor(totalItems.moviesNew / 24);
+
+  const [isLoading, setIsLoading] = useState(() => {
+    if (movies && movies.length > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  });
   useEffect(() => {
     // check if don't have movies or length of movies === 0 or page !==1 when call API
     if (!movies || movies.length === 0 || page !== 1) {
@@ -88,7 +95,7 @@ const New = () => {
   }, [location]);
 
   const handlePageClick = (e) => {
-    dispatch(getCurrentPageMovies(e.selected + 1));
+    dispatch(getCurrentPageMoviesNew(e.selected + 1));
   };
 
   return (
