@@ -58,7 +58,7 @@ const Account = () => {
   return (
     <>
       <div className="is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
-        <h1 className="title is-3">Hữu Sang</h1>
+        <h1 className="title is-3">Người Dùng</h1>
         <p>
           Ngày gia nhập: <b>10/01/2023 14:30</b>
         </p>

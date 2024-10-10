@@ -59,7 +59,7 @@ const Bars = () => {
             </svg>
           </div>
           <div className="MuiListItemText-root">
-            <span>Hữu Sang</span>
+            <span>Người Dùng</span>
           </div>
         </Link>
         <Link to="/settings" className={cx('bar')} onClick={handleCloseBar}>

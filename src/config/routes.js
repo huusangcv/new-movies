@@ -4,6 +4,7 @@ const routes = {
   series: '/movies/series',
   new: '/movies/new',
   top: '/top',
+  faqs: '/faqs',
   search: '/search',
   developing: '/developing',
   detail: '/movie/:slug',

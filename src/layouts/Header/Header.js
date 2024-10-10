@@ -128,7 +128,7 @@ const Header = () => {
                 <span>Phim mới</span>
               </div>
             </Link>
-            <Link className={cx('navbar-item')} to="/developing" onClick={() => handleDispatchFilter('phim-moi')}>
+            <Link className={cx('navbar-item')} to="/faqs" onClick={() => handleDispatchFilter('phim-moi')}>
               <div className={cx('navbar-link')}>
                 <span>FAQs</span>
               </div>
@@ -137,7 +137,7 @@ const Header = () => {
           <div className={cx('navbar-end')}>
             <div div className={cx('navbar-item', 'has-dropdown', 'is-hoverable', 'navbar-item__name')}>
               <div className={cx('navbar-link')}>
-                <span className={cx('layout_name')}>Hữu Sang</span>
+                <span className={cx('layout_name')}>Người Dùng</span>
               </div>
               <div className={cx('navbar-dropdown', 'is-right header-menu')}>
                 <Link className={cx('navbar-item')} to={'/settings'}>

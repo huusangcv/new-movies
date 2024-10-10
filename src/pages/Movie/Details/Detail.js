@@ -89,7 +89,7 @@ const MovieDetails = () => {
   const handleShare = async () => {
     try {
       await navigator?.share({
-        title: 'Hữu Sang',
+        title: 'Người Dùng',
         text: 'Phim này hay lắm',
         url: window.location.href,
       });

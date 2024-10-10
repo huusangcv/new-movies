@@ -13,6 +13,7 @@ import Top from '~/pages/Movies/Top';
 import Collection from '~/pages/Movies/Collection';
 import Search from '~/pages/Search';
 import Browse from '~/pages/Browse';
+import Faqs from '~/pages/Faqs/Faqs';
 
 const Watch = lazy(() => import('~/pages/Movie/Watch'));
 const Developing = lazy(() => import('~/pages/Developing'));
@@ -35,6 +36,7 @@ const publicLayout = [
   { path: config.routes.developing, component: Developing },
   { path: config.routes.settings, component: Account },
   { path: config.routes.donate, component: Donate },
+  { path: config.routes.faqs, component: Faqs },
   { path: config.routes.notfound, component: NotFound },
 ];
 

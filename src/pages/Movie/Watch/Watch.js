@@ -38,7 +38,7 @@ const Watch = () => {
     if (movie) {
       setIsLoading(false);
       if (currentEpisode === 0) {
-        toast.info('Nếu phim không load được vui lòng refresh');
+        toast.info('Nếu phim không load được vui lòng load lại trang');
       }
       if (movie.quality === 'CAM') toast.warning('Phim hiện chưa có bản đẹp');
     } else {
@@ -81,7 +81,7 @@ const Watch = () => {
   const handleShare = async () => {
     try {
       await navigator?.share({
-        title: 'Hữu Sang',
+        title: 'Người Dùng',
         text: 'Phim này hay lắm',
         url: window.location.href,
       });
@@ -159,7 +159,7 @@ const Watch = () => {
             </div>
           </div>
           <p className={cx('has-text-centered', 'is-size-7')}>
-            <a href="/developing">Phim bị giật hình / mất tiếng nhân vật?</a>
+            <Link to="/faqs">Phim bị giật hình / mất tiếng nhân vật?</Link>
           </p>
           <section className={cx('section')}>
             <div className={cx('container')}>
