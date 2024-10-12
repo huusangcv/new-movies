@@ -155,7 +155,7 @@ const Bars = () => {
             <span>Phim mới</span>
           </div>
         </Link>
-        <Link to="/movies/faqs" onClick={handleCloseBar} className={cx('bar')}>
+        <Link to="/faqs" onClick={handleCloseBar} className={cx('bar')}>
           <div className="MuiListItemText-root">
             <span>FAQs</span>
           </div>

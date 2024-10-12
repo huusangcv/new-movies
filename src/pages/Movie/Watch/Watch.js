@@ -38,7 +38,7 @@ const Watch = () => {
     if (movie) {
       setIsLoading(false);
       if (currentEpisode === 0) {
-        toast.info('Nếu phim không load được vui lòng load lại trang');
+        toast.info('Nếu phim không tải được vui lòng load lại trang');
       }
       if (movie.quality === 'CAM') toast.warning('Phim hiện chưa có bản đẹp');
     } else {
