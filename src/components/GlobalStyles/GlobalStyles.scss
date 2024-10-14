@@ -200,6 +200,20 @@ button {
   }
 }
 
+.tlist {
+  .column {
+    padding: 12px 8px;
+    flex: none;
+
+    @media screen and (max-width: 767.98px) {
+      width: 100%;
+    }
+  }
+
+  .name {
+    white-space: wrap !important;
+  }
+}
 @keyframes shadow-animation {
   0% {
     left: -100%;

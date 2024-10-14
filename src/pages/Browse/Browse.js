@@ -7,9 +7,9 @@ import getMovies from '~/services/getMovies';
 import ReactGA from 'react-ga4';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { moviesOnMultiline, moviesSelector } from '~/redux/selector/selector';
+import { moviesOnMultiline } from '~/redux/selector/selector';
 import Pagination from '~/components/Pagination';
-import { useQueryParams, StringParam, NumberParam, ArrayParam, withDefault } from 'use-query-params';
+import { useQueryParams, StringParam, NumberParam } from 'use-query-params';
 const cx = classNames.bind(styles);
 
 const Browse = () => {
