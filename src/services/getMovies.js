@@ -18,15 +18,7 @@ const getMovies = {
     return result.data;
   },
   Browse: async (moviesType, page, type = '', nation = '', year = '', sortBy = '') => {
-    let result;
-    // if (moviesType === '' && page === '' && type === '' && nation === '' && year === '' && sortBy === '') {
-    //   result = await axios.get(`danh-sach/`);
-    // } else {
-    //   result = await axios.get(
-    //     `danh-sach/${moviesType}?page=${page}&sort_field=${sortBy}&category=${type}&country=${nation}&year=${year}`,
-    //   );
-    // }
-    result = await axios.get(
+    const result = await axios.get(
       `danh-sach/${moviesType}?page=${page}&sort_field=${sortBy}&category=${type}&country=${nation}&year=${year}`,
     );
     return result.data;

@@ -6,7 +6,7 @@ import Filter from '~/layouts/Filter';
 import getMovies from '~/services/getMovies';
 import ReactGA from 'react-ga4';
 import { Link, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { moviesOnMultiline } from '~/redux/selector/selector';
 import Pagination from '~/components/Pagination';
 import { useQueryParams, StringParam, NumberParam } from 'use-query-params';
@@ -19,6 +19,7 @@ const Browse = () => {
   const [paginate, setPaginate] = useState();
   const [movies, setMovies] = useState([]);
   // const { moviesType, type, nation, year, sortBy } = useSelector(moviesSelector);
+
   const isMultiline = useSelector(moviesOnMultiline);
 
   const [query] = useQueryParams({
@@ -56,7 +57,6 @@ const Browse = () => {
               time: movie.time,
             };
           });
-
           setMovies(result);
           setIsLoading(false);
         }

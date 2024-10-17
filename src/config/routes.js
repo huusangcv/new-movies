@@ -6,7 +6,6 @@ const routes = {
   top: '/top',
   faqs: '/faqs',
   search: '/search',
-  developing: '/developing',
   detail: '/movie/:slug',
   watch: '/watch/:slug',
   browse: '/browse',
@@ -15,7 +14,7 @@ const routes = {
   settings: '/settings',
   donate: '/donate',
   notfound: '*',
-  login: '/login',
+  login: '/',
   signup: '/signup',
 };
 

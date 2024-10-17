@@ -1,5 +1,5 @@
 const AuthLayout = ({ children }) => {
-  return <h1>{children}</h1>;
+  return <>{children}</>;
 };
 
 export default AuthLayout;

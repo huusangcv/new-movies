@@ -8,6 +8,7 @@ const initialState = {
   single: 1,
   series: 1,
   new: 1,
+  browse: 1,
 };
 
 const currentPageReducer = (state = initialState, action) => {

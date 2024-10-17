@@ -1,16 +1,20 @@
 import classNames from 'classnames/bind';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toggleBars } from '~/redux/actions/toggleBars';
 import styles from './Bars.module.scss';
-import { filterMoviesByCategory } from '~/redux/actions';
+import { userProfile } from '~/redux/selector/selector';
+import { useCookies } from 'react-cookie';
 
 const cx = classNames.bind(styles);
 
 const Bars = () => {
   const isShowBar = useSelector((state) => state.isShowBar);
   const dispatch = useDispatch();
+  const user = useSelector(userProfile);
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const navigate = useNavigate();
   useEffect(() => {
     const body = document.querySelector('body');
     if (isShowBar) {
@@ -26,26 +30,17 @@ const Bars = () => {
     dispatch(toggleBars(false));
   };
 
-  //Func update state of filter
-  const handleDispatchFilter = (payload) => {
-    if (payload === '') {
-      dispatch(
-        filterMoviesByCategory({
-          titlePage: '',
-          filterState: false,
-          moviesType: '',
-          type: '',
-          nation: '',
-          year: '',
-          sortBy: '',
-        }),
-      );
-    } else
-      dispatch(
-        filterMoviesByCategory({
-          moviesType: payload,
-        }),
-      );
+  useEffect(() => {
+    if (!cookies) {
+      navigate('/');
+    }
+  }, [cookies]);
+
+  const handleLogout = () => {
+    removeCookie('token', {
+      path: '/',
+    });
+    navigate('/');
   };
 
   return (
@@ -59,7 +54,7 @@ const Bars = () => {
             </svg>
           </div>
           <div className="MuiListItemText-root">
-            <span>Người Dùng</span>
+            <span>{user.name}</span>
           </div>
         </Link>
         <Link to="/settings" className={cx('bar')} onClick={handleCloseBar}>
@@ -92,7 +87,7 @@ const Bars = () => {
             <span>Bộ sưu tập</span>
           </div>
         </Link>
-        <Link to="/developing" onClick={handleCloseBar} className={cx('bar')}>
+        <Link to="/" onClick={handleLogout} className={cx('bar')}>
           <div className={cx('layout_icon')}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path d="M48 64h132c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H48c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16h132c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48zm279 19.5l-7.1 7.1c-4.7 4.7-4.7 12.3 0 17l132 131.4H172c-6.6 0-12 5.4-12 12v10c0 6.6 5.4 12 12 12h279.9L320 404.4c-4.7 4.7-4.7 12.3 0 17l7.1 7.1c4.7 4.7 12.3 4.7 17 0l164.5-164c4.7-4.7 4.7-12.3 0-17L344 83.5c-4.7-4.7-12.3-4.7-17 0z"></path>
@@ -123,7 +118,6 @@ const Bars = () => {
           to="/movies/single"
           className={cx('bar')}
           onClick={() => {
-            handleDispatchFilter('phim-le');
             handleCloseBar();
           }}
         >
@@ -135,7 +129,6 @@ const Bars = () => {
           to="/movies/series"
           className={cx('bar')}
           onClick={() => {
-            handleDispatchFilter('phim-bo');
             handleCloseBar();
           }}
         >
@@ -147,7 +140,6 @@ const Bars = () => {
           to="/movies/new"
           className={cx('bar')}
           onClick={() => {
-            handleDispatchFilter('phim-moi');
             handleCloseBar();
           }}
         >

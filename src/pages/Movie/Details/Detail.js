@@ -175,7 +175,7 @@ const MovieDetails = () => {
                         Chia sẻ
                       </div>
                     </div>
-                    <div className={cx('level-item')}>
+                    <div className={cx('level-item')} style={{ visibility: 'hidden' }}>
                       <div className={cx('dropdown', 'is-hoverable')}>
                         <div className={cx('dropdown-trigger')}>
                           <button

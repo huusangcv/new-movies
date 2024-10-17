@@ -1,10 +1,12 @@
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toggleBars } from '~/redux/actions/toggleBars';
 import { useEffect, useState } from 'react';
 import { filterMoviesByCategory } from '~/redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Header.module.scss';
+import { useCookies } from 'react-cookie';
+import { userProfile } from '~/redux/selector/selector';
 
 const cx = classNames.bind(styles);
 
@@ -12,6 +14,10 @@ const Header = () => {
   const [background, setBackground] = useState('');
   const dispatch = useDispatch();
   const isShowBar = useSelector((state) => state.isShowBar);
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+
+  const navigate = useNavigate();
+  const user = useSelector(userProfile);
 
   useEffect(() => {
     //Func handle event set background for header when user scroll down
@@ -27,33 +33,24 @@ const Header = () => {
 
     //Func cleanup of useEffect to clear EventListener
     return () => window.removeEventListener('scroll', handleScroll);
-  });
+  }, []);
+
+  useEffect(() => {
+    if (!cookies) {
+      navigate('/');
+    }
+  }, [cookies]);
 
   // Func show/close bars for mobile
   const handleShowBar = () => {
     dispatch(toggleBars(!isShowBar));
   };
 
-  //Func update state of filter
-  const handleDispatchFilter = (payload) => {
-    if (payload === '') {
-      dispatch(
-        filterMoviesByCategory({
-          titlePage: '',
-          filterState: false,
-          moviesType: '',
-          type: '',
-          nation: '',
-          year: '',
-          sortBy: '',
-        }),
-      );
-    } else
-      dispatch(
-        filterMoviesByCategory({
-          moviesType: payload,
-        }),
-      );
+  const handleLogout = () => {
+    removeCookie('token', {
+      path: '/',
+    });
+    navigate('/');
   };
 
   return (
@@ -67,7 +64,7 @@ const Header = () => {
           </span>
         </button>
         <div className={cx('navbar-brand')}>
-          <Link to="/" className={cx('navbar-item', 'brand')} onClick={() => handleDispatchFilter('')}>
+          <Link to="/" className={cx('navbar-item', 'brand')}>
             <div className={cx('logo-text')}>
               <span>NewMovies</span>
             </div>
@@ -91,7 +88,7 @@ const Header = () => {
       <nav className={cx('navbar', 'desktop')} style={{ background: background && background, opacity: 0.9 }}>
         <div className={cx('navbar-brand')}>
           <div className={cx('navbar-item', 'brand')}>
-            <Link className={cx('logo-text')} to="/" onClick={() => handleDispatchFilter('')}>
+            <Link className={cx('logo-text')} to="/">
               NewMovies
             </Link>
           </div>
@@ -113,22 +110,22 @@ const Header = () => {
                 <span>Phim hot</span>
               </div>
             </Link>
-            <Link className={cx('navbar-item')} to="/movies/series" onClick={() => handleDispatchFilter('phim-bo')}>
+            <Link className={cx('navbar-item')} to="/movies/series">
               <div className={cx('navbar-link')}>
                 <span>Phim bộ</span>
               </div>
             </Link>
-            <Link className={cx('navbar-item')} to="/movies/single" onClick={() => handleDispatchFilter('phim-le')}>
+            <Link className={cx('navbar-item')} to="/movies/single">
               <div className={cx('navbar-link')}>
                 <span>Phim lẻ</span>
               </div>
             </Link>
-            <Link className={cx('navbar-item')} to="/movies/new" onClick={() => handleDispatchFilter('phim-moi')}>
+            <Link className={cx('navbar-item')} to="/movies/new">
               <div className={cx('navbar-link')}>
                 <span>Phim mới</span>
               </div>
             </Link>
-            <Link className={cx('navbar-item')} to="/faqs" onClick={() => handleDispatchFilter('phim-moi')}>
+            <Link className={cx('navbar-item')} to="/faqs">
               <div className={cx('navbar-link')}>
                 <span>FAQs</span>
               </div>
@@ -137,7 +134,7 @@ const Header = () => {
           <div className={cx('navbar-end')}>
             <div div className={cx('navbar-item', 'has-dropdown', 'is-hoverable', 'navbar-item__name')}>
               <div className={cx('navbar-link')}>
-                <span className={cx('layout_name')}>Người Dùng</span>
+                <span className={cx('layout_name')}>{user.name}</span>
               </div>
               <div className={cx('navbar-dropdown', 'is-right header-menu')}>
                 <Link className={cx('navbar-item')} to={'/settings'}>
@@ -158,10 +155,10 @@ const Header = () => {
                   </svg>{' '}
                   Bộ sưu tập
                 </Link>
-                <a className={cx('navbar-item')} href="#!">
+                <a className={cx('navbar-item')} href="#" onClick={handleLogout}>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <path d="M48 64h132c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H48c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16h132c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48zm279 19.5l-7.1 7.1c-4.7 4.7-4.7 12.3 0 17l132 131.4H172c-6.6 0-12 5.4-12 12v10c0 6.6 5.4 12 12 12h279.9L320 404.4c-4.7 4.7-4.7 12.3 0 17l7.1 7.1c4.7 4.7 12.3 4.7 17 0l164.5-164c4.7-4.7 4.7-12.3 0-17L344 83.5c-4.7-4.7-12.3-4.7-17 0z"></path>
-                  </svg>{' '}
+                  </svg>
                   Thoát
                 </a>
               </div>

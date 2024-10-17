@@ -4,7 +4,7 @@ import Footer from '../Footer';
 import BackDrop from '../BackDrop';
 import Bars from '../OverlayBars';
 import styles from './Header.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 

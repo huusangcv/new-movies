@@ -1,17 +1,46 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { userProfile } from '~/redux/selector/selector';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
+import { getUserProfile } from '~/redux/actions';
 
+// Hàm để lấy giá trị cookie theo tên
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+
+  // Lấy các phần của ngày
+  const day = String(date.getDate()).padStart(2, '0'); // Ngày
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Tháng (0-11)
+  const year = date.getFullYear(); // Năm
+
+  // Lấy giờ và phút
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+
+  // Trả về định dạng mong muốn
+  return `${month}/${day}/${year} ${hours}:${minutes}`;
+};
 const Account = () => {
   const [isChangeEmail, setIsChangeEmail] = useState(false);
   const [isChangePassword, setIsChangePassword] = useState(false);
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
+  const user = useSelector(userProfile);
+  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+  const token = cookies['token'];
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const formattedDate = formatDate(user.created_at);
 
   useEffect(() => {
-    window.scroll({
-      top: 0,
-    });
-  }, []);
+    if (!token) {
+      navigate('/');
+    }
+  }, [token]);
 
   const handleIsChangeEmail = () => {
     setIsChangeEmail(!isChangeEmail);
@@ -30,7 +59,7 @@ const Account = () => {
 
     const fetchApi = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/users/1', {
+        const response = await fetch(`http://127.0.0.1:8000/api/users/${user.id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -48,7 +77,65 @@ const Account = () => {
 
     fetchApi();
     setEmail('');
+
+    const fetchApiUser = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/auth/profile', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        // Phân tích phản hồi JSON
+        const result = await response.json();
+        if (result.success === true) {
+          dispatch(getUserProfile(result.user));
+        }
+      } catch (error) {}
+    };
+    fetchApiUser();
     setIsChangeEmail(false);
+  };
+
+  const handleOnSubmitChangePassword = (e) => {
+    e.preventDefault();
+
+    const data = {
+      password,
+    };
+
+    const fetchApi = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/users/${user.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        // Phân tích phản hồi JSON
+        const result = await response.json();
+        if (result.success === true) {
+          toast.success('Thay đổi mật khẩu thành công');
+        }
+      } catch (error) {}
+    };
+
+    if (password.length >= 6 && rePassword.length >= 6) {
+      if (password === rePassword) {
+        fetchApi();
+        setPassword('');
+        setRePassword('');
+        setIsChangePassword(false);
+      } else {
+        alert('Nhập lại mật khẩu không chính xác');
+      }
+    } else {
+      alert('Mật khẩu phải từ 6 kí tự');
+    }
   };
 
   const handleChangeEmail = (e) => {
@@ -58,13 +145,13 @@ const Account = () => {
   return (
     <>
       <div className="is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
-        <h1 className="title is-3">Người Dùng</h1>
+        <h1 className="title is-3">{user.name}</h1>
         <p>
-          Ngày gia nhập: <b>10/01/2023 14:30</b>
+          Ngày gia nhập: <b>{formattedDate}</b>
         </p>
         {(!isChangeEmail && (
           <p>
-            Email: <b>huusangcv@gmail.com</b> -&nbsp;
+            Email: <b>{user.email}</b> -&nbsp;
             <a href="#!" onClick={handleIsChangeEmail}>
               Đổi email
             </a>
@@ -103,28 +190,30 @@ const Account = () => {
             </a>
           </p>
         )) || (
-          <form className="my-4" style={{ width: '300px' }}>
+          <form onSubmit={handleOnSubmitChangePassword} className="my-4" style={{ width: '300px' }}>
             <div className="field">
               <div className="control">
                 <input
+                  onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   name="password1"
                   className="input"
                   placeholder="Mật khẩu mới"
                   required=""
-                  value=""
+                  value={password}
                 />
               </div>
             </div>
             <div className="field">
               <div className="control">
                 <input
+                  onChange={(e) => setRePassword(e.target.value)}
                   type="password"
                   name="password2"
                   className="input"
                   placeholder="Nhập lại mật khẩu"
                   required=""
-                  value=""
+                  value={rePassword}
                 />
               </div>
             </div>
@@ -140,7 +229,7 @@ const Account = () => {
         )}
         <br />
         <p>
-          Số dư: <b className="has-text-danger">1,491 đ</b>
+          Số dư: <b className="has-text-danger">1,000 đ</b>
         </p>
         {/* <div className="field mt-4 has-text-centered">
         <label className="checkbox">

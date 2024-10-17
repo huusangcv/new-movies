@@ -20,7 +20,6 @@ const BrowseDetails = () => {
   const [movies, setMovies] = useState([]);
   const isMultiline = useSelector(moviesOnMultiline);
   const { genreCurrent, index } = useParams();
-  console.log(genreCurrent, index, '123');
 
   const totalPage = Math.floor(paginate?.totalItems / paginate?.totalItemsPerPage);
   useEffect(() => {

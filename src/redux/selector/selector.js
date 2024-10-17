@@ -14,6 +14,7 @@ const currentMoviesTop = (state) => state.currentMoviesTop;
 const moviesOnMultiline = (state) => state.moviesOnMultiline;
 const watchedMovies = (state) => state.collectionMovies.watched;
 const wantToSeeMovies = (state) => state.collectionMovies.wantToSee;
+const userProfile = (state) => state.userProfile;
 
 export {
   moviesSelector,
@@ -32,4 +33,5 @@ export {
   watchedMovies,
   wantToSeeMovies,
   loading,
+  userProfile,
 };

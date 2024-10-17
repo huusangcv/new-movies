@@ -17,6 +17,7 @@ import {
   GET_TOTAL_ITEMS_MOVIES_TOP,
   IS_MULTILINE,
   TITLE_MOVIES,
+  USER_PROFILE,
   WANT_TO_SEE,
   WATCHED,
 } from '../constans';
@@ -161,6 +162,13 @@ const addMoviesWantToSee = (payload) => {
   };
 };
 
+const getUserProfile = (payload) => {
+  return {
+    type: USER_PROFILE,
+    payload,
+  };
+};
+
 export {
   getMovieDetails,
   getTitle,
@@ -182,4 +190,5 @@ export {
   getMoviesOnMultiline,
   addMoviesWatched,
   addMoviesWantToSee,
+  getUserProfile,
 };

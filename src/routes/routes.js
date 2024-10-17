@@ -16,13 +16,19 @@ import Browse from '~/pages/Browse';
 import Faqs from '~/pages/Faqs/Faqs';
 
 const Watch = lazy(() => import('~/pages/Movie/Watch'));
-const Developing = lazy(() => import('~/pages/Developing'));
 const NotFound = lazy(() => import('~/pages/NotFound'));
 const Account = lazy(() => import('~/pages/Account'));
 const Donate = lazy(() => import('~/pages/Donate'));
 
 const publicLayout = [
+  { path: config.routes.login, component: Login, layout: null },
+  { path: config.routes.signup, component: SignUp, layout: null },
+];
+
+const privateLayout = [
   { path: config.routes.home, component: HomePage },
+  { path: config.routes.login, component: Login, layout: null },
+  { path: config.routes.signup, component: SignUp, layout: null },
   { path: config.routes.series, component: Series },
   { path: config.routes.single, component: Single },
   { path: config.routes.new, component: New },
@@ -33,18 +39,18 @@ const publicLayout = [
   { path: config.routes.watch, component: Watch, layout: HeaderOnlyForMovies },
   { path: config.routes.browse, component: Browse },
   { path: config.routes.search, component: Search },
-  { path: config.routes.developing, component: Developing },
   { path: config.routes.settings, component: Account },
   { path: config.routes.donate, component: Donate },
   { path: config.routes.faqs, component: Faqs },
   { path: config.routes.notfound, component: NotFound },
 ];
 
-const authLayout = [
-  { path: config.routes.login, component: Login },
-  { path: config.routes.signup, component: SignUp },
-];
+const hasCookie = () => {
+  return document.cookie.split(';').some((item) => item.trim().startsWith('token='));
+};
 
-const privateLayout = [];
+const PrivateRoute = () => {
+  return hasCookie() ? privateLayout : publicLayout;
+};
 
-export { publicLayout, privateLayout, authLayout };
+export default PrivateRoute;

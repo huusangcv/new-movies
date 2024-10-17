@@ -9,6 +9,7 @@ import movieReducer from './movieReducer';
 import moviesNewUpdateReducer from './moviesNewUpdateReducer';
 import toggleBarsReducer from './toggleBarsReducer';
 import totalPageReducer from './totalPageReducer';
+import userProfileReducer from './userProfileReducer';
 
 const rootReducer = (state = {}, action) => {
   return {
@@ -23,6 +24,7 @@ const rootReducer = (state = {}, action) => {
     moviesOnMultiline: isMultilineReducer(state.moviesOnMultiline, action),
     collectionMovies: collectionReducer(state.collectionMovies, action),
     currentMoviesTop: currentMoviesTopReducer(state.currentMoviesTop, action),
+    userProfile: userProfileReducer(state.userProfile, action),
   };
 };
 
