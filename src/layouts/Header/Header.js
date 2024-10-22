@@ -134,7 +134,7 @@ const Header = () => {
           <div className={cx('navbar-end')}>
             <div div className={cx('navbar-item', 'has-dropdown', 'is-hoverable', 'navbar-item__name')}>
               <div className={cx('navbar-link')}>
-                <span className={cx('layout_name')}>{user.name || 'Người Dùng'}</span>
+                <span className={cx('layout_name')}>{user.name} Người Dùng</span>
               </div>
               <div className={cx('navbar-dropdown', 'is-right header-menu')}>
                 <Link className={cx('navbar-item')} to={'/settings'}>
