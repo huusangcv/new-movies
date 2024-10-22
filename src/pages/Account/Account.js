@@ -70,6 +70,8 @@ const Account = () => {
         // Phân tích phản hồi JSON
         const result = await response.json();
         if (result.success === true) {
+          dispatch(getUserProfile(result.data));
+          setIsChangeEmail(false);
           toast.success('Thay đổi Email thành công');
         }
       } catch (error) {}
@@ -77,26 +79,6 @@ const Account = () => {
 
     fetchApi();
     setEmail('');
-
-    const fetchApiUser = async () => {
-      try {
-        const response = await fetch('http://127.0.0.1:8000/api/auth/profile', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        // Phân tích phản hồi JSON
-        const result = await response.json();
-        if (result.success === true) {
-          dispatch(getUserProfile(result.user));
-        }
-      } catch (error) {}
-    };
-    fetchApiUser();
-    setIsChangeEmail(false);
   };
 
   const handleOnSubmitChangePassword = (e) => {
@@ -243,19 +225,19 @@ const Account = () => {
           </label>
           <div className="help has-text-grey">Chúng tôi chỉ gửi những thông báo quan trọng</div>
         </div>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
       </div>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
     </>
   );
 };

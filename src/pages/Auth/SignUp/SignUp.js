@@ -5,13 +5,15 @@ import styles from './SignUp.module.scss';
 import classNames from 'classnames/bind';
 import Spinner from '~/components/Spinner';
 import user from '~/services/user';
-
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify';
 const cx = classNames.bind(styles);
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
   const [username, setUserName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,38 +41,44 @@ const SignUp = () => {
       name: username,
       email: email,
       password: password,
+      password_confirmation: rePassword,
     };
 
     try {
       // Gửi yêu cầu POST đến API
 
-      const response = await fetch('http://127.0.0.1:8000/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await user.SignUp(data);
 
-      // Kiểm tra mã phản hồi
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (response.errors) {
+        if (response.errors.email) {
+          // Xử lý lỗi trùng email ở đây
+          toast.error(response.errors.email[0]); // Hiển thị lỗi trùng email cho người dùng
+        } else {
+          toast.error(response.errors.password[0]);
+        }
+        setIsLoading(false);
+        return false;
       }
 
-      // Phân tích phản hồi JSON
-      const result = await response.json();
-
       // Xử lý phản hồi
-      if (result.success) {
+      if (response.status === true) {
         alert('Đăng ký thành công');
         setIsLoading(false);
         navigate('/');
         // Có thể lưu thông tin người dùng hoặc token ở đây
       } else {
-        console.error('Lỗi đăng ký:', result.message);
+        toast.error(response.message);
       }
     } catch (error) {
-      console.error('Có lỗi xảy ra:', error);
+      if (error.response.status === 422) {
+        // Xử lý lỗi 422 Unprocessable Entity
+        console.log('Lỗi 422 Unprocessable Entity:');
+        // Điều chỉnh xử lý lỗi 422 theo nhu cầu của bạn
+      } else {
+        // Xử lý các lỗi khác
+        console.error('Đã xảy ra lỗi:', error);
+      }
+      setIsLoading(false);
     }
   };
   return (
@@ -116,6 +124,17 @@ const SignUp = () => {
                         />
                       </div>
                     </div>
+                    <div className={cx('field')}>
+                      <div className={cx('control')}>
+                        <input
+                          type="password"
+                          className="input is-large"
+                          name="repassword"
+                          placeholder="Nhập lại mật khẩu"
+                          onChange={(e) => setRePassword(e.target.value)}
+                        />
+                      </div>
+                    </div>
                     <button type="submit" className={cx('button', 'is-block', 'is-info')}>
                       {(isLoading && <Spinner />) || <span>Đăng Ký</span>}
                     </button>
@@ -132,6 +151,18 @@ const SignUp = () => {
           </div>
         </div>
       </section>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };

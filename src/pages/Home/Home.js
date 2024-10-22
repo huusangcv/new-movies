@@ -30,7 +30,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchApiUser = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/auth/profile', {
+        const response = await fetch('http://127.0.0.1:8000/api/profile', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -40,8 +40,8 @@ const HomePage = () => {
 
         // Phân tích phản hồi JSON
         const result = await response.json();
-        if (result.success === true) {
-          dispatch(getUserProfile(result.user));
+        if (result.status === true) {
+          dispatch(getUserProfile(result.data));
         }
       } catch (error) {}
     };

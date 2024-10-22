@@ -6,7 +6,8 @@ import Spinner from '~/components/Spinner';
 import { useCookies } from 'react-cookie';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import user from '~/services/user';
 
 const cx = classNames.bind(styles);
 
@@ -15,6 +16,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [cookies, setCookie] = useCookies(['token']);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Ngăn chặn hành động mặc định của form
@@ -28,36 +30,22 @@ const Login = () => {
     try {
       // Gửi yêu cầu POST đến API
       setIsLoading(true);
-      const response = await fetch('http://127.0.0.1:8000/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+      const { status, token, message } = await user.Login(data);
 
-      // Kiểm tra mã phản hồi
-      if (!response.ok) {
-        const { message } = await response.json(); // Lấy thông điệp từ phản hồi
-        if (response.status === 401) {
-          // Xử lý lỗi 401
-          toast.error(message);
+      if (status) {
+        if (email === 'admin@gmail.com') {
+          window.location.assign('https://admin.newmoviesz.online');
         } else {
-          // Xử lý các lỗi khác
-          toast.error(message || 'Có lỗi xảy ra.');
+          navigate('/');
+          setIsLoading(false);
+          setCookie('token', token, {
+            path: '/',
+            secure: true,
+          });
         }
+      } else {
+        toast.error(message);
         setIsLoading(false);
-        return false;
-      }
-
-      // Phân tích phản hồi JSON
-      const { message, success, token } = await response.json();
-      if (success) {
-        window.location.href = '/';
-        setIsLoading(false);
-        setCookie('token', token, {
-          path: '/',
-        });
       }
     } catch (error) {
       console.error('Có lỗi xảy ra:', error);
@@ -109,7 +97,7 @@ const Login = () => {
                 </div>
                 <p className="has-text-grey has-text-right">
                   <Link to="/signup">Đăng ký</Link>
-                  &nbsp;&nbsp;·&nbsp;&nbsp;<a href="/forgot">Quên mật khẩu</a>
+                  &nbsp;&nbsp;·&nbsp;&nbsp;<Link to="/forgot">Quên mật khẩu</Link>
                   {/*
                   &nbsp;&nbsp;·&nbsp;&nbsp;<a href="/resendVerification">Gửi lại email xác nhận</a> */}
                 </p>

@@ -27,7 +27,7 @@ const DefaultLayout = ({ children }) => {
       <Bars />
       <div className="main-toastify">
         <ToastContainer
-          position="top-right"
+          position="botom-right"
           autoClose={10000}
           hideProgressBar={false}
           newestOnTop={false}

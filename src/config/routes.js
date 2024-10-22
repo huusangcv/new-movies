@@ -16,6 +16,7 @@ const routes = {
   notfound: '*',
   login: '/',
   signup: '/signup',
+  forgot: '/forgot',
 };
 
 export default routes;

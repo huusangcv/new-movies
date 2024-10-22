@@ -3,6 +3,7 @@ import config from '~/config';
 import HeaderOnlyForMovies from '~/layouts/HeaderOnlyForMovies';
 import Login from '~/pages/Auth/Login/Login';
 import SignUp from '~/pages/Auth/SignUp';
+import Forgot from '~/pages/Auth/Forgot';
 import Details from '~/pages/Movie/Details';
 import BrowseDetails from '~/pages/BrowseDetails';
 import HomePage from '~/pages/Home';
@@ -23,6 +24,7 @@ const Donate = lazy(() => import('~/pages/Donate'));
 const publicLayout = [
   { path: config.routes.login, component: Login, layout: null },
   { path: config.routes.signup, component: SignUp, layout: null },
+  { path: config.routes.forgot, component: Forgot, layout: null },
 ];
 
 const privateLayout = [
@@ -50,7 +52,7 @@ const hasCookie = () => {
 };
 
 const PrivateRoute = () => {
-  return hasCookie() ? privateLayout : publicLayout;
+  return !hasCookie() ? privateLayout : publicLayout;
 };
 
 export default PrivateRoute;
