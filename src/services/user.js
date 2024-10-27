@@ -10,6 +10,10 @@ const user = {
     const result = await axios.post(`${API_URL}/login`, data);
     return result;
   },
+  ResendVerification: async (data) => {
+    const result = await axios.post(`${API_URL}/resend-verification`, data);
+    return result;
+  },
   Donate: async (data) => {
     const result = await axios.post('https://api.vietqr.io/v2/generate', data);
     return result;

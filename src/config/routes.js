@@ -17,6 +17,8 @@ const routes = {
   login: '/',
   signup: '/signup',
   forgot: '/forgot',
+  resendVerification: 'resendVerification',
+  verify: '/verify/:token',
 };
 
 export default routes;

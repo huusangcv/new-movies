@@ -5,15 +5,10 @@ import Header from '../Header';
 import Footer from '../Footer';
 import Bars from '../OverlayBars';
 import { memo } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
 
 const cx = classNames.bind(styles);
 
 const DefaultLayout = ({ children }) => {
-  if (!localStorage.getItem('visited')) {
-    localStorage.setItem('visited', 'true');
-    toast.warn('Trang web đang trong quá trình phát triển!');
-  }
   return (
     <div className={cx('wapper')}>
       <Header />
@@ -25,20 +20,6 @@ const DefaultLayout = ({ children }) => {
         </div>
       </section>
       <Bars />
-      <div className="main-toastify">
-        <ToastContainer
-          position="botom-right"
-          autoClose={10000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
-      </div>
       <Footer />
     </div>
   );

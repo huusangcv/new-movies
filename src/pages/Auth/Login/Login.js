@@ -98,8 +98,7 @@ const Login = () => {
                 <p className="has-text-grey has-text-right">
                   <Link to="/signup">Đăng ký</Link>
                   &nbsp;&nbsp;·&nbsp;&nbsp;<Link to="/forgot">Quên mật khẩu</Link>
-                  {/*
-                  &nbsp;&nbsp;·&nbsp;&nbsp;<a href="/resendVerification">Gửi lại email xác nhận</a> */}
+                  &nbsp;&nbsp;·&nbsp;&nbsp;<Link to="/resendVerification">Gửi lại email xác nhận</Link>
                 </p>
               </div>
             </div>

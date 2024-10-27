@@ -1,5 +1,5 @@
 // src/Login.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './SignUp.module.scss';
 import classNames from 'classnames/bind';
@@ -13,73 +13,84 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [rePassword, setRePassword] = useState('');
+  const [data, setData] = useState();
   const [username, setUserName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // useEffect(()=> {
-  //   const fetchApi = async () => {
-  //     try {
-  //       const signup = await user.SignUp(data);
-  //       if(signup) {
-  //         navigate('/')
-  //       }
-  //     } catch (error) {
-  //       alert('Lỗi');
-  //     }
-  //   }
-  // fetchApi();
+  useEffect(() => {
+    const fetchApi = async () => {
+      try {
+        // Gửi yêu cầu POST đến API
 
-  // },[data])
+        const response = await user.SignUp(data);
+
+        if (response.errors) {
+          if (response.errors.email) {
+            // Xử lý lỗi trùng email ở đây
+            toast.error(response.errors.email[0]); // Hiển thị lỗi trùng email cho người dùng
+          } else {
+            toast.error(response.errors.password[0]);
+          }
+          setIsLoading(false);
+          return false;
+        }
+
+        // Xử lý phản hồi
+        if (response.status === true) {
+          setIsLoading(false);
+          toast.success(
+            <div>
+              <p>Đăng ký thành công!</p>
+              <p>
+                Chúng tôi đã gửi 1 email chứa link xác nhận tới <strong className="has-text-warning">{email}</strong>.
+              </p>
+              Vui lòng kiểm tra email của bạn (nhớ kiểm tra cả hòm thư spam).
+            </div>,
+            {
+              position: 'bottom-center',
+              autoClose: false,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: 'colored',
+              icon: false,
+            },
+          );
+        } else {
+          toast.error(response.message);
+        }
+      } catch (error) {
+        if (error.response.status === 422) {
+          // Xử lý lỗi 422 Unprocessable Entity
+          console.log('Lỗi 422 Unprocessable Entity:');
+          // Điều chỉnh xử lý lỗi 422 theo nhu cầu của bạn
+        } else {
+          // Xử lý các lỗi khác
+          console.error('Đã xảy ra lỗi:', error);
+        }
+        setIsLoading(false);
+      }
+    };
+
+    if (data) {
+      fetchApi();
+    }
+  }, [data]);
 
   const handleSubmit = async (event) => {
     setIsLoading(true);
-    event.preventDefault(); // Ngăn chặn hành động mặc định của form
-
+    event.preventDefault(); // Ngăn chặn hành động mặc định của
     // Tạo đối tượng dữ liệu để gửi
     const data = {
       name: username,
       email: email,
       password: password,
-      password_confirmation: rePassword,
+      password_confirmation: password,
     };
 
-    try {
-      // Gửi yêu cầu POST đến API
-
-      const response = await user.SignUp(data);
-
-      if (response.errors) {
-        if (response.errors.email) {
-          // Xử lý lỗi trùng email ở đây
-          toast.error(response.errors.email[0]); // Hiển thị lỗi trùng email cho người dùng
-        } else {
-          toast.error(response.errors.password[0]);
-        }
-        setIsLoading(false);
-        return false;
-      }
-
-      // Xử lý phản hồi
-      if (response.status === true) {
-        alert('Đăng ký thành công');
-        setIsLoading(false);
-        navigate('/');
-        // Có thể lưu thông tin người dùng hoặc token ở đây
-      } else {
-        toast.error(response.message);
-      }
-    } catch (error) {
-      if (error.response.status === 422) {
-        // Xử lý lỗi 422 Unprocessable Entity
-        console.log('Lỗi 422 Unprocessable Entity:');
-        // Điều chỉnh xử lý lỗi 422 theo nhu cầu của bạn
-      } else {
-        // Xử lý các lỗi khác
-        console.error('Đã xảy ra lỗi:', error);
-      }
-      setIsLoading(false);
-    }
+    setData(data);
   };
   return (
     <div className={cx('wapper')}>
@@ -124,17 +135,6 @@ const SignUp = () => {
                         />
                       </div>
                     </div>
-                    <div className={cx('field')}>
-                      <div className={cx('control')}>
-                        <input
-                          type="password"
-                          className="input is-large"
-                          name="repassword"
-                          placeholder="Nhập lại mật khẩu"
-                          onChange={(e) => setRePassword(e.target.value)}
-                        />
-                      </div>
-                    </div>
                     <button type="submit" className={cx('button', 'is-block', 'is-info')}>
                       {(isLoading && <Spinner />) || <span>Đăng Ký</span>}
                     </button>
@@ -142,9 +142,6 @@ const SignUp = () => {
                 </div>
                 <p className="has-text-grey has-text-right">
                   <Link to="/">Đăng nhập</Link>
-                  {/* <a href="/forgot">Quên mật khẩu</a>
-                  &nbsp;&nbsp;·&nbsp;&nbsp;
-                  <a href="/resendVerification">Gửi lại email xác nhận</a> */}
                 </p>
               </div>
             </div>

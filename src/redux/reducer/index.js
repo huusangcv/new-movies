@@ -1,3 +1,4 @@
+import { emailVerify } from '../actions/auth';
 import collectionReducer from './collectionReducer';
 import currentMoviesTopReducer from './currentMoviesTopReducer';
 import currentPageReducer from './currentPageReducer';
@@ -10,6 +11,7 @@ import moviesNewUpdateReducer from './moviesNewUpdateReducer';
 import toggleBarsReducer from './toggleBarsReducer';
 import totalPageReducer from './totalPageReducer';
 import userProfileReducer from './userProfileReducer';
+import verifyEmailReducer from './verifyEmailReducer';
 
 const rootReducer = (state = {}, action) => {
   return {
@@ -25,6 +27,7 @@ const rootReducer = (state = {}, action) => {
     collectionMovies: collectionReducer(state.collectionMovies, action),
     currentMoviesTop: currentMoviesTopReducer(state.currentMoviesTop, action),
     userProfile: userProfileReducer(state.userProfile, action),
+    emailVerify: verifyEmailReducer(state.emailVerify, action),
   };
 };
 

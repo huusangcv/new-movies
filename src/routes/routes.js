@@ -15,6 +15,8 @@ import Collection from '~/pages/Movies/Collection';
 import Search from '~/pages/Search';
 import Browse from '~/pages/Browse';
 import Faqs from '~/pages/Faqs/Faqs';
+import ResendVerification from '~/pages/Auth/ResendVerification';
+import Verify from '~/pages/Auth/Verify';
 
 const Watch = lazy(() => import('~/pages/Movie/Watch'));
 const NotFound = lazy(() => import('~/pages/NotFound'));
@@ -25,6 +27,9 @@ const publicLayout = [
   { path: config.routes.login, component: Login, layout: null },
   { path: config.routes.signup, component: SignUp, layout: null },
   { path: config.routes.forgot, component: Forgot, layout: null },
+  { path: config.routes.resendVerification, component: ResendVerification, layout: null },
+  { path: config.routes.verify, component: Verify, layout: null },
+  { path: config.routes.notfound, component: Login, layout: null },
 ];
 
 const privateLayout = [
@@ -52,7 +57,7 @@ const hasCookie = () => {
 };
 
 const PrivateRoute = () => {
-  return !hasCookie() ? privateLayout : publicLayout;
+  return hasCookie() ? privateLayout : publicLayout;
 };
 
 export default PrivateRoute;

@@ -54,7 +54,7 @@ const Bars = () => {
             </svg>
           </div>
           <div className="MuiListItemText-root">
-            <span>{user.name} Người Dùng</span>
+            <span>{user.name}</span>
           </div>
         </Link>
         <Link to="/settings" className={cx('bar')} onClick={handleCloseBar}>

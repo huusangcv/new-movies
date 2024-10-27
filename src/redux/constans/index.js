@@ -21,6 +21,7 @@ const WATCHED = 'watched';
 const WANT_TO_SEE = 'want_to_see';
 const CURRENT_MOVIES_TOP = 'current_movies_top';
 const USER_PROFILE = 'user_profile';
+const EMAIL_VERIFY = 'email_verify';
 export {
   TOGGLE_BARS,
   TITLE_MOVIES,
@@ -45,4 +46,5 @@ export {
   WANT_TO_SEE,
   CURRENT_MOVIES_TOP,
   USER_PROFILE,
+  EMAIL_VERIFY,
 };

@@ -15,6 +15,7 @@ const moviesOnMultiline = (state) => state.moviesOnMultiline;
 const watchedMovies = (state) => state.collectionMovies.watched;
 const wantToSeeMovies = (state) => state.collectionMovies.wantToSee;
 const userProfile = (state) => state.userProfile;
+const emailVerify = (state) => state.emailVerify;
 
 export {
   moviesSelector,
@@ -34,4 +35,5 @@ export {
   wantToSeeMovies,
   loading,
   userProfile,
+  emailVerify,
 };
