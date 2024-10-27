@@ -17,6 +17,7 @@ import Browse from '~/pages/Browse';
 import Faqs from '~/pages/Faqs/Faqs';
 import ResendVerification from '~/pages/Auth/ResendVerification';
 import Verify from '~/pages/Auth/Verify';
+import Maintenance from '~/pages/Maintenance';
 
 const Watch = lazy(() => import('~/pages/Movie/Watch'));
 const NotFound = lazy(() => import('~/pages/NotFound'));
@@ -52,12 +53,14 @@ const privateLayout = [
   { path: config.routes.notfound, component: NotFound },
 ];
 
+const publicLayoutDiference = [{ path: config.routes.maintenance, component: Maintenance, layout: null }];
+
 const hasCookie = () => {
   return document.cookie.split(';').some((item) => item.trim().startsWith('token='));
 };
 
 const PrivateRoute = () => {
-  return hasCookie() ? privateLayout : publicLayout;
+  return publicLayoutDiference;
 };
 
 export default PrivateRoute;
