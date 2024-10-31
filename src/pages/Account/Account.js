@@ -6,6 +6,7 @@ import { userProfile } from '~/redux/selector/selector';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { getUserProfile } from '~/redux/actions';
+import Spinner from '~/components/Spinner';
 
 // Hàm để lấy giá trị cookie theo tên
 const formatDate = (dateString) => {
@@ -35,7 +36,7 @@ const Account = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const formattedDate = formatDate(user.created_at);
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     if (!token) {
       navigate('/');
@@ -57,28 +58,48 @@ const Account = () => {
       email,
     };
 
+    setIsLoading(true);
+
     const fetchApi = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/users/${user.id}`, {
-          method: 'PATCH',
+        const response = await fetch(`http://127.0.0.1:8000/api/update-profile/${user.id}`, {
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(data),
         });
 
         // Phân tích phản hồi JSON
         const result = await response.json();
-        if (result.success === true) {
-          dispatch(getUserProfile(result.data));
+        if (result.status === true) {
+          setIsLoading(false);
           setIsChangeEmail(false);
-          toast.success('Thay đổi Email thành công');
+          setEmail('');
+          toast.success(
+            <div>
+              <p>
+                Một email xác nhận đã được gửi tới địa chỉ email mới của bạn. Hãy đọc và làm theo hướng dẫn trong đó
+              </p>
+            </div>,
+            {
+              position: 'bottom-center',
+              autoClose: false,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: 'colored',
+              icon: false,
+            },
+          );
         }
       } catch (error) {}
     };
 
     fetchApi();
-    setEmail('');
   };
 
   const handleOnSubmitChangePassword = (e) => {
@@ -101,7 +122,17 @@ const Account = () => {
         // Phân tích phản hồi JSON
         const result = await response.json();
         if (result.success === true) {
-          toast.success('Thay đổi mật khẩu thành công');
+          toast.success(<p>Thay đổi mật khẩu thành công</p>, {
+            position: 'bottom-center',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+            icon: false,
+          });
         }
       } catch (error) {}
     };
@@ -134,7 +165,7 @@ const Account = () => {
         {(!isChangeEmail && (
           <p>
             Email: <b>{user.email}</b> -&nbsp;
-            <a href="#!" onClick={handleIsChangeEmail}>
+            <a href="#" onClick={handleIsChangeEmail}>
               Đổi email
             </a>
           </p>
@@ -154,7 +185,7 @@ const Account = () => {
               </div>
               <div className="control">
                 <button type="submit" className="button is-info">
-                  Cập nhật
+                  {(isLoading && <Spinner />) || 'Cập nhật'}
                 </button>
               </div>
               <div className="control">
@@ -225,18 +256,7 @@ const Account = () => {
           </label>
           <div className="help has-text-grey">Chúng tôi chỉ gửi những thông báo quan trọng</div>
         </div>
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
+        <ToastContainer />
       </div>
     </>
   );

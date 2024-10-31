@@ -4,10 +4,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyles from './components/GlobalStyles';
 import { Provider } from 'react-redux';
-import store from './redux/store';
 import ReactGA from 'react-ga4';
 import { CookiesProvider } from 'react-cookie';
-
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from '~/redux/store';
 ReactGA.initialize('G-9G552G5GLK');
 ReactGA.send({ hitType: 'pageview', page: window.location.pathname, title: document.title });
 
@@ -15,11 +15,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <GlobalStyles>
+    <PersistGate loading={null} persistor={persistor}>
       <CookiesProvider defaultSetOptions={{ path: '/' }}>
-        <App />
+        <GlobalStyles>
+          <App />
+        </GlobalStyles>
       </CookiesProvider>
-    </GlobalStyles>
+    </PersistGate>
   </Provider>,
   // </React.StrictMode>,
 );

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ResendVerification.module.scss';
 import classNames from 'classnames/bind';
-import Spinner from '~/components/Spinner';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import user from '~/services/user';
@@ -63,16 +62,16 @@ const ResendVerification = () => {
           <div className={cx('inner')}>
             <div className={cx('content')}>
               <div className={cx('column')}>
-                <h1 class="title has-text-grey">Gửi lại link xác nhận</h1>
+                <h1 className="title has-text-grey">Gửi lại link xác nhận</h1>
                 <div className={cx('has-text-grey', 'box')}>
                   <form onSubmit={handleSubmit}>
-                    <div class="column is-half-tablet is-offset-one-quarter-tablet is-one-third-widescreen is-offset-one-third-widescreen">
-                      <div class="box has-text-grey">
-                        <div class="field">
-                          <div class="control">
+                    <div className="column is-half-tablet is-offset-one-quarter-tablet is-one-third-widescreen is-offset-one-third-widescreen">
+                      <div className="box has-text-grey">
+                        <div className="field">
+                          <div className="control">
                             <input
                               type="email"
-                              class="input is-large"
+                              className="input is-large"
                               name="email"
                               placeholder="Email đăng ký"
                               required=""

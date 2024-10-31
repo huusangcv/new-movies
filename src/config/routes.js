@@ -19,6 +19,7 @@ const routes = {
   forgot: '/forgot',
   resendVerification: 'resendVerification',
   verify: '/verify/:token',
+  confirmNewEmail: '/confirmNewEmail',
   maintenance: '/',
 };
 

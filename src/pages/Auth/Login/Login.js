@@ -44,7 +44,7 @@ const Login = () => {
           });
         }
       } else {
-        toast.error(message);
+        alert(message);
         setIsLoading(false);
       }
     } catch (error) {

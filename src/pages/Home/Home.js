@@ -3,13 +3,12 @@ import ReactGA from 'react-ga4';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getNewUpdateMovies, getUserProfile } from '~/redux/actions';
+import { getNewUpdateMovies } from '~/redux/actions';
 import { movieNewUpdate } from '~/redux/selector/selector';
 import styles from './Home.module.scss';
 import moviesRecommend from '~/components/Options/recommend';
 import getMovies from '~/services/getMovies';
 import Filter from '~/layouts/Filter';
-import { useCookies } from 'react-cookie';
 
 const cx = classNames.bind(styles);
 
@@ -22,31 +21,7 @@ const HomePage = () => {
     return 7;
   });
 
-  const [cookies, setCookie, removeCookie] = useCookies();
-  const token = cookies['token']; // Lấy giá trị cookie
-
   const moviesNewUpdate = useSelector(movieNewUpdate);
-
-  useEffect(() => {
-    const fetchApiUser = async () => {
-      try {
-        const response = await fetch('http://127.0.0.1:8000/api/profile', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        // Phân tích phản hồi JSON
-        const result = await response.json();
-        if (result.status === true) {
-          dispatch(getUserProfile(result.data));
-        }
-      } catch (error) {}
-    };
-    fetchApiUser();
-  }, []);
 
   useEffect(() => {
     document.title = 'Từ Hollywood đến Bollywood, chúng tôi mang đến những bộ phim bạn yêu thích';

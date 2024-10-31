@@ -1,19 +1,29 @@
 // src/Login.js
 import React, { useEffect, useState } from 'react';
-import styles from './Verify.module.scss';
+import styles from './ConfirmNewEmail.module.scss';
 import classNames from 'classnames/bind';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { useSelector } from 'react-redux';
+import { userProfile } from '~/redux/selector/selector';
 const cx = classNames.bind(styles);
-const Verify = () => {
-  const { token } = useParams();
+const ConfirmNewEmail = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const emailCode = searchParams.get('emailCode');
   const [notification, setNotification] = useState('');
+  const [cookies] = useCookies(['token']);
+  const token = cookies['token'];
+
+  const { id } = useSelector(userProfile);
   useEffect(() => {
     const fetchApiEmailUser = async () => {
       try {
-        const response = await fetch(`https://api.newmoviesz.online/api/email-token/${token}`, {
+        const response = await fetch(`https://api.newmoviesz.online/api/confirm-update-profile/${id}/${emailCode}`, {
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
           },
         });
 
@@ -30,8 +40,7 @@ const Verify = () => {
     };
 
     fetchApiEmailUser();
-  }, [token]);
-
+  }, []);
   return (
     <div className={cx('wrapper')}>
       <section className={cx('section')}>
@@ -47,4 +56,4 @@ const Verify = () => {
   );
 };
 
-export default Verify;
+export default ConfirmNewEmail;

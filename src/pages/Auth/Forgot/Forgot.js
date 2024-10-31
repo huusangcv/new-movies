@@ -39,16 +39,16 @@ const Forgot = () => {
           <div className={cx('inner')}>
             <div className={cx('content')}>
               <div className={cx('column')}>
-                <h1 class="title has-text-grey">Lấy lại mật khẩu</h1>
+                <h1 className="title has-text-grey">Lấy lại mật khẩu</h1>
                 <div className={cx('has-text-grey', 'box')}>
                   <form onSubmit={handleSubmit}>
-                    <div class="column is-half-tablet is-offset-one-quarter-tablet is-one-third-widescreen is-offset-one-third-widescreen">
-                      <div class="box has-text-grey">
-                        <div class="field">
-                          <div class="control">
+                    <div className="column is-half-tablet is-offset-one-quarter-tablet is-one-third-widescreen is-offset-one-third-widescreen">
+                      <div className="box has-text-grey">
+                        <div className="field">
+                          <div className="control">
                             <input
                               type="email"
-                              class="input is-large"
+                              className="input is-large"
                               name="email"
                               placeholder="Email đăng ký"
                               required=""

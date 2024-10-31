@@ -930,6 +930,11 @@ img {
   padding: 2rem 2.4rem;
 }
 
+.message.is-warning .message-body {
+  border-color: #ffe08a;
+  color: #946c00;
+}
+
 .message.is-warning {
   background-color: #fffaeb;
 }
