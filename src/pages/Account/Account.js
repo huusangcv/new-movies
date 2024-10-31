@@ -62,7 +62,7 @@ const Account = () => {
 
     const fetchApi = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/update-profile/${user.id}`, {
+        const response = await fetch(`https://api.newmoviesz.online/api/update-profile/${user.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ const Account = () => {
 
     const fetchApi = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/users/${user.id}`, {
+        const response = await fetch(`https://api.newmoviesz.online/api/users/${user.id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
