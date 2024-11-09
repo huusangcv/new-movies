@@ -20,6 +20,7 @@ const routes = {
   resendVerification: 'resendVerification',
   verify: '/verify/:token',
   confirmNewEmail: '/confirmNewEmail',
+  retrievePassword: '/retrievePassword',
   maintenance: '/',
 };
 

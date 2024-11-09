@@ -18,6 +18,7 @@ import Faqs from '~/pages/Faqs/Faqs';
 import ResendVerification from '~/pages/Auth/ResendVerification';
 import Verify from '~/pages/Auth/Verify';
 import ConfirmNewEmail from '~/pages/Auth/ConfirmNewEmail';
+import RetrievalPassword from '~/pages/Auth/RetrievalPassword/RetrievalPassword';
 
 const Watch = lazy(() => import('~/pages/Movie/Watch'));
 const NotFound = lazy(() => import('~/pages/NotFound'));
@@ -29,6 +30,7 @@ const publicLayout = [
   { path: config.routes.signup, component: SignUp, layout: null },
   { path: config.routes.forgot, component: Forgot, layout: null },
   { path: config.routes.resendVerification, component: ResendVerification, layout: null },
+  { path: config.routes.retrievePassword, component: RetrievalPassword, layout: null },
   { path: config.routes.verify, component: Verify, layout: null },
   { path: config.routes.notfound, component: Login, layout: null },
 ];

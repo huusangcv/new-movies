@@ -11,6 +11,7 @@ import getMovies from '~/services/getMovies';
 import styles from './Detail.module.scss';
 import BackDrop from '~/layouts/BackDrop';
 import Modal from '~/components/ModalRoot/Modal';
+import SimpleSlider from '~/components/SimpleSlider/SimpleSlider';
 
 const cx = classNames.bind(styles);
 
@@ -343,12 +344,14 @@ const MovieDetails = () => {
                 </dl>
 
                 <div className={cx('has-text-grey-light')}>
-                  {movie?.content
-                    .replace(/<\/?p>/g, '')
-                    .replace(/<\/?strong>/g, '')
-                    .replace(/<\/?i>/g, '')
-                    .replace(/<\/?br>/g, '')
-                    .replace(/&nbsp;/g, ' ')}
+                  <p>
+                    {movie?.content
+                      .replace(/<\/?p>/g, '')
+                      .replace(/<\/?strong>/g, '')
+                      .replace(/<\/?i>/g, '')
+                      .replace(/<\/?br>/g, '')
+                      .replace(/&nbsp;/g, ' ')}
+                  </p>
                 </div>
 
                 <h3 className="section-header">Trailer</h3>
@@ -390,6 +393,11 @@ const MovieDetails = () => {
                       )}
                     </div>
                   </div>
+                </div>
+
+                <h3 className="section-header">Phim tương tự</h3>
+                <div className={cx('related-titles')}>
+                  <SimpleSlider />
                 </div>
               </div>
             </div>

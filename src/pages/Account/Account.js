@@ -133,6 +133,8 @@ const Account = () => {
             theme: 'colored',
             icon: false,
           });
+        } else {
+          alert(result.message);
         }
       } catch (error) {}
     };

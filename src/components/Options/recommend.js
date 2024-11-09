@@ -1,5 +1,5 @@
-import thumb1 from '~/assets/images/thumb.jpg';
-import thumb2 from '~/assets/images/thumb-2.jpg';
+import thumb1 from '~/assets/images/thumb-1.avif';
+import thumb2 from '~/assets/images/thumb-2.avif';
 import thumb3 from '~/assets/images/thumb-3.jpg';
 import thumb4 from '~/assets/images/thumb-4.jpg';
 import thumb5 from '~/assets/images/thumb-5.jpg';
@@ -10,16 +10,16 @@ import thumb8 from '~/assets/images/thumb-8.jpg';
 const moviesRecommend = [
   {
     id: 1,
-    name: 'Doraemon: Nobita và bản giao hưởng Địa Cầu',
-    slug: 'doraemon-nobita-va-ban-giao-huong-dia-cau',
-    origin_name: "Doraemon the Movie: Nobita's Earth Symphony",
+    name: 'Arcane (Phần 2) (2024)',
+    slug: 'arcane-phan-2',
+    origin_name: 'Xem phim Arcane (Season 2)',
     thumb_url: thumb1,
   },
   {
     id: 2,
-    name: 'Những mảnh ghép cảm xúc 2 (2024)',
-    slug: 'nhung-manh-ghep-cam-xuc-2',
-    origin_name: 'Inside Out 2',
+    name: 'Arcane (2021)',
+    slug: 'arcane',
+    origin_name: 'Arcane',
     thumb_url: thumb2,
   },
   {

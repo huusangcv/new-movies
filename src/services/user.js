@@ -10,8 +10,16 @@ const user = {
     const result = await axios.post(`${API_URL}/login`, data);
     return result;
   },
+  Forgot: async (data) => {
+    const result = await axios.post(`${API_URL}/forgot-password`, data);
+    return result;
+  },
   ResendVerification: async (data) => {
     const result = await axios.post(`${API_URL}/resend-verification`, data);
+    return result;
+  },
+  RetrievalPassword: async (data) => {
+    const result = await axios.post(`${API_URL}/renew-password`, data);
     return result;
   },
   Donate: async (data) => {

@@ -1,31 +1,31 @@
 // src/Login.js
-import React, { useEffect, useState } from 'react';
-import styles from './Forgot.module.scss';
+import { useEffect, useState } from 'react';
+import styles from './RetrievalPassword.module.scss';
 import classNames from 'classnames/bind';
-import Spinner from '~/components/Spinner';
+import { Link, useLocation } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import user from '~/services/user';
 
 const cx = classNames.bind(styles);
-const Forgot = () => {
-  const [email, setEmail] = useState('');
+const RetrievalPassword = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const passwordCode = searchParams.get('passwordRetrievalCode');
+
   const [data, setData] = useState();
+  const [newPassword, setNewpassword] = useState('');
 
   useEffect(() => {
-    const fetchApiForgotPassword = async () => {
+    const fetchResenVirify = async () => {
       try {
         // Gửi yêu cầu POST đến API
-        const { status, message } = await user.Forgot(data);
+        const { status, message } = await user.RetrievalPassword(data);
 
         if (status) {
           toast.success(
             <div>
-              <p>
-                Chúng tôi đã gửi 1 email hướng dẫn lấy mật khẩu về <strong className="has-text-warning">{email}</strong>
-                .
-              </p>
-              Vui lòng kiểm tra email của bạn (nhớ kiểm tra cả hòm thư spam).
+              Đặt mật khẩu mới thành công, hãy <Link to="/">đăng nhập vào tài khoản</Link>.
             </div>,
             {
               position: 'bottom-center',
@@ -48,15 +48,17 @@ const Forgot = () => {
     };
 
     if (data) {
-      fetchApiForgotPassword();
+      fetchResenVirify();
     }
   }, [data]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setData({ email });
+    setData({
+      password: newPassword,
+      password_retrieval_code: passwordCode,
+    });
   };
-
   return (
     <div className={cx('wapper')}>
       <section className={cx('section')}>
@@ -64,7 +66,7 @@ const Forgot = () => {
           <div className={cx('inner')}>
             <div className={cx('content')}>
               <div className={cx('column')}>
-                <h1 className="title has-text-grey">Lấy lại mật khẩu</h1>
+                <h1 className="title has-text-grey">Đặt lại mật khẩu</h1>
                 <div className={cx('has-text-grey', 'box')}>
                   <form onSubmit={handleSubmit}>
                     <div className="column is-half-tablet is-offset-one-quarter-tablet is-one-third-widescreen is-offset-one-third-widescreen">
@@ -72,17 +74,17 @@ const Forgot = () => {
                         <div className="field">
                           <div className="control">
                             <input
-                              type="email"
+                              type="text"
                               className="input is-large"
-                              name="email"
-                              placeholder="Email đăng ký"
-                              required=""
-                              onChange={(e) => setEmail(e.target.value)}
+                              name="password"
+                              placeholder="Mật khẩu mới"
+                              value={newPassword}
+                              onChange={(e) => setNewpassword(e.target.value)}
                             />
                           </div>
                         </div>
                         <button type="submit" className={cx('button', 'is-block', 'is-info')}>
-                          {(false && <Spinner />) || <span>Gửi</span>}
+                          <span>Gửi</span>
                         </button>
                       </div>
                     </div>
@@ -98,4 +100,4 @@ const Forgot = () => {
   );
 };
 
-export default Forgot;
+export default RetrievalPassword;
