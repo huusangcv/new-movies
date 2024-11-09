@@ -395,10 +395,10 @@ const MovieDetails = () => {
                   </div>
                 </div>
 
-                <h3 className="section-header">Phim tương tự</h3>
+                {/* <h3 className="section-header">Phim tương tự</h3>
                 <div className={cx('related-titles')}>
                   <SimpleSlider />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
