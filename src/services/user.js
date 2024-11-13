@@ -1,5 +1,5 @@
 import axios from '~/utils/custonizeAxiosAuth';
-const API_URL = 'https://newmoviesz.online/api';
+const API_URL = 'https://api.newmoviesz.online/api';
 
 const user = {
   SignUp: async (data) => {
