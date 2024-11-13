@@ -13,7 +13,7 @@ const RetrievalPassword = () => {
   const searchParams = new URLSearchParams(location.search);
   const passwordCode = searchParams.get('passwordRetrievalCode');
 
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
   const [newPassword, setNewpassword] = useState('');
 
   useEffect(() => {

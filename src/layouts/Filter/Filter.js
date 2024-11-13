@@ -38,6 +38,7 @@ const Filter = ({ noneMultiline, movieType, genreCurrent, index }) => {
       setQuery({ type: newType, genre, country, year, sort }, 'push');
     }
   };
+
   const handleSelectType = (e) => {
     const newGenre = e.target.value;
     if (newGenre === '') {
@@ -60,6 +61,7 @@ const Filter = ({ noneMultiline, movieType, genreCurrent, index }) => {
       }
     }
   };
+
   const handleSelectNations = (e) => {
     const newCountry = e.target.value;
     if (newCountry === '') {
@@ -81,6 +83,7 @@ const Filter = ({ noneMultiline, movieType, genreCurrent, index }) => {
       }
     }
   };
+
   const handleSelectYears = (e) => {
     const newYear = e.target.value;
     if (newYear === '') {
@@ -103,6 +106,7 @@ const Filter = ({ noneMultiline, movieType, genreCurrent, index }) => {
       }
     }
   };
+
   const handleSelectSortBy = (e) => {
     const newSort = e.target.value;
     if (newSort === '') {
@@ -126,13 +130,13 @@ const Filter = ({ noneMultiline, movieType, genreCurrent, index }) => {
     }
   };
 
-  const handleActiveIsMultiline = (e) => {
+  const handleActiveIsMultiline = () => {
     if (!isMultiline) {
       dispatch(getMoviesOnMultiline(true));
     }
   };
 
-  const handleActiveIsPanel = (e) => {
+  const handleActiveIsPanel = () => {
     if (isMultiline) {
       dispatch(getMoviesOnMultiline(false));
     }

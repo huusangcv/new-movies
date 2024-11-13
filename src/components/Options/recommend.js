@@ -2,7 +2,7 @@ import thumb1 from '~/assets/images/thumb-1.avif';
 import thumb2 from '~/assets/images/thumb-2.avif';
 import thumb3 from '~/assets/images/thumb-3.jpg';
 import thumb4 from '~/assets/images/thumb-4.jpg';
-import thumb5 from '~/assets/images/thumb-5.jpg';
+import thumb5 from '~/assets/images/thumb-5.avif';
 import thumb6 from '~/assets/images/thumb-6.jpg';
 import thumb7 from '~/assets/images/thumb-7.jpg';
 import thumb8 from '~/assets/images/thumb-8.jpg';
@@ -38,9 +38,9 @@ const moviesRecommend = [
   },
   {
     id: 5,
-    name: 'Đẹp Trai Thấy Sai Sai',
-    slug: 'dep-trai-thay-sai-sai',
-    origin_name: 'Handsome Guys',
+    name: 'Robot Hoang Dã (2024)',
+    slug: 'robot-hoang-da',
+    origin_name: 'The Wild Robot',
     thumb_url: thumb5,
   },
   {
