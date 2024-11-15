@@ -359,7 +359,7 @@ const MovieDetails = () => {
                 <div className="trailers">
                   <div
                     data-index="0"
-                    className="slick-slide slick-active slick-current"
+                    className="slick-active slick-current"
                     tabIndex="-1"
                     aria-hidden="false"
                     style={{
