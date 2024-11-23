@@ -20,6 +20,10 @@ import {
   USER_PROFILE,
   WANT_TO_SEE,
   WATCHED,
+  UPDATE_WATCHED,
+  UPDATE_WANT_TO_SEE,
+  DELETE_WATCHED,
+  DELETE_WANT_TO_SEE,
 } from '../constans';
 
 const getTitle = (payload) => {
@@ -162,6 +166,33 @@ const addMoviesWantToSee = (payload) => {
   };
 };
 
+const updateMoviesWatched = (payload) => {
+  return {
+    type: UPDATE_WATCHED,
+    payload: payload,
+  };
+};
+const updateMoviesWantToSee = (payload) => {
+  return {
+    type: UPDATE_WANT_TO_SEE,
+    payload: payload,
+  };
+};
+
+const deleteMoviesWatched = (payload) => {
+  return {
+    type: DELETE_WATCHED,
+    payload: payload,
+  };
+};
+
+const deleteMoviesWantToSee = (payload) => {
+  return {
+    type: DELETE_WANT_TO_SEE,
+    payload: payload,
+  };
+};
+
 const getUserProfile = (payload) => {
   return {
     type: USER_PROFILE,
@@ -190,5 +221,9 @@ export {
   getMoviesOnMultiline,
   addMoviesWatched,
   addMoviesWantToSee,
+  deleteMoviesWatched,
+  deleteMoviesWantToSee,
+  updateMoviesWantToSee,
+  updateMoviesWatched,
   getUserProfile,
 };

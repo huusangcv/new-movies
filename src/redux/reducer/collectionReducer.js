@@ -1,4 +1,11 @@
-const { WATCHED, WANT_TO_SEE } = require('../constans');
+const {
+  WATCHED,
+  WANT_TO_SEE,
+  UPDATE_WATCHED,
+  UPDATE_WANT_TO_SEE,
+  DELETE_WATCHED,
+  DELETE_WANT_TO_SEE,
+} = require('../constans');
 
 const initialState = {
   watched: [],
@@ -17,6 +24,34 @@ const collectionReducer = (state = initialState, action) => {
         ...state,
         wantToSee: [...state.wantToSee, action.payload],
       };
+    case UPDATE_WATCHED: {
+      const movies = state.wantToSee.filter((movie) => movie.id !== action.payload.id);
+      return {
+        watched: [...state.watched, action.payload],
+        wantToSee: movies,
+      };
+    }
+    case UPDATE_WANT_TO_SEE: {
+      const movies = state.watched.filter((movie) => movie.id !== action.payload.id);
+      return {
+        watched: movies,
+        wantToSee: [...state.wantToSee, action.payload],
+      };
+    }
+    case DELETE_WATCHED: {
+      const movies = state.watched.filter((movie) => movie.id !== action.payload.id);
+      return {
+        ...state,
+        watched: movies,
+      };
+    }
+    case DELETE_WANT_TO_SEE: {
+      const movies = state.watched.filter((movie) => movie.id !== action.payload.id);
+      return {
+        ...state,
+        wantToSee: movies,
+      };
+    }
     default:
       return state;
   }

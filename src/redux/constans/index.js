@@ -19,6 +19,11 @@ const IS_MULTILINE = 'is_multiline';
 const IS_LOADING = 'is_loading';
 const WATCHED = 'watched';
 const WANT_TO_SEE = 'want_to_see';
+const UPDATE_WATCHED = 'update_watched';
+const UPDATE_WANT_TO_SEE = 'update_want_to_see';
+const DELETE_WATCHED = 'delete_watched';
+const DELETE_WANT_TO_SEE = 'delete_want_to_see';
+
 const CURRENT_MOVIES_TOP = 'current_movies_top';
 const USER_PROFILE = 'user_profile';
 const EMAIL_VERIFY = 'email_verify';
@@ -44,6 +49,10 @@ export {
   IS_LOADING,
   WATCHED,
   WANT_TO_SEE,
+  UPDATE_WATCHED,
+  UPDATE_WANT_TO_SEE,
+  DELETE_WATCHED,
+  DELETE_WANT_TO_SEE,
   CURRENT_MOVIES_TOP,
   USER_PROFILE,
   EMAIL_VERIFY,

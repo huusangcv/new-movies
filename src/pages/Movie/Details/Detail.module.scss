@@ -335,6 +335,16 @@
     color: rgba(0, 0, 0, 0.7);
   }
 
+  .button.is-warning {
+    background-color: #ffe08a;
+    border-color: transparent;
+    color: rgba(0, 0, 0, 0.7);
+  }
+  .collection-btn.watched svg,
+  .collection-btn.wishlist svg {
+    fill: #7a7a7a;
+  }
+
   &-menu {
     display: none;
     left: 0;
