@@ -5,12 +5,14 @@ import Header from '../Header';
 import Footer from '../Footer';
 import Bars from '../OverlayBars';
 import { memo } from 'react';
+import Snowfall from 'react-snowfall';
 
 const cx = classNames.bind(styles);
 
 const DefaultLayout = ({ children }) => {
   return (
     <div className={cx('wapper')}>
+      <Snowfall style={{ zIndex: 999999999 }} />
       <Header />
       <section className={cx('section')}>
         <div className={cx('container')} style={{ flex: 1 }}>

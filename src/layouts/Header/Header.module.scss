@@ -176,3 +176,14 @@ header {
 .d-none {
   display: none;
 }
+
+.navbar-item {
+  position: relative;
+}
+
+.icon-noel {
+  position: absolute;
+  right: 41%;
+  top: 5px;
+  width: 30px;
+}

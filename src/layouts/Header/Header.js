@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './Header.module.scss';
 import { useCookies } from 'react-cookie';
 import { userProfile } from '~/redux/selector/selector';
-
+import noel from '~/assets/images/noel.png';
 const cx = classNames.bind(styles);
 
 const Header = () => {
@@ -67,6 +67,7 @@ const Header = () => {
           <Link to="/" className={cx('navbar-item', 'brand')}>
             <div className={cx('logo-text')}>
               <span>NewMovies</span>
+              <img src={noel} alt="" className={cx('icon-noel')} />
             </div>
           </Link>
         </div>
@@ -91,6 +92,7 @@ const Header = () => {
             <Link className={cx('logo-text')} to="/">
               NewMovies
             </Link>
+            <img src={noel} alt="" className={cx('icon-noel')} />
           </div>
         </div>
         <div className={cx('navbar-menu')}>

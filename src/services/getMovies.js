@@ -1,5 +1,5 @@
 import axios from '~/utils/customizeAxios';
-
+import axios2 from 'axios';
 const getMovies = {
   Single: async (page) => {
     const result = await axios.get(`danh-sach/phim-le?page=${page}`);
@@ -25,6 +25,10 @@ const getMovies = {
   },
   Detail: async (slug) => {
     const result = await axios.get(`phim/${slug}`);
+    return result.data;
+  },
+  Detail2: async (slug) => {
+    const result = await axios2.get(`https://phim.nguonc.com/api/film/${slug}`);
     return result.data;
   },
   Search: async (keyword, page = 1) => {

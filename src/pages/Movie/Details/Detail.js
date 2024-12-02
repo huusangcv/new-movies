@@ -151,6 +151,7 @@ const MovieDetails = () => {
                     {metaTag()}
                   </span>
                 </div>
+
                 <div className={cx('meta')}>
                   <span className={cx('imdb-icon')}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
