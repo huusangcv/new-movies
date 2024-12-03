@@ -12,7 +12,6 @@ const cx = classNames.bind(styles);
 const DefaultLayout = ({ children }) => {
   return (
     <div className={cx('wapper')}>
-      <Snowfall style={{ zIndex: 999999999 }} />
       <Header />
       <section className={cx('section')}>
         <div className={cx('container')} style={{ flex: 1 }}>

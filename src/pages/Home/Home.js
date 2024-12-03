@@ -9,6 +9,7 @@ import styles from './Home.module.scss';
 import moviesRecommend from '~/components/Options/recommend';
 import getMovies from '~/services/getMovies';
 import Filter from '~/layouts/Filter';
+import Snowfall from 'react-snowfall';
 
 const cx = classNames.bind(styles);
 
@@ -99,6 +100,7 @@ const HomePage = () => {
 
   return (
     <div className={cx('wapper')}>
+      <Snowfall style={{ zIndex: 999999999 }} />
       <Filter noneMultiline={true} />
       <h2 className="heading">
         <span>PHIM ĐỀ CỬ</span>

@@ -7,6 +7,7 @@ import { useCookies } from 'react-cookie';
 import PrivateRoute from './routes/routes';
 import { useDispatch } from 'react-redux';
 import { getUserProfile } from './redux/actions';
+import Snowfall from 'react-snowfall';
 // Hàm kiểm tra cookie
 function App() {
   const [cookies] = useCookies(['token']);

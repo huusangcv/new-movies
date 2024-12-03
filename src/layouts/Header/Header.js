@@ -91,8 +91,8 @@ const Header = () => {
           <div className={cx('navbar-item', 'brand')}>
             <Link className={cx('logo-text')} to="/">
               NewMovies
+              <img src={noel} alt="" className={cx('icon-noel')} />
             </Link>
-            <img src={noel} alt="" className={cx('icon-noel')} />
           </div>
         </div>
         <div className={cx('navbar-menu')}>
