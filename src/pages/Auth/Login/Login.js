@@ -40,7 +40,6 @@ const Login = () => {
           setIsLoading(false);
           setCookie('token', token, {
             path: '/',
-            httpOnly,
             secure: true,
           });
         }
