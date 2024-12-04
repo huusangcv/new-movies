@@ -1,0 +1,54 @@
+.related-titles {
+  position: relative;
+}
+.slick-slider {
+  @media screen and (min-width: 1216px) {
+    max-width: 850px;
+  }
+
+  @media screen and (min-width: 1408px) {
+    max-width: 920px;
+  }
+
+  max-width: 850px;
+  overflow: hidden !important;
+  position: initial;
+}
+
+.related-titles .slick-slide {
+  padding: 2px 1.6rem 0 2px !important;
+  width: 100%;
+}
+.related-titles .slick-track {
+  margin-left: 0;
+  transition: -webkit-transform 500ms;
+}
+
+.related-titles .name {
+  margin-top: 0;
+}
+.related-titles a {
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+.slick-next {
+  top: -22px;
+  right: -10px;
+}
+
+.slick-arrow::before {
+  content: ''; /* Không hiển thị ký tự nào */
+  display: none;
+}
+
+.slick-arrow svg {
+  color: #fff;
+  fill: #fff;
+  height: 2.2rem;
+}
+.slick-prev {
+  top: -22px;
+  right: 30px;
+  left: auto;
+}
