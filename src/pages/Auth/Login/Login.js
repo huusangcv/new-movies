@@ -30,7 +30,9 @@ const Login = () => {
     try {
       // Gửi yêu cầu POST đến API
       setIsLoading(true);
-      const { status, token, message } = await user.Login(data);
+      const { status, token, message } = await user.Login(data, {
+        credentials: 'include',
+      });
 
       if (status) {
         if (email === 'admin@gmail.com') {
@@ -40,7 +42,6 @@ const Login = () => {
           setIsLoading(false);
           setCookie('token', token, {
             path: '/',
-            httpOnly: true,
             secure: true,
           });
         }
