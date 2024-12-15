@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getNewUpdateMovies } from '~/redux/actions';
 import { movieNewUpdate } from '~/redux/selector/selector';
 import styles from './Home.module.scss';
-import moviesRecommend from '~/components/Options/recommend';
+// import moviesRecommend from '~/components/Options/recommend';
 import getMovies from '~/services/getMovies';
 import Filter from '~/layouts/Filter';
 import Snowfall from 'react-snowfall';
@@ -29,12 +29,22 @@ const HomePage = () => {
     if (!moviesNewUpdate.single || moviesNewUpdate.single.length === 0) {
       const fetchApi = async () => {
         setIsLoading(true);
-        const [newUpdateSingle, newUpdateSeries] = await Promise.all([
+        const [newUpdateRecommend, newUpdateSingle, newUpdateSeries] = await Promise.all([
+          getMovies.newUpdateRecommend(),
           getMovies.newUpdateSingle(),
           getMovies.newUpdateSeries(),
         ]);
-        if ([newUpdateSingle, newUpdateSeries]) {
-          const result1 = newUpdateSingle.items.map((movie) => {
+        if ([newUpdateRecommend, newUpdateSingle, newUpdateSeries]) {
+          const result1 = newUpdateRecommend.data.map((movie) => {
+            return {
+              name: movie.name_vi,
+              slug: movie.slug,
+              origin_name: movie.name_en,
+              thumb_url: movie.thumb,
+            };
+          });
+
+          const result2 = newUpdateSingle.items.map((movie) => {
             return {
               name: movie.name,
               slug: movie.slug,
@@ -43,7 +53,7 @@ const HomePage = () => {
             };
           });
 
-          const result2 = newUpdateSeries.items.map((movie) => {
+          const result3 = newUpdateSeries.items.map((movie) => {
             return {
               name: movie.name,
               slug: movie.slug,
@@ -54,8 +64,9 @@ const HomePage = () => {
 
           dispatch(
             getNewUpdateMovies({
-              single: result1,
-              series: result2,
+              recommend: result1,
+              single: result2,
+              series: result3,
             }),
           );
           setIsLoading(false);
@@ -107,14 +118,14 @@ const HomePage = () => {
       </h2>
       <div className="title-list">
         <div className="gird columns">
-          {moviesRecommend.map((movie, currentItem) => {
+          {moviesNewUpdate?.recommend.map((movie, currentItem) => {
             let newIndex = index;
             if (window.innerWidth > 1280) newIndex = 4;
             return (
               currentItem <= newIndex && (
                 <Link to={`/movie/${movie.slug}`} className="column" key={movie.id}>
                   <div className="cover">
-                    <img src={movie.thumb_url} alt="" />
+                    <img src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`} alt="" />
                   </div>
                   <h3 className="name vi">
                     <span>{movie.name}</span>

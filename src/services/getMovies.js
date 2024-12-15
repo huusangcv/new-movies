@@ -35,6 +35,10 @@ const getMovies = {
     const result = await axios.get(`tim-kiem?keyword=${keyword}&page=${page}`);
     return result.data;
   },
+  newUpdateRecommend: async () => {
+    const result = await axios.get(`https://newmoviesz.online/api/movies`);
+    return result.data;
+  },
   newUpdateSeries: async () => {
     const result = await axios.get(`danh-sach/phim-bo-dang-chieu?sort_field=modified.time&category=&country=&year=`);
     return result.data;

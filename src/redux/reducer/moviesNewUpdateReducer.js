@@ -1,6 +1,7 @@
 import { GET_NEW_UPDATE_MOVIES } from '../constans';
 
 const initialState = {
+  recommend: [],
   single: [],
   series: [],
 };
