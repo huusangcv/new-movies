@@ -36,7 +36,7 @@ const getMovies = {
     return result.data;
   },
   newUpdateRecommend: async () => {
-    const result = await axios.get(`https://newmoviesz.online/api/movies`);
+    const result = await axios.get(`https://api.newmoviesz.online/api/movies`);
     return result.data;
   },
   newUpdateSeries: async () => {
