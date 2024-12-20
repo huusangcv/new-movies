@@ -35,15 +35,15 @@ const Login = () => {
       });
 
       if (status) {
+        setIsLoading(false);
+        setCookie('token', token, {
+          path: '/',
+          secure: true,
+          domain: '.newmoviesz.online',
+        });
         if (email === 'admin@gmail.com') {
           window.location.assign('https://admin.newmoviesz.online');
         } else {
-          setIsLoading(false);
-          setCookie('token', token, {
-            path: '/',
-            secure: true,
-            domain: '.newmoviesz.online',
-          });
           navigate('/');
         }
       } else {

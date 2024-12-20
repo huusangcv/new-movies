@@ -10,6 +10,10 @@ const user = {
     const result = await axios.post(`${API_URL}/login`, data);
     return result;
   },
+  LogOut: async () => {
+    const result = await axios.get(`${API_URL}/logout`);
+    return result;
+  },
   Forgot: async (data) => {
     const result = await axios.post(`${API_URL}/forgot-password`, data);
     return result;
