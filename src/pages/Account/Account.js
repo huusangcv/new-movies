@@ -112,9 +112,10 @@ const Account = () => {
     const fetchApi = async () => {
       try {
         const response = await fetch(`https://api.newmoviesz.online/api/users/${user.id}`, {
-          method: 'PATCH',
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(data),
         });

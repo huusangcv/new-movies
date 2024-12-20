@@ -38,12 +38,13 @@ const Login = () => {
         if (email === 'admin@gmail.com') {
           window.location.assign('https://admin.newmoviesz.online');
         } else {
-          navigate('/');
           setIsLoading(false);
           setCookie('token', token, {
             path: '/',
             secure: true,
+            domain: '.newmoviesz.online',
           });
+          navigate('/');
         }
       } else {
         alert(message);
