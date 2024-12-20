@@ -36,7 +36,6 @@ const Login = () => {
 
       if (status) {
         if (email === 'admin@gmail.com') {
-          setIsLoading(false);
           setCookie('token', token, {
             path: '/',
             secure: true,
