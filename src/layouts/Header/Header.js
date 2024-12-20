@@ -1,8 +1,7 @@
 import classNames from 'classnames/bind';
 import { Link, useNavigate } from 'react-router-dom';
 import { toggleBars } from '~/redux/actions/toggleBars';
-import { useEffect, useState } from 'react';
-import { filterMoviesByCategory } from '~/redux/actions';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Header.module.scss';
 import { useCookies } from 'react-cookie';
@@ -36,23 +35,23 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    if (!cookies) {
+    if (!cookies.token) {
       navigate('/');
     }
-  }, [cookies]);
+  }, [cookies, navigate]);
 
   // Func show/close bars for mobile
-  const handleShowBar = () => {
+  const handleShowBar = useCallback(() => {
     dispatch(toggleBars(!isShowBar));
-  };
+  }, [dispatch, isShowBar]);
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     removeCookie('token', {
       path: '/',
+      domain: 'newmoviesz.online',
     });
     navigate('/');
-  };
-
+  }, [removeCookie, navigate]);
   return (
     <header className={cx('wapper')}>
       <nav className={cx('navbar', 'mobile')} style={{ background: background && background, opacity: 0.9 }}>
