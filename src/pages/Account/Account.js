@@ -1,10 +1,11 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userProfile } from '~/redux/selector/selector';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import { getUserProfile } from '~/redux/actions';
 import Spinner from '~/components/Spinner';
 
 // Hàm để lấy giá trị cookie theo tên
@@ -33,6 +34,7 @@ const Account = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['token']);
   const token = cookies['token'];
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const formattedDate = formatDate(user.created_at);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
