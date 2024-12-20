@@ -1,5 +1,4 @@
 import axios from '~/utils/customizeAxios';
-import axios2 from 'axios';
 const getMovies = {
   Single: async (page) => {
     const result = await axios.get(`danh-sach/phim-le?page=${page}`);
