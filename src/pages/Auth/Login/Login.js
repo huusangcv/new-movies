@@ -15,7 +15,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [setCookie] = useCookies(['token']);
+  const [cookies, setCookie] = useCookies(['token']);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -39,7 +39,7 @@ const Login = () => {
           setCookie('token', token, {
             path: '/',
             secure: true,
-            domain: '.newmoviesz.online',
+            // domain: '.newmoviesz.online',
           });
           window.location.assign('https://admin.newmoviesz.online');
         } else {
@@ -47,7 +47,7 @@ const Login = () => {
           setCookie('token', token, {
             path: '/',
             secure: true,
-            domain: 'newmoviesz.online',
+            // domain: 'newmoviesz.online',
           });
           navigate('/');
         }
