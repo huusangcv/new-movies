@@ -10,6 +10,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useSelector } from 'react-redux';
 import { moviesSimilar } from '~/redux/selector/selector';
 import { Link } from 'react-router-dom';
+
 const DialogSmilar = ({ open, setOpen, handleClickOpen, handleClose, slug }) => {
   const movies = useSelector(moviesSimilar);
   return (

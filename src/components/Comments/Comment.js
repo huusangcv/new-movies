@@ -8,7 +8,7 @@ const FacebookComments = ({ url }) => {
     }
   }, []);
 
-  return <div className="fb-comments" data-href={url} data-width="100%" data-numposts="5"></div>;
+  return <div className="fb-comments" data-href={url} data-width="100%" data-numposts="5" data-mobile={true}></div>;
 };
 
 export default FacebookComments;
