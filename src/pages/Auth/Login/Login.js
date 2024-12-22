@@ -39,7 +39,7 @@ const Login = () => {
           setCookie('token', token, {
             path: '/',
             secure: true,
-            domain: '.newmoviesz.online',
+            domain: 'admin.newmoviesz.online',
           });
           window.location.assign('https://admin.newmoviesz.online');
         } else {

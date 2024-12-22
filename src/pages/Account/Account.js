@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userProfile } from '~/redux/selector/selector';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import { getUserProfile } from '~/redux/actions';
 import Spinner from '~/components/Spinner';
+import userApi from '~/services/user';
 
 // Hàm để lấy giá trị cookie theo tên
 const formatDate = (dateString) => {
@@ -95,6 +95,9 @@ const Account = () => {
               icon: false,
             },
           );
+        } else {
+          setIsLoading(false);
+          alert(result.message);
         }
       } catch (error) {}
     };
@@ -111,18 +114,10 @@ const Account = () => {
 
     const fetchApi = async () => {
       try {
-        const response = await fetch(`https://api.newmoviesz.online/api/users/${user.id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(data),
-        });
+        const res = await userApi.updatePassword(data);
 
         // Phân tích phản hồi JSON
-        const result = await response.json();
-        if (result.success === true) {
+        if (res.status === true) {
           toast.success(<p>Thay đổi mật khẩu thành công</p>, {
             position: 'bottom-center',
             autoClose: 3000,
@@ -135,9 +130,11 @@ const Account = () => {
             icon: false,
           });
         } else {
-          alert(result.message);
+          alert(res.message);
         }
-      } catch (error) {}
+      } catch (error) {
+        alert(error);
+      }
     };
 
     if (password.length >= 6 && rePassword.length >= 6) {
@@ -253,12 +250,12 @@ const Account = () => {
         </label>
         <div className="help has-text-grey">Những từ ngữ tục, chửi thề... trong phụ đề sẽ được thay bằng ký tự lạ</div>
       </div> */}
-        <div className="field mt-4 has-text-centered ">
+        {/* <div className="field mt-4 has-text-centered ">
           <label className="checkbox">
             <input type="checkbox" name="subscribed" checked="" /> Đăng ký nhận thông báo về trang web
           </label>
           <div className="help has-text-grey">Chúng tôi chỉ gửi những thông báo quan trọng</div>
-        </div>
+        </div> */}
         <ToastContainer />
       </div>
     </>

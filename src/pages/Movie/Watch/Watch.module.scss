@@ -1,3 +1,5 @@
+@import '.././Details/Detail.module.scss';
+
 .watch_video {
   width: 100%;
   position: absolute;
@@ -11,10 +13,6 @@
 
     @media screen and (max-width: 767.98px) {
       font-size: 1.2rem;
-    }
-
-    a:hover {
-      color: #dcf836;
     }
   }
 }
@@ -33,10 +31,6 @@
     .container {
       margin: 0;
     }
-  }
-
-  a:hover {
-    color: #dcf836;
   }
 }
 
@@ -78,15 +72,13 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   max-height: 250px;
-  overflow: auto;
-  margin-bottom: 20px;
 
   @media screen and (max-width: 767.98px) {
     margin-bottom: 0;
   }
 
   .button {
-    padding: 7px 16px;
+    padding: 6px 16px;
     border: 1px solid transparent;
     border-radius: 4px;
     border-color: #dbdbdb;
@@ -110,7 +102,7 @@
     background-color: #485fc7;
     border-color: transparent;
     color: #fff;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
   }
 
   .button[disabled],
@@ -143,3 +135,16 @@
 }
 
 // video player
+//dropdown
+.episode {
+  overflow: auto;
+}
+.collection-btn,
+.fb-share {
+  margin: 0 !important;
+  height: 35px;
+}
+
+.dropdown {
+  margin-left: 0;
+}

@@ -1,3 +1,4 @@
+import { type } from '@testing-library/user-event/dist/type';
 import {
   CURRENT_MOVIES_TOP,
   FILTER_MOVIES,
@@ -24,6 +25,7 @@ import {
   UPDATE_WANT_TO_SEE,
   DELETE_WATCHED,
   DELETE_WANT_TO_SEE,
+  GET_SMILAR_MOVIES,
 } from '../constans';
 
 const getTitle = (payload) => {
@@ -114,6 +116,13 @@ const getNewUpdateMovies = (payload) => {
   return {
     type: GET_NEW_UPDATE_MOVIES,
     payload: payload,
+  };
+};
+
+const getSimilarMovies = (payload) => {
+  return {
+    type: GET_SMILAR_MOVIES,
+    payload,
   };
 };
 
@@ -214,6 +223,7 @@ export {
   getTotalItemsNew,
   getTotalItemsTop,
   getNewUpdateMovies,
+  getSimilarMovies,
   getCurrentPageMoviesSingle,
   getCurrentPageMoviesSeries,
   getCurrentPageMoviesNew,

@@ -18,6 +18,14 @@ const user = {
     const result = await axios.post(`${API_URL}/forgot-password`, data);
     return result;
   },
+  updateProfile: async (data) => {
+    const result = await axios.put(`${API_URL}/update-profile`, data);
+    return result;
+  },
+  updatePassword: async (data) => {
+    const result = await axios.put(`${API_URL}/update-password`, data);
+    return result;
+  },
   ResendVerification: async (data) => {
     const result = await axios.post(`${API_URL}/resend-verification`, data);
     return result;
@@ -30,8 +38,8 @@ const user = {
     const result = await axios.post('https://api.vietqr.io/v2/generate', data);
     return result;
   },
-  Account: async (data) => {
-    const result = await axios.get('auth/profile');
+  profile: async () => {
+    const result = await axios.get('profile');
     return result;
   },
 };

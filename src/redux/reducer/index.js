@@ -8,6 +8,7 @@ import isMultilineReducer from './isMultilineReducer';
 import movieListReducer from './movieListReducer';
 import movieReducer from './movieReducer';
 import moviesNewUpdateReducer from './moviesNewUpdateReducer';
+import similarMoviesReducer from './similarMoviesReducer';
 import toggleBarsReducer from './toggleBarsReducer';
 import totalPageReducer from './totalPageReducer';
 import userProfileReducer from './userProfileReducer';
@@ -28,6 +29,7 @@ const rootReducer = (state = {}, action) => {
     currentMoviesTop: currentMoviesTopReducer(state.currentMoviesTop, action),
     userProfile: userProfileReducer(state.userProfile, action),
     emailVerify: verifyEmailReducer(state.emailVerify, action),
+    similarMovies: similarMoviesReducer(state.similarMovies, action),
   };
 };
 

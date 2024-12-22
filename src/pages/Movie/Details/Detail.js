@@ -458,10 +458,15 @@ const MovieDetails = () => {
                   </div>
                 </div>
 
-                {/* <h3 className="section-header">Phim tương tự</h3>
+                <h3 className="section-header">Phim tương tự</h3>
                 <div className={'related-titles'}>
-                  <SimpleSlider />
-                </div> */}
+                  <SimpleSlider
+                    type={(movie.type === 'single' && 'phim-le') || 'phim-bo'}
+                    genre={movie.category}
+                    country={movie.country}
+                    year={movie.year}
+                  />
+                </div>
               </div>
             </div>
           </div>

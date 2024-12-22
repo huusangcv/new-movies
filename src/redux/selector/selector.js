@@ -3,6 +3,7 @@ const moviesSingle = (state) => state.movies.single;
 const moviesSeries = (state) => state.movies.series;
 const moviesNew = (state) => state.movies.new;
 const moviesTop = (state) => state.movies.top;
+const moviesSimilar = (state) => state.similarMovies;
 const getTotalItems = (state) => state.totalPage;
 const loading = (state) => state.isLoading;
 const movieDetail = (state) => state.movie.item;
@@ -24,6 +25,7 @@ export {
   moviesSeries,
   moviesNew,
   moviesTop,
+  moviesSimilar,
   getTotalItems,
   movieNewUpdate,
   currentPageMoviesSingle,

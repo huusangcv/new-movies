@@ -641,7 +641,7 @@ button {
   box-shadow: none;
   display: inline-flex;
   font-size: 1.6rem;
-  height: 2.5em;
+  height: 3.5rem;
   justify-content: flex-start;
   line-height: 1.5;
   padding: calc(0.5em - 1px) calc(0.75em - 1px);
@@ -952,4 +952,108 @@ header,
 hgroup,
 section {
   display: block;
+}
+
+.year:hover,
+.back:hover {
+  color: #dcf836;
+}
+
+.related-btn {
+  border: 1px solid #48c78e !important;
+  background: transparent !important;
+  color: #48c78e !important;
+  svg {
+    height: 1.3rem;
+    fill: #fff;
+    color: #fff;
+    margin-right: 0.5em;
+  }
+
+  &:hover {
+    background: #48c78e !important;
+    color: #fff !important;
+  }
+}
+
+.button-actions {
+  margin: 35px 0;
+  gap: 15px;
+}
+
+//comments
+.comments-section {
+  max-width: 600px;
+  margin-top: 1.6rem;
+  border-top: 1px solid #4a4a4a;
+}
+.comments-section .section-title {
+  padding: 1em 2em 0;
+  color: #7a7a7a;
+}
+
+.title-watch .title {
+  margin: 0 0 1em;
+  font-family: Merriweather, serif;
+  font-weight: 400;
+}
+.title.is-5 {
+  font-size: 2rem;
+}
+.comments-section .section-title svg {
+  fill: #7a7a7a;
+  width: 3rem;
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+
+.fb-comments {
+  background: #fff !important;
+}
+
+.MuiPaper-root {
+  color: #fff !important;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+  background-color: #0b1e30 !important;
+}
+
+.css-rsks93-MuiPaper-root-MuiDialog-paper {
+  z-index: 99999 !important;
+  max-width: 1280px !important;
+}
+
+.MuiDialogContent-dividers {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.css-ks0ey5-MuiTypography-root-MuiDialogTitle-root {
+  font-size: 2rem;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 500 !important;
+  line-height: 1.6 !important;
+  letter-spacing: 0.0075em !important;
+}
+
+.dialog-close-btn svg {
+  width: 1.6em;
+  height: 1.6em;
+  fill: #fff;
+}
+
+.MuiDialogTitle-root {
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+  padding: 16px 24px !important;
+}
+
+.MuiTypography-h6 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 !important;
+}
+.MuiDialog-paperFullWidth {
+  width: calc(100% - 64px) !important;
 }

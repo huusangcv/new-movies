@@ -1,18 +1,33 @@
 import axios from 'axios';
 
+const getTokenFromCookie = () => {
+  const name = 'token=';
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const ca = decodedCookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return '';
+};
 const instanceUser = axios.create({
   baseURL: 'http://127.0.0.1:8000/api/',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${getTokenFromCookie()}`,
+  },
 });
-
-const hasCookie = () => {
-  return document.cookie.split(';').some((item) => item.trim().startsWith('token='));
-};
 
 // Add a request interceptor
 instanceUser.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    const token = hasCookie();
+    const token = getTokenFromCookie();
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }

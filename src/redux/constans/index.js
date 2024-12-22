@@ -23,10 +23,10 @@ const UPDATE_WATCHED = 'update_watched';
 const UPDATE_WANT_TO_SEE = 'update_want_to_see';
 const DELETE_WATCHED = 'delete_watched';
 const DELETE_WANT_TO_SEE = 'delete_want_to_see';
-
 const CURRENT_MOVIES_TOP = 'current_movies_top';
 const USER_PROFILE = 'user_profile';
 const EMAIL_VERIFY = 'email_verify';
+const GET_SMILAR_MOVIES = 'get_similar_movies';
 export {
   TOGGLE_BARS,
   TITLE_MOVIES,
@@ -45,6 +45,7 @@ export {
   GET_CURRENT_PAGE_MOVIES_SINGLE,
   GET_CURRENT_PAGE_MOVIES_SERIES,
   GET_CURRENT_PAGE_MOVIES_NEW,
+  GET_SMILAR_MOVIES,
   IS_MULTILINE,
   IS_LOADING,
   WATCHED,
