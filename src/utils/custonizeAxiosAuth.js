@@ -16,7 +16,7 @@ const getTokenFromCookie = () => {
   return '';
 };
 const instanceUser = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api/',
+  baseURL: 'https://api.newmoviesz.online/api/',
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${getTokenFromCookie()}`,

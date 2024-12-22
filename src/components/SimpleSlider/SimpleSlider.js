@@ -29,7 +29,7 @@ function SamplePrevArrow(props) {
     </div>
   );
 }
-function SimpleSlider({ type, genre, country, year }) {
+function SimpleSlider({ type, genre, country, year, slug }) {
   const dispatch = useDispatch();
   const movies = useSelector(moviesSimilar);
   useEffect(() => {
@@ -99,20 +99,22 @@ function SimpleSlider({ type, genre, country, year }) {
     <div className="slider-container">
       <Slider {...settings}>
         {movies.map((movie) => {
-          return (
-            <div key={movie.id}>
-              <Link className="cover" to={`/movie/${movie.slug}`}>
-                <img
-                  src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
-                  alt={movie.title}
-                  title={movie.title}
-                />
-              </Link>
-              <h3 className="name">
-                <Link to={`/movie/${movie.slug}`}>{movie.origin_name}</Link>
-              </h3>
-            </div>
-          );
+          if (slug !== movie.slug) {
+            return (
+              <div key={movie.id}>
+                <Link className="cover" to={`/movie/${movie.slug}`}>
+                  <img
+                    src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
+                    alt={movie.title}
+                    title={movie.title}
+                  />
+                </Link>
+                <h3 className="name">
+                  <Link to={`/movie/${movie.slug}`}>{movie.origin_name}</Link>
+                </h3>
+              </div>
+            );
+          }
         })}
       </Slider>
     </div>

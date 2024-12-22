@@ -10,7 +10,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useSelector } from 'react-redux';
 import { moviesSimilar } from '~/redux/selector/selector';
 import { Link } from 'react-router-dom';
-const DialogSmilar = ({ open, setOpen, handleClickOpen, handleClose }) => {
+const DialogSmilar = ({ open, setOpen, handleClickOpen, handleClose, slug }) => {
   const movies = useSelector(moviesSimilar);
   return (
     <div>
@@ -40,25 +40,27 @@ const DialogSmilar = ({ open, setOpen, handleClickOpen, handleClose }) => {
             <div className="title-list">
               <div className="gird columns">
                 {movies?.map((movie) => {
-                  return (
-                    <Link to={`/movie/${movie.slug}`} className="column" key={movie._id}>
-                      <div className="cover">
-                        <LazyLoadImage
-                          src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
-                          alt={movie.name}
-                          effect="blur"
-                          srcSet={`
-                                      https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
-                        ></LazyLoadImage>
-                      </div>
-                      <h3 className="name vi">
-                        <span>{movie.name}</span>
-                      </h3>
-                      <h3 className="name en">
-                        <span>{movie.origin_name}</span>
-                      </h3>
-                    </Link>
-                  );
+                  if (movie.slug !== slug) {
+                    return (
+                      <Link to={`/movie/${movie.slug}`} className="column" key={movie._id}>
+                        <div className="cover">
+                          <LazyLoadImage
+                            src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
+                            alt={movie.name}
+                            effect="blur"
+                            srcSet={`
+                                        https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
+                          ></LazyLoadImage>
+                        </div>
+                        <h3 className="name vi">
+                          <span>{movie.name}</span>
+                        </h3>
+                        <h3 className="name en">
+                          <span>{movie.origin_name}</span>
+                        </h3>
+                      </Link>
+                    );
+                  }
                 })}
               </div>
             </div>

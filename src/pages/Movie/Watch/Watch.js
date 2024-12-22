@@ -420,6 +420,7 @@ const Watch = () => {
                   setOpen={setOpen}
                   handleClickOpen={handleClickOpen}
                   handleClose={handleClose}
+                  slug={movie.slug}
                 />
               </div>
             </div>

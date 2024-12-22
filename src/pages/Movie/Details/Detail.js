@@ -465,6 +465,7 @@ const MovieDetails = () => {
                     genre={movie.category}
                     country={movie.country}
                     year={movie.year}
+                    slug={movie.slug}
                   />
                 </div>
               </div>
