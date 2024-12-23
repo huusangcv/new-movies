@@ -41,8 +41,8 @@ const user = {
     const result = await axios.get('profile');
     return result;
   },
-  ConfirmNewEmail: async (id, emailCode) => {
-    const result = await axios.get(`confirm-update-profile/${id}/${emailCode}`);
+  ConfirmNewEmail: async (emailCode) => {
+    const result = await axios.get(`confirm-update-profile/${emailCode}`);
     return result;
   },
 };

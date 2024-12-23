@@ -14,11 +14,10 @@ const ConfirmNewEmail = () => {
   const emailCode = searchParams.get('emailCode');
   const [notification, setNotification] = useState('');
 
-  const { id } = useSelector(userProfile);
   useEffect(() => {
     const fetchApiEmailUser = async () => {
       try {
-        const response = await user.ConfirmNewEmail(id, emailCode);
+        const response = await user.ConfirmNewEmail(emailCode);
         if (response) {
           setNotification(response.data);
         } else {
