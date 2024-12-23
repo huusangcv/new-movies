@@ -48,11 +48,7 @@ const Header = () => {
 
   const handleLogout = useCallback(() => {
     dispatch(getUserProfile({ id: null, name: '', email: '' }));
-    dispatch(
-      getNewUpdateMovies({
-        recommend: [],
-      }),
-    );
+    dispatch(getNewUpdateMovies({}));
     removeCookie('token', {
       path: '/',
       domain: 'newmoviesz.online',

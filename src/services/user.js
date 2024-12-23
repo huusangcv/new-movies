@@ -41,6 +41,10 @@ const user = {
     const result = await axios.get('profile');
     return result;
   },
+  ConfirmNewEmail: async (id, emailCode) => {
+    const result = await axios.get(`confirm-update-profile/${id}/${emailCode}`);
+    return result;
+  },
 };
 
 export default user;
