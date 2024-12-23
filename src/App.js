@@ -7,8 +7,8 @@ import { useCookies } from 'react-cookie';
 import PrivateRoute from './routes/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserProfile } from './redux/actions';
-import Snowfall from 'react-snowfall';
 import { userProfile } from './redux/selector/selector';
+import user from './services/user';
 // Hàm kiểm tra cookie
 function App() {
   const [cookies] = useCookies(['token']);
@@ -18,17 +18,10 @@ function App() {
   useEffect(() => {
     const fetchApiUser = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/profile', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await user.profile();
         // Phân tích phản hồi JSON
-        const result = await response.json();
-        if (result.status === true) {
-          dispatch(getUserProfile(result.data));
+        if (res.status === true) {
+          dispatch(getUserProfile(res.data));
         }
       } catch (error) {}
     };

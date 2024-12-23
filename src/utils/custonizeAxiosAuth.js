@@ -15,6 +15,8 @@ const getTokenFromCookie = () => {
   }
   return '';
 };
+
+console.log('getTokenFromCookie', getTokenFromCookie());
 const instanceUser = axios.create({
   baseURL: 'https://api.newmoviesz.online/api/',
   headers: {

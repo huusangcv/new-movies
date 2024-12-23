@@ -47,7 +47,7 @@ const Login = () => {
           setCookie('token', token, {
             path: '/',
             secure: true,
-            domain: 'newmoviesz.online',
+            // domain: 'newmoviesz.online',
           });
           navigate('/');
         }

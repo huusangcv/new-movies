@@ -115,7 +115,7 @@ const Account = () => {
     const fetchApi = async () => {
       try {
         const res = await userApi.updatePassword(data);
-
+        console.log('res', res);
         // Phân tích phản hồi JSON
         if (res.status === true) {
           toast.success(<p>Thay đổi mật khẩu thành công</p>, {
