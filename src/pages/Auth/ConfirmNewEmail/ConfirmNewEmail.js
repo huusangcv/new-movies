@@ -19,10 +19,10 @@ const ConfirmNewEmail = () => {
       try {
         const response = await user.ConfirmNewEmail(emailCode);
         if (response) {
-          setNotification(response.data);
+          setNotification(response);
         } else {
           // Handle non-200 HTTP responses (e.g., 404, 500)
-          console.error('Response not OK:', response.status);
+          console.error('Response not OK:', response);
         }
       } catch (error) {
         console.error('Error during fetch:', error);
