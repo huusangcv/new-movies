@@ -412,7 +412,9 @@ const Watch = () => {
                   </svg>
                   Bình luận phim
                 </h2>
-                <FacebookComments url={`https://newmoviesz.online/watch/${slug}`} />
+                <div className="facebook-comments">
+                  <FacebookComments url={`https://newmoviesz.online/watch/${slug}`} />
+                </div>
               </div>
               <div className="dialog-smilar">
                 <DialogSmilar

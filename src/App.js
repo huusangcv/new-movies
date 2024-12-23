@@ -5,14 +5,16 @@ import { QueryParamProvider } from 'use-query-params';
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
 import { useCookies } from 'react-cookie';
 import PrivateRoute from './routes/routes';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUserProfile } from './redux/actions';
 import Snowfall from 'react-snowfall';
+import { userProfile } from './redux/selector/selector';
 // Hàm kiểm tra cookie
 function App() {
   const [cookies] = useCookies(['token']);
   const token = cookies.token; // Lấy giá trị cookie
   const dispatch = useDispatch();
+  const profile = useSelector(userProfile);
   useEffect(() => {
     const fetchApiUser = async () => {
       try {
@@ -30,7 +32,7 @@ function App() {
         }
       } catch (error) {}
     };
-    if (token) {
+    if (token || profile.id === null) {
       fetchApiUser();
     }
   }, [token, dispatch]);

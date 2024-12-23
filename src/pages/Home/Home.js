@@ -26,57 +26,62 @@ const HomePage = () => {
 
   useEffect(() => {
     document.title = 'Từ Hollywood đến Bollywood, chúng tôi mang đến những bộ phim bạn yêu thích';
-    if (!moviesNewUpdate.single || moviesNewUpdate.single.length === 0) {
-      const fetchApi = async () => {
-        setIsLoading(true);
-        const [newUpdateRecommend, newUpdateSingle, newUpdateSeries] = await Promise.all([
-          getMovies.newUpdateRecommend(),
-          getMovies.newUpdateSingle(),
-          getMovies.newUpdateSeries(),
-        ]);
-        if ([newUpdateRecommend, newUpdateSingle, newUpdateSeries]) {
-          const result1 = newUpdateRecommend.data.map((movie) => {
-            return {
-              name: movie.name_vi,
-              slug: movie.slug,
-              origin_name: movie.name_en,
-              thumb_url: movie.thumb,
-            };
-          });
 
-          const result2 = newUpdateSingle.items.map((movie) => {
-            return {
-              name: movie.name,
-              slug: movie.slug,
-              origin_name: movie.origin_name,
-              thumb_url: movie.thumb_url,
-            };
-          });
+    const fetchApi = async () => {
+      setIsLoading(true);
+      try {
+        const newUpdateRecommend = await getMovies.newUpdateRecommend();
+        const result1 = newUpdateRecommend.data.map((movie) => {
+          return {
+            name: movie.name_vi,
+            slug: movie.slug,
+            origin_name: movie.name_en,
+            thumb_url: movie.thumb,
+          };
+        });
 
-          const result3 = newUpdateSeries.items.map((movie) => {
-            return {
-              name: movie.name,
-              slug: movie.slug,
-              origin_name: movie.origin_name,
-              thumb_url: movie.thumb_url,
-            };
-          });
+        const newUpdateSingle = await getMovies.newUpdateSingle();
+        const result2 = newUpdateSingle.items.map((movie) => {
+          return {
+            name: movie.name,
+            slug: movie.slug,
+            origin_name: movie.origin_name,
+            thumb_url: movie.thumb_url,
+          };
+        });
 
-          dispatch(
-            getNewUpdateMovies({
-              recommend: result1,
-              single: result2,
-              series: result3,
-            }),
-          );
-          setIsLoading(false);
-        }
-      };
+        const newUpdateSeries = await getMovies.newUpdateSeries();
+        const result3 = newUpdateSeries.items.map((movie) => {
+          return {
+            name: movie.name,
+            slug: movie.slug,
+            origin_name: movie.origin_name,
+            thumb_url: movie.thumb_url,
+          };
+        });
+
+        dispatch(
+          getNewUpdateMovies({
+            recommend: result1,
+            single: result2,
+            series: result3,
+          }),
+        );
+      } catch (error) {
+        console.error('Failed to fetch movies:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (
+      !moviesNewUpdate ||
+      moviesNewUpdate.single.length === 0 ||
+      moviesNewUpdate.series.length === 0 ||
+      moviesNewUpdate.recommend.length === 0
+    ) {
       fetchApi();
-    } else if (moviesNewUpdate) {
-      setIsLoading(false);
     }
-
     window.scroll({
       top: 0,
     });

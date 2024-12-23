@@ -7,6 +7,7 @@ import styles from './Header.module.scss';
 import { useCookies } from 'react-cookie';
 import { userProfile } from '~/redux/selector/selector';
 import noel from '~/assets/images/noel.png';
+import { getNewUpdateMovies, getUserProfile } from '~/redux/actions';
 const cx = classNames.bind(styles);
 
 const Header = () => {
@@ -46,6 +47,12 @@ const Header = () => {
   }, [dispatch, isShowBar]);
 
   const handleLogout = useCallback(() => {
+    dispatch(getUserProfile({ id: null, name: '', email: '' }));
+    dispatch(
+      getNewUpdateMovies({
+        recommend: [],
+      }),
+    );
     removeCookie('token', {
       path: '/',
       domain: 'newmoviesz.online',
