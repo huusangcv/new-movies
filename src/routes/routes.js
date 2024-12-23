@@ -33,7 +33,6 @@ const publicLayout = [
   { path: config.routes.retrievePassword, component: RetrievalPassword, layout: null },
   { path: config.routes.verify, component: Verify, layout: null },
   { path: config.routes.notfound, component: Login, layout: null },
-  { path: config.routes.confirmNewEmail, component: ConfirmNewEmail, layout: null },
 ];
 
 const privateLayout = [
