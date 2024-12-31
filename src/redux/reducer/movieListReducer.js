@@ -1,10 +1,20 @@
-const { GET_MOVIE_SINGLE, GET_MOVIE_SERIES, GET_MOVIE_NEW, GET_MOVIE_TOP } = require('../constans');
+const {
+  GET_MOVIE_SINGLE,
+  GET_MOVIE_SERIES,
+  GET_MOVIE_NEW,
+  GET_MOVIE_TOP,
+  GET_MOVIE_TOP_SINGLE,
+  GET_MOVIE_TOP_SERIES,
+} = require('../constans');
 
 const initialState = {
   single: [],
   series: [],
   new: [],
-  top: [],
+  top: {
+    single: [],
+    series: [],
+  },
 };
 
 const movieListReducer = (state = initialState, action) => {
@@ -24,10 +34,21 @@ const movieListReducer = (state = initialState, action) => {
         ...state,
         new: [...action.payload],
       };
-    case GET_MOVIE_TOP:
+    case GET_MOVIE_TOP_SINGLE:
       return {
         ...state,
-        top: [...action.payload],
+        top: {
+          ...state.top,
+          single: [...action.payload],
+        },
+      };
+    case GET_MOVIE_TOP_SERIES:
+      return {
+        ...state,
+        top: {
+          ...state.top,
+          series: [...action.payload],
+        },
       };
     default:
       return state;

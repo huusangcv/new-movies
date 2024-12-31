@@ -2,7 +2,8 @@ const moviesSelector = (state) => state.filterBy;
 const moviesSingle = (state) => state.movies.single;
 const moviesSeries = (state) => state.movies.series;
 const moviesNew = (state) => state.movies.new;
-const moviesTop = (state) => state.movies.top;
+const moviesTopSingle = (state) => state.movies.top.single;
+const moviesTopSeries = (state) => state.movies.top.series;
 const moviesSimilar = (state) => state.similarMovies;
 const getTotalItems = (state) => state.totalPage;
 const loading = (state) => state.isLoading;
@@ -24,7 +25,8 @@ export {
   moviesSingle,
   moviesSeries,
   moviesNew,
-  moviesTop,
+  moviesTopSingle,
+  moviesTopSeries,
   moviesSimilar,
   getTotalItems,
   movieNewUpdate,

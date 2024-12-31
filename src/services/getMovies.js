@@ -12,8 +12,12 @@ const getMovies = {
     const result = await axios.get(`danh-sach/phim-moi?page=${page}`);
     return result.data;
   },
-  Top: async (page, movieType = '') => {
-    const result = await axios.get(`danh-sach/${movieType}?page=${page}&sort_field=view&year=2024`);
+  TopSingle: async () => {
+    const result = await axios.get(`danh-sach/phim-le?page=1&sort_field=view&year=2024`);
+    return result.data;
+  },
+  TopSeries: async () => {
+    const result = await axios.get(`danh-sach/phim-bo?page=1&sort_field=view&year=2024`);
     return result.data;
   },
   Browse: async (moviesType, page, type = '', nation = '', year = '', sortBy = '') => {

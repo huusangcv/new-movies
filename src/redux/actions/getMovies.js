@@ -1,4 +1,3 @@
-import { type } from '@testing-library/user-event/dist/type';
 import {
   CURRENT_MOVIES_TOP,
   FILTER_MOVIES,
@@ -10,7 +9,8 @@ import {
   GET_MOVIE_NEW,
   GET_MOVIE_SERIES,
   GET_MOVIE_SINGLE,
-  GET_MOVIE_TOP,
+  GET_MOVIE_TOP_SINGLE,
+  GET_MOVIE_TOP_SERIES,
   GET_NEW_UPDATE_MOVIES,
   GET_TOTAL_ITEMS_MOVIES_NEW,
   GET_TOTAL_ITEMS_MOVIES_SERIES,
@@ -77,9 +77,15 @@ const getMoviesNew = (payload) => {
   };
 };
 
-const getMoviesTop = (payload) => {
+const getMoviesTopSingle = (payload) => {
   return {
-    type: GET_MOVIE_TOP,
+    type: GET_MOVIE_TOP_SINGLE,
+    payload,
+  };
+};
+const getMoviesTopSeries = (payload) => {
+  return {
+    type: GET_MOVIE_TOP_SERIES,
     payload,
   };
 };
@@ -217,7 +223,8 @@ export {
   getMoviesSingle,
   getMoviesSeries,
   getMoviesNew,
-  getMoviesTop,
+  getMoviesTopSingle,
+  getMoviesTopSeries,
   getTotalItemsSingle,
   getTotalItemsSeries,
   getTotalItemsNew,
