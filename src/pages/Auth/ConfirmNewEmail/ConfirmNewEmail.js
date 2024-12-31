@@ -20,13 +20,22 @@ const ConfirmNewEmail = () => {
       try {
         let response;
         if (id !== null) {
-          response = await user.ConfirmNewEmail(id, emailCode);
+          response = await fetch(`https://api.newmoviesz.online/api/confirm-update-profile/${id}/${emailCode}`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
         } else {
-          response = await user.ConfirmNewEmail(0, emailCode);
+          response = await fetch(`https://api.newmoviesz.online/api/confirm-update-profile/0/${emailCode}`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
         }
 
-        if (response) {
-          setNotification(response);
+        if (response.ok) {
+          const data = await response.text();
+          setNotification(data);
         } else {
           // Handle non-200 HTTP responses (e.g., 404, 500)
           console.error('Response not OK:', response);
