@@ -2,7 +2,6 @@ const {
   GET_MOVIE_SINGLE,
   GET_MOVIE_SERIES,
   GET_MOVIE_NEW,
-  GET_MOVIE_TOP,
   GET_MOVIE_TOP_SINGLE,
   GET_MOVIE_TOP_SERIES,
 } = require('../constans');

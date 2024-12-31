@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -8,8 +8,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSimilarMovies } from '~/redux/actions';
 import { moviesSimilar } from '~/redux/selector/selector';
+import ImageComponent from '../ImagesComponent/ImagesComponent';
 function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
+  const { className, onClick } = props;
   return (
     <div className={className} onClick={onClick}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -20,7 +21,7 @@ function SampleNextArrow(props) {
 }
 
 function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
+  const { className, onClick } = props;
   return (
     <div className={className} onClick={onClick}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -44,7 +45,7 @@ function SimpleSlider({ type, genre, country, year, slug }) {
     if (year !== '' && genre !== '') {
       fetchApiSimilar();
     }
-  }, []);
+  }, [year, genre, country, dispatch, type]);
   var settings = {
     infinite: true,
     speed: 500,
@@ -98,24 +99,25 @@ function SimpleSlider({ type, genre, country, year, slug }) {
   return (
     <div className="slider-container">
       <Slider {...settings}>
-        {movies.map((movie) => {
-          if (slug !== movie.slug) {
-            return (
-              <div key={movie.id}>
-                <Link className="cover" to={`/movie/${movie.slug}`}>
-                  <img
-                    src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
-                    alt={movie.title}
-                    title={movie.title}
-                  />
-                </Link>
-                <h3 className="name">
-                  <Link to={`/movie/${movie.slug}`}>{movie.origin_name}</Link>
-                </h3>
-              </div>
-            );
-          }
-        })}
+        {movies &&
+          movies.map((movie) => {
+            if (slug !== movie.slug) {
+              return (
+                <div key={movie.id}>
+                  <Link className="cover" to={`/movie/${movie.slug}`}>
+                    <ImageComponent
+                      src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
+                      alt={movie.title}
+                    />
+                  </Link>
+                  <h3 className="name">
+                    <Link to={`/movie/${movie.slug}`}>{movie.origin_name}</Link>
+                  </h3>
+                </div>
+              );
+            }
+            return null;
+          })}
       </Slider>
     </div>
   );

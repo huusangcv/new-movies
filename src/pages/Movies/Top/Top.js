@@ -69,9 +69,7 @@ const Top = () => {
     };
 
     //Check page === 1 delay 1,2 call api movies series else page !== 1 delay 400ms
-    if (moviesSingle.lenght === 0 || moviesSeries.lenght === 0) {
-      fetchApi();
-    }
+    fetchApi();
     //--
 
     window.scroll({

@@ -1,0 +1,10 @@
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none; /* Ẩn ảnh mặc định */
+}
+
+.image.loaded {
+  display: block; /* Hiển thị ảnh khi đã tải xong */
+}

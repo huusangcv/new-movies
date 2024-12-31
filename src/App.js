@@ -28,7 +28,7 @@ function App() {
     if (token || profile.id === null) {
       fetchApiUser();
     }
-  }, [token, dispatch]);
+  }, [token, dispatch, profile.id]);
 
   const LayoutRoutes = PrivateRoute();
   return (

@@ -18,7 +18,7 @@ import {
 } from '~/redux/actions';
 import { movieDetail, moviesSimilar, wantToSeeMovies, watchedMovies } from '~/redux/selector/selector';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import Hls from 'hls.js';
+// import Hls from 'hls.js';
 import getMovies from '~/services/getMovies';
 import Footer from '~/layouts/Footer';
 import FacebookComments from '~/components/Comments';
@@ -112,20 +112,20 @@ const Watch = () => {
     } catch (error) {}
   };
 
-  const playM3u8 = (video, url, art) => {
-    if (Hls.isSupported()) {
-      if (art.hls) art.hls.destroy();
-      const hls = new Hls();
-      hls.loadSource(url);
-      hls.attachMedia(video);
-      art.hls = hls;
-      art.on('destroy', () => hls.destroy());
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = url;
-    } else {
-      art.notice.show = 'Unsupported playback format: m3u8';
-    }
-  };
+  // const playM3u8 = (video, url, art) => {
+  //   if (Hls.isSupported()) {
+  //     if (art.hls) art.hls.destroy();
+  //     const hls = new Hls();
+  //     hls.loadSource(url);
+  //     hls.attachMedia(video);
+  //     art.hls = hls;
+  //     art.on('destroy', () => hls.destroy());
+  //   } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+  //     video.src = url;
+  //   } else {
+  //     art.notice.show = 'Unsupported playback format: m3u8';
+  //   }
+  // };
 
   const handleClickOpen = () => {
     setOpen(true);
