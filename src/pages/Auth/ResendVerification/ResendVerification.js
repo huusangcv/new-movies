@@ -5,15 +5,17 @@ import classNames from 'classnames/bind';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import user from '~/services/user';
+import Spinner from '~/components/Spinner';
 
 const cx = classNames.bind(styles);
 const ResendVerification = () => {
   const [email, setEmail] = useState('');
   const [data, setData] = useState();
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const fetchResenVirify = async () => {
       try {
+        setIsLoading(true);
         // Gửi yêu cầu POST đến API
         const { status, message } = await user.ResendVerification(data);
 
@@ -37,8 +39,10 @@ const ResendVerification = () => {
               icon: false,
             },
           );
+          setIsLoading(false);
         } else {
           alert(message);
+          setIsLoading(false);
         }
       } catch (error) {
         console.error('Có lỗi xảy ra:', error);
@@ -80,7 +84,7 @@ const ResendVerification = () => {
                           </div>
                         </div>
                         <button type="submit" className={cx('button', 'is-block', 'is-info')}>
-                          <span>Gửi</span>
+                          {(isLoading && <Spinner />) || <span>Gửi</span>}
                         </button>
                       </div>
                     </div>

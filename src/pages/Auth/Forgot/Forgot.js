@@ -11,10 +11,11 @@ const cx = classNames.bind(styles);
 const Forgot = () => {
   const [email, setEmail] = useState('');
   const [data, setData] = useState();
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const fetchApiForgotPassword = async () => {
       try {
+        setIsLoading(true);
         // Gửi yêu cầu POST đến API
         const { status, message } = await user.Forgot(data);
 
@@ -39,11 +40,13 @@ const Forgot = () => {
               icon: false,
             },
           );
+          setIsLoading(false);
         } else {
           alert(message);
         }
       } catch (error) {
         console.error('Có lỗi xảy ra:', error);
+        setIsLoading(false);
       }
     };
 
@@ -82,7 +85,7 @@ const Forgot = () => {
                           </div>
                         </div>
                         <button type="submit" className={cx('button', 'is-block', 'is-info')}>
-                          {(false && <Spinner />) || <span>Gửi</span>}
+                          {(isLoading && <Spinner />) || <span>Gửi</span>}
                         </button>
                       </div>
                     </div>

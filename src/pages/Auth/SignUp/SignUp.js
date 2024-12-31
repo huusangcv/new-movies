@@ -141,7 +141,7 @@ const SignUp = () => {
                   </form>
                 </div>
                 <p className="has-text-grey has-text-right">
-                  <Link to="/">Đăng nhập</Link>
+                  <Link to="/login">Đăng nhập</Link>
                 </p>
               </div>
             </div>
