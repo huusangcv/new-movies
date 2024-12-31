@@ -103,7 +103,7 @@ const Bars = () => {
             </Link>
           </>
         )) || (
-          <div style={{ padding: '15x 0 0 15px' }}>
+          <div style={{ padding: '15px 0 0 15px' }}>
             <Link class="button is-primary btn-login" rel="nofollow" to="/login">
               Đăng nhập
             </Link>
