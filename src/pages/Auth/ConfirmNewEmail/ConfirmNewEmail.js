@@ -44,7 +44,18 @@ const ConfirmNewEmail = () => {
         <div className={cx('container')} style={{ flex: 1 }}>
           <div className={cx('inner')}>
             <div className={cx('content')}>
-              <div className={cx('column')} dangerouslySetInnerHTML={{ __html: notification }} />
+              {(notification === '' && (
+                <div className={cx('column')}>
+                  <h1 class="title">Xác nhận địa chỉ email mới</h1>
+                  <div class="message is-success">
+                    <div class="message-body">
+                      <p>
+                        Quá trình đổi email mới đã thành công. Từ giờ bạn hãy nhớ đăng nhập bằng địa chỉ email mới này!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )) || <div className={cx('column')} dangerouslySetInnerHTML={{ __html: notification }} />}
             </div>
           </div>
         </div>
