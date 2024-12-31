@@ -14,7 +14,7 @@ const Header = () => {
   const [background, setBackground] = useState('');
   const dispatch = useDispatch();
   const isShowBar = useSelector((state) => state.isShowBar);
-  const [removeCookie] = useCookies(['token']);
+  const [cookie, setCookie, removeCookie] = useCookies(['token']);
 
   const navigate = useNavigate();
   const user = useSelector(userProfile);
