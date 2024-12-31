@@ -25,7 +25,7 @@ const RetrievalPassword = () => {
         if (status) {
           toast.success(
             <div>
-              Đặt mật khẩu mới thành công, hãy <Link to="/">đăng nhập vào tài khoản</Link>.
+              Đặt mật khẩu mới thành công, hãy <Link to="/login">đăng nhập vào tài khoản</Link>.
             </div>,
             {
               position: 'bottom-center',
