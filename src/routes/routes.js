@@ -26,19 +26,30 @@ const Account = lazy(() => import('~/pages/Account'));
 const Donate = lazy(() => import('~/pages/Donate'));
 
 const publicLayout = [
-  { path: config.routes.login, component: Login, layout: null },
-  { path: config.routes.signup, component: SignUp, layout: null },
-  { path: config.routes.forgot, component: Forgot, layout: null },
-  { path: config.routes.resendVerification, component: ResendVerification, layout: null },
-  { path: config.routes.retrievePassword, component: RetrievalPassword, layout: null },
-  { path: config.routes.verify, component: Verify, layout: null },
-  { path: config.routes.notfound, component: Login, layout: null },
+  { path: config.routes.login, component: Login },
+  { path: config.routes.signup, component: SignUp },
+  { path: config.routes.forgot, component: Forgot },
+  { path: config.routes.resendVerification, component: ResendVerification },
+  { path: config.routes.retrievePassword, component: RetrievalPassword },
+  { path: config.routes.verify, component: Verify },
+  { path: config.routes.notfound, component: Login },
+  { path: config.routes.home, component: HomePage },
+  { path: config.routes.series, component: Series },
+  { path: config.routes.single, component: Single },
+  { path: config.routes.new, component: New },
+  { path: config.routes.top, component: Top },
+  { path: config.routes.collection, component: Collection },
+  { path: config.routes.browseDetails, component: BrowseDetails },
+  { path: config.routes.detail, component: Details },
+  { path: config.routes.watch, component: Watch, layout: HeaderOnlyForMovies },
+  { path: config.routes.browse, component: Browse },
+  { path: config.routes.search, component: Search },
+  { path: config.routes.faqs, component: Faqs },
+  { path: config.routes.notfound, component: NotFound },
 ];
 
 const privateLayout = [
   { path: config.routes.home, component: HomePage },
-  { path: config.routes.login, component: Login, layout: null },
-  { path: config.routes.signup, component: SignUp, layout: null },
   { path: config.routes.series, component: Series },
   { path: config.routes.single, component: Single },
   { path: config.routes.new, component: New },
@@ -65,3 +76,4 @@ const PrivateRoute = () => {
 };
 
 export default PrivateRoute;
+export { privateLayout, publicLayout };

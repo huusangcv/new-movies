@@ -1,5 +1,5 @@
 // src/Login.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Login.module.scss';
 import classNames from 'classnames/bind';
 import Spinner from '~/components/Spinner';
@@ -17,6 +17,10 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [cookies, setCookie] = useCookies(['token']);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Ngăn chặn hành động mặc định của form

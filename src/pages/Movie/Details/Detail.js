@@ -22,7 +22,9 @@ import Modal from '~/components/ModalRoot/Modal';
 import SimpleSlider from '~/components/SimpleSlider/SimpleSlider';
 
 const cx = classNames.bind(styles);
-
+const hasCookie = () => {
+  return document.cookie.split(';').some((item) => item.trim().startsWith('token='));
+};
 const MovieDetails = () => {
   const { slug } = useParams();
   const location = useLocation();
@@ -187,89 +189,55 @@ const MovieDetails = () => {
                       </div>
                     </div>
                     <div className={cx('level-item')}>
-                      <div className={cx('dropdown', 'is-hoverable')}>
-                        <div className={cx('dropdown-trigger')}>
-                          <button
-                            className={cx(
-                              'collection-btn',
-                              'button',
-                              isWatched &&
-                                isWatched.find((movieWatched) => movieWatched.id === movie._id) &&
-                                'is-light',
-                              isWatched.length > 0 && 'watched',
-                              isWantToSee &&
-                                isWantToSee.find((movieWantToSee) => movieWantToSee.id === movie._id) &&
-                                'watched',
-                              isWantToSee &&
-                                isWantToSee.find((movieWantToSee) => movieWantToSee.id === movie._id) &&
-                                'is-warning',
-                            )}
-                          >
-                            {(isWatched && isWatched.find((movieWatched) => movieWatched.id === movie._id) && (
-                              <>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                  <path d="M435.848 83.466L172.804 346.51l-96.652-96.652c-4.686-4.686-12.284-4.686-16.971 0l-28.284 28.284c-4.686 4.686-4.686 12.284 0 16.971l133.421 133.421c4.686 4.686 12.284 4.686 16.971 0l299.813-299.813c4.686-4.686 4.686-12.284 0-16.971l-28.284-28.284c-4.686-4.686-12.284-4.686-16.97 0z"></path>
-                                </svg>
-                                Đã xem
-                              </>
-                            )) ||
-                              (isWantToSee && isWantToSee.find((movieWantToSee) => movieWantToSee.id === movie._id) && (
-                                <>
-                                  {' '}
-                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                                    <path d="M569.354 231.631C512.97 135.949 407.81 72 288 72 168.14 72 63.004 135.994 6.646 231.631a47.999 47.999 0 0 0 0 48.739C63.031 376.051 168.19 440 288 440c119.86 0 224.996-63.994 281.354-159.631a47.997 47.997 0 0 0 0-48.738zM288 392c-102.556 0-192.091-54.701-240-136 44.157-74.933 123.677-127.27 216.162-135.007C273.958 131.078 280 144.83 280 160c0 30.928-25.072 56-56 56s-56-25.072-56-56l.001-.042C157.794 179.043 152 200.844 152 224c0 75.111 60.889 136 136 136s136-60.889 136-136c0-31.031-10.4-59.629-27.895-82.515C451.704 164.638 498.009 205.106 528 256c-47.908 81.299-137.444 136-240 136z"></path>
-                                  </svg>
-                                  Mong muốn
-                                </>
-                              )) || (
-                                <>
-                                  {' '}
-                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                                    <path d="M368 224H224V80c0-8.84-7.16-16-16-16h-32c-8.84 0-16 7.16-16 16v144H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h144v144c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V288h144c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path>
-                                  </svg>
-                                  Bộ sưu tập
-                                </>
+                      {(hasCookie() && (
+                        <div className={cx('dropdown', 'is-hoverable')}>
+                          <div className={cx('dropdown-trigger')}>
+                            <button
+                              className={cx(
+                                'collection-btn',
+                                'button',
+                                isWatched &&
+                                  isWatched.find((movieWatched) => movieWatched.id === movie._id) &&
+                                  'is-light',
+                                isWatched.length > 0 && 'watched',
+                                isWantToSee &&
+                                  isWantToSee.find((movieWantToSee) => movieWantToSee.id === movie._id) &&
+                                  'watched',
+                                isWantToSee &&
+                                  isWantToSee.find((movieWantToSee) => movieWantToSee.id === movie._id) &&
+                                  'is-warning',
                               )}
-                          </button>
-                        </div>
-
-                        {(isWatched && isWatched.find((movieWatched) => movieWatched.id === movie._id) && (
-                          <div className={cx('dropdown-menu')} role="menu">
-                            <div className={cx('dropdown-content', 'has-text-left')}>
-                              <a
-                                href="#!"
-                                className={cx('dropdown-item')}
-                                onClick={() =>
-                                  dispatch(
-                                    updateMoviesWantToSee({
-                                      id: movie._id,
-                                      thumb_url: movie.thumb_url,
-                                      name: movie.name,
-                                      origin_name: movie.origin_name,
-                                      slug: movie.slug,
-                                    }),
-                                  )
-                                }
-                              >
-                                Thêm vào danh sách phim <strong>Muốn xem</strong>
-                              </a>
-                              <a
-                                href="#!"
-                                className={cx('dropdown-item')}
-                                onClick={() =>
-                                  dispatch(
-                                    deleteMoviesWatched({
-                                      id: movie._id,
-                                    }),
-                                  )
-                                }
-                              >
-                                Loại bỏ khỏi bộ sưu tập
-                              </a>
-                            </div>
+                            >
+                              {(isWatched && isWatched.find((movieWatched) => movieWatched.id === movie._id) && (
+                                <>
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path d="M435.848 83.466L172.804 346.51l-96.652-96.652c-4.686-4.686-12.284-4.686-16.971 0l-28.284 28.284c-4.686 4.686-4.686 12.284 0 16.971l133.421 133.421c4.686 4.686 12.284 4.686 16.971 0l299.813-299.813c4.686-4.686 4.686-12.284 0-16.971l-28.284-28.284c-4.686-4.686-12.284-4.686-16.97 0z"></path>
+                                  </svg>
+                                  Đã xem
+                                </>
+                              )) ||
+                                (isWantToSee &&
+                                  isWantToSee.find((movieWantToSee) => movieWantToSee.id === movie._id) && (
+                                    <>
+                                      {' '}
+                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                        <path d="M569.354 231.631C512.97 135.949 407.81 72 288 72 168.14 72 63.004 135.994 6.646 231.631a47.999 47.999 0 0 0 0 48.739C63.031 376.051 168.19 440 288 440c119.86 0 224.996-63.994 281.354-159.631a47.997 47.997 0 0 0 0-48.738zM288 392c-102.556 0-192.091-54.701-240-136 44.157-74.933 123.677-127.27 216.162-135.007C273.958 131.078 280 144.83 280 160c0 30.928-25.072 56-56 56s-56-25.072-56-56l.001-.042C157.794 179.043 152 200.844 152 224c0 75.111 60.889 136 136 136s136-60.889 136-136c0-31.031-10.4-59.629-27.895-82.515C451.704 164.638 498.009 205.106 528 256c-47.908 81.299-137.444 136-240 136z"></path>
+                                      </svg>
+                                      Mong muốn
+                                    </>
+                                  )) || (
+                                  <>
+                                    {' '}
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                      <path d="M368 224H224V80c0-8.84-7.16-16-16-16h-32c-8.84 0-16 7.16-16 16v144H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h144v144c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V288h144c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path>
+                                    </svg>
+                                    Bộ sưu tập
+                                  </>
+                                )}
+                            </button>
                           </div>
-                        )) ||
-                          (isWantToSee && isWantToSee.find((movieWantToSee) => movieWantToSee.id === movie._id) && (
+
+                          {(isWatched && isWatched.find((movieWatched) => movieWatched.id === movie._id) && (
                             <div className={cx('dropdown-menu')} role="menu">
                               <div className={cx('dropdown-content', 'has-text-left')}>
                                 <a
@@ -277,59 +245,7 @@ const MovieDetails = () => {
                                   className={cx('dropdown-item')}
                                   onClick={() =>
                                     dispatch(
-                                      updateMoviesWatched({
-                                        id: movie._id,
-                                        thumb_url: movie.thumb_url,
-                                        name: movie.name,
-                                        origin_name: movie.origin_name,
-                                        slug: movie.slug,
-                                      }),
-                                    )
-                                  }
-                                >
-                                  Thêm vào danh sách phim <strong>Đã xem</strong>
-                                </a>
-                                <a
-                                  href="#!"
-                                  className={cx('dropdown-item')}
-                                  onClick={() =>
-                                    dispatch(
-                                      deleteMoviesWantToSee({
-                                        id: movie._id,
-                                      }),
-                                    )
-                                  }
-                                >
-                                  Loại bỏ khỏi bộ sưu tập
-                                </a>
-                              </div>
-                            </div>
-                          )) || (
-                            <div className={cx('dropdown-menu')} role="menu">
-                              <div className={cx('dropdown-content', 'has-text-left')}>
-                                <a
-                                  href="#!"
-                                  className={cx('dropdown-item')}
-                                  onClick={() =>
-                                    dispatch(
-                                      addMoviesWatched({
-                                        id: movie._id,
-                                        thumb_url: movie.thumb_url,
-                                        name: movie.name,
-                                        origin_name: movie.origin_name,
-                                        slug: movie.slug,
-                                      }),
-                                    )
-                                  }
-                                >
-                                  Thêm vào danh sách phim <strong>Đã Xem</strong>
-                                </a>
-                                <a
-                                  href="#!"
-                                  className={cx('dropdown-item')}
-                                  onClick={() =>
-                                    dispatch(
-                                      addMoviesWantToSee({
+                                      updateMoviesWantToSee({
                                         id: movie._id,
                                         thumb_url: movie.thumb_url,
                                         name: movie.name,
@@ -341,10 +257,112 @@ const MovieDetails = () => {
                                 >
                                   Thêm vào danh sách phim <strong>Muốn xem</strong>
                                 </a>
+                                <a
+                                  href="#!"
+                                  className={cx('dropdown-item')}
+                                  onClick={() =>
+                                    dispatch(
+                                      deleteMoviesWatched({
+                                        id: movie._id,
+                                      }),
+                                    )
+                                  }
+                                >
+                                  Loại bỏ khỏi bộ sưu tập
+                                </a>
                               </div>
                             </div>
-                          )}
-                      </div>
+                          )) ||
+                            (isWantToSee && isWantToSee.find((movieWantToSee) => movieWantToSee.id === movie._id) && (
+                              <div className={cx('dropdown-menu')} role="menu">
+                                <div className={cx('dropdown-content', 'has-text-left')}>
+                                  <a
+                                    href="#!"
+                                    className={cx('dropdown-item')}
+                                    onClick={() =>
+                                      dispatch(
+                                        updateMoviesWatched({
+                                          id: movie._id,
+                                          thumb_url: movie.thumb_url,
+                                          name: movie.name,
+                                          origin_name: movie.origin_name,
+                                          slug: movie.slug,
+                                        }),
+                                      )
+                                    }
+                                  >
+                                    Thêm vào danh sách phim <strong>Đã xem</strong>
+                                  </a>
+                                  <a
+                                    href="#!"
+                                    className={cx('dropdown-item')}
+                                    onClick={() =>
+                                      dispatch(
+                                        deleteMoviesWantToSee({
+                                          id: movie._id,
+                                        }),
+                                      )
+                                    }
+                                  >
+                                    Loại bỏ khỏi bộ sưu tập
+                                  </a>
+                                </div>
+                              </div>
+                            )) || (
+                              <div className={cx('dropdown-menu')} role="menu">
+                                <div className={cx('dropdown-content', 'has-text-left')}>
+                                  <a
+                                    href="#!"
+                                    className={cx('dropdown-item')}
+                                    onClick={() =>
+                                      dispatch(
+                                        addMoviesWatched({
+                                          id: movie._id,
+                                          thumb_url: movie.thumb_url,
+                                          name: movie.name,
+                                          origin_name: movie.origin_name,
+                                          slug: movie.slug,
+                                        }),
+                                      )
+                                    }
+                                  >
+                                    Thêm vào danh sách phim <strong>Đã Xem</strong>
+                                  </a>
+                                  <a
+                                    href="#!"
+                                    className={cx('dropdown-item')}
+                                    onClick={() =>
+                                      dispatch(
+                                        addMoviesWantToSee({
+                                          id: movie._id,
+                                          thumb_url: movie.thumb_url,
+                                          name: movie.name,
+                                          origin_name: movie.origin_name,
+                                          slug: movie.slug,
+                                        }),
+                                      )
+                                    }
+                                  >
+                                    Thêm vào danh sách phim <strong>Muốn xem</strong>
+                                  </a>
+                                </div>
+                              </div>
+                            )}
+                        </div>
+                      )) || (
+                        <div className={cx('dropdown', 'is-hoverable')}>
+                          <div className={cx('dropdown-trigger')}>
+                            <Link to="/login">
+                              <button className={cx('collection-btn', 'button')}>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                  <path d="M368 224H224V80c0-8.84-7.16-16-16-16h-32c-8.84 0-16 7.16-16 16v144H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h144v144c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V288h144c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path>
+                                </svg>
+                                Bộ sưu tập
+                              </button>
+                            </Link>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="level-right">

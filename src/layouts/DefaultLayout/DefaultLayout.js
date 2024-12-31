@@ -5,7 +5,6 @@ import Header from '../Header';
 import Footer from '../Footer';
 import Bars from '../OverlayBars';
 import { memo } from 'react';
-import Snowfall from 'react-snowfall';
 
 const cx = classNames.bind(styles);
 

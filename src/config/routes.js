@@ -14,14 +14,14 @@ const routes = {
   settings: '/settings',
   donate: '/donate',
   notfound: '*',
-  login: '/',
+  login: '/login',
   signup: '/signup',
   forgot: '/forgot',
   resendVerification: 'resendVerification',
   verify: '/verify/:token',
   confirmNewEmail: '/confirmNewEmail',
   retrievePassword: '/retrievePassword',
-  maintenance: '/',
+  // maintenance: '/',
 };
 
 export default routes;
