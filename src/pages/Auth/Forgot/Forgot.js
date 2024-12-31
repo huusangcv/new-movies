@@ -43,6 +43,7 @@ const Forgot = () => {
           setIsLoading(false);
         } else {
           alert(message);
+          setIsLoading(false);
         }
       } catch (error) {
         console.error('Có lỗi xảy ra:', error);

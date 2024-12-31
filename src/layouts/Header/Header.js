@@ -170,11 +170,9 @@ const Header = () => {
                   </div>
                 </>
               )) || (
-                <div className={cx('navbar-link')}>
-                  <Link class="button is-primary btn-login" rel="nofollow" to="/login">
-                    Đăng nhập
-                  </Link>
-                </div>
+                <Link className={cx('navbar-link')} to="/login" rel="nofollow">
+                  <div class="button is-primary btn-login">Đăng nhập</div>
+                </Link>
               )}
             </div>
           </div>
