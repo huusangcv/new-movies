@@ -46,6 +46,7 @@ const publicLayout = [
   { path: config.routes.search, component: Search },
   { path: config.routes.faqs, component: Faqs },
   { path: config.routes.notfound, component: NotFound },
+  { path: config.routes.confirmNewEmail, component: ConfirmNewEmail },
 ];
 
 const privateLayout = [
@@ -63,6 +64,7 @@ const privateLayout = [
   { path: config.routes.settings, component: Account },
   { path: config.routes.donate, component: Donate },
   { path: config.routes.faqs, component: Faqs },
+  { path: config.routes.verify, component: Verify },
   { path: config.routes.confirmNewEmail, component: ConfirmNewEmail },
   { path: config.routes.notfound, component: NotFound },
 ];

@@ -137,7 +137,7 @@ const Header = () => {
           </div>
           <div className={cx('navbar-end')}>
             <div div className={cx('navbar-item', 'has-dropdown', 'is-hoverable', 'navbar-item__name')}>
-              {(user.name !== '' && (
+              {(user.id !== null && (
                 <>
                   <div className={cx('navbar-link')}>
                     <span className={cx('layout_name')}>{user.name}</span>
