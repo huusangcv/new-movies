@@ -99,7 +99,10 @@ const Account = () => {
           setIsLoading(false);
           alert(result.message);
         }
-      } catch (error) {}
+      } catch (error) {
+        setIsLoading(false);
+        alert('Đã có lỗi xảy ra khi kết nối đến máy chủ');
+      }
     };
 
     fetchApi();
@@ -133,7 +136,8 @@ const Account = () => {
           alert(res.message);
         }
       } catch (error) {
-        alert(error);
+        setIsLoading(false);
+        alert('Đã có lỗi xảy ra khi kết nối đến máy chủ');
       }
     };
 
