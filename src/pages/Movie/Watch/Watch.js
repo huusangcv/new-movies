@@ -112,21 +112,6 @@ const Watch = () => {
     } catch (error) {}
   };
 
-  // const playM3u8 = (video, url, art) => {
-  //   if (Hls.isSupported()) {
-  //     if (art.hls) art.hls.destroy();
-  //     const hls = new Hls();
-  //     hls.loadSource(url);
-  //     hls.attachMedia(video);
-  //     art.hls = hls;
-  //     art.on('destroy', () => hls.destroy());
-  //   } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-  //     video.src = url;
-  //   } else {
-  //     art.notice.show = 'Unsupported playback format: m3u8';
-  //   }
-  // };
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -150,44 +135,6 @@ const Watch = () => {
                   className="video-js"
                 ></iframe>
               )) || <div className="video-js">Vui lòng đợi giây lát</div>}
-              {/* 
-              <Player
-                option={{
-                  url: videoSrc,
-                  customType: {
-                    m3u8: playM3u8,
-                  },
-                  volume: 0.5,
-                  isLive: false,
-                  muted: false,
-                  autoplay: true,
-                  pip: true,
-                  autoMini: true,
-                  setting: true,
-                  loop: true,
-                  flip: true,
-                  playbackRate: true,
-                  aspectRatio: true,
-                  fullscreen: true,
-                  subtitleOffset: true,
-                  miniProgressBar: true,
-                  mutex: true,
-                  backdrop: true,
-                  playsInline: true,
-                  autoPlayback: true,
-                  airplay: true,
-                  theme: '#23ade5',
-                  lang: navigator.language.toLowerCase(),
-                  moreVideoAttr: {
-                    crossOrigin: 'anonymous',
-                  },
-                }}
-                style={{
-                  width: '100%',
-                  height: '600px',
-                }}
-                getInstance={(art) => console.info(art)}
-              /> */}
             </div>
           </div>
           <p className={cx('has-text-centered', 'is-size-7')}>
