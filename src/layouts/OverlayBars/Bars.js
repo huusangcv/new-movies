@@ -38,12 +38,15 @@ const Bars = () => {
     }
   }, [cookies]);
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     removeCookie('token', {
       path: '/',
+      domain: 'newmoviesz.online',
     });
+    dispatch(getUserProfile({ id: null, name: '', email: '' }));
+    dispatch(getNewUpdateMovies({}));
     navigate('/');
-  };
+  }, [removeCookie, navigate, dispatch]);
 
   return (
     <div className={cx('wapper')}>

@@ -47,12 +47,12 @@ const Header = () => {
   }, [dispatch, isShowBar]);
 
   const handleLogout = useCallback(() => {
-    dispatch(getUserProfile({ id: null, name: '', email: '' }));
-    dispatch(getNewUpdateMovies({}));
     removeCookie('token', {
       path: '/',
       domain: 'newmoviesz.online',
     });
+    dispatch(getUserProfile({ id: null, name: '', email: '' }));
+    dispatch(getNewUpdateMovies({}));
     navigate('/');
   }, [removeCookie, navigate, dispatch]);
   return (

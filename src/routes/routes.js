@@ -38,7 +38,6 @@ const publicLayout = [
   { path: config.routes.single, component: Single },
   { path: config.routes.new, component: New },
   { path: config.routes.top, component: Top },
-  { path: config.routes.collection, component: Collection },
   { path: config.routes.browseDetails, component: BrowseDetails },
   { path: config.routes.detail, component: Details },
   { path: config.routes.watch, component: Watch, layout: HeaderOnlyForMovies },
