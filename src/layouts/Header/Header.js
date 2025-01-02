@@ -8,9 +8,9 @@ import { useCookies } from 'react-cookie';
 import { userProfile } from '~/redux/selector/selector';
 import noel from '~/assets/images/noel.png';
 import { getNewUpdateMovies, getUserProfile } from '~/redux/actions';
-const cx = classNames.bind(styles);
 import { persistStore } from 'redux-persist';
-import store from './store'; // Nhập store của bạn
+import { store } from '~/redux/store'; // Nhập store của bạn
+const cx = classNames.bind(styles);
 
 const Header = () => {
   const [background, setBackground] = useState('');
