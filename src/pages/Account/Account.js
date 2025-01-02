@@ -39,7 +39,11 @@ const Account = () => {
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     if (!token) {
-      navigate('/');
+      removeCookie('token', {
+        path: '/',
+        domain: 'newmoviesz.online',
+      });
+      navigate('/login');
     }
   }, [token]);
 
