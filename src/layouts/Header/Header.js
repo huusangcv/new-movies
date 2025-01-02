@@ -9,12 +9,15 @@ import { userProfile } from '~/redux/selector/selector';
 import noel from '~/assets/images/noel.png';
 import { getNewUpdateMovies, getUserProfile } from '~/redux/actions';
 const cx = classNames.bind(styles);
+import { persistStore } from 'redux-persist';
+import store from './store'; // Nhập store của bạn
 
 const Header = () => {
   const [background, setBackground] = useState('');
   const dispatch = useDispatch();
   const isShowBar = useSelector((state) => state.isShowBar);
   const [cookie, setCookie, removeCookie] = useCookies(['token']);
+  const persistor = persistStore(store);
 
   const navigate = useNavigate();
   const user = useSelector(userProfile);
@@ -47,8 +50,7 @@ const Header = () => {
   }, [dispatch, isShowBar]);
 
   const handleLogout = useCallback(() => {
-    dispatch(getUserProfile({ id: null, name: '', email: '' }));
-    dispatch(getNewUpdateMovies({}));
+    persistor.remove('userProfile');
     removeCookie('token', {
       path: '/',
       domain: 'newmoviesz.online',

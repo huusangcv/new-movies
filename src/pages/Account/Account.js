@@ -7,6 +7,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '~/components/Spinner';
 import userApi from '~/services/user';
+import { getUserProfile } from '~/redux/actions';
 
 // Hàm để lấy giá trị cookie theo tên
 const formatDate = (dateString) => {
