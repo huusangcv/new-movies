@@ -10,6 +10,7 @@ import { getCurrentPageMoviesSingle, getMoviesSingle, getTotalItemsSingle } from
 import { currentPageMoviesSingle, getTotalItems, moviesOnMultiline, moviesSingle } from '~/redux/selector/selector';
 import Pagination from '~/components/Pagination';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import ImageComponent from '~/components/ImagesComponent/ImagesComponent';
 const cx = classNames.bind(styles);
 
 const Single = () => {
@@ -115,13 +116,12 @@ const Single = () => {
                     return (
                       <div className="media">
                         <Link className="media-left" to={`/movie/${movie.slug}`}>
-                          <LazyLoadImage
+                          <ImageComponent
                             src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
                             alt={movie.name}
-                            effect="blur"
                             srcSet={`
-                            https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
-                          ></LazyLoadImage>
+                              https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
+                          />
                         </Link>
                         <div className="media-content">
                           <div className="columns">
@@ -194,13 +194,12 @@ const Single = () => {
                     return (
                       <Link to={`/movie/${movie.slug}`} className="column" key={movie._id}>
                         <div className="cover">
-                          <LazyLoadImage
+                          <ImageComponent
                             src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
                             alt={movie.name}
-                            effect="blur"
                             srcSet={`
-                            https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
-                          ></LazyLoadImage>
+                              https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
+                          />
                         </div>
                         <h3 className="name vi">
                           <span>{movie.name}</span>

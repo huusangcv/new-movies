@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { wantToSeeMovies, watchedMovies } from '~/redux/selector/selector';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import ImageComponent from '~/components/ImagesComponent/ImagesComponent';
 const cx = classNames.bind(styles);
 
 const Collection = () => {
@@ -32,13 +33,12 @@ const Collection = () => {
                 return (
                   <Link to={`/movie/${movie.slug}`} className="column" key={movie._id}>
                     <div className="cover">
-                      <LazyLoadImage
+                      <ImageComponent
                         src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
                         alt={movie.name}
-                        effect="blur"
                         srcSet={`
-                            https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
-                      ></LazyLoadImage>
+                              https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
+                      />
                     </div>
                     <h3 className="name vi">
                       <span>{movie.name}</span>

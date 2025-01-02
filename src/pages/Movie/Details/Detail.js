@@ -20,6 +20,7 @@ import styles from './Detail.module.scss';
 import BackDrop from '~/layouts/BackDrop';
 import Modal from '~/components/ModalRoot/Modal';
 import SimpleSlider from '~/components/SimpleSlider/SimpleSlider';
+import ImageComponent from '~/components/ImagesComponent/ImagesComponent';
 
 const cx = classNames.bind(styles);
 const hasCookie = () => {
@@ -121,15 +122,12 @@ const MovieDetails = () => {
             <div className={cx('details')}>
               <div className={cx('column', 'is-one-quarter-tablet')}>
                 <p className={cx('cover', 'has-text-centered')}>
-                  <img
+                  <ImageComponent
                     src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
                     alt={movie.name}
-                    loading="lazy"
-                    decoding="auto"
                     srcSet={`
-                          https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w,
-                      `}
-                  ></img>
+                              https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
+                  />
                 </p>
                 <Link
                   onClick={movie?.episode_current === 'Trailer' && handleCloseModalTrailers}

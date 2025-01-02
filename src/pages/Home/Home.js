@@ -10,6 +10,7 @@ import styles from './Home.module.scss';
 import getMovies from '~/services/getMovies';
 import Filter from '~/layouts/Filter';
 import Snowfall from 'react-snowfall';
+import ImageComponent from '~/components/ImagesComponent/ImagesComponent';
 
 const cx = classNames.bind(styles);
 
@@ -125,7 +126,12 @@ const HomePage = () => {
               currentItem <= newIndex && (
                 <Link to={`/movie/${movie.slug}`} className="column" key={movie.id}>
                   <div className="cover">
-                    <img src={`https://img.ophim.live/uploads/movies/${movie.thumb_url}`} alt="" />
+                    <ImageComponent
+                      src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
+                      alt={movie.name}
+                      srcSet={`
+                              https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
+                    />
                   </div>
                   <h3 className="name vi">
                     <span>{movie.name}</span>
@@ -157,13 +163,12 @@ const HomePage = () => {
                 currentItem <= index && (
                   <Link to={`movie/${movie.slug}`} className="column" key={movie._id}>
                     <div className="cover">
-                      <img
+                      <ImageComponent
                         src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
-                        alt={movie.origin_name}
-                        title={movie.origin_name}
-                        decoding="async"
-                        data-nimg="responsive"
-                      ></img>
+                        alt={movie.name}
+                        srcSet={`
+                              https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
+                      />
                     </div>
                     <h3 className="name vi">
                       <span>{movie.name}</span>
@@ -194,10 +199,12 @@ const HomePage = () => {
                 currentItem <= index && (
                   <Link to={`movie/${movie.slug}`} className="column" key={movie._id}>
                     <span className="cover">
-                      <img
+                      <ImageComponent
                         src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
-                        alt=""
-                      ></img>
+                        alt={movie.name}
+                        srcSet={`
+                              https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
+                      />
                     </span>
                     <h3 className="name vi">
                       <span>{movie.name}</span>
