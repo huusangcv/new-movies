@@ -1,11 +1,12 @@
 import classNames from 'classnames/bind';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { toggleBars } from '~/redux/actions/toggleBars';
 import styles from './Bars.module.scss';
 import { userProfile } from '~/redux/selector/selector';
 import { useCookies } from 'react-cookie';
+import { getNewUpdateMovies, getUserProfile } from '~/redux/actions';
 
 const cx = classNames.bind(styles);
 const hasCookie = () => {
