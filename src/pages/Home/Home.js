@@ -112,7 +112,7 @@ const HomePage = () => {
 
   return (
     <div className={cx('wapper')}>
-      <Snowfall style={{ zIndex: 999999999 }} />
+      {/* <Snowfall style={{ zIndex: 999999999 }} /> */}
       <Filter noneMultiline={true} />
       <h2 className="heading">
         <span>PHIM ĐỀ CỬ</span>
