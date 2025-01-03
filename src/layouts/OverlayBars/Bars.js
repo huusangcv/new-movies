@@ -46,7 +46,7 @@ const Bars = () => {
     });
     dispatch(getUserProfile({ id: null, name: '', email: '' }));
     dispatch(getNewUpdateMovies({}));
-    handleShowBar();
+    handleCloseBar();
     navigate('/');
   }, [removeCookie, navigate, dispatch]);
 
