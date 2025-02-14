@@ -66,7 +66,6 @@ const Watch = () => {
             progress: undefined,
             theme: 'colored',
           });
-        } else {
           dispatch(isVisit(true));
         }
       }
