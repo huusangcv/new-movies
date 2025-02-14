@@ -1,4 +1,3 @@
-import { emailVerify } from '../actions/auth';
 import collectionReducer from './collectionReducer';
 import currentMoviesTopReducer from './currentMoviesTopReducer';
 import currentPageReducer from './currentPageReducer';
