@@ -54,15 +54,21 @@ const Watch = () => {
     if (movie) {
       setIsLoading(false);
       if (currentEpisode === 0) {
-        toast.info('Nếu phim không tải được vui lòng load lại trang');
-        toast.warn('Nếu bạn thấy hay, hãy chia sẻ đến mọi người để ủng hộ mình trang web này!', {
-          position: 'bottom-left',
-          hideProgressBar: false,
-          closeOnClick: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'colored',
-        });
+        const visit = localStorage.getItem('visit');
+
+        if (!visit) {
+          toast.info('Nếu phim không tải được vui lòng load lại trang');
+          toast.warn('Nếu bạn thấy hay, hãy chia sẻ đến mọi người để ủng hộ mình trang web này!', {
+            position: 'bottom-left',
+            hideProgressBar: false,
+            closeOnClick: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+          });
+        } else {
+          localStorage.setItem('visit', true);
+        }
       }
       if (movie.quality === 'CAM') toast.warning('Phim hiện chưa có bản đẹp');
     } else {
