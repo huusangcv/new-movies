@@ -17,6 +17,7 @@ const GET_CURRENT_PAGE_MOVIES_SINGLE = 'get_current_page_movies_single';
 const GET_CURRENT_PAGE_MOVIES_SERIES = 'get_current_page_movies_series';
 const GET_CURRENT_PAGE_MOVIES_NEW = 'get_current_page_movies_new';
 const IS_MULTILINE = 'is_multiline';
+const IS_VISIT = 'is_visit';
 const IS_LOADING = 'is_loading';
 const WATCHED = 'watched';
 const WANT_TO_SEE = 'want_to_see';
@@ -50,6 +51,7 @@ export {
   GET_SMILAR_MOVIES,
   IS_MULTILINE,
   IS_LOADING,
+  IS_VISIT,
   WATCHED,
   WANT_TO_SEE,
   UPDATE_WATCHED,

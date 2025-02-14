@@ -13,10 +13,11 @@ import {
   deleteMoviesWantToSee,
   deleteMoviesWatched,
   getMovieDetails,
+  isVisit,
   updateMoviesWantToSee,
   updateMoviesWatched,
 } from '~/redux/actions';
-import { movieDetail, moviesSimilar, wantToSeeMovies, watchedMovies } from '~/redux/selector/selector';
+import { movieDetail, moviesSimilar, visitWatch, wantToSeeMovies, watchedMovies } from '~/redux/selector/selector';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 // import Hls from 'hls.js';
 import getMovies from '~/services/getMovies';
@@ -37,6 +38,7 @@ const Watch = () => {
   const isWatched = useSelector(watchedMovies);
   const isWantToSee = useSelector(wantToSeeMovies);
   const moviesSimilarExits = useSelector(moviesSimilar);
+  const visit = useSelector(visitWatch);
   const [open, setOpen] = useState(false);
   const [currentEpisode, setCurrentEpisode] = useState(0);
   const [isLoading, setIsLoading] = useState(() => {
@@ -54,8 +56,6 @@ const Watch = () => {
     if (movie) {
       setIsLoading(false);
       if (currentEpisode === 0) {
-        const visit = localStorage.getItem('visit');
-
         if (!visit) {
           toast.info('Nếu phim không tải được vui lòng load lại trang');
           toast.warn('Nếu bạn thấy hay, hãy chia sẻ đến mọi người để ủng hộ mình trang web này!', {
@@ -67,7 +67,7 @@ const Watch = () => {
             theme: 'colored',
           });
         } else {
-          localStorage.setItem('visit', true);
+          dispatch(isVisit(true));
         }
       }
       if (movie.quality === 'CAM') toast.warning('Phim hiện chưa có bản đẹp');
