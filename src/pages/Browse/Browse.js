@@ -100,10 +100,10 @@ const Browse = () => {
                       <div className="media">
                         <Link className="media-left" to={`/movie/${movie.slug}`}>
                           <ImageComponent
-                            src={`https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
+                            src={`https://ophim17.cc/_next/image?url=https%3A%2F%2Fimg.ophim.live%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
                             alt={movie.name}
                             srcSet={`
-                              https://ophim17.cc/_next/image?url=http%3A%2F%2Fimg.ophim1.com%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
+                              https://ophim17.cc/_next/image?url=https%3A%2F%2Fimg.ophim.live%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
                           />
                         </Link>
                         <div className="media-content">
