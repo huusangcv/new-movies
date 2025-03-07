@@ -35,12 +35,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // useEffect(() => {
-  //   if (!cookies.token) {
-  //     navigate('/');
-  //   }
-  // }, [cookies, navigate]);
-
   // Func show/close bars for mobile
   const handleShowBar = useCallback(() => {
     dispatch(toggleBars(!isShowBar));
