@@ -26,11 +26,12 @@ Mở terminal hoặc command prompt và chạy lệnh sau để sao chép reposi
 
 ```bash
 git clone https://github.com/huusangcv/new-movies
-
+```
 ### Bước 2: Change Repository
 ```bash
 cd new-movies
-
+```
 ### Bước 3: Start Repository
 ```bash
 npm start
+```
