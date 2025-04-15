@@ -54,7 +54,10 @@ const Search = () => {
       }
     };
 
-    fetchApi();
+    let timer;
+    timer = setTimeout(() => {
+      fetchApi();
+    }, 1000);
 
     window.scroll({
       top: 0,
