@@ -1,6 +1,6 @@
 // src/Login.js
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './SignUp.module.scss';
 import classNames from 'classnames/bind';
 import Spinner from '~/components/Spinner';
@@ -10,7 +10,6 @@ import { toast, ToastContainer } from 'react-toastify';
 const cx = classNames.bind(styles);
 
 const SignUp = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [data, setData] = useState();

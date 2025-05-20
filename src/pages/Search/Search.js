@@ -7,11 +7,16 @@ import styles from './Search.module.scss';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { StringParam, useQueryParams } from 'use-query-params';
 import ImageComponent from '~/components/ImagesComponent/ImagesComponent';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchMovies } from '~/redux/selector/selector';
+import { getMoviesBySearchName } from '~/redux/actions';
 
 const cx = classNames.bind(styles);
 
 const Search = () => {
   const [movies, setMovies] = useState([]);
+  const searchNames = useSelector(searchMovies);
+  const dispatch = useDispatch();
   const location = useLocation();
   const refInput = useRef();
 
@@ -63,6 +68,8 @@ const Search = () => {
       top: 0,
     });
 
+    return () => clearTimeout(timer);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [q]);
 
@@ -87,6 +94,15 @@ const Search = () => {
 
   return (
     <div className={cx('wapper')}>
+      <div className="title">
+        {searchNames &&
+          searchNames.length > 0 &&
+          searchNames.map((item) => (
+            <button className={cx('btn-searchName')} key={item.id} onClick={() => setQuery({ q: item }, 'push')}>
+              {item.title}
+            </button>
+          ))}
+      </div>
       <div className="title-list">
         <div className={cx('mb-5')}>
           <input
@@ -102,7 +118,12 @@ const Search = () => {
         <div className="gird columns">
           {movies?.map((movie) => {
             return (
-              <Link to={`/movie/${movie.slug}`} className="column" key={movie._id}>
+              <Link
+                to={`/movie/${movie.slug}`}
+                className="column"
+                key={movie._id}
+                onClick={() => dispatch(getMoviesBySearchName(q))}
+              >
                 <div className="cover">
                   <ImageComponent
                     src={`https://ophim17.cc/_next/image?url=https%3A%2F%2Fimg.ophim.live%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}

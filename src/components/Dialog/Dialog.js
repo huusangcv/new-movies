@@ -16,7 +16,6 @@ const DialogSmilar = ({ open, setOpen, handleClickOpen, handleClose, slug }) => 
   const movies = useSelector(moviesSimilar);
   return (
     <div>
-      {/* Hộp thoại */}
       <Dialog open={open} onClose={handleClose}>
         <div className="MuiDialogTitle-root">
           <h2 className="MuiTypography-root MuiTypography-h6">

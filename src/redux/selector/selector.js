@@ -19,6 +19,7 @@ const wantToSeeMovies = (state) => state.collectionMovies.wantToSee;
 const userProfile = (state) => state.userProfile;
 const emailVerify = (state) => state.emailVerify;
 const visitWatch = (state) => state.isVisit;
+const searchMovies = (state) => state.searchMovies;
 
 export {
   moviesSelector,
@@ -40,6 +41,7 @@ export {
   wantToSeeMovies,
   loading,
   visitWatch,
+  searchMovies,
   userProfile,
   emailVerify,
 };

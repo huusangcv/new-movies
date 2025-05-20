@@ -26,6 +26,7 @@ import {
   DELETE_WATCHED,
   DELETE_WANT_TO_SEE,
   GET_SMILAR_MOVIES,
+  SEARCH_NAME_MOVIES,
 } from '../constans';
 
 const getTitle = (payload) => {
@@ -128,6 +129,13 @@ const getNewUpdateMovies = (payload) => {
 const getSimilarMovies = (payload) => {
   return {
     type: GET_SMILAR_MOVIES,
+    payload,
+  };
+};
+
+const getMoviesBySearchName = (payload) => {
+  return {
+    type: SEARCH_NAME_MOVIES,
     payload,
   };
 };
@@ -243,4 +251,5 @@ export {
   updateMoviesWantToSee,
   updateMoviesWatched,
   getUserProfile,
+  getMoviesBySearchName,
 };

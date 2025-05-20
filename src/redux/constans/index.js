@@ -29,6 +29,7 @@ const CURRENT_MOVIES_TOP = 'current_movies_top';
 const USER_PROFILE = 'user_profile';
 const EMAIL_VERIFY = 'email_verify';
 const GET_SMILAR_MOVIES = 'get_similar_movies';
+const SEARCH_NAME_MOVIES = 'search_name_movies';
 export {
   TOGGLE_BARS,
   TITLE_MOVIES,
@@ -61,4 +62,5 @@ export {
   CURRENT_MOVIES_TOP,
   USER_PROFILE,
   EMAIL_VERIFY,
+  SEARCH_NAME_MOVIES,
 };
