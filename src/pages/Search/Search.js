@@ -98,7 +98,7 @@ const Search = () => {
         {searchNames &&
           searchNames.length > 0 &&
           searchNames.map((item) => (
-            <button className={cx('btn-searchName')} key={item.id} onClick={() => setQuery({ q: item }, 'push')}>
+            <button className={cx('btn-searchName')} key={item.id} onClick={() => setQuery({ q: item.title }, 'push')}>
               {item.title}
             </button>
           ))}
