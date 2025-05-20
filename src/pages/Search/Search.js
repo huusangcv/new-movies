@@ -15,6 +15,7 @@ const cx = classNames.bind(styles);
 
 const Search = () => {
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const searchNames = useSelector(searchMovies);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -28,6 +29,7 @@ const Search = () => {
 
   useEffect(() => {
     const fetchApi = async () => {
+      setIsLoading(true);
       try {
         const movies = await getMovies.Search(q);
         if (movies) {
@@ -51,8 +53,10 @@ const Search = () => {
               time: movie.time,
             };
           });
-
-          setMovies(result);
+          if (result) {
+            setIsLoading(false);
+            setMovies(result);
+          }
         }
       } catch (error) {
         console.log('Error ---> ', error);
@@ -116,31 +120,32 @@ const Search = () => {
           />
         </div>
         <div className="gird columns">
-          {movies?.map((movie) => {
-            return (
-              <Link
-                to={`/movie/${movie.slug}`}
-                className="column"
-                key={movie._id}
-                onClick={() => dispatch(getMoviesBySearchName(q))}
-              >
-                <div className="cover">
-                  <ImageComponent
-                    src={`https://ophim17.cc/_next/image?url=https%3A%2F%2Fimg.ophim.live%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
-                    alt={movie.name}
-                    srcSet={`
+          {(isLoading && <p>Loading...</p>) ||
+            movies?.map((movie) => {
+              return (
+                <Link
+                  to={`/movie/${movie.slug}`}
+                  className="column"
+                  key={movie._id}
+                  onClick={() => dispatch(getMoviesBySearchName(q))}
+                >
+                  <div className="cover">
+                    <ImageComponent
+                      src={`https://ophim17.cc/_next/image?url=https%3A%2F%2Fimg.ophim.live%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
+                      alt={movie.name}
+                      srcSet={`
                               https://ophim17.cc/_next/image?url=https%3A%2F%2Fimg.ophim.live%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
-                  />
-                </div>
-                <h3 className="name vi">
-                  <span>{movie.name}</span>
-                </h3>
-                <h3 className="name en">
-                  <span>{movie.origin_name}</span>
-                </h3>
-              </Link>
-            );
-          })}
+                    />
+                  </div>
+                  <h3 className="name vi">
+                    <span>{movie.name}</span>
+                  </h3>
+                  <h3 className="name en">
+                    <span>{movie.origin_name}</span>
+                  </h3>
+                </Link>
+              );
+            })}
         </div>
       </div>
     </div>
