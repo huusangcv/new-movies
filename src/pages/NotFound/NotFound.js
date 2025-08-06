@@ -31,8 +31,8 @@ const h2Style = {
 };
 const NotFound = () => {
   return (
-    <section class="section">
-      <div class="container">
+    <section className="section">
+      <div className="container">
         <div style={divStyle}>
           <div>
             <h1 style={h1Style}>404</h1>

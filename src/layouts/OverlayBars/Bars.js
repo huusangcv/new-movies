@@ -109,7 +109,7 @@ const Bars = () => {
           </>
         )) || (
           <div style={{ padding: '15px 0 0 15px' }} onClick={handleCloseBar}>
-            <Link class="button is-primary btn-login" rel="nofollow" to="/login">
+            <Link className="button is-primary btn-login" rel="nofollow" to="/login">
               Đăng nhập
             </Link>
           </div>

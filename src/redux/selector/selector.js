@@ -13,6 +13,9 @@ const currentPageMoviesSingle = (state) => state.currentPageMovies.single;
 const currentPageMoviesSeries = (state) => state.currentPageMovies.series;
 const currentPageMoviesNew = (state) => state.currentPageMovies.new;
 const currentMoviesTop = (state) => state.currentMoviesTop;
+const currentEpisode = (state) => state.currentEpisode;
+const currentUrl = (state) => state.currentUrl;
+const currentEpisodeMovie = (state) => state.currentEpisodeMovie;
 const moviesOnMultiline = (state) => state.moviesOnMultiline;
 const watchedMovies = (state) => state.collectionMovies.watched;
 const wantToSeeMovies = (state) => state.collectionMovies.wantToSee;
@@ -36,6 +39,9 @@ export {
   currentPageMoviesSeries,
   currentPageMoviesNew,
   currentMoviesTop,
+  currentUrl,
+  currentEpisode,
+  currentEpisodeMovie,
   moviesOnMultiline,
   watchedMovies,
   wantToSeeMovies,

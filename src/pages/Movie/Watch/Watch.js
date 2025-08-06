@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/iframe-has-title */
 import classNames from 'classnames/bind';
 import styles from './Watch.module.scss';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  addCurrentEpisodeMovie,
   addMoviesWantToSee,
   addMoviesWatched,
   deleteMoviesWantToSee,
@@ -17,9 +17,15 @@ import {
   updateMoviesWantToSee,
   updateMoviesWatched,
 } from '~/redux/actions';
-import { movieDetail, moviesSimilar, visitWatch, wantToSeeMovies, watchedMovies } from '~/redux/selector/selector';
+import {
+  currentEpisodeMovie,
+  movieDetail,
+  moviesSimilar,
+  visitWatch,
+  wantToSeeMovies,
+  watchedMovies,
+} from '~/redux/selector/selector';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-// import Hls from 'hls.js';
 import getMovies from '~/services/getMovies';
 import Footer from '~/layouts/Footer';
 import FacebookComments from '~/components/Comments';
@@ -38,9 +44,24 @@ const Watch = () => {
   const isWatched = useSelector(watchedMovies);
   const isWantToSee = useSelector(wantToSeeMovies);
   const moviesSimilarExits = useSelector(moviesSimilar);
+  const isCurrentEpisodeMovie = useSelector(currentEpisodeMovie);
+
+  const [isCurrentEpisode, setIsCurrentEpisode] = useState(0);
+
+  // Khi slug hoặc danh sách episodeMovie thay đổi, cập nhật tập hiện tại
+  useEffect(() => {
+    if (isCurrentEpisodeMovie && Array.isArray(isCurrentEpisodeMovie)) {
+      const found = isCurrentEpisodeMovie.find((item) => item.slug === slug);
+      if (found) {
+        setIsCurrentEpisode(found.episode);
+      } else {
+        setIsCurrentEpisode(0);
+      }
+    }
+  }, [slug, isCurrentEpisodeMovie]);
+
   const visit = useSelector(visitWatch);
   const [open, setOpen] = useState(false);
-  const [currentEpisode, setCurrentEpisode] = useState(0);
   const [isLoading, setIsLoading] = useState(() => {
     if (movie) {
       return false;
@@ -49,13 +70,19 @@ const Watch = () => {
     }
   });
 
-  const videoSrc = movie?.episodes[0]?.server_data[currentEpisode]?.link_embed;
+  const [videoSrc, setVideoSrc] = useState('');
+
+  useEffect(() => {
+    if (movie && movie.episodes[0]?.server_data[isCurrentEpisode]) {
+      setVideoSrc(movie.episodes[0].server_data[isCurrentEpisode].link_embed);
+    }
+  }, [movie, isCurrentEpisode]);
 
   useEffect(() => {
     setIsLoading(true);
     if (movie) {
       setIsLoading(false);
-      if (currentEpisode === 0) {
+      if (isCurrentEpisode === 0) {
         if (!visit) {
           toast.info('Nếu phim không tải được vui lòng load lại trang');
           toast.warn('Nếu bạn thấy hay, hãy chia sẻ đến mọi người để ủng hộ mình trang web này!', {
@@ -93,7 +120,7 @@ const Watch = () => {
       top: 0,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentEpisode, videoSrc]);
+  }, [isCurrentEpisode, videoSrc]);
 
   useEffect(() => {
     const page = location.pathname; // Đặt tên trang là URL
@@ -104,7 +131,13 @@ const Watch = () => {
   }, [location]);
 
   const handleEpisodeChange = (index) => {
-    setCurrentEpisode(index);
+    setIsCurrentEpisode(index);
+    dispatch(
+      addCurrentEpisodeMovie({
+        episode: index,
+        slug,
+      }),
+    );
   };
 
   const handleShare = async () => {
@@ -125,6 +158,8 @@ const Watch = () => {
     setOpen(false);
   };
 
+  console.log('check url', videoSrc);
+
   return (
     <>
       {(isLoading && <p>Loading...</p>) || (
@@ -132,6 +167,7 @@ const Watch = () => {
           <div className={cx('columns')}>
             <div className={cx('column')}>
               {(videoSrc && (
+                // eslint-disable-next-line jsx-a11y/iframe-has-title
                 <iframe
                   src={videoSrc}
                   frameBorder="0"
@@ -375,7 +411,7 @@ const Watch = () => {
                       className={cx('button', 'is-success')}
                       key={uid(episode)}
                       onClick={() => handleEpisodeChange(index)}
-                      disabled={index === currentEpisode && true}
+                      disabled={index === isCurrentEpisode && true}
                     >
                       Tập {episode.name}
                     </span>

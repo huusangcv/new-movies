@@ -30,6 +30,9 @@ const USER_PROFILE = 'user_profile';
 const EMAIL_VERIFY = 'email_verify';
 const GET_SMILAR_MOVIES = 'get_similar_movies';
 const SEARCH_NAME_MOVIES = 'search_name_movies';
+const GET_CURRENT_EPISODE = 'get_current_episode';
+const GET_CURRENT_URL = 'get_current_url';
+const ADD_CURRENT_EPISODE_MOVIE = 'add_current_episode_movie';
 export {
   TOGGLE_BARS,
   TITLE_MOVIES,
@@ -63,4 +66,7 @@ export {
   USER_PROFILE,
   EMAIL_VERIFY,
   SEARCH_NAME_MOVIES,
+  GET_CURRENT_EPISODE,
+  GET_CURRENT_URL,
+  ADD_CURRENT_EPISODE_MOVIE,
 };
