@@ -2,7 +2,7 @@
 
 Chào mừng bạn đến với dự án Website Phim Trực Tuyến, một ứng dụng web được xây dựng bằng ReactJS, cho phép người dùng xem và tìm kiếm các bộ phim yêu thích của họ một cách dễ dàng.
 
-![Giao Diện Ứng Dụng](https://scontent.fsgn2-3.fna.fbcdn.net/v/t39.30808-6/472047201_3843395255973834_2250829010639961721_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=aa7b47&_nc_eui2=AeE-lbjvPjlXQKoOfOh0kZFbeUu66lZTF3t5S7rqVlMXe-qmEYtSc9SDRmeBqXnPZWjaupfAzFcCk54vGSI6li8n&_nc_ohc=TeGAuu8Z0ZcQ7kNvgE-ogi9&_nc_oc=AdmRy0ZEhxFbEToAqFsf5NhfJtz1MRXSxDwhPylzJDNFIv8stmU48J0JciwjsrwipCk&_nc_zt=23&_nc_ht=scontent.fsgn2-3.fna&_nc_gid=8W_T0d27D5O52i5iBrRDcA&oh=00_AYHyjOv_VHgo2S0ZizfVQmAAG8mbm9ZFW7HuBj8oxIdYqQ&oe=67EAA413)
+![Giao Diện Ứng Dụng](https://scontent.fvca4-1.fna.fbcdn.net/v/t39.30808-6/504031343_3986899144956777_4063455835726677490_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=aa7b47&_nc_eui2=AeFPgDcPLs0-SAhz0vwUItl1NXAHfNvQF-s1cAd829AX662knKN_2S0oWIRnG4oT5iGR9CBTdKzVD_AOuIiYMd4Z&_nc_ohc=Z5ykstJGyakQ7kNvwGTw-aD&_nc_oc=AdmyMdYFjvqMvbfiukil-j1jIgtD6jzy8D8-xZsqqzDS1MvQ2Y0vODKY1U4oWSdG9VI&_nc_zt=23&_nc_ht=scontent.fvca4-1.fna&_nc_gid=rsRe23MIPucy7IgxoMDc4w&oh=00_AfUA5sFyxmza0pXevMPfLvwYBzd1SaOUul20cS7MSV0vqQ&oe=689B35E0)
 
 ## Tính Năng
 
