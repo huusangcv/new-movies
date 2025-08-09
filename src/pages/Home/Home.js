@@ -3,14 +3,15 @@ import ReactGA from 'react-ga4';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getNewUpdateMovies } from '~/redux/actions';
-import { movieNewUpdate } from '~/redux/selector/selector';
+import { addFilter, getNewUpdateMovies } from '~/redux/actions';
+import { getFillFilter, movieNewUpdate } from '~/redux/selector/selector';
 import styles from './Home.module.scss';
 // import moviesRecommend from '~/components/Options/recommend';
 import getMovies from '~/services/getMovies';
 import Filter from '~/layouts/Filter';
 import Snowfall from 'react-snowfall';
 import ImageComponent from '~/components/ImagesComponent/ImagesComponent';
+import endpointMethods from '~/services/getEndpoints';
 
 const cx = classNames.bind(styles);
 
@@ -23,53 +24,103 @@ const HomePage = () => {
     return 7;
   });
 
+  let filterFill = useSelector(getFillFilter);
+  filterFill =
+    Array.isArray(filterFill.types) &&
+    Array.isArray(filterFill.nations) &&
+    Array.isArray(filterFill.years) &&
+    filterFill;
+
   const moviesNewUpdate = useSelector(movieNewUpdate);
+  useEffect(() => {
+    const fetchFillFilter = async () => {
+      setIsLoading(true);
+      try {
+        const [typesData, nationsData, yearsData] = await Promise.all([
+          endpointMethods.getFillTypes(),
+          endpointMethods.getFillNations(),
+          endpointMethods.getFillYears(),
+        ]);
+
+        if (typesData.status === 'success' && nationsData.status === 'success' && yearsData.status === 'success') {
+          dispatch(
+            addFilter({
+              types: typesData.data.items,
+              nations: nationsData.data.items,
+              years: yearsData.data.items,
+            }),
+          );
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (filterFill.types.length === 0 && filterFill.nations.length === 0 && filterFill.years.length === 0) {
+      fetchFillFilter();
+    }
+  }, [dispatch, filterFill]);
 
   useEffect(() => {
     document.title = 'Từ Hollywood đến Bollywood, chúng tôi mang đến những bộ phim bạn yêu thích';
-    if (!moviesNewUpdate.single || moviesNewUpdate.single.length === 0) {
+    if (!moviesNewUpdate || !moviesNewUpdate.single || moviesNewUpdate.single.length === 0) {
       const fetchApi = async () => {
         setIsLoading(true);
-        const [newUpdateRecommend, newUpdateSingle, newUpdateSeries] = await Promise.all([
-          getMovies.newUpdateRecommend(),
-          getMovies.newUpdateSingle(),
-          getMovies.newUpdateSeries(),
-        ]);
-        if ([newUpdateRecommend, newUpdateSingle, newUpdateSeries]) {
-          const result1 = newUpdateRecommend.data.map((movie) => {
-            return {
-              name: movie.name_vi,
-              slug: movie.slug,
-              origin_name: movie.name_en,
-              thumb_url: movie.thumb,
-            };
-          });
+        try {
+          const [newUpdateRecommend, newUpdateSingle, newUpdateSeries] = await Promise.all([
+            getMovies.newUpdateRecommend(),
+            getMovies.newUpdateSingle(),
+            getMovies.newUpdateSeries(),
+          ]);
+          if ([newUpdateRecommend, newUpdateSingle, newUpdateSeries]) {
+            const result1 =
+              newUpdateRecommend?.data && Array.isArray(newUpdateRecommend.data)
+                ? newUpdateRecommend.data.map((movie) => {
+                    return {
+                      name: movie.name_vi || movie.name || '',
+                      slug: movie.slug || '',
+                      origin_name: movie.name_en || movie.origin_name || '',
+                      thumb_url: movie.thumb || movie.thumb_url || '',
+                    };
+                  })
+                : [];
 
-          const result2 = newUpdateSingle.items.map((movie) => {
-            return {
-              name: movie.name,
-              slug: movie.slug,
-              origin_name: movie.origin_name,
-              thumb_url: movie.thumb_url,
-            };
-          });
+            const result2 =
+              newUpdateSingle?.items && Array.isArray(newUpdateSingle.items)
+                ? newUpdateSingle.items.map((movie) => {
+                    return {
+                      name: movie.name || '',
+                      slug: movie.slug || '',
+                      origin_name: movie.origin_name || '',
+                      thumb_url: movie.thumb_url || '',
+                    };
+                  })
+                : [];
 
-          const result3 = newUpdateSeries.items.map((movie) => {
-            return {
-              name: movie.name,
-              slug: movie.slug,
-              origin_name: movie.origin_name,
-              thumb_url: movie.thumb_url,
-            };
-          });
+            const result3 =
+              newUpdateSeries?.items && Array.isArray(newUpdateSeries.items)
+                ? newUpdateSeries.items.map((movie) => {
+                    return {
+                      name: movie.name || '',
+                      slug: movie.slug || '',
+                      origin_name: movie.origin_name || '',
+                      thumb_url: movie.thumb_url || '',
+                    };
+                  })
+                : [];
 
-          dispatch(
-            getNewUpdateMovies({
-              recommend: result1,
-              single: result2,
-              series: result3,
-            }),
-          );
+            dispatch(
+              getNewUpdateMovies({
+                recommend: result1,
+                single: result2,
+                series: result3,
+              }),
+            );
+            setIsLoading(false);
+          }
+        } catch (error) {
+          console.error('Error fetching movies:', error);
           setIsLoading(false);
         }
       };
@@ -112,37 +163,39 @@ const HomePage = () => {
 
   return (
     <div className={cx('wapper')}>
-      {/* <Snowfall style={{ zIndex: 999999999 }} /> */}
+      {/* <Snowfall style={{ zIndex: 999999999 }} />  */}
       <Filter noneMultiline={true} />
       <h2 className="heading">
         <span>PHIM ĐỀ CỬ</span>
       </h2>
       <div className="title-list">
         <div className="gird columns">
-          {moviesNewUpdate?.recommend.map((movie, currentItem) => {
-            let newIndex = index;
-            if (window.innerWidth > 1280) newIndex = 4;
-            return (
-              currentItem <= newIndex && (
-                <Link to={`/movie/${movie.slug}`} className="column" key={movie.id}>
-                  <div className="cover">
-                    <ImageComponent
-                      src={`https://ophim17.cc/_next/image?url=https%3A%2F%2Fimg.ophim.live%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
-                      alt={movie.name}
-                      srcSet={`
+          {moviesNewUpdate?.recommend &&
+            Array.isArray(moviesNewUpdate.recommend) &&
+            moviesNewUpdate.recommend.map((movie, currentItem) => {
+              let newIndex = index;
+              if (window.innerWidth > 1280) newIndex = 4;
+              return (
+                currentItem <= newIndex && (
+                  <Link to={`/movie/${movie.slug}`} className="column" key={movie.slug || currentItem}>
+                    <div className="cover">
+                      <ImageComponent
+                        src={`https://ophim17.cc/_next/image?url=https%3A%2F%2Fimg.ophim.live%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
+                        alt={movie.name}
+                        srcSet={`
                               https://ophim17.cc/_next/image?url=https%3A%2F%2Fimg.ophim.live%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 384w`}
-                    />
-                  </div>
-                  <h3 className="name vi">
-                    <span>{movie.name}</span>
-                  </h3>
-                  <h3 className="name en">
-                    <span>{movie.origin_name}</span>
-                  </h3>
-                </Link>
-              )
-            );
-          })}
+                      />
+                    </div>
+                    <h3 className="name vi">
+                      <span>{movie.name}</span>
+                    </h3>
+                    <h3 className="name en">
+                      <span>{movie.origin_name}</span>
+                    </h3>
+                  </Link>
+                )
+              );
+            })}
         </div>
       </div>
 
@@ -158,28 +211,30 @@ const HomePage = () => {
       <div className="title-list">
         <div className="gird columns">
           {(isLoading && <p>Loading...</p>) ||
-            moviesNewUpdate?.single.map((movie, currentItem) => {
-              return (
-                currentItem <= index && (
-                  <Link to={`movie/${movie.slug}`} className="column" key={movie._id}>
-                    <div className="cover">
-                      <ImageComponent
-                        src={`https://ophim17.cc/_next/image?url=https%3A%2F%2Fimg.ophim.live%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
-                        alt={movie.name}
-                        srcSet={`
+            (moviesNewUpdate?.single &&
+              Array.isArray(moviesNewUpdate.single) &&
+              moviesNewUpdate.single.map((movie, currentItem) => {
+                return (
+                  currentItem <= index && (
+                    <Link to={`movie/${movie.slug}`} className="column" key={movie.slug || currentItem}>
+                      <div className="cover">
+                        <ImageComponent
+                          src={`https://ophim17.cc/_next/image?url=https%3A%2F%2Fimg.ophim.live%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75`}
+                          alt={movie.name}
+                          srcSet={`
                               https://ophim17.cc/_next/image?url=https%3A%2F%2Fimg.ophim.live%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75 `}
-                      />
-                    </div>
-                    <h3 className="name vi">
-                      <span>{movie.name}</span>
-                    </h3>
-                    <h3 className="name en">
-                      <span>{movie.origin_name}</span>
-                    </h3>
-                  </Link>
-                )
-              );
-            })}
+                        />
+                      </div>
+                      <h3 className="name vi">
+                        <span>{movie.name}</span>
+                      </h3>
+                      <h3 className="name en">
+                        <span>{movie.origin_name}</span>
+                      </h3>
+                    </Link>
+                  )
+                );
+              }))}
         </div>
       </div>
       <h2 className="heading">
@@ -194,27 +249,29 @@ const HomePage = () => {
       <div className="title-list">
         <div className="gird columns">
           {(isLoading && <p>Loading...</p>) ||
-            moviesNewUpdate?.series.map((movie, currentItem) => {
-              return (
-                currentItem <= index && (
-                  <Link to={`movie/${movie.slug}`} className="column" key={movie._id}>
-                    <span className="cover">
-                      <ImageComponent
-                        src={`https://ophim17.cc/_next/image?url=https%3A%2F%2Fimg.ophim.live%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75
+            (moviesNewUpdate?.series &&
+              Array.isArray(moviesNewUpdate.series) &&
+              moviesNewUpdate.series.map((movie, currentItem) => {
+                return (
+                  currentItem <= index && (
+                    <Link to={`movie/${movie.slug}`} className="column" key={movie.slug || currentItem}>
+                      <span className="cover">
+                        <ImageComponent
+                          src={`https://ophim17.cc/_next/image?url=https%3A%2F%2Fimg.ophim.live%2Fuploads%2Fmovies%2F${movie.thumb_url}&w=384&q=75
 `}
-                        alt={movie.name}
-                      />
-                    </span>
-                    <h3 className="name vi">
-                      <span>{movie.name}</span>
-                    </h3>
-                    <h3 className="name en">
-                      <span>{movie.origin_name}</span>
-                    </h3>
-                  </Link>
-                )
-              );
-            })}
+                          alt={movie.name}
+                        />
+                      </span>
+                      <h3 className="name vi">
+                        <span>{movie.name}</span>
+                      </h3>
+                      <h3 className="name en">
+                        <span>{movie.origin_name}</span>
+                      </h3>
+                    </Link>
+                  )
+                );
+              }))}
         </div>
       </div>
     </div>

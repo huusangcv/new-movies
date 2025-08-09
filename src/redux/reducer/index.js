@@ -4,6 +4,7 @@ import currentEpisodeReducer from './currentEpisodeReducer';
 import currentMoviesTopReducer from './currentMoviesTopReducer';
 import currentPageReducer from './currentPageReducer';
 import currentUrlReducer from './currentUrlReducer';
+import fillFilterReducer from './fillFilterReducer';
 import filterReducer from './filterReducer';
 import isLoadingReducer from './isLoadingReducer';
 import isMultilineReducer from './isMultilineReducer';
@@ -39,6 +40,7 @@ const rootReducer = (state = {}, action) => {
     currentEpisode: currentEpisodeReducer(state.currentEpisode, action),
     currentUrl: currentUrlReducer(state.currentUrl, action),
     currentEpisodeMovie: currentEpisodeMovieReducer(state.currentEpisodeMovie, action),
+    fillFilter: fillFilterReducer(state.fillFilter, action),
   };
 };
 

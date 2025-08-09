@@ -3,7 +3,7 @@ import filter from '~/components/Options';
 import styles from './Filter.module.scss';
 import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { moviesOnMultiline } from '~/redux/selector/selector';
+import { getFillFilter, moviesOnMultiline } from '~/redux/selector/selector';
 import { useNavigate } from 'react-router-dom';
 import { getMoviesOnMultiline } from '~/redux/actions';
 import { useQueryParams, StringParam, NumberParam } from 'use-query-params';
@@ -24,6 +24,13 @@ const Filter = ({ noneMultiline, movieType, genreCurrent, index }) => {
   });
 
   const { type, genre, country, year, sort } = query;
+
+  let filterFill = useSelector(getFillFilter);
+  filterFill =
+    Array.isArray(filterFill.types) &&
+    Array.isArray(filterFill.nations) &&
+    Array.isArray(filterFill.years) &&
+    filterFill;
 
   const isOnBrowsePage = window.location.pathname.startsWith('/browse');
   const handleSelectMovies = (e) => {
@@ -160,13 +167,15 @@ const Filter = ({ noneMultiline, movieType, genreCurrent, index }) => {
                     onChange={handleSelectMovies}
                   >
                     <option value="">- Tất cả -</option>
-                    {filter?.movies.map((movie) => {
-                      return (
-                        <option value={movie.slug} key={movie.id}>
-                          {movie.text}
-                        </option>
-                      );
-                    })}
+                    {filter?.movies &&
+                      Array.isArray(filter.movies) &&
+                      filter.movies.map((movie) => {
+                        return (
+                          <option value={movie.slug} key={movie.id}>
+                            {movie.text}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
               </div>
@@ -186,11 +195,13 @@ const Filter = ({ noneMultiline, movieType, genreCurrent, index }) => {
                     value={(genreCurrent === 'genre' && index) || (genre && genre) || ''}
                   >
                     <option value="">- Tất cả -</option>
-                    {filter?.types.map((type) => (
-                      <option value={type.slug} key={type.id}>
-                        {type.text}
-                      </option>
-                    ))}
+                    {filterFill?.types &&
+                      Array.isArray(filterFill.types) &&
+                      filterFill.types.map((type) => (
+                        <option value={type.slug} key={type._id}>
+                          {type.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
               </div>
@@ -210,11 +221,13 @@ const Filter = ({ noneMultiline, movieType, genreCurrent, index }) => {
                     value={(genreCurrent === 'country' && index) || (country && country) || ''}
                   >
                     <option value="">- Tất cả -</option>
-                    {filter?.nations.map((nation) => (
-                      <option value={nation.slug} key={nation.id}>
-                        {nation.text}
-                      </option>
-                    ))}
+                    {filterFill?.nations &&
+                      Array.isArray(filterFill.nations) &&
+                      filterFill.nations.map((nation) => (
+                        <option value={nation.slug} key={nation._id}>
+                          {nation.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
               </div>
@@ -234,11 +247,13 @@ const Filter = ({ noneMultiline, movieType, genreCurrent, index }) => {
                     value={(genreCurrent === 'year' && index) || (year && year) || ''}
                   >
                     <option value="">- Tất cả -</option>
-                    {filter?.years.map((year) => (
-                      <option value={year.slug} key={year.id}>
-                        {year.text}
-                      </option>
-                    ))}
+                    {filterFill?.years &&
+                      Array.isArray(filterFill.years) &&
+                      filterFill.years.map((year) => (
+                        <option value={year.year} key={year.year}>
+                          {year.year}
+                        </option>
+                      ))}
                     <option value={Math.floor(Math.random() * 10) + 1990}>Trước 2000</option>
                   </select>
                 </div>

@@ -6,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { userProfile } from '~/redux/selector/selector';
-import user from '~/services/user';
 const cx = classNames.bind(styles);
 const ConfirmNewEmail = () => {
   const location = useLocation();

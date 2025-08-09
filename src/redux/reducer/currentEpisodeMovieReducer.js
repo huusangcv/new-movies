@@ -12,7 +12,6 @@ const currentEpisodeMovieReducer = (state = initialState, action) => {
     case ADD_CURRENT_EPISODE_MOVIE:
       const { slug, episode } = action?.payload;
       const existingSlug = state.find((item) => item.slug === slug);
-      console.log('chekc', existingSlug);
 
       if (existingSlug) {
         const updatedState = state.map((item) => {

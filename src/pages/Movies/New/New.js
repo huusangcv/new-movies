@@ -9,7 +9,6 @@ import ReactGA from 'react-ga4';
 import { getCurrentPageMoviesNew, getMoviesNew, getTotalItemsNew } from '~/redux/actions';
 import { currentPageMoviesNew, getTotalItems, moviesNew, moviesOnMultiline } from '~/redux/selector/selector';
 import Pagination from '~/components/Pagination';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import ImageComponent from '~/components/ImagesComponent/ImagesComponent';
 const cx = classNames.bind(styles);
 

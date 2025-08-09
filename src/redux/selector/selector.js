@@ -23,6 +23,7 @@ const userProfile = (state) => state.userProfile;
 const emailVerify = (state) => state.emailVerify;
 const visitWatch = (state) => state.isVisit;
 const searchMovies = (state) => state.searchMovies;
+const getFillFilter = (state) => state.fillFilter;
 
 export {
   moviesSelector,
@@ -50,4 +51,5 @@ export {
   searchMovies,
   userProfile,
   emailVerify,
+  getFillFilter,
 };
