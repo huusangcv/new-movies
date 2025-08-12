@@ -197,11 +197,14 @@ const Filter = ({ noneMultiline, movieType, genreCurrent, index }) => {
                     <option value="">- Tất cả -</option>
                     {filterFill?.types &&
                       Array.isArray(filterFill.types) &&
-                      filterFill.types.map((type) => (
-                        <option value={type.slug} key={type._id}>
-                          {type.name}
-                        </option>
-                      ))}
+                      filterFill.types.map(
+                        (type) =>
+                          type.slug !== 'phim-18' && (
+                            <option value={type.slug} key={type._id}>
+                              {type.name}
+                            </option>
+                          ),
+                      )}
                   </select>
                 </div>
               </div>
